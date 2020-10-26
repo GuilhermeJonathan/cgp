@@ -10,6 +10,7 @@ namespace GCN.Infraestrutura.InterfaceDeServicosExternos
     public interface IServicoExternoDePersistenciaViaEntityFramework
     {
         IRepositorioDeClientes RepositorioDeClientes { get; }
+
         void Persistir();
         void Dispose();
     }

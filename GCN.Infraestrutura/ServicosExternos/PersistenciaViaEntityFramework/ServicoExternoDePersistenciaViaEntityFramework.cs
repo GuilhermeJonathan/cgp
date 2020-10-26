@@ -26,6 +26,8 @@ namespace GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
+        IRepositorioDeClientes RepositorioDeUsuarios { get; }
+
         public void Persistir()
         {
             this._contexto.SaveChanges();

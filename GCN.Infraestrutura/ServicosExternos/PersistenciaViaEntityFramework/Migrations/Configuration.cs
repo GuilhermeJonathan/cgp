@@ -19,9 +19,6 @@ namespace GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Mig
 
         protected override void Seed(Contexto contexto)
         {
-            var cliente = new Cliente("teste", "teste'121");
-            contexto.Set<Cliente>().Add(cliente);
-            contexto.SaveChanges();
         }
 
     }

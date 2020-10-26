@@ -17,7 +17,7 @@ namespace GCN.Web.Controllers
 
         public ActionResult Index()
         {
-            this._servicoDeGestaoDeClientes.CadastrarNovoCliente("teste", "1231312");
+            this._servicoDeGestaoDeClientes.CadastrarNovoCliente("Cliente novo 2", "3333-0000");
             return View();
         }
     }

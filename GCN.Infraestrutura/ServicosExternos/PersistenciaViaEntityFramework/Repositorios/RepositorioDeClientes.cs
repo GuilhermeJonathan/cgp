@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
-    public class RepositorioDeClientes : IRepositorioDeClientes
+    public class RepositorioDeClientes : Repositorio<Cliente>, IRepositorioDeClientes
     {
         private readonly Contexto _contexto;
 
-        public RepositorioDeClientes(Contexto contexto) 
+        public RepositorioDeClientes(Contexto contexto) : base(contexto)
         {
             this._contexto = contexto;
         }

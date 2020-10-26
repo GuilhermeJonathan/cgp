@@ -20,9 +20,10 @@ namespace GCN.Aplicacao.GestaoDeClientes
 
         public void CadastrarNovoCliente(string nome, string telefone)
         {
-            if (this._servicoExternoDePersistencia.RepositorioDeClientes.VerificaSeJaCliente(nome))
+            if (!this._servicoExternoDePersistencia.RepositorioDeClientes.VerificaSeJaCliente(nome))
             {
                 var novoCliente = new Cliente(nome, telefone);
+                this._servicoExternoDePersistencia.RepositorioDeClientes.Inserir(novoCliente);
                 this._servicoExternoDePersistencia.Persistir();
             }
         }

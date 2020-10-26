@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GCN.Dominio.Repositorios
 {
-    public interface IRepositorioDeClientes
+    public interface IRepositorioDeClientes : IRepositorio<Cliente>
     {
         bool VerificaSeJaCliente(string nome);
     }
