@@ -9,8 +9,9 @@ using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using Container = SimpleInjector.Container;
-using GCN.Aplicacao.GestaoDeClientes;
+using GCN.Aplicacao.GestaoDeFuncionarios;
 using System.Web.Mvc;
+using GCN.Aplicacao.Comum;
 
 namespace GCN.Web.App_Start
 {
@@ -23,8 +24,9 @@ namespace GCN.Web.App_Start
             container.Register<Contexto, Contexto>(Lifestyle.Scoped);
 
             container.Register<IServicoExternoDePersistenciaViaEntityFramework, ServicoExternoDePersistenciaViaEntityFramework>(Lifestyle.Scoped);
-            container.Register<IServicoDeGestaoDeClientes, ServicoDeGestaoDeClientes>(Lifestyle.Scoped);
-                        
+            container.Register<IServicoDeGestaoDeFuncionarios, ServicoDeGestaoDeFuncionarios>(Lifestyle.Scoped);
+            container.Register<IServicoDeGeracaoDeHashSha, ServicoDeGeracaoDeHashSha>(Lifestyle.Scoped);
+
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }

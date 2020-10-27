@@ -60,10 +60,12 @@
     <Compile Include="InterfaceDeServicosExternos\IServicoExternoDePersistenciaViaEntityFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Contexto.cs" />
-    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCliente.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeFuncionario.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeUsuario.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Migrations\Configuration.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\Repositorio.cs" />
-    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeClientes.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeFuncionarios.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeUsuarios.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\ServicoExternoDePersistenciaViaEntityFramework.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using GCN.Aplicacao.GestaoDeClientes;
+﻿using GCN.Aplicacao.GestaoDeFuncionarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace GCN.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IServicoDeGestaoDeClientes _servicoDeGestaoDeClientes;
+        private readonly IServicoDeGestaoDeFuncionarios _servicoDeGestaoDeClientes;
         
 
-        public HomeController(IServicoDeGestaoDeClientes servicoDeGestaoDeClientes)
+        public HomeController(IServicoDeGestaoDeFuncionarios servicoDeGestaoDeClientes)
         {
             this._servicoDeGestaoDeClientes = servicoDeGestaoDeClientes;
         }

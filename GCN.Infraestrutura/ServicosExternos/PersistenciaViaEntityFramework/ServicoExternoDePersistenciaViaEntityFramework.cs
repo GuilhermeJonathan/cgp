@@ -18,15 +18,21 @@ namespace GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             this._contexto = contexto;
         }
 
-        public IRepositorioDeClientes RepositorioDeClientes
+        public IRepositorioDeFuncionarios RepositorioDeFuncionarios
         {
             get
             {
-                return new RepositorioDeClientes(this._contexto);
+                return new RepositorioDeFuncionarios(this._contexto);
             }
         }
 
-        IRepositorioDeClientes RepositorioDeUsuarios { get; }
+        public IRepositorioDeUsuarios RepositorioDeUsuarios
+        {
+            get
+            {
+                return new RepositorioDeUsuarios(this._contexto);
+            }
+        }
 
         public void Persistir()
         {

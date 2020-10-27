@@ -145,7 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\InjetorDeDependencia.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,11 +190,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Funcionario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Cliente\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -213,6 +214,10 @@
     <ProjectReference Include="..\GCN.Aplicacao\GCN.Aplicacao.csproj">
       <Project>{113F5AB4-5F2E-4840-B082-00CE2936B276}</Project>
       <Name>GCN.Aplicacao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GCN.Dominio\GCN.Dominio.csproj">
+      <Project>{8E93870E-B982-4D35-882E-EC59490F43A6}</Project>
+      <Name>GCN.Dominio</Name>
     </ProjectReference>
     <ProjectReference Include="..\GCN.Infraestrutura\GCN.Infraestrutura.csproj">
       <Project>{2BB21161-BBE2-4E94-94AF-439A8E49B1AE}</Project>
