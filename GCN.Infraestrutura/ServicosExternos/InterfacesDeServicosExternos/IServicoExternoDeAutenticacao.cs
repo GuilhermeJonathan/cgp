@@ -10,7 +10,6 @@ namespace GCN.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos
     {
         void Acessar(IDictionary<string, object> informacoesDoUsuario);
         void Sair();
-        int PegarEmpresaDoUsuarioLogado();
         string PegarPerfilDoUsuarioLogado();
     }
 }

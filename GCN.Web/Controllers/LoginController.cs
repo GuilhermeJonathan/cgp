@@ -1,5 +1,7 @@
 ﻿using GCN.Aplicacao.Login;
 using GCN.Aplicacao.Login.Modelos;
+using GCN.Web.CustomExtensions;
+using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,12 @@ namespace GCN.Web.Controllers
 
         public ActionResult Index()
         {
+            if (User.Autenticado())
+            {
+                var usuario = User.Logado();
+                ViewBag.Usuario = usuario.Nome;
+            }
+
             return View();
         }
 
@@ -26,9 +34,19 @@ namespace GCN.Web.Controllers
         [AllowAnonymous]
         public ActionResult Entrar(string login, string senha)
         {
-            this._servicoDeLogin.Entrar(new ModeloDeLogin(login, senha, Request.UserHostAddress));
+            if(!User.Autenticado())
+                this._servicoDeLogin.Entrar(new ModeloDeLogin(login, senha, Request.UserHostAddress));
 
-            return RedirectToAction(nameof(Index), "Inicio");
+    
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+
+        [HttpGet]
+        public ActionResult Sair()
+        {
+            this._servicoDeLogin.Sair();
+            return RedirectToAction(nameof(Index), "Login");
         }
     }
 }

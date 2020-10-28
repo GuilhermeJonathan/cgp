@@ -1,4 +1,5 @@
 ﻿using GCN.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
+using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,23 +17,24 @@ namespace GCN.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookie
         public void Acessar(IDictionary<string, object> informacoesDoUsuario)
         {
             var contextoOwin = HttpContext.Current.GetOwinContext().Authentication;
-            contextoOwin.SignIn(new ClaimsIdentity(this.GerarClaims(informacoesDoUsuario), TipoDeAutenticacao));
+            var claims = this.GerarClaims(informacoesDoUsuario);
+            HttpContext.Current.GetOwinContext().Set("claims", claims);
+
+            var props = new AuthenticationProperties()
+            {
+                IsPersistent = true
+            };
+
+            contextoOwin.SignIn(props, new ClaimsIdentity(claims, TipoDeAutenticacao));
+
+
         }
 
         public string PegarPerfilDoUsuarioLogado()
         {
             var contextoOwin = HttpContext.Current.GetOwinContext().Authentication;
             var claim = contextoOwin.User.Claims.FirstOrDefault(c => c.Type == "perfil".ToLower());
-
             return claim != null ? claim.Value : string.Empty;
-        }
-
-        public int PegarEmpresaDoUsuarioLogado()
-        {
-            var contextoOwin = HttpContext.Current.GetOwinContext().Authentication;
-            var claim = contextoOwin.User.Claims.FirstOrDefault(c => c.Type == "empresa".ToLower());
-
-            return claim != null ? int.Parse(claim.Value) : 0;
         }
 
         public void Sair()
@@ -54,7 +56,7 @@ namespace GCN.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookie
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, valor));
                 else if (chave == "nome")
                     claims.Add(new Claim(ClaimTypes.Name, valor));
-                else if (chave == "email")
+                else if (chave == "email" || chave == "login")
                     claims.Add(new Claim(ClaimTypes.Email, valor));
                 else
                     claims.Add(new Claim(chave, valor ?? ""));

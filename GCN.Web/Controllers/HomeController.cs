@@ -1,4 +1,5 @@
 ﻿using GCN.Aplicacao.GestaoDeFuncionarios;
+using GCN.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,11 @@ namespace GCN.Web.Controllers
 
         public ActionResult Index()
         {
-            //this._servicoDeGestaoDeClientes.CadastrarNovoCliente()
+            if (User.Autenticado())
+            {
+                var usuario = User.Logado();
+                ViewBag.Usuario = usuario.Nome;
+            }
             return View();
         }
 

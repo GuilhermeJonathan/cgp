@@ -31,11 +31,14 @@ namespace GCN.Aplicacao.Login
             {
                 var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarPorLoginESenha(modelo.Login, modelo.SenhaCriptograda(this._servicoDeGeracaoDeHashSha.GerarHash));
 
+                if(usuario == null)
+                    throw new ExcecaoDeAplicacao("Usuário e/ou senha inválidos");
+
                 var dadosDaSessao = new Dictionary<string, object>
-                    {   
+                    {
                         { "id", usuario.Id },
-                        { "nome", usuario.Nome },
-                        { "login", usuario.Login },
+                        { "nome", usuario.Nome.Valor },
+                        { "login", usuario.Login.Valor },
                         { "perfil", usuario.PerfilDeUsuario },
                         { "dataDoCadastro", usuario.DataDoCadastro }
                     };
