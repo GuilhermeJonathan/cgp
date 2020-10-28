@@ -15,26 +15,27 @@ namespace GCN.Aplicacao.GestaoDeFuncionarios
     public class ServicoDeGestaoDeFuncionarios : IServicoDeGestaoDeFuncionarios
     {
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
-        private readonly IServicoDeGeracaoDeHashSha _servicoDeGeracaoDeHashSha;
+        //private readonly IServicoDeGeracaoDeHashSha _servicoDeGeracaoDeHashSha;
 
-        public ServicoDeGestaoDeFuncionarios(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha)
+        public ServicoDeGestaoDeFuncionarios(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
-            this._servicoDeGeracaoDeHashSha = servicoDeGeracaoDeHashSha;
+            //this._servicoDeGeracaoDeHashSha = servicoDeGeracaoDeHashSha;
         }
 
         public void CadastrarNovoFuncionario(ModeloDeCadastroDeFuncionario modelo)
         {
-            if (!this._servicoExternoDePersistencia.RepositorioDeFuncionarios.VerificaSeJaFuncionario(modelo.Nome))
-            {
-                var endereco = new Endereco(modelo.Pais, modelo.Uf, modelo.Cidade, modelo.Bairro, modelo.Cep, modelo.Logradouro, modelo.Numero, modelo.Complemento);
+            if (!this._servicoExternoDePersistencia.RepositorioDeFuncionarios.VerificaSeJaFuncionario(modelo.Email))
+                throw new ExcecaoDeAplicacao($"Ja existe usuário com o email:{modelo.Email}");
+            
+            var endereco = new Endereco(modelo.Pais, modelo.Uf, modelo.Cidade, modelo.Bairro, modelo.Cep, modelo.Logradouro, modelo.Numero, modelo.Complemento);
 
-                var novoFuncionario = new Funcionario(modelo.Nome, modelo.Documento, modelo.Email, new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash),
-                    modelo.Telefone, modelo.Celular, modelo.PerfilDeFuncionario, endereco);
+            var novoFuncionario = new Funcionario(modelo.Nome, modelo.Documento, modelo.Email, new Senha(modelo.Senha),
+                modelo.Telefone, modelo.Celular, modelo.PerfilDeFuncionario, endereco);
 
-                this._servicoExternoDePersistencia.RepositorioDeFuncionarios.Inserir(novoFuncionario);
-                this._servicoExternoDePersistencia.Persistir();
-            }
+            this._servicoExternoDePersistencia.RepositorioDeFuncionarios.Inserir(novoFuncionario);
+            this._servicoExternoDePersistencia.Persistir();
+            
         }
     }
 }

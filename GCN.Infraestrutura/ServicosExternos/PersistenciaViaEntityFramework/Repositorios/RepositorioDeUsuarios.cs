@@ -19,5 +19,13 @@ namespace GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             return usuario != null ? usuario : null;
         }
+
+        public Usuario PegarPorLoginESenha(string login, string senha)
+        {
+            var usuario = this._contexto.Set<Usuario>().FirstOrDefault(
+            au => au.Login.Valor == login && au.Senha.Valor == senha && au.Ativo == true);
+
+            return usuario != null ? usuario : null;
+        }
     }
 }

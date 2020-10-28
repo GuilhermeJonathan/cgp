@@ -1,4 +1,5 @@
 ﻿using GCN.Dominio;
+using GCN.Dominio.Entidades;
 using GCN.Dominio.Repositorios;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
     {
         public RepositorioDeFuncionarios(Contexto contexto) : base(contexto) {}
 
-        public bool VerificaSeJaFuncionario(string nome)
+        public bool VerificaSeJaFuncionario(string email)
         {
-            var cliente = this._contexto.Set<Funcionario>().FirstOrDefault(u => u.Nome == nome);
+            var cliente = this._contexto.Set<Usuario>().FirstOrDefault(u => u.Login.Valor == email);
             return cliente == null ? false : true;
         }
     }

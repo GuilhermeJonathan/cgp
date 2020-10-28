@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Entidades\Funcionario.cs" />
     <Compile Include="Entidades\Entidade.cs" />
+    <Compile Include="Entidades\Socio.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="ExcecaoDeNegocio.cs" />
     <Compile Include="ObjetosDeValor\Cnpj.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="ObjetosDeValor\Login.cs" />
     <Compile Include="ObjetosDeValor\Nome.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeFuncionario.cs" />
+    <Compile Include="ObjetosDeValor\PerfilDeSocio.cs" />
     <Compile Include="ObjetosDeValor\Senha.cs" />
     <Compile Include="ObjetosDeValor\Telefone.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeUsuario.cs" />

@@ -12,6 +12,9 @@ using Container = SimpleInjector.Container;
 using GCN.Aplicacao.GestaoDeFuncionarios;
 using System.Web.Mvc;
 using GCN.Aplicacao.Comum;
+using GCN.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookieOwin;
+using GCN.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
+using GCN.Aplicacao.Login;
 
 namespace GCN.Web.App_Start
 {
@@ -25,7 +28,10 @@ namespace GCN.Web.App_Start
 
             container.Register<IServicoExternoDePersistenciaViaEntityFramework, ServicoExternoDePersistenciaViaEntityFramework>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeFuncionarios, ServicoDeGestaoDeFuncionarios>(Lifestyle.Scoped);
+            container.Register<IServicoDeLogin, ServicoDeLogin>(Lifestyle.Scoped);
             container.Register<IServicoDeGeracaoDeHashSha, ServicoDeGeracaoDeHashSha>(Lifestyle.Scoped);
+            container.Register<IServicoExternoDeAutenticacao, ServicoExternoDeAutenticacaoViaCookieOwin>(Lifestyle.Scoped);
+            
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

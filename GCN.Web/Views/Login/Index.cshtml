@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<body class="gray-bg" cz-shortcut-listen="true">
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name">DF</h1>
+        </div>
+        <div class="subtitle">
+            <h2>Gestão Administrativa</h2>
+        </div>
+        <p>Entre com seu login e senha</p>
+        <form action="@Url.Action("Entrar", "Login")" method="post">
+            <div class="form-group has-feedback">
+                <input type="email" name="login" class="form-control" placeholder="Email" required autofocus>
+                <span class="fa fa-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback margin-bottom">
+                <input type="password" class="form-control" name="senha" placeholder="Senha" required>
+                <span class="fa fa-lock form-control-feedback"></span>
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">Entrar</button>
+
+            <a href="@Url.Action("Index", "EsqueciMinhaSenha")"><small>Esqueci minha senha</small></a>
+        </form>
+        <p class="m-t"> <small> Powered By TimiPro © Todos os direitos reservados @DateTime.Now.Year</small> </p>
+    </div>
+</div>
+
+</body>
+</html>
+
