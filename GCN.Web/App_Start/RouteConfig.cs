@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace GCN.Web
+namespace Campeonato.Web
 {
     public class RouteConfig
     {

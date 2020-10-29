@@ -1,12 +1,12 @@
-﻿using GCN.Dominio.ObjetosDeValor;
-using GCN.Dominio.ObjetosDeValor.Email;
+﻿using Campeonato.Dominio.ObjetosDeValor;
+using Campeonato.Dominio.ObjetosDeValor.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Dominio.Entidades
+namespace Campeonato.Dominio.Entidades
 {
     public class Usuario : Entidade
     {

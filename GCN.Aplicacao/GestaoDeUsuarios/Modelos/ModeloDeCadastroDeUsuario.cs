@@ -1,5 +1,5 @@
-﻿using GCN.Aplicacao.Util;
-using GCN.Dominio.ObjetosDeValor;
+﻿using Campeonato.Aplicacao.Util;
+using Campeonato.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace GCN.Aplicacao.GestaoDeUsuarios.Modelos
+namespace Campeonato.Aplicacao.GestaoDeUsuarios.Modelos
 {
     public class ModeloDeCadastroDeUsuario
     {

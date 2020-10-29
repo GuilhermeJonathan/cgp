@@ -1,16 +1,16 @@
-﻿using GCN.Aplicacao.Comum;
-using GCN.Aplicacao.GestaoDeFuncionario.Modelos;
-using GCN.Dominio;
-using GCN.Dominio.ObjetosDeValor;
-using GCN.Infraestrutura.InterfaceDeServicosExternos;
-using GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework;
+﻿using Campeonato.Aplicacao.Comum;
+using Campeonato.Aplicacao.GestaoDeFuncionario.Modelos;
+using Campeonato.Dominio;
+using Campeonato.Dominio.ObjetosDeValor;
+using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+using Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Aplicacao.GestaoDeFuncionarios
+namespace Campeonato.Aplicacao.GestaoDeFuncionarios
 {
     public class ServicoDeGestaoDeFuncionarios : IServicoDeGestaoDeFuncionarios
     {

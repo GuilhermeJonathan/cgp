@@ -1,4 +1,4 @@
-﻿namespace GCN.Dominio.Repositorios
+﻿namespace Campeonato.Dominio.Repositorios
 {
     public interface IRepositorioDeFuncionarios : IRepositorio<Funcionario>
     {

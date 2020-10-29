@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Aplicacao.Comum
+namespace Campeonato.Aplicacao.Comum
 {
     public class ServicoDeGeracaoDeHashSha : IServicoDeGeracaoDeHashSha
     {

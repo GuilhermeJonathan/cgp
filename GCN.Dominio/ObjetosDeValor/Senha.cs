@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Dominio.ObjetosDeValor
+namespace Campeonato.Dominio.ObjetosDeValor
 {
     public class Senha
     {

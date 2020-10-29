@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Dominio
+namespace Campeonato.Dominio
 {
     [Serializable]
     class ExcecaoDeNegocio : Exception

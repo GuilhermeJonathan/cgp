@@ -8,8 +8,8 @@
     <ProjectGuid>{2BB21161-BBE2-4E94-94AF-439A8E49B1AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GCN.Infraestrutura</RootNamespace>
-    <AssemblyName>GCN.Infraestrutura</AssemblyName>
+    <RootNamespace>Campeonato.Infraestrutura</RootNamespace>
+    <AssemblyName>Campeonato.Infraestrutura</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -106,9 +106,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GCN.Dominio\GCN.Dominio.csproj">
+    <ProjectReference Include="..\GCN.Dominio\Campeonato.Dominio.csproj">
       <Project>{8e93870e-b982-4d35-882e-ec59490f43a6}</Project>
-      <Name>GCN.Dominio</Name>
+      <Name>Campeonato.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

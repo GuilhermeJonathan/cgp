@@ -1,14 +1,14 @@
-﻿using GCN.Aplicacao.Comum;
-using GCN.Aplicacao.Login.Modelos;
-using GCN.Infraestrutura.InterfaceDeServicosExternos;
-using GCN.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
+﻿using Campeonato.Aplicacao.Comum;
+using Campeonato.Aplicacao.Login.Modelos;
+using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+using Campeonato.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Aplicacao.Login
+namespace Campeonato.Aplicacao.Login
 {
     public class ServicoDeLogin : IServicoDeLogin
     {

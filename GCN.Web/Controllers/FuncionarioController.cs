@@ -1,14 +1,14 @@
-﻿using GCN.Aplicacao.GestaoDeFuncionario.Modelos;
-using GCN.Aplicacao.GestaoDeFuncionarios;
-using GCN.Dominio.ObjetosDeValor;
-using GCN.Web.CustomExtensions;
+﻿using Campeonato.Aplicacao.GestaoDeFuncionario.Modelos;
+using Campeonato.Aplicacao.GestaoDeFuncionarios;
+using Campeonato.Dominio.ObjetosDeValor;
+using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GCN.Web.Controllers
+namespace Campeonato.Web.Controllers
 {
     public class FuncionarioController : Controller
     {

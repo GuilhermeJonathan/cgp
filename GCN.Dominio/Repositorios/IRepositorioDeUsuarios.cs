@@ -1,6 +1,6 @@
-﻿using GCN.Dominio.Entidades;
+﻿using Campeonato.Dominio.Entidades;
 
-namespace GCN.Dominio.Repositorios
+namespace Campeonato.Dominio.Repositorios
 {
     public interface IRepositorioDeUsuarios : IRepositorio<Usuario>
     {

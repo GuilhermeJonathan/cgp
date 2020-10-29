@@ -1,13 +1,13 @@
-﻿using GCN.Dominio;
-using GCN.Dominio.Entidades;
-using GCN.Dominio.Repositorios;
+﻿using Campeonato.Dominio;
+using Campeonato.Dominio.Entidades;
+using Campeonato.Dominio.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
+namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
     public class RepositorioDeFuncionarios : Repositorio<Funcionario>, IRepositorioDeFuncionarios
     {

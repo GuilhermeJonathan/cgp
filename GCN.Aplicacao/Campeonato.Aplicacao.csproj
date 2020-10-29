@@ -7,8 +7,8 @@
     <ProjectGuid>{113F5AB4-5F2E-4840-B082-00CE2936B276}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GCN.Aplicacao</RootNamespace>
-    <AssemblyName>GCN.Aplicacao</AssemblyName>
+    <RootNamespace>Campeonato.Aplicacao</RootNamespace>
+    <AssemblyName>Campeonato.Aplicacao</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -60,13 +60,13 @@
     <Compile Include="Util\ListaDeItensDeDominio.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GCN.Dominio\GCN.Dominio.csproj">
+    <ProjectReference Include="..\GCN.Dominio\Campeonato.Dominio.csproj">
       <Project>{8E93870E-B982-4D35-882E-EC59490F43A6}</Project>
-      <Name>GCN.Dominio</Name>
+      <Name>Campeonato.Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GCN.Infraestrutura\GCN.Infraestrutura.csproj">
+    <ProjectReference Include="..\GCN.Infraestrutura\Campeonato.Infraestrutura.csproj">
       <Project>{2BB21161-BBE2-4E94-94AF-439A8E49B1AE}</Project>
-      <Name>GCN.Infraestrutura</Name>
+      <Name>Campeonato.Infraestrutura</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

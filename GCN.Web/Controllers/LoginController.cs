@@ -1,6 +1,6 @@
-﻿using GCN.Aplicacao.Login;
-using GCN.Aplicacao.Login.Modelos;
-using GCN.Web.CustomExtensions;
+﻿using Campeonato.Aplicacao.Login;
+using Campeonato.Aplicacao.Login.Modelos;
+using Campeonato.Web.CustomExtensions;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GCN.Web.Controllers
+namespace Campeonato.Web.Controllers
 {
     public class LoginController : Controller
     {

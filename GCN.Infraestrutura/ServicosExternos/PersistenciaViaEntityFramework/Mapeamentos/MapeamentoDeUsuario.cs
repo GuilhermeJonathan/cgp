@@ -1,4 +1,4 @@
-﻿using GCN.Dominio.Entidades;
+﻿using Campeonato.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Mapeamentos
+namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Mapeamentos
 {
     public class MapeamentoDeUsuario : EntityTypeConfiguration<Usuario>
     {

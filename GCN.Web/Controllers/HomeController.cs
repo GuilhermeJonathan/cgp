@@ -1,12 +1,12 @@
-﻿using GCN.Aplicacao.GestaoDeFuncionarios;
-using GCN.Web.CustomExtensions;
+﻿using Campeonato.Aplicacao.GestaoDeFuncionarios;
+using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GCN.Web.Controllers
+namespace Campeonato.Web.Controllers
 {
     public class HomeController : Controller
     {

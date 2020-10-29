@@ -1,12 +1,12 @@
-﻿using GCN.Dominio.Entidades;
-using GCN.Dominio.ObjetosDeValor;
+﻿using Campeonato.Dominio.Entidades;
+using Campeonato.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Dominio
+namespace Campeonato.Dominio
 {
     public class Funcionario : Entidade
     {

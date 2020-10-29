@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-[assembly: OwinStartup(typeof(GCN.Web.Startup))]
+[assembly: OwinStartup(typeof(Campeonato.Web.Startup))]
 
-namespace GCN.Web
+namespace Campeonato.Web
 {
     public class Startup
     {
@@ -31,7 +31,7 @@ namespace GCN.Web
             opcoes.CookieSecure = CookieSecureOption.SameAsRequest;
             opcoes.CookieDomain = new Uri(configuracaoDoDominio).Host;
 
-            opcoes.CookieName = "gcn_secure";
+            opcoes.CookieName = "campeonato_secure";
 
             app.UseCookieAuthentication(opcoes);
         }

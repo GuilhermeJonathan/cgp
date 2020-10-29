@@ -1,11 +1,11 @@
-﻿using GCN.Aplicacao.GestaoDeFuncionario.Modelos;
+﻿using Campeonato.Aplicacao.GestaoDeFuncionario.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Aplicacao.GestaoDeFuncionarios
+namespace Campeonato.Aplicacao.GestaoDeFuncionarios
 {
     public interface IServicoDeGestaoDeFuncionarios
     {

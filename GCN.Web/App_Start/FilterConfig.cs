@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace GCN.Web
+namespace Campeonato.Web
 {
     public class FilterConfig
     {

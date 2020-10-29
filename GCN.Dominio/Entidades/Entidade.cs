@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Dominio.Entidades
+namespace Campeonato.Dominio.Entidades
 {
     public abstract class Entidade
     {

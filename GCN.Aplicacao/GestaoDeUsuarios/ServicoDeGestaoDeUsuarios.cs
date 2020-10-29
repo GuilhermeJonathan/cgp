@@ -1,12 +1,12 @@
-﻿using GCN.Aplicacao.Comum;
-using GCN.Infraestrutura.InterfaceDeServicosExternos;
+﻿using Campeonato.Aplicacao.Comum;
+using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Aplicacao.GestaoDeUsuarios
+namespace Campeonato.Aplicacao.GestaoDeUsuarios
 {
     public class ServicoDeGestaoDeUsuarios : IServicoDeGestaoDeUsuarios
     {

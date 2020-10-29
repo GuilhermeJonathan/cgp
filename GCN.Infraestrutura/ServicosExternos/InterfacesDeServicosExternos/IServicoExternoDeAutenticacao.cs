@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos
+namespace Campeonato.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos
 {
     public interface IServicoExternoDeAutenticacao
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace GCN.Aplicacao.Util
+namespace Campeonato.Aplicacao.Util
 {
     public static class ListaDeItensDeDominio
     {

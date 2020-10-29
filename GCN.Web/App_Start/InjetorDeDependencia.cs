@@ -1,5 +1,5 @@
-﻿using GCN.Infraestrutura.InterfaceDeServicosExternos;
-using GCN.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework;
+﻿using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+using Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,14 +9,14 @@ using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using Container = SimpleInjector.Container;
-using GCN.Aplicacao.GestaoDeFuncionarios;
+using Campeonato.Aplicacao.GestaoDeFuncionarios;
 using System.Web.Mvc;
-using GCN.Aplicacao.Comum;
-using GCN.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookieOwin;
-using GCN.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
-using GCN.Aplicacao.Login;
+using Campeonato.Aplicacao.Comum;
+using Campeonato.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookieOwin;
+using Campeonato.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
+using Campeonato.Aplicacao.Login;
 
-namespace GCN.Web.App_Start
+namespace Campeonato.Web.App_Start
 {
     public class InjetorDeDependencia
     {

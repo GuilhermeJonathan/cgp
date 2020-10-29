@@ -1,11 +1,11 @@
-﻿using GCN.Aplicacao.Login.Modelos;
+﻿using Campeonato.Aplicacao.Login.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCN.Aplicacao.Login
+namespace Campeonato.Aplicacao.Login
 {
     public interface IServicoDeLogin
     {
