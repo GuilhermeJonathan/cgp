@@ -20,5 +20,10 @@ namespace Campeonato.Controllers
             return View();
 
         }
+
+        public ActionResult Contato()
+        {
+            return View();
+        }
     }
 }

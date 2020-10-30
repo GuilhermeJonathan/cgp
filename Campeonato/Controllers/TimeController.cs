@@ -33,7 +33,7 @@ namespace Campeonato.Controllers
         [HttpGet]
         public ActionResult Editar(int? id)
         {
-            if (id.HasValue)
+            if (!id.HasValue)
                 TimeNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeTimes.BuscarTimePorId(id.Value);
