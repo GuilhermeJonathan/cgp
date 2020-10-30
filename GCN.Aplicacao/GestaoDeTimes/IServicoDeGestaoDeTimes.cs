@@ -14,6 +14,7 @@ namespace Campeonato.Aplicacao.GestaoDeTimes
         ModeloDeListaDeTimes RetonarTodosOsTimes(ModeloDeFiltroDeTime filtro, int pagina, int registrosPorPagina = 30);
         IList<Time> RetonarTodosOsTimesAtivos();
         ModeloDeEdicaoDeTime BuscarTimePorId(int id);
+        string CadastrarTime(ModeloDeCadastroDeTime modelo, UsuarioLogado usuario);
         string AlterarDadosDoTime(ModeloDeEdicaoDeTime modelo, UsuarioLogado usuario);
     }
 }

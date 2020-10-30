@@ -50,6 +50,14 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             }
         }
 
+        public IRepositorioDeRodadas RepositorioDeRodadas
+        {
+            get
+            {
+                return new RepositorioDeRodada(this._contexto);
+            }
+        }
+
         public void Persistir()
         {
             this._contexto.SaveChanges();

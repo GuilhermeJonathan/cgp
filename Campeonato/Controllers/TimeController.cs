@@ -31,6 +31,23 @@ namespace Campeonato.Controllers
 
         [Authorize]
         [HttpGet]
+        public ActionResult Cadastrar()
+        {
+            var modelo = new ModeloDeCadastroDeTime();
+            return View(modelo);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Cadastrar(ModeloDeCadastroDeTime modelo)
+        {
+            var retorno = this._servicoDeGestaoDeTimes.CadastrarTime(modelo, User.Logado());
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize]
+        [HttpGet]
         public ActionResult Editar(int? id)
         {
             if (!id.HasValue)

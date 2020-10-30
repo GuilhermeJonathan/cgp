@@ -13,6 +13,14 @@ namespace Campeonato.Dominio.Entidades
                 
         }
 
+        public Estadio(string nome, string cidade, Time time)
+        {
+            this.Nome = nome;
+            this.Cidade = cidade;
+            this.Time = time;
+            this.Ativo = true;
+        }
+
         public string Nome { get; set; }
         public Time Time { get; set; }
         public string Cidade { get; set; }

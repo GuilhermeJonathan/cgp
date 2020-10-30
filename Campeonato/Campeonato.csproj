@@ -172,6 +172,7 @@
     <Compile Include="Controllers\EstadioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RodadaController.cs" />
     <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="CustomExtensions\ControllerExtensions.cs" />
     <Compile Include="CustomExtensions\HtmlHelpers.cs" />
@@ -341,6 +342,11 @@
     <Content Include="Views\Shared\_Mensagens.cshtml" />
     <Content Include="Views\Estadio\Index.cshtml" />
     <Content Include="Views\Estadio\Editar.cshtml" />
+    <Content Include="Views\Rodada\Index.cshtml" />
+    <Content Include="Views\Rodada\Editar.cshtml" />
+    <Content Include="Views\Rodada\Cadastrar.cshtml" />
+    <Content Include="Views\Time\Cadastrar.cshtml" />
+    <Content Include="Views\Estadio\Cadastrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,6 +12,7 @@ namespace Campeonato.Aplicacao.GestaoDeEstadio
     {
         ModeloDeListaDeEstadios RetonarTodosOsEstadios(ModeloDeFiltroDeEstadio filtro, int pagina, int registrosPorPagina = 30);
         ModeloDeEdicaoDeEstadio BuscarEstadioPorId(int id);
+        string CadastrarEstadio(ModeloDeCadastroDeEstadio modelo, UsuarioLogado usuario);
         string AlterarDadosDoEstadio(ModeloDeEdicaoDeEstadio modelo, UsuarioLogado usuario);
     }
 }

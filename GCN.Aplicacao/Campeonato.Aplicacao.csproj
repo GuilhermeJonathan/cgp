@@ -49,6 +49,7 @@
     <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="GestaoDeEstadio\IServicoDeGestaoDeEstadio.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeCadastroDeEstadio.cs" />
     <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEdicaoDeEstadio.cs" />
     <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEstadiosDaLista.cs" />
     <Compile Include="GestaoDeEstadio\Modelos\ModeloDeFiltroDeEstadio.cs" />
@@ -57,7 +58,15 @@
     <Compile Include="GestaoDeFuncionario\IServicoDeGestaoDeFuncionarios.cs" />
     <Compile Include="GestaoDeFuncionario\Modelos\ModeloDeCadastroDeFuncionario.cs" />
     <Compile Include="GestaoDeFuncionario\ServicoDeGestaoDeFuncionarios.cs" />
+    <Compile Include="GestaoDeRodada\IServicoDeGestaoDeRodadas.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeCadastroDeRodada.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeEdicaoDeRodada.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeFiltroDeRodada.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeListaDeRodadas.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeRodadaDaLista.cs" />
+    <Compile Include="GestaoDeRodada\ServicoDeGestaoDeRodadas.cs" />
     <Compile Include="GestaoDeTimes\IServicoDeGestaoDeTimes.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeCadastroDeTime.cs" />
     <Compile Include="GestaoDeTimes\Modelos\ModeloDeEdicaoDeTime.cs" />
     <Compile Include="GestaoDeTimes\Modelos\ModeloDeFiltroDeTime.cs" />
     <Compile Include="GestaoDeTimes\Modelos\ModeloDeListaDeTimes.cs" />

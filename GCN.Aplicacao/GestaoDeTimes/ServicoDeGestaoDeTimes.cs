@@ -53,6 +53,22 @@ namespace Campeonato.Aplicacao.GestaoDeTimes
             }
         }
 
+        public string CadastrarTime(ModeloDeCadastroDeTime modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var novoTime = new Time(modelo.Nome, modelo.Imagem);
+                this._servicoExternoDePersistencia.RepositorioDeTimes.Inserir(novoTime);
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Time incluído com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível incluir rodada: " + ex.InnerException);
+            }
+        }
+
         public string AlterarDadosDoTime(ModeloDeEdicaoDeTime modelo, UsuarioLogado usuario)
         {
             try

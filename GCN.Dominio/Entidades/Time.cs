@@ -13,6 +13,13 @@ namespace Campeonato.Dominio.Entidades
 
         }
 
+        public Time(string nome, string imagem)
+        {
+            this.Nome = nome;
+            this.Imagem = imagem;
+            this.Ativo = true;
+        }
+
         public string Nome { get; set; }
         public string Imagem { get; set; }
         public bool Ativo { get; set; }

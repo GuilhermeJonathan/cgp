@@ -37,6 +37,26 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult Cadastrar()
+        {
+            var modelo = new ModeloDeCadastroDeEstadio();
+
+            modelo.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
+                       () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesAtivos());
+
+            return View(modelo);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Cadastrar(ModeloDeCadastroDeEstadio modelo)
+        {
+            var retorno = this._servicoDeGestaoDeEstadios.CadastrarEstadio(modelo, User.Logado());
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(Index));
+        }
 
         [Authorize]
         [HttpGet]

@@ -1,7 +1,8 @@
-﻿@model Campeonato.Aplicacao.GestaoDeTimes.Modelos.ModeloDeEdicaoDeTime
+﻿@model Campeonato.Aplicacao.GestaoDeRodada.Modelos.ModeloDeEdicaoDeRodada
+@using GridMvc.Html
 
 @{
-    ViewBag.Title = "Editar Time";
+    ViewBag.Title = "Edição de Rodadas";
 }
 
 <div class="content-wrapper">
@@ -11,8 +12,8 @@
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Editar Times</li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">Edição de Rodadas</li>
                     </ol>
                 </div>
             </div>
@@ -21,10 +22,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form role="form" action="@Url.Action("Editar", "Time")" method="post">
+                <form role="form" action="@Url.Action("Editar", "Rodada")" method="post">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Editar Time</h3>
+                            <h3 class="card-title">Edição de Rodadas</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                     <i class="fas fa-minus"></i>
@@ -37,7 +38,7 @@
                                     @Html.InputTextFor(a => a.Nome, "Nome", required: false)
                                 </div>
                                 <div class="col-lg-6">
-                                    @Html.InputTextFor(a => a.DataDoCadastro, "Data do Cadastro", required: false, @readonly: true)
+                                    @Html.InputTextFor(a => a.Temporada, "Temporada", required: false)
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -53,5 +54,4 @@
             </div>
         </div>
     </div>
-
 </div>

@@ -21,11 +21,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Editar Estádio</h3>
-                    </div>
-                    <form role="form" action="@Url.Action("Editar", "Estadio")" method="post">
+                <form role="form" action="@Url.Action("Editar", "Estadio")" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Editar Estádio</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -40,21 +45,18 @@
                                     <label class="control-label"> Times </label>
                                     @Html.DropDownListFor(m => m.Time, Model.Times, new { @class = "form-control" })
                                 </div>
-                                <div class="col-lg-6">
-                                    <label class="control-label"> Ativo </label>
-                                    @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
-                                </div>
                             </div>
-
+                            <div class="col-lg-12">
+                                <label class="control-label"> Ativo </label>
+                                @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
+                            </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary float-right">Salvar</button>
+                            <button type="submit" class="btn btn-success float-right">Salvar</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
 </div>
-

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Campeonato.Dominio.Repositorios
 {
-    public interface IRepositorioDeEstadios
+    public interface IRepositorioDeEstadios : IRepositorio<Estadio>
     {
         IList<Estadio> RetornarTodosOsEstadios(string nome, int time, bool ativo, out int quantidadeEncontrada);
         Estadio PegarPorId(int id);

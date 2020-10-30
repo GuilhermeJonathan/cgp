@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Campeonato.Dominio.Repositorios
 {
-    public interface IRepositorioDeTimes
+    public interface IRepositorioDeTimes : IRepositorio<Time>
     {
         IList<Time> RetornarTodosOsTimes(string nome, bool ativo, out int quantidadeEncontrada);
         IList<Time> RetornarTodosOsTimesAtivos();

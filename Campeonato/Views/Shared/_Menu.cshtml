@@ -33,8 +33,20 @@
                 </li>
                 <li class="nav-item">
                     <a href="@Url.Action("Index", "Estadio" )" class="nav-link @Html.Raw(controller == "Estadio" ? "active" : "")">
-                        <i class="nav-icon fas  fa-futbol"></i>
+                        <i class="nav-icon fas  fa-home"></i>
                         <p> Estádios </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Jogo" )" class="nav-link @Html.Raw(controller == "Jogo" ? "active" : "")">
+                        <i class="nav-icon fas  fa-futbol"></i>
+                        <p> Jogos </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Rodada" )" class="nav-link @Html.Raw(controller == "Rodada" ? "active" : "")">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p> Rodadas </p>
                     </a>
                 </li>
             </ul>

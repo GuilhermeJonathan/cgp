@@ -1,5 +1,6 @@
 ﻿using Campeonato.Aplicacao.Comum;
 using Campeonato.Aplicacao.GestaoDeEstadio.Modelos;
+using Campeonato.Dominio.Entidades;
 using Campeonato.Dominio.ObjetosDeValor;
 using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
 using System;
@@ -43,6 +44,23 @@ namespace Campeonato.Aplicacao.GestaoDeEstadio
             catch (Exception ex)
             {
                 throw new ExcecaoDeAplicacao("Erro ao consultar times");
+            }
+        }
+
+        public string CadastrarEstadio(ModeloDeCadastroDeEstadio modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var time = this._servicoExternoDePersistencia.RepositorioDeTimes.PegarPorId(modelo.Time);
+                var novoEstadio = new Estadio(modelo.Nome, modelo.Cidade, time);
+                this._servicoExternoDePersistencia.RepositorioDeEstadios.Inserir(novoEstadio);
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Estádio incluído com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível incluir o estádio: " + ex.InnerException);
             }
         }
 
