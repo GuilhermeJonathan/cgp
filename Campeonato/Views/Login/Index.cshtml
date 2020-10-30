@@ -16,11 +16,13 @@
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../Content/adminlte.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/toastr.min.css" />
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <img src="~/Content/bola2.jpg" alt="Logo Campeonato" style="max-height:200px">
+            <a href="#"><b>Bolão</b>Brasileirão</a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
@@ -69,6 +71,9 @@
     <script src="../plugins/jquery/jquery.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../Scripts/adminlte.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+
+    @Html.Partial("_Mensagens")
 </body>
 </html>
 

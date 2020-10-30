@@ -15,6 +15,8 @@ using Campeonato.Aplicacao.Comum;
 using Campeonato.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookieOwin;
 using Campeonato.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
 using Campeonato.Aplicacao.Login;
+using Campeonato.Aplicacao.GestaoDeTimes;
+using Campeonato.Aplicacao.GestaoDeEstadio;
 
 namespace Campeonato.App_Start
 {
@@ -32,6 +34,8 @@ namespace Campeonato.App_Start
             container.Register<IServicoDeGeracaoDeHashSha, ServicoDeGeracaoDeHashSha>(Lifestyle.Scoped);
             container.Register<IServicoExternoDeAutenticacao, ServicoExternoDeAutenticacaoViaCookieOwin>(Lifestyle.Scoped);
 
+            container.Register<IServicoDeGestaoDeTimes, ServicoDeGestaoDeTimes>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeEstadios, ServicoDeGestaoDeEstadios>(Lifestyle.Scoped);
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

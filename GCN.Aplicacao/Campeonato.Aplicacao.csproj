@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Mvc">
       <HintPath>..\..\..\..\Desktop\System.Web.Mvc.dll</HintPath>
@@ -47,17 +48,33 @@
     <Compile Include="Comum\ExcecaoDeAplicacao.cs" />
     <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
+    <Compile Include="GestaoDeEstadio\IServicoDeGestaoDeEstadio.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEdicaoDeEstadio.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEstadiosDaLista.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeFiltroDeEstadio.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeListaDeEstadios.cs" />
+    <Compile Include="GestaoDeEstadio\ServicoDeGestaoDeEstadio.cs" />
     <Compile Include="GestaoDeFuncionario\IServicoDeGestaoDeFuncionarios.cs" />
     <Compile Include="GestaoDeFuncionario\Modelos\ModeloDeCadastroDeFuncionario.cs" />
     <Compile Include="GestaoDeFuncionario\ServicoDeGestaoDeFuncionarios.cs" />
+    <Compile Include="GestaoDeTimes\IServicoDeGestaoDeTimes.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeEdicaoDeTime.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeFiltroDeTime.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeListaDeTimes.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeTimesDaLista.cs" />
+    <Compile Include="GestaoDeTimes\ServicoDeGestaoDeTimes.cs" />
     <Compile Include="GestaoDeUsuarios\IServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeCadastroDeUsuario.cs" />
     <Compile Include="GestaoDeUsuarios\ServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="Login\IServicoDeLogin.cs" />
     <Compile Include="Login\Modelos\ModeloDeLogin.cs" />
     <Compile Include="Login\ServicoDeLogin.cs" />
+    <Compile Include="Modelo.cs" />
+    <Compile Include="ModeloDeLista.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\ExtensoesDeString.cs" />
     <Compile Include="Util\ListaDeItensDeDominio.cs" />
+    <Compile Include="Util\VariaveisDeAmbiente.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GCN.Dominio\Campeonato.Dominio.csproj">
@@ -72,5 +89,6 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

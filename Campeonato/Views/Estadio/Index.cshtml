@@ -1,0 +1,84 @@
+﻿@model Campeonato.Aplicacao.GestaoDeEstadio.Modelos.ModeloDeListaDeEstadios
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Lista de Estádios";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Lista de Estádios</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Buscar Estádios</h3>
+                    </div>
+                    <form role="form" action="@Url.Action("Index", "Estadio")" method="get">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.Filtro.Nome, "Nome", required: false)
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Times </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Time, Model.Filtro.Times, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="control-label"> Ativo </label>
+                                @Html.CheckBoxFor(m => m.Filtro.Ativo, new { @class = "checkbox" })
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Estádios </h3>
+                    </div>
+                    <div class="card-body p-0">
+                        @Html.Grid(Model.Lista).Columns(colunas =>
+                        {
+                           colunas.Add(m => m.Nome).Titled("Nome");
+                           colunas.Add(m => m.Cidade).Titled("Cidade");
+                           colunas.Add(m => m.Ativo).Titled("Ativo");
+                           colunas.Add(m => m.DataDoCadastro).Titled("DataDoCadastro");
+
+                           colunas.Add().Encoded(false).Sanitized(false).Titled("Time").SetWidth(30).RenderValueAs(
+                             m => Html.Raw("<img style='max-width: 30px;' src='../content/escudos/" + m.ImagemTime + "' </>"));
+
+                             colunas.Add().Encoded(false).Sanitized(false).Titled("Editar").SetWidth(30).RenderValueAs(
+                            m => @<a href="@Url.Action("Editar", "Estadio", new { id = m.Id })" title="Editar"> <i class="nav-icon fas fa-pencil-alt"></i> </a>);
+
+                 }).WithPaging(30).Sortable(true).EmptyText("Nenhum estádio encontrado")
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

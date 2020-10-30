@@ -1,0 +1,15 @@
+﻿@if (TempData["MensagemDeSucesso"] != null)
+{
+    <script>
+        var mensagem = "@TempData["MensagemDeSucesso"]";
+        campeonatoGeral.AdicionarMensagemDeSucesso(mensagem);
+    </script>
+}
+
+@if (TempData["MensagemDeErro"] != null)
+{
+    <script>
+        var mensagem = "@TempData["MensagemDeErro"]";
+         campeonatoGeral.AdicionarMensagemDeErro(mensagem);
+    </script>
+}

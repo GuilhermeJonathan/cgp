@@ -1,0 +1,67 @@
+﻿using Campeonato.Aplicacao.Comum;
+using Campeonato.Aplicacao.GestaoDeEstadio.Modelos;
+using Campeonato.Dominio.ObjetosDeValor;
+using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Campeonato.Aplicacao.GestaoDeEstadio
+{
+    public class ServicoDeGestaoDeEstadios : IServicoDeGestaoDeEstadios
+    {
+        private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
+        public ServicoDeGestaoDeEstadios(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
+        {
+            this._servicoExternoDePersistencia = servicoExternoDePersistencia;
+        }
+
+        public ModeloDeListaDeEstadios RetonarTodosOsEstadios(ModeloDeFiltroDeEstadio filtro, int pagina, int registrosPorPagina = 30)
+        {
+            try
+            {
+                var quantidadeEncontrada = 0;
+                var estadios = this._servicoExternoDePersistencia.RepositorioDeEstadios.RetornarTodosOsEstadios(filtro.Nome, filtro.Time, filtro.Ativo, out quantidadeEncontrada);
+
+                return new ModeloDeListaDeEstadios(estadios, quantidadeEncontrada, filtro);
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar estádios");
+            }
+        }
+
+        public ModeloDeEdicaoDeEstadio BuscarEstadioPorId(int id)
+        {
+            try
+            {
+                var estadio = this._servicoExternoDePersistencia.RepositorioDeEstadios.PegarPorId(id);
+                return new ModeloDeEdicaoDeEstadio(estadio);
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar times");
+            }
+        }
+
+        public string AlterarDadosDoEstadio(ModeloDeEdicaoDeEstadio modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var estadio = this._servicoExternoDePersistencia.RepositorioDeEstadios.PegarPorId(modelo.Id);
+                var time = this._servicoExternoDePersistencia.RepositorioDeTimes.PegarPorId(modelo.Time);
+                estadio.AlterarDados(modelo.Nome, modelo.Cidade, time, modelo.Ativo);
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Estádio alterado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível alterar o estádio: " + ex.InnerException);
+            }
+
+        }
+    }
+}

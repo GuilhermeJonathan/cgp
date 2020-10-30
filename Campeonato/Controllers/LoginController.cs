@@ -1,5 +1,6 @@
 ﻿using Campeonato.Aplicacao.Login;
 using Campeonato.Aplicacao.Login.Modelos;
+using Campeonato.CustomExtensions;
 using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace Campeonato.Controllers
             if (!User.Autenticado())
                 this._servicoDeLogin.Entrar(new ModeloDeLogin(login, senha, Request.UserHostAddress));
 
-
+            this.AdicionarMensagemDeSucesso("Login Efetuado com sucesso.");
             return RedirectToAction(nameof(Index), "Home");
         }
 

@@ -1,0 +1,49 @@
+﻿@model Campeonato.Aplicacao.GestaoDeTimes.Modelos.ModeloDeEdicaoDeTime
+
+@{
+    ViewBag.Title = "Editar Time";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Editar Times</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Editar Time</h3>
+                    </div>
+                    <form role="form" action="@Url.Action("Editar", "Time")" method="post">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.Nome, "Nome", required: false)
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="control-label"> Ativo </label>
+                                @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -34,6 +34,22 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             }
         }
 
+        public IRepositorioDeTimes RepositorioDeTimes
+        {
+            get
+            {
+                return new RepositorioDeTime(this._contexto);
+            }
+        }
+
+        public IRepositorioDeEstadios RepositorioDeEstadios
+        {
+            get
+            {
+                return new RepositorioDeEstadio(this._contexto);
+            }
+        }
+
         public void Persistir()
         {
             this._contexto.SaveChanges();
