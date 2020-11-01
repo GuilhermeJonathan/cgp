@@ -1,0 +1,109 @@
+﻿@model Campeonato.Aplicacao.GestaoDeJogos.Modelos.ModeloDeListaDeJogos
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Lista de Jogos";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">Lista de Jogos</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="@Url.Action("Index", "Jogo")" method="get">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Buscar Jogos</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Data do Jogo</label>
+                                    <input type="text" class="form-control dataJogo" name="Filtro.DataHoraDoJogo">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Times </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Time, Model.Filtro.Times, new { @class = "form-control" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Rodada </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="@Url.Action("Cadastrar", "Jogo" )" class="btn btn-info float-left"> Cadastrar Novo Jogo</a>
+                            <button type="submit" class="btn btn-primary float-right">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-md-4">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <h3 class="card-title">Lista de Jogos</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body p-0">
+                            @Html.Grid(Model.Lista).Columns(colunas =>
+                            {
+                                colunas.Add().Encoded(false).Sanitized(false).Titled("Casa").SetWidth(60).RenderValueAs(
+                                m => Html.Raw("<img style='max-width: 30px;' src='../content/escudos/" + m.ImagemTime1 + "' </>"));
+
+                               colunas.Add().Encoded(false).Sanitized(false).Titled("Adversário").SetWidth(60).RenderValueAs(
+                                   m => Html.Raw("<img style='max-width: 30px;' src='../content/escudos/" + m.ImagemTime2 + "' </>"));
+                               colunas.Add(m => m.DataHoraDoJogo).Titled("Data");
+                     
+                                colunas.Add(m => m.NomeRodada).Titled("Rodada");
+
+                               colunas.Add(m => m.NomeEstadio).Titled("Local");
+
+                               colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
+                               m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Editar", "Jogo", new { id = m.Id })" title="Editar" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></div>);
+
+                            }).WithPaging(30).Sortable(true).EmptyText("Nenhuma jogo encontrado")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@**@
+<script>
+    $(function () {
+
+        $('.dataJogo').datepicker({
+            language: "pt-BR", autoclose: true,
+            zIndexOffset: 99999999
+        });
+    })
+</script>

@@ -166,8 +166,8 @@ namespace Campeonato.CustomExtensions
 
         public static MvcHtmlString BackButton(this HtmlHelper helper)
         {
-            var html = new StringBuilder("<div class='pull-left'>");
-            html.Append("<button type='button' class='btn btn-default voltar'> <i class='fa fa-arrow-left'> </i> &nbsp; Voltar</button>");
+            var html = new StringBuilder("<div>");
+            html.Append("<button type='button' class='btn btn-default voltar float-left'> <i class='fa fa-arrow-left'> </i> &nbsp; Voltar</button>");
             html.Append("</div>");
 
             return new MvcHtmlString(html.ToString());

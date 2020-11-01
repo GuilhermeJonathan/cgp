@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - Bolão Brasileirão</title>
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="~/Content/toastr.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
@@ -18,10 +19,10 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Index", "Home" )"  class="nav-link">Home</a>
+                    <a href="@Url.Action("Index", "Home" )" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Contato", "Home" )"  class="nav-link">Contato</a>
+                    <a href="@Url.Action("Contato", "Home" )" class="nav-link">Contato</a>
                 </li>
             </ul>
 
@@ -34,21 +35,26 @@
 
         @Html.Partial("_Menu")
 
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        <script src="~/Scripts/campeonatoGeral.js"></script>
+
+        <script src="~/Scripts/toastr.min.js"></script>
+        <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+        <script src="~/plugins/datepicker/moment-with-locales.js"></script>
+        <script src="~/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="~/plugins/datepicker/bootstrap-datepicker.pt-BR.min.js"></script>
+
+        <script src="~/plugins/inputmask/jquery.mask.js"></script>
 
         @RenderBody()
 
         <footer class="main-footer">
             <b>Bolão</b>Brasileirão 2020 - All rights reserved.
         </footer>
-
-
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    <script src="~/Scripts/toastr.min.js"></script>
-    <script src="~/Scripts/CampeonatoGeral.js"></script>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
 
     @Html.Partial("_Mensagens")
 

@@ -21,12 +21,6 @@ namespace Campeonato.Controllers
        
         public ActionResult Index()
         {
-            if (User.Autenticado())
-            {
-                var usuario = User.Logado();
-                ViewBag.Usuario = usuario.Nome;
-            }
-
             return View();
         }
 

@@ -58,6 +58,15 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             }
         }
 
+        public IRepositorioDeJogos RepositorioDeJogos
+        {
+            get
+            {
+                return new RepositorioDeJogo(this._contexto);
+            }
+        }
+
+
         public void Persistir()
         {
             this._contexto.SaveChanges();

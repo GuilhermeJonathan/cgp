@@ -101,6 +101,7 @@
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\Repositorio.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeEstadio.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeFuncionarios.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeJogo.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeRodada.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeTime.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeUsuarios.cs" />

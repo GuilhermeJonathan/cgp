@@ -1,0 +1,91 @@
+﻿@model Campeonato.Aplicacao.GestaoDeJogos.Modelos.ModeloDeCadastroDeJogo
+
+@{
+    ViewBag.Title = "Cadastrar Jogo";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Cadastro de Jogo </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="@Url.Action("Cadastrar", "Jogo")" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Cadastrar Jogo</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Data </label>
+                                    <input type="text" class="form-control mascaraHora" id="dataHoraDoJogo" name="DataDoJogo">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Hora </label>
+                                    <input type="text" class="form-control mascaraHora" name="HoraDoJogo">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Estádio </label>
+                                    @Html.DropDownListFor(m => m.Estadio, Model.Estadios, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Time da casa </label>
+                                    @Html.DropDownListFor(m => m.Time1, Model.Times1, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Time de fora </label>
+                                    @Html.DropDownListFor(m => m.Time2, Model.Times2, new { @class = "form-control" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Rodadas </label>
+                                    @Html.DropDownListFor(m => m.Rodada, Model.Rodadas, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row botoes">
+                                <div class="col-lg-12">
+                                    @Html.BackButton()
+                                    <button type="submit" class="btn btn-success float-right"> <i class='fa fa-save'> </i> Salvar</button>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+  
+        $('#dataHoraDoJogo').datepicker({
+            language: "pt-BR", autoclose: true,
+            zIndexOffset: 99999999
+        });
+
+        $('.mascaraData').mask('00/00/0000');
+        $('.mascaraHora').mask('00:00');
+    })
+</script>

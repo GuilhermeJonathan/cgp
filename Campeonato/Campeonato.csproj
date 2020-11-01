@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EstadioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JogoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RodadaController.cs" />
     <Compile Include="Controllers\TimeController.cs" />
@@ -187,16 +188,31 @@
   <ItemGroup>
     <Content Include="Content\adminlte.css" />
     <Content Include="Content\all.min.css" />
+    <Content Include="Content\alt\adminlte.components.css" />
+    <Content Include="Content\alt\adminlte.components.min.css" />
+    <Content Include="Content\alt\adminlte.core.css" />
+    <Content Include="Content\alt\adminlte.core.min.css" />
+    <Content Include="Content\alt\adminlte.extra-components.css" />
+    <Content Include="Content\alt\adminlte.extra-components.min.css" />
+    <Content Include="Content\alt\adminlte.pages.css" />
+    <Content Include="Content\alt\adminlte.pages.min.css" />
+    <Content Include="Content\alt\adminlte.plugins.css" />
+    <Content Include="Content\alt\adminlte.plugins.min.css" />
     <Content Include="Content\bola.png" />
     <Content Include="Content\bola2.jpg" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\escudos\atleticoGO.png" />
     <Content Include="Content\escudos\atleticoMG.png" />
     <Content Include="Content\escudos\atleticoParanaense.png" />
+    <Content Include="Content\escudos\atleticoPR.png" />
     <Content Include="Content\escudos\bahia.png" />
     <Content Include="Content\escudos\botafogo.png" />
+    <Content Include="Content\escudos\bragantino.png" />
+    <Content Include="Content\escudos\ceara.png" />
     <Content Include="Content\escudos\chapecoense.png" />
     <Content Include="Content\escudos\corinthians.png" />
     <Content Include="Content\escudos\coritiba.png" />
@@ -205,6 +221,7 @@
     <Content Include="Content\escudos\figueirense.png" />
     <Content Include="Content\escudos\flamengo.png" />
     <Content Include="Content\escudos\fluminense.png" />
+    <Content Include="Content\escudos\fortaleza.png" />
     <Content Include="Content\escudos\goias.png" />
     <Content Include="Content\escudos\gremio.png" />
     <Content Include="Content\escudos\internacional.png" />
@@ -229,6 +246,10 @@
     <Content Include="plugins\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="plugins\bootstrap\js\bootstrap.js" />
     <Content Include="plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="plugins\datepicker\bootstrap-datetimepicker.js" />
+    <Content Include="plugins\datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="plugins\datepicker\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="plugins\datepicker\moment-with-locales.js" />
     <Content Include="plugins\fontawesome-free\css\all.css" />
     <Content Include="plugins\fontawesome-free\css\all.min.css" />
     <Content Include="plugins\fontawesome-free\css\brands.css" />
@@ -248,11 +269,18 @@
     <Content Include="plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="plugins\icheck-bootstrap\icheck-bootstrap.css" />
     <Content Include="plugins\icheck-bootstrap\icheck-bootstrap.min.css" />
+    <Content Include="plugins\inputmask\inputmask.js" />
+    <Content Include="plugins\inputmask\inputmask.min.js" />
+    <Content Include="plugins\inputmask\jquery.mask.js" />
+    <Content Include="plugins\inputmask\jquery.inputmask.bundle.js" />
+    <Content Include="plugins\inputmask\jquery.inputmask.js" />
+    <Content Include="plugins\inputmask\jquery.inputmask.min.js" />
     <Content Include="plugins\jquery\core.js" />
     <Content Include="plugins\jquery\jquery.js" />
     <Content Include="plugins\jquery\jquery.min.js" />
     <Content Include="plugins\jquery\jquery.slim.js" />
     <Content Include="plugins\jquery\jquery.slim.min.js" />
+    <Content Include="plugins\moment\moment.min.js" />
     <Content Include="plugins\popper\esm\popper-utils.js" />
     <Content Include="plugins\popper\esm\popper-utils.min.js" />
     <Content Include="plugins\popper\esm\popper.js" />
@@ -265,6 +293,8 @@
     <Content Include="plugins\popper\umd\popper-utils.min.js" />
     <Content Include="plugins\popper\umd\popper.js" />
     <Content Include="plugins\popper\umd\popper.min.js" />
+    <Content Include="plugins\select2\select2.full.min.js" />
+    <Content Include="plugins\select2\select2.min.js" />
     <Content Include="Scripts\adminlte.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -303,6 +333,16 @@
     <Content Include="plugins\popper\umd\popper.js.map" />
     <Content Include="plugins\popper\umd\popper.min.js.map" />
     <Content Include="Grid.mvc.readme" />
+    <Content Include="Content\alt\adminlte.components.css.map" />
+    <Content Include="Content\alt\adminlte.components.min.css.map" />
+    <Content Include="Content\alt\adminlte.core.css.map" />
+    <Content Include="Content\alt\adminlte.core.min.css.map" />
+    <Content Include="Content\alt\adminlte.extra-components.css.map" />
+    <Content Include="Content\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Content\alt\adminlte.pages.css.map" />
+    <Content Include="Content\alt\adminlte.pages.min.css.map" />
+    <Content Include="Content\alt\adminlte.plugins.css.map" />
+    <Content Include="Content\alt\adminlte.plugins.min.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\campeonatoGeral.js" />
     <Content Include="Scripts\gridmvc.js" />
@@ -347,6 +387,10 @@
     <Content Include="Views\Rodada\Cadastrar.cshtml" />
     <Content Include="Views\Time\Cadastrar.cshtml" />
     <Content Include="Views\Estadio\Cadastrar.cshtml" />
+    <Content Include="Views\Jogo\Index.cshtml" />
+    <Content Include="Views\Jogo\Cadastrar.cshtml" />
+    <Content Include="Views\Jogo\Editar.cshtml" />
+    <Content Include="Views\Rodada\LancarResultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

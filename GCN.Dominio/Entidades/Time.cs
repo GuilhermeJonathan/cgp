@@ -21,6 +21,8 @@ namespace Campeonato.Dominio.Entidades
         }
 
         public string Nome { get; set; }
+        public string Sigla { get; set; }
+
         public string Imagem { get; set; }
         public bool Ativo { get; set; }
 

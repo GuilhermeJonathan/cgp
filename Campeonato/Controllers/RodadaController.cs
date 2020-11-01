@@ -1,7 +1,9 @@
 ﻿using Campeonato.Aplicacao.GestaoDeRodada;
 using Campeonato.Aplicacao.GestaoDeRodada.Modelos;
+using Campeonato.Aplicacao.GestaoDeTimes;
 using Campeonato.Aplicacao.Util;
 using Campeonato.CustomExtensions;
+using Campeonato.Dominio.Entidades;
 using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
@@ -15,21 +17,26 @@ namespace Campeonato.Controllers
     {
 
         private readonly IServicoDeGestaoDeRodadas _servicoDeGestaoDeRodadas;
+        private readonly IServicoDeGestaoDeTimes _servicoDeGestaoDeTimes;
 
-        public RodadaController(IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas)
+        public RodadaController(IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas, IServicoDeGestaoDeTimes servicoDeGestaoDeTimes)
         {
             this._servicoDeGestaoDeRodadas = servicoDeGestaoDeRodadas;
+            this._servicoDeGestaoDeTimes = servicoDeGestaoDeTimes;
         }
 
         [Authorize]
         [HttpGet]
         public ActionResult Index(ModeloDeListaDeRodadas modelo)
         {
+            modelo.Filtro.Rodadas = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Rodada>(nameof(Rodada.Nome), nameof(Rodada.Id),
+                     () => this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivas());
+
             modelo = this._servicoDeGestaoDeRodadas.RetonarTodosasRodadas(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
             return View(modelo);
         }
-
+            
         [Authorize]
         [HttpGet]
         public ActionResult Cadastrar()
@@ -70,6 +77,29 @@ namespace Campeonato.Controllers
         private ActionResult RodadaNaoEncontrado()
         {
             this.AdicionarMensagemDeErro("Rodada não foi encontrada");
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult LancarResultados(int? id)
+        {
+            if (!id.HasValue)
+                RodadaNaoEncontrado();
+
+            var modelo = this._servicoDeGestaoDeRodadas.BuscarRodadaPorId(id.Value);
+            return View(modelo);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult LancarResultados(int id, int[] placar1, int[] placar2, int[] idJogos)
+        {
+            if (idJogos != null)
+            {
+                var retorno = this._servicoDeGestaoDeRodadas.CadastrarResultados(id, placar1, placar2, idJogos, User.Logado());
+                this.AdicionarMensagemDeSucesso(retorno);
+            }
             return RedirectToAction(nameof(Index));
         }
     }

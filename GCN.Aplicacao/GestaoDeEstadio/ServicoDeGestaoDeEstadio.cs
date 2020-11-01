@@ -34,6 +34,12 @@ namespace Campeonato.Aplicacao.GestaoDeEstadio
             }
         }
 
+        public IList<Estadio> RetonarTodosOsEstadiosAtivos()
+        {
+            var estadios = this._servicoExternoDePersistencia.RepositorioDeEstadios.RetornarTodosOsEstadiosAtivos();
+            return estadios;
+        }
+
         public ModeloDeEdicaoDeEstadio BuscarEstadioPorId(int id)
         {
             try

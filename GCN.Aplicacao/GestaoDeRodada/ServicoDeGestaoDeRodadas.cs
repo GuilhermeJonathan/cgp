@@ -25,8 +25,12 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
             try
             {
                 var quantidadeEncontrada = 0;
-                var rodadas = this._servicoExternoDePersistencia.RepositorioDeRodadas.RetornarTodosAsRodadas(filtro.Nome, filtro.Temporada, filtro.Ativo, out quantidadeEncontrada);
+                var rodadas = this._servicoExternoDePersistencia.RepositorioDeRodadas.RetornarTodosAsRodadas(filtro.Rodada, filtro.Temporada, out quantidadeEncontrada);
+                var jogosPorRodadas = this._servicoExternoDePersistencia.RepositorioDeJogos.RetornarTodosJogos();
 
+                foreach (var rodada in rodadas)
+                    rodada.Jogos = jogosPorRodadas.Where(a => a.Rodada.Id == rodada.Id).OrderBy(a => a.DataHoraDoJogo).ToList();
+                
                 return new ModeloDeListaDeRodadas(rodadas, quantidadeEncontrada, filtro);
             }
             catch (Exception ex)
@@ -40,6 +44,13 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
             try
             {
                 var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(id);
+
+                if (rodada != null)
+                {
+                    var jogos = this._servicoExternoDePersistencia.RepositorioDeJogos.RetornarJogosPorRodada(rodada.Id);
+                    rodada.Jogos = jogos;
+                }
+
                 return new ModeloDeEdicaoDeRodada(rodada);
             }
             catch (Exception ex)
@@ -78,7 +89,67 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
             {
                 throw new ExcecaoDeAplicacao("Não foi possível alterar a rodada: " + ex.InnerException);
             }
-
         }
+
+        public IList<Rodada> RetonarTodosAsRodadasAtivas()
+        {
+            var rodadas = this._servicoExternoDePersistencia.RepositorioDeRodadas.RetornarTodosAsRodadasAtivas();
+            return rodadas;
+        }
+
+        public int BuscarRodadaAtiva()
+        {
+            var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.BuscarRodadaAtiva();
+            return rodada;
+        }
+
+        public string CadastrarResultados(int id, int[] placar1, int[] placar2, int[] idJogos, UsuarioLogado usuario)
+        {
+            try
+            {
+                var contador = 0;
+                var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                foreach (var idJogo in idJogos)
+                {
+                    var jogo = this._servicoExternoDePersistencia.RepositorioDeJogos.BuscarPorId(idJogo);
+                   
+                    if (jogo != null)
+                    {
+                        jogo.PlacarTime1 = placar1[contador];
+                        jogo.PlacarTime2 = placar2[contador];
+
+                        if(jogo.DataHoraDoJogo < DateTime.Now)
+                            jogo.SituacaoDoJogo = SituacaoDoJogo.Finalizado;
+                        else
+                            jogo.SituacaoDoJogo = SituacaoDoJogo.AJogar;
+                    }
+                    contador++;
+                }
+
+                rodada.IncluirAlteracao(DateTime.Now, usuarioBanco);
+
+                if (rodada.Jogos != null)
+                {
+                    var aindaTemJogo = rodada.Jogos.Any(a => a.SituacaoDoJogo == SituacaoDoJogo.AJogar);
+                    if (!aindaTemJogo)
+                    {
+                        rodada.SituacaoDaRodada = SituacaoDaRodada.Finalizada;
+                        var proximaRodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.BuscarProximaRodada();
+                        proximaRodada.SituacaoDaRodada = SituacaoDaRodada.Atual;
+                    }
+                }
+
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Resultados cadastrados com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível incluir resultado: " + ex.InnerException);
+            }
+        }
+
     }
 }

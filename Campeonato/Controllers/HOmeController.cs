@@ -9,7 +9,8 @@ namespace Campeonato.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: HOme
+
+        [Authorize]
         public ActionResult Index()
         {
             if (User.Autenticado())

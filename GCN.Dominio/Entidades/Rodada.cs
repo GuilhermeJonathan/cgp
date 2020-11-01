@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Campeonato.Dominio.ObjetosDeValor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace Campeonato.Dominio.Entidades
         public string Nome { get; set; }
         public IList<Jogo> Jogos { get; set; }
         public string Temporada { get; set; }
+        public int Ordem { get; set; }
+        public SituacaoDaRodada SituacaoDaRodada { get; set; }
+        public Usuario UsuarioQueAlterou { get; set; }
+        public DateTime DataUltimaAtualizacao { get; set; }
+
         public bool Ativo { get; set; }
 
         public void AlterarRodada(string nome, string temporada, bool ativo)
@@ -35,6 +41,12 @@ namespace Campeonato.Dominio.Entidades
         public void IncluirJogoNaRodada(Jogo jogo)
         {
             this.Jogos.Add(jogo);
+        }
+
+        public void IncluirAlteracao(DateTime data, Usuario usuario)
+        {
+            this.DataUltimaAtualizacao = data;
+            this.UsuarioQueAlterou = usuario;
         }
     }
 }

@@ -60,6 +60,8 @@
     <Compile Include="ObjetosDeValor\PerfilDeFuncionario.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeSocio.cs" />
     <Compile Include="ObjetosDeValor\Senha.cs" />
+    <Compile Include="ObjetosDeValor\SituacaoDaRodada.cs" />
+    <Compile Include="ObjetosDeValor\SituacaoDoJogo.cs" />
     <Compile Include="ObjetosDeValor\Telefone.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeUsuario.cs" />
     <Compile Include="ObjetosDeValor\UsuarioLogado.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Repositorios\IRepositorio.cs" />
     <Compile Include="Repositorios\IRepositorioDeEstadios.cs" />
     <Compile Include="Repositorios\IRepositorioDeFuncionarios.cs" />
+    <Compile Include="Repositorios\IRepositorioDeJogos.cs" />
     <Compile Include="Repositorios\IRepositorioDeRodadas.cs" />
     <Compile Include="Repositorios\IRepositorioDeTimes.cs" />
     <Compile Include="Repositorios\IRepositorioDeUsuarios.cs" />

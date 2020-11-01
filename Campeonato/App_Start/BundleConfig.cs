@@ -30,6 +30,7 @@ namespace Campeonato
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                        "~/Content/adminlte.css",
+                         "~/Content/Site.css",
                         "~/plugins/fontawesome-free/css/all.min.css"));
         }
     }

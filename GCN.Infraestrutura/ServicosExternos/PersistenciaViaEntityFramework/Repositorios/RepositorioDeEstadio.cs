@@ -28,6 +28,13 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             return query.OrderBy(a => a.Nome).ToList();
         }
 
+        public IList<Estadio> RetornarTodosOsEstadiosAtivos()
+        {
+            var query = this._contexto.Set<Estadio>().AsQueryable();
+            query = query.Where(c => c.Ativo);
+            return query.OrderBy(a => a.Nome).ToList();
+        }
+
         public Estadio PegarPorId(int id)
         {
             return this._contexto.Set<Estadio>().Include(nameof(Estadio.Time)).FirstOrDefault(a => a.Id == id);

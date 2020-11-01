@@ -10,6 +10,7 @@ namespace Campeonato.Dominio.Repositorios
     public interface IRepositorioDeEstadios : IRepositorio<Estadio>
     {
         IList<Estadio> RetornarTodosOsEstadios(string nome, int time, bool ativo, out int quantidadeEncontrada);
+        IList<Estadio> RetornarTodosOsEstadiosAtivos();
         Estadio PegarPorId(int id);
     }
 }

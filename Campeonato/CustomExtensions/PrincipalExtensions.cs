@@ -43,6 +43,14 @@ namespace Campeonato.Web.CustomExtensions
             return principal.Identity.IsAuthenticated;
         }
 
+        public static bool EhAdministrador(this IPrincipal principal)
+        {
+            var perfil = Claim(principal, "perfil");
+            if ((PerfilDeUsuario)Enum.Parse(typeof(PerfilDeUsuario), perfil) == PerfilDeUsuario.Administrador)
+                return true;
+            else return false;
+        }
+
         public static UsuarioLogado Logado(this IPrincipal principal)
         {
             return new UsuarioLogado(principal.Id(), principal.Nome(), principal.Email(), principal.Perfil());

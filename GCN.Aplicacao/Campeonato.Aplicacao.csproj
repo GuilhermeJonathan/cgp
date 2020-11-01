@@ -58,6 +58,13 @@
     <Compile Include="GestaoDeFuncionario\IServicoDeGestaoDeFuncionarios.cs" />
     <Compile Include="GestaoDeFuncionario\Modelos\ModeloDeCadastroDeFuncionario.cs" />
     <Compile Include="GestaoDeFuncionario\ServicoDeGestaoDeFuncionarios.cs" />
+    <Compile Include="GestaoDeJogos\IServicoDeGestaoDeJogos.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeCadastroDeJogo.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeEdicaoDeJogo.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeFiltroDeJogo.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeJogosDaLista.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeListaDeJogos.cs" />
+    <Compile Include="GestaoDeJogos\ServicoDeGestaoDeJogos.cs" />
     <Compile Include="GestaoDeRodada\IServicoDeGestaoDeRodadas.cs" />
     <Compile Include="GestaoDeRodada\Modelos\ModeloDeCadastroDeRodada.cs" />
     <Compile Include="GestaoDeRodada\Modelos\ModeloDeEdicaoDeRodada.cs" />
