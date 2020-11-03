@@ -68,6 +68,7 @@
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
                            colunas.Add(m => m.Nome).Titled("Nome");
+                           colunas.Add(m => m.Sigla).Titled("Sigla");
                            colunas.Add(m => m.Ativo).Titled("Ativo");
                            colunas.Add(m => m.DataDoCadastro).Titled("DataDoCadastro");
 

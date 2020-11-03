@@ -2,6 +2,7 @@
 using Campeonato.Aplicacao.GestaoDeTimes.Modelos;
 using Campeonato.Aplicacao.Util;
 using Campeonato.CustomExtensions;
+using Campeonato.Filter;
 using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ using System.Web.Mvc;
 
 namespace Campeonato.Controllers
 {
+    [Authorize]
+    [TratarErros]
     public class TimeController : Controller
     {
         private readonly IServicoDeGestaoDeTimes _servicoDeGestaoDeTimes;
@@ -20,7 +23,6 @@ namespace Campeonato.Controllers
             this._servicoDeGestaoDeTimes = servicoDeGestaoDeTimes;
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Index(ModeloDeListaDeTimes modelo)
         {
@@ -29,7 +31,6 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Cadastrar()
         {
@@ -37,7 +38,6 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Cadastrar(ModeloDeCadastroDeTime modelo)
         {
@@ -46,7 +46,6 @@ namespace Campeonato.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Editar(int? id)
         {
@@ -57,7 +56,6 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeTime modelo)
         {

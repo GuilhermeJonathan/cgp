@@ -48,6 +48,14 @@
     <Compile Include="Comum\ExcecaoDeAplicacao.cs" />
     <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
+    <Compile Include="ExcecaoDeAplicacao.cs" />
+    <Compile Include="GestaoDeApostas\IServicoDeGestaoDeAposta.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeApostaDaLista.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeCadastroDeAposta.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeEdicaoDeAposta.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeFiltroDeAposta.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeListaDeApostas.cs" />
+    <Compile Include="GestaoDeApostas\ServicoDeGestaoDeAposta.cs" />
     <Compile Include="GestaoDeEstadio\IServicoDeGestaoDeEstadio.cs" />
     <Compile Include="GestaoDeEstadio\Modelos\ModeloDeCadastroDeEstadio.cs" />
     <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEdicaoDeEstadio.cs" />
@@ -62,6 +70,7 @@
     <Compile Include="GestaoDeJogos\Modelos\ModeloDeCadastroDeJogo.cs" />
     <Compile Include="GestaoDeJogos\Modelos\ModeloDeEdicaoDeJogo.cs" />
     <Compile Include="GestaoDeJogos\Modelos\ModeloDeFiltroDeJogo.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeJogosDaApostaDaLista.cs" />
     <Compile Include="GestaoDeJogos\Modelos\ModeloDeJogosDaLista.cs" />
     <Compile Include="GestaoDeJogos\Modelos\ModeloDeListaDeJogos.cs" />
     <Compile Include="GestaoDeJogos\ServicoDeGestaoDeJogos.cs" />
@@ -81,6 +90,7 @@
     <Compile Include="GestaoDeTimes\ServicoDeGestaoDeTimes.cs" />
     <Compile Include="GestaoDeUsuarios\IServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeCadastroDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeUsuarioDaLista.cs" />
     <Compile Include="GestaoDeUsuarios\ServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="Login\IServicoDeLogin.cs" />
     <Compile Include="Login\Modelos\ModeloDeLogin.cs" />

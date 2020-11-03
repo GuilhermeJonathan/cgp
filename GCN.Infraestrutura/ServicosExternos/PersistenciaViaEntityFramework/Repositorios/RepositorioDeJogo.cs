@@ -68,5 +68,15 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
                 .Include(a => a.Rodada)
                 .FirstOrDefault(a => a.Id == id);
         }
+
+        public JogoDaAposta PegarJogoDaApostaPorId(int id)
+        {
+            return this._contexto.Set<JogoDaAposta>()
+                .Include(nameof(Jogo.Time1))
+                .Include(nameof(Jogo.Time2))
+                .Include(a => a.Estadio)
+                .Include(a => a.Rodada)
+                .FirstOrDefault(a => a.Id == id);
+        }
     }
 }

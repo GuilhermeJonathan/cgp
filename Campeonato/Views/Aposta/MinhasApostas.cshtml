@@ -1,0 +1,133 @@
+﻿@model Campeonato.Aplicacao.GestaoDeApostas.Modelos.ModeloDeEdicaoDeAposta
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Minhas Apostas";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">Minhas Apostas</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <form role="form" action="@Url.Action("SalvarMinhaAposta", "Aposta")" method="post">
+                    @if (Model.RodadaFechada)
+                    {
+                    <div class="callout callout-info">
+                        <h5>@Model.NomeRodada FECHADA!</h5>
+
+                        @if (Model.RodadaPodeAlterar)
+                        {
+                            <p>Rodada ainda disponível.</p>}
+                        else
+                        {
+                            <p>Somente é possível realizar alterações até 30 minutos antes do primeiro jogo da Rodada.</p>
+                        }
+                    </div>
+                    }   
+                    <div class="card">
+                        <div class="card-header ">
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-lg-11">
+                                        <h3 class="card-title">
+                                            Apostas da Rodada
+                                            @Html.DropDownListFor(m => m.Rodada, Model.Rodadas, new { @class = "form-control autoComplete" })
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <input hidden name="id" value="@Model.IdRodada" />
+                        <div class="card-body">
+
+                            @foreach (var jogo in Model.Jogos)
+                            {
+                                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                                    <div class="row" style="width: 100%; ">
+
+                                        <div class=" col-lg-3  col-sm-6">
+                                            <p class="text-center">
+                                                <span class="text-muted">@jogo.SiglaTime1</span>
+                                                <img src="../../content/escudos/@jogo.ImagemTime1" style="max-width: 40px;" />
+                                                <input type="text" class="text-muted placarResultado text-center " @(Model.RodadaFechada ? "disabled='disabled'" : "") name="placar1[]" maxlength="2" value="@jogo.PlacarTime1">
+                                                <span style="padding-bottom: 20px;">x</span>
+                                                <input type="text" class="text-muted placarResultado text-center" @(Model.RodadaFechada ? "disabled='disabled'" : "") name="placar2[]" maxlength="2" value="@jogo.PlacarTime2">
+
+                                                <img src="../../content/escudos/@jogo.ImagemTime2" style="max-width: 40px;" />
+                                                <span class="text-muted">@jogo.SiglaTime2</span>
+                                                <input hidden name="idJogos[]" value="@jogo.Id" />
+                                            </p>
+                                        </div>
+                                        <div class=" col-lg-3  col-sm-6">
+                                            <p class="d-flex flex-column text-center">
+                                                <span class="text-muted"> @jogo.NomeTime1</span>
+                                                <span class="text-muted"> @jogo.NomeTime2</span>
+                                            </p>
+                                        </div>
+                                        <div class=" col-lg-3 col-sm-6">
+                                            <p class="d-flex flex-column text-center">
+                                                <span class="font-weight-bold">
+                                                    <i class="fas fa-calendar-plus-o"></i> @jogo.DataDoJogo
+                                                </span>
+                                                <span class="text-muted">@jogo.HoraDoJogo</span>
+                                            </p>
+                                        </div>
+                                        <div class=" col-lg-3 col-sm-6">
+                                            <p class="d-flex flex-column text-center">
+                                                <span class="font-weight-bold">
+                                                    <i class="fas fa-calendar-plus-o"></i> @jogo.NomeRodada
+                                                </span>
+                                                <span class="text-muted">@jogo.NomeEstadio</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            @if (Model.RodadaPodeAlterar)
+                            {
+                                <button type="submit" class="btn btn-primary float-right">Salvar Aposta</button>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript">
+        
+        $(function () {
+
+            $(".placarResultado").bind('input paste', function (e) {
+                var regex = /[^0-9]/g;
+                if ($(this).val().match(regex)) {
+                    $(this).val($(this).val().replace(regex, ''));
+                }
+            });
+
+            $("#Rodada").on("change", function () {
+                var idRodada = $(this).val();
+                window.location.assign("../MinhasApostas/" + idRodada);
+            });
+        });
+
+    $('.autoComplete').select2();
+</script>

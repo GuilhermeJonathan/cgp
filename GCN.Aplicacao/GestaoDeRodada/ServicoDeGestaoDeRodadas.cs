@@ -13,6 +13,10 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
 {
     public class ServicoDeGestaoDeRodadas : IServicoDeGestaoDeRodadas
     {
+        private static int AcertoPlacar = 3;
+        private static int AcertoEmpate = 2;
+        private static int AcertoGanhador = 1;
+        
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
 
         public ServicoDeGestaoDeRodadas(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
@@ -103,7 +107,7 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
             return rodada;
         }
 
-        public string CadastrarResultados(int id, int[] placar1, int[] placar2, int[] idJogos, UsuarioLogado usuario)
+        public string CadastrarResultados(int id, string[] placar1, string[] placar2, int[] idJogos, UsuarioLogado usuario)
         {
             try
             {
@@ -117,8 +121,13 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
                    
                     if (jogo != null)
                     {
-                        jogo.PlacarTime1 = placar1[contador];
-                        jogo.PlacarTime2 = placar2[contador];
+                        if (!String.IsNullOrEmpty(placar1[contador]) && !String.IsNullOrEmpty(placar2[contador]))
+                        {
+                            jogo.PlacarTime1 = Convert.ToInt32(placar1[contador]);
+                            jogo.PlacarTime2 = Convert.ToInt32(placar2[contador]);
+                            jogo.LancouResultado = true;
+                        }
+                        else jogo.LancouResultado = false;
 
                         if(jogo.DataHoraDoJogo < DateTime.Now)
                             jogo.SituacaoDoJogo = SituacaoDoJogo.Finalizado;
@@ -138,6 +147,8 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
                         rodada.SituacaoDaRodada = SituacaoDaRodada.Finalizada;
                         var proximaRodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.BuscarProximaRodada();
                         proximaRodada.SituacaoDaRodada = SituacaoDaRodada.Atual;
+                        var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorRodada(rodada.Id);
+                        ProcessarResultado(rodada.Jogos.ToList(), apostas.ToList());
                     }
                 }
 
@@ -151,5 +162,74 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
             }
         }
 
+        public string FecharRodada(int id, UsuarioLogado usuario)
+        {
+            try
+            {
+                var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                if (rodada != null)
+                {
+                    if(rodada.Fechada)
+                        rodada.AbrirRodada(usuarioBanco);
+                    else
+                        rodada.FecharRodada(usuarioBanco);
+                }
+
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Rodada alterada com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível alterar a rodada: " + ex.InnerException);
+            }
+        }
+
+        private void ProcessarResultado(List<Jogo> jogosDaRodada, List<Aposta> apostas)
+        {
+            var pontos = 0;
+
+            if (apostas != null)
+            {
+                foreach (var aposta in apostas)
+                {
+                    foreach (var jogoDaAposta in aposta.Jogos)
+                    {
+                        var jogoDaRodada = jogosDaRodada.FirstOrDefault( a => a.Time1.Id == jogoDaAposta.Time1.Id && a.Time2.Id == jogoDaAposta.Time2.Id);
+                        var timeGanhador = jogoDaRodada.PlacarTime1 == jogoDaRodada.PlacarTime2 ? 0 : jogoDaRodada.PlacarTime1 > jogoDaRodada.PlacarTime2 ? jogoDaRodada.Time1.Id : jogoDaRodada.Time2.Id;
+                        var timeGanhadorAposta = jogoDaAposta.PlacarTime1 == jogoDaAposta.PlacarTime2 ? 0 : jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2 ? jogoDaAposta.Time1.Id : jogoDaAposta.Time2.Id;
+
+                        //Acerto Placar
+                        if (jogoDaAposta.PlacarTime1 == jogoDaRodada.PlacarTime1 && jogoDaAposta.PlacarTime2 == jogoDaRodada.PlacarTime2)
+                        {
+                            pontos += AcertoPlacar;
+                            aposta.AcertoPlacar += 1;
+                            jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Placar;
+                        }
+                        //Acerto Empate
+                        else if (timeGanhador == 0 && timeGanhadorAposta == 0)
+                        {
+                            pontos += AcertoEmpate;
+                            aposta.AcertoEmpate += 1;
+                            jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Empate;
+                        }
+                        //Acerto TimeGanhador
+                        else if (timeGanhador == timeGanhadorAposta)
+                        {
+                            pontos += AcertoGanhador;
+                            aposta.AcertoGanhador += 1;
+                            jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Ganhador;
+                        }
+
+                        aposta.Pontuacao += pontos;
+                        aposta.SituacaoDaAposta = SituacaoDaAposta.Finalizada;
+                        pontos = 0;
+                    }
+                }
+            }
+
+        }
     }
 }

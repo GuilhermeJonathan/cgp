@@ -1,4 +1,5 @@
-﻿using Campeonato.Web.CustomExtensions;
+﻿using Campeonato.Filter;
+using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,8 @@ using System.Web.Mvc;
 
 namespace Campeonato.Controllers
 {
+    [Authorize]
+    [TratarErros]
     public class HomeController : Controller
     {
 

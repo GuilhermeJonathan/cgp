@@ -13,5 +13,6 @@ namespace Campeonato.Dominio.Repositorios
         IList<Jogo> RetornarTodosJogos();
         IList<Jogo> RetornarJogosPorRodada(int rodada);
         Jogo PegarPorId(int id);
+        JogoDaAposta PegarJogoDaApostaPorId(int id);
     }
 }

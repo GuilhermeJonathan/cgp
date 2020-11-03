@@ -21,14 +21,14 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
                 this.ImagemTime1 = jogo.Time1.Imagem;
                 this.NomeTime1 = jogo.Time1.Nome;
                 this.SiglaTime1 = jogo.Time1.Sigla;
-                this.PlacarTime1 = jogo.PlacarTime1 != null ? jogo.PlacarTime1.ToString() : "";
+                this.PlacarTime1 = jogo.LancouResultado ? jogo.PlacarTime1.ToString() : "";
             }
             if (jogo.Time2 != null)
             {
                 this.ImagemTime2 = jogo.Time2.Imagem;
                 this.NomeTime2 = jogo.Time2.Nome;
                 this.SiglaTime2 = jogo.Time2.Sigla;
-                this.PlacarTime2 = jogo.PlacarTime2 != null ? jogo.PlacarTime2.ToString() : "";
+                this.PlacarTime2 = jogo.LancouResultado ? jogo.PlacarTime2.ToString() : "";
             }
 
             this.NomeEstadio = jogo.Estadio != null ? jogo.Estadio.Nome : "";

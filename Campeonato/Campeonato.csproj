@@ -169,15 +169,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\InjetorDeDependencia.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ApostaController.cs" />
     <Compile Include="Controllers\EstadioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ResultadoController.cs" />
     <Compile Include="Controllers\RodadaController.cs" />
     <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="CustomExtensions\ControllerExtensions.cs" />
     <Compile Include="CustomExtensions\HtmlHelpers.cs" />
     <Compile Include="CustomExtensions\PrincipalExtensions.cs" />
+    <Compile Include="Filter\TratarErro.cs" />
     <Compile Include="Filter\ViewModelMenuAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -236,6 +239,7 @@
     <Content Include="Content\escudos\vasco.png" />
     <Content Include="Content\escudos\vitoria.png" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\select2.min.css" />
     <Content Include="Content\images\user2-160x160.jpg" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
@@ -391,6 +395,10 @@
     <Content Include="Views\Jogo\Cadastrar.cshtml" />
     <Content Include="Views\Jogo\Editar.cshtml" />
     <Content Include="Views\Rodada\LancarResultados.cshtml" />
+    <Content Include="Views\Aposta\Index.cshtml" />
+    <Content Include="Views\Aposta\MinhasApostas.cshtml" />
+    <Content Include="Views\Aposta\Visualizar.cshtml" />
+    <Content Include="Views\Resultado\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

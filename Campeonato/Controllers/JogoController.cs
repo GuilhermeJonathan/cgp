@@ -3,9 +3,11 @@ using Campeonato.Aplicacao.GestaoDeJogos;
 using Campeonato.Aplicacao.GestaoDeJogos.Modelos;
 using Campeonato.Aplicacao.GestaoDeRodada;
 using Campeonato.Aplicacao.GestaoDeTimes;
+using Campeonato.Aplicacao.GestaoDeTimes.Modelos;
 using Campeonato.Aplicacao.Util;
 using Campeonato.CustomExtensions;
 using Campeonato.Dominio.Entidades;
+using Campeonato.Filter;
 using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,8 @@ using System.Web.Mvc;
 
 namespace Campeonato.Controllers
 {
+    [Authorize]
+    [TratarErros]
     public class JogoController : Controller
     {
         private readonly IServicoDeGestaoDeJogos _servicoDeGestaoDeJogos;
@@ -31,7 +35,6 @@ namespace Campeonato.Controllers
             this._servicoDeGestaoDeRodadas = servicoDeGestaoDeRodadas;
         }
 
-        [Authorize]
         public ActionResult Index(ModeloDeListaDeJogos modelo)
         {
             modelo.Filtro.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
@@ -45,17 +48,16 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Cadastrar()
         {
             var modelo = new ModeloDeCadastroDeJogo();
 
-            modelo.Times1 = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
-                       () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesAtivos());
+            modelo.Times1 = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<ModeloDeTimesDaLista>(nameof(ModeloDeTimesDaLista.NomeComSigla), nameof(ModeloDeTimesDaLista.Id),
+                       () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesParaSelect());
 
-            modelo.Times2 = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
-                       () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesAtivos());
+            modelo.Times2 = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<ModeloDeTimesDaLista>(nameof(ModeloDeTimesDaLista.NomeComSigla), nameof(ModeloDeTimesDaLista.Id),
+                       () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesParaSelect());
 
             modelo.Estadios = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Estadio>(nameof(Estadio.Nome), nameof(Estadio.Id),
                      () => this._servicoDeGestaoDeEstadios.RetonarTodosOsEstadiosAtivos());
@@ -71,7 +73,6 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Cadastrar(ModeloDeCadastroDeJogo modelo)
         {
@@ -80,7 +81,6 @@ namespace Campeonato.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Editar(int? id)
         {
@@ -88,6 +88,12 @@ namespace Campeonato.Controllers
                 JogoNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeJogos.BuscarJogoPorId(id.Value);
+
+            if (modelo.Id == 0)
+            {
+                JogoNaoEncontrado();
+                return RedirectToAction(nameof(Index));
+            }
 
             modelo.Times1 = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
                         () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesAtivos());
@@ -104,7 +110,6 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeJogo modelo)
         {
@@ -113,7 +118,7 @@ namespace Campeonato.Controllers
             this.AdicionarMensagemDeSucesso(retorno);
             return RedirectToAction(nameof(Index));
         }
-
+        
         private ActionResult JogoNaoEncontrado()
         {
             this.AdicionarMensagemDeErro("Jogo não encontrado");

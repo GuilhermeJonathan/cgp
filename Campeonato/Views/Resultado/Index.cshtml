@@ -1,0 +1,51 @@
+﻿@model Campeonato.Aplicacao.GestaoDeApostas.Modelos.ModeloDeListaDeApostas
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Classificação do Campeonato";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">Classificação do Campeonato</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Classificação no Campeonato </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        @Html.Grid(Model.Lista).Columns(colunas =>
+                        {
+                           colunas.Add(m => m.Classificacao).Titled("Classificação");
+                           colunas.Add(m => m.NomeUsuario).Titled("Usuário");
+                           colunas.Add(m => m.Pontuacao).Titled("Pontução");
+                           colunas.Add(m => m.AcertoPlacar).Titled("Placar");
+                           colunas.Add(m => m.AcertoEmpate).Titled("Empates");
+                           colunas.Add(m => m.AcertoGanhador).Titled("Vitórias");
+
+                       }).WithPaging(30).Sortable(true).EmptyText("Nenhuma aposta encontrada")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

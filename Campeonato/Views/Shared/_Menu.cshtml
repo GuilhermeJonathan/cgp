@@ -25,18 +25,26 @@
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Time" )" class="nav-link @Html.Raw(controller == "Time" ? "active" : "")">
-                        <i class="nav-icon fas fa-shield-alt"></i>
-                        <p> Times </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Estadio" )" class="nav-link @Html.Raw(controller == "Estadio" ? "active" : "")">
-                        <i class="nav-icon fas  fa-home"></i>
-                        <p> Estádios </p>
-                    </a>
-                </li>
+
+                @if (User.EhAdministrador())
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Time")" class="nav-link @Html.Raw(controller == "Time" ? "active" : "")">
+                            <i class="nav-icon fas fa-shield-alt"></i>
+                            <p> Times </p>
+                        </a>
+                    </li>
+                }
+
+                @if (User.EhAdministrador())
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Estadio")" class="nav-link @Html.Raw(controller == "Estadio" ? "active" : "")">
+                            <i class="nav-icon fas  fa-home"></i>
+                            <p> Estádios </p>
+                        </a>
+                    </li>
+                }
                 <li class="nav-item">
                     <a href="@Url.Action("Index", "Jogo" )" class="nav-link @Html.Raw(controller == "Jogo" ? "active" : "")">
                         <i class="nav-icon fas  fa-futbol"></i>
@@ -47,6 +55,18 @@
                     <a href="@Url.Action("Index", "Rodada" )" class="nav-link @Html.Raw(controller == "Rodada" ? "active" : "")">
                         <i class="nav-icon fas fa-table"></i>
                         <p> Rodadas </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Aposta" )" class="nav-link @Html.Raw(controller == "Aposta" ? "active" : "")">
+                        <i class="nav-icon fas fa-receipt"></i>
+                        <p> Apostas </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Resultado" )" class="nav-link @Html.Raw(controller == "Resultado" ? "active" : "")">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p> Classficação </p>
                     </a>
                 </li>
             </ul>

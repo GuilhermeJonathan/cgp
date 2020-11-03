@@ -19,6 +19,7 @@ namespace Campeonato.Aplicacao.GestaoDeRodada.Modelos
             this.Temporada = rodada.Temporada;
             this.Ativo = rodada.Ativo ? "Sim" : "Não";
             rodada.Jogos.ToList().ForEach(a => this.Jogos.Add(new ModeloDeJogosDaLista(a)));
+            this.Fechada = rodada.Fechada;
             this.QuantidadeDeJogos = rodada.Jogos.Count;
         }
 
@@ -27,6 +28,7 @@ namespace Campeonato.Aplicacao.GestaoDeRodada.Modelos
         public string Temporada { get; set; }
         public IList<ModeloDeJogosDaLista> Jogos { get; set; }
         public string Ativo { get; set; }
+        public bool Fechada { get; set; }
         public int QuantidadeDeJogos { get; set; }
     }
 }

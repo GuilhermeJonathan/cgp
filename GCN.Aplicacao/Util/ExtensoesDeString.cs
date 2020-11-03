@@ -83,12 +83,11 @@ namespace Campeonato.Aplicacao.Util
             if (String.IsNullOrEmpty(mensagem))
                 return mensagem;
 
+            //byte[] utf8Bytes = Encoding.UTF8.GetBytes(mensagem);
+            //byte[] win1252Bytes = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("Windows-1252"), utf8Bytes);
+            //string sConvertedString = Encoding.UTF8.GetString(win1252Bytes);
 
-            byte[] utf8Bytes = Encoding.UTF8.GetBytes(mensagem);
-            byte[] win1252Bytes = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("Windows-1252"), utf8Bytes);
-            string sConvertedString = Encoding.UTF8.GetString(win1252Bytes);
-
-            return sConvertedString;
+            return mensagem;
         }
 
         public static string PreecherAtributosDoEnum(Enum value)

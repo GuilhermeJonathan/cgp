@@ -19,6 +19,8 @@ using Campeonato.Aplicacao.GestaoDeTimes;
 using Campeonato.Aplicacao.GestaoDeEstadio;
 using Campeonato.Aplicacao.GestaoDeRodada;
 using Campeonato.Aplicacao.GestaoDeJogos;
+using Campeonato.Aplicacao.GestaoDeApostas.Modelos;
+using Campeonato.Aplicacao.GestaoDeUsuarios;
 
 namespace Campeonato.App_Start
 {
@@ -40,6 +42,8 @@ namespace Campeonato.App_Start
             container.Register<IServicoDeGestaoDeEstadios, ServicoDeGestaoDeEstadios>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeRodadas, ServicoDeGestaoDeRodadas>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeJogos, ServicoDeGestaoDeJogos>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeApostas, ServicoDeGestaoDeApostas>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeUsuarios, ServicoDeGestaoDeUsuarios>(Lifestyle.Scoped);
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

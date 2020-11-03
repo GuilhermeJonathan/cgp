@@ -47,6 +47,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
+                            @Html.BackButton()
                             <button type="submit" class="btn btn-success float-right">Salvar</button>
                         </div>
                     </div>
@@ -55,3 +56,19 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    $(function () {
+
+        $('#dataHoraDoJogo').datepicker({
+            language: "pt-BR", autoclose: true,
+            zIndexOffset: 99999999
+        });
+
+        $('.mascaraData').mask('00/00/0000');
+        $('.mascaraHora').mask('00:00');
+
+        $('.autoComplete').select2();
+    })
+</script>

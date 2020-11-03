@@ -27,5 +27,15 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
 
             return usuario != null ? usuario : null;
         }
+
+        public IList<Usuario> RetornarTodosUsuarios()
+        {
+            var query = this._contexto.Set<Usuario>()
+                .AsQueryable();
+
+            query = query.Where(c => c.Ativo);
+
+            return query.OrderBy(a => a.DataDoCadastro).ToList();
+        }
     }
 }

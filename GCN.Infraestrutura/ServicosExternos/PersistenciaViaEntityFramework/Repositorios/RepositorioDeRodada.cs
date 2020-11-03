@@ -2,9 +2,9 @@
 using Campeonato.Dominio.Repositorios;
 using System;
 using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
@@ -38,7 +38,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
 
         public Rodada PegarPorId(int id)
         {
-            return this._contexto.Set<Rodada>().FirstOrDefault(a => a.Id == id);
+            return this._contexto.Set<Rodada>().Include(a => a.Jogos).FirstOrDefault(a => a.Id == id);
         }
 
         public int BuscarRodadaAtiva()

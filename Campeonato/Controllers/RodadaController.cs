@@ -4,6 +4,7 @@ using Campeonato.Aplicacao.GestaoDeTimes;
 using Campeonato.Aplicacao.Util;
 using Campeonato.CustomExtensions;
 using Campeonato.Dominio.Entidades;
+using Campeonato.Filter;
 using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ using System.Web.Mvc;
 
 namespace Campeonato.Controllers
 {
+    [Authorize]
+    [TratarErros]
     public class RodadaController : Controller
     {
 
@@ -25,7 +28,7 @@ namespace Campeonato.Controllers
             this._servicoDeGestaoDeTimes = servicoDeGestaoDeTimes;
         }
 
-        [Authorize]
+        
         [HttpGet]
         public ActionResult Index(ModeloDeListaDeRodadas modelo)
         {
@@ -37,7 +40,6 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
             
-        [Authorize]
         [HttpGet]
         public ActionResult Cadastrar()
         {
@@ -45,7 +47,6 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Cadastrar(ModeloDeCadastroDeRodada modelo)
         {
@@ -54,7 +55,6 @@ namespace Campeonato.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Editar(int? id)
         {
@@ -65,7 +65,6 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeRodada modelo)
         {
@@ -80,7 +79,6 @@ namespace Campeonato.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult LancarResultados(int? id)
         {
@@ -91,9 +89,8 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
-        [Authorize]
         [HttpPost]
-        public ActionResult LancarResultados(int id, int[] placar1, int[] placar2, int[] idJogos)
+        public ActionResult LancarResultados(int id, string[] placar1, string[] placar2, int[] idJogos)
         {
             if (idJogos != null)
             {
@@ -101,6 +98,12 @@ namespace Campeonato.Controllers
                 this.AdicionarMensagemDeSucesso(retorno);
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult FecharRodada(int id)
+        {
+            var modelo = this._servicoDeGestaoDeRodadas.FecharRodada(id, User.Logado());
+            return Content(modelo);
         }
     }
 }

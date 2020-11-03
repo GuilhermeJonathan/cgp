@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="~/Content/toastr.min.css" />
     <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="~/Content/select2.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
@@ -48,6 +49,7 @@
         <script src="~/plugins/datepicker/bootstrap-datepicker.pt-BR.min.js"></script>
 
         <script src="~/plugins/inputmask/jquery.mask.js"></script>
+        <script src="~/plugins/select2/select2.min.js"></script>
 
         @RenderBody()
 
@@ -58,6 +60,15 @@
 
     @Html.Partial("_Mensagens")
 
-</body>
+    <script>
+        $(function () {
+            $('.autoComplete').select2();
+
+            $(".voltar").on("click", function () {
+                history.back();
+            });
+        })
+    </script>
+</body> 
 </html>
 

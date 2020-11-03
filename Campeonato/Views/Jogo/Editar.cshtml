@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="control-label"> Estádio </label>
-                                    @Html.DropDownListFor(m => m.Estadio, Model.Estadios, new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.Estadio, Model.Estadios, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                             <div class="row">
@@ -52,11 +52,11 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="control-label"> Time de fora </label>
-                                    @Html.DropDownListFor(m => m.Time2, Model.Times2, new { @class = "form-control" } )
+                                    @Html.DropDownListFor(m => m.Time2, Model.Times2, new { @class = "form-control autoComplete" } )
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="control-label"> Rodadas </label>
-                                    @Html.DropDownListFor(m => m.Rodada, Model.Rodadas, new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.Rodada, Model.Rodadas, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                         </div>
@@ -85,5 +85,7 @@
 
         $('.mascaraData').mask('00/00/0000');
         $('.mascaraHora').mask('00:00');
+
+        $('.autoComplete').select2();
     })
 </script>

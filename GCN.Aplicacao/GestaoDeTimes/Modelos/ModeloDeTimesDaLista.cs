@@ -18,6 +18,8 @@ namespace Campeonato.Aplicacao.GestaoDeTimes.Modelos
         {
             this.Id = time.Id;
             this.Nome = time.Nome;
+            this.Sigla = time.Sigla;
+            this.NomeComSigla = $"{time.Nome} - {time.Sigla}";
             this.Imagem = time.Imagem;
             this.DataDoCadastro = time.DataDoCadastro.ToShortDateString();
             this.Ativo = time.Ativo ? "Sim" : "Não";
@@ -25,6 +27,8 @@ namespace Campeonato.Aplicacao.GestaoDeTimes.Modelos
 
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string NomeComSigla { get; set; }
+        public string Sigla { get; set; }
         public string Imagem { get; set; }
         public string Ativo { get; set; }
         public string DataDoCadastro { get; set; }

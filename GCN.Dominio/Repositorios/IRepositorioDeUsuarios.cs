@@ -1,4 +1,5 @@
 ﻿using Campeonato.Dominio.Entidades;
+using System.Collections.Generic;
 
 namespace Campeonato.Dominio.Repositorios
 {
@@ -6,5 +7,6 @@ namespace Campeonato.Dominio.Repositorios
     {
         Usuario PegarAtivoPorLogin(string login);
         Usuario PegarPorLoginESenha(string login, string senha);
+        IList<Usuario> RetornarTodosUsuarios();
     }
 }

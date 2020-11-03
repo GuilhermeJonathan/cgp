@@ -1,0 +1,87 @@
+﻿@model Campeonato.Aplicacao.GestaoDeApostas.Modelos.ModeloDeListaDeApostas
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Apostas";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">Apostas</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="@Url.Action("Index", "Aposta")" method="get">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Buscar Apostas</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Usuários </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Usuario, Model.Filtro.Usuarios, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Rodadas </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
+                                </div>
+                            </div>
+                          
+                        </div>
+                        <div class="card-footer">
+                            <a href="@Url.Action("MinhasApostas", "Aposta", new { id = Model.Filtro.Rodada } )" class="btn btn-info float-left">Minhas Apostas</a>
+                            <button type="submit" class="btn btn-primary float-right">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Apostas </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        @Html.Grid(Model.Lista).Columns(colunas =>
+                        {
+                            colunas.Add(m => m.NomeUsuario).Titled("Usuário");
+                            colunas.Add(m => m.NomeRodada).Titled("Rodada");
+                            colunas.Add(m => m.DataDoCadastro).Titled("Data Cadastro");
+
+                            colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
+                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Visualizar", "Aposta", new { id = m.IdRodada, idUsuario = m.IdUsuario })" title="Visualizar Aposta" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
+
+                        }).WithPaging(30).Sortable(true).EmptyText("Nenhuma aposta encontrada")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -71,12 +71,6 @@
 
     $(document).on("ready", function () {
 
-        alert("teste");
-
-        $(".voltar").on("click", function () {
-            history.back();
-        });
-
         $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
         $("input[required], select[required]").closest(".form-group").find("label.control-label").append("<span class='obrigatorio'>*</span>");

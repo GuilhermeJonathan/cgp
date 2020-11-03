@@ -32,6 +32,7 @@ namespace Campeonato.Dominio.Entidades
         public int PlacarTime1 { get; set; }
         public int PlacarTime2 { get; set; }
         public SituacaoDoJogo SituacaoDoJogo { get; set; }
+        public bool LancouResultado { get; set; }
 
         public void AlterarDadosDoJogo(DateTime dataHoraDoJogo, Estadio estadio, Time time1, Time time2, Rodada rodada)
         {

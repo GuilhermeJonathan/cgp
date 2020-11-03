@@ -66,6 +66,14 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             }
         }
 
+        public IRepositorioDeApostas RepositorioDeApostas
+        {
+            get
+            {
+                return new RepositorioDeAposta(this._contexto);
+            }
+        }
+
 
         public void Persistir()
         {

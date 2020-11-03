@@ -40,6 +40,14 @@ namespace Campeonato.Aplicacao.GestaoDeTimes
             return times;
         }
 
+        public IList<ModeloDeTimesDaLista> RetonarTodosOsTimesParaSelect()
+        {
+            var times = this._servicoExternoDePersistencia.RepositorioDeTimes.RetornarTodosOsTimesAtivos();
+            var modelo = new List<ModeloDeTimesDaLista>();
+            times.ToList().ForEach(a => modelo.Add(new ModeloDeTimesDaLista(a)));
+            return modelo;
+        }
+
         public ModeloDeEdicaoDeTime BuscarTimePorId(int id)
         {
             try

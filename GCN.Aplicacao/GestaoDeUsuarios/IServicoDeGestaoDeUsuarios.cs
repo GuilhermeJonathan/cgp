@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Campeonato.Aplicacao.GestaoDeUsuarios.Modelos;
+using Campeonato.Dominio.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +11,6 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
     public interface IServicoDeGestaoDeUsuarios
     {
         string CadastrarNovoUsuario();
+        IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos();
     }
 }

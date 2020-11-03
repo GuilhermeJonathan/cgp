@@ -1,6 +1,7 @@
 ﻿using Campeonato.Aplicacao.Login;
 using Campeonato.Aplicacao.Login.Modelos;
 using Campeonato.CustomExtensions;
+using Campeonato.Filter;
 using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Campeonato.Controllers
 {
+    [TratarErros]
     public class LoginController : Controller
     {
         private readonly IServicoDeLogin _servicoDeLogin;
@@ -23,7 +25,7 @@ namespace Campeonato.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Entrar(string login, string senha)
