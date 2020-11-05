@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Campeonato.Dominio.ObjetosDeValor
 {
-    public class Login
+    public class LoginUsuario
     {
-        private Login()
+        private LoginUsuario()
         {
         }
 
-        public Login(string valor)
+        public LoginUsuario(string valor)
         {
             var email = new Email.Email(valor);
             this.Valor = email.Endereco;

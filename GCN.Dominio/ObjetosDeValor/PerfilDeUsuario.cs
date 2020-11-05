@@ -10,6 +10,6 @@ namespace Campeonato.Dominio.ObjetosDeValor
     {
         Administrador = 1,
         Interno = 2,
-        Externo = 3
+        Usuario = 3
     }
 }

@@ -32,7 +32,7 @@ namespace Campeonato.Controllers
         [HttpGet]
         public ActionResult Index(ModeloDeListaDeRodadas modelo)
         {
-            modelo.Filtro.Rodadas = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Rodada>(nameof(Rodada.Nome), nameof(Rodada.Id),
+            modelo.Filtro.Rodadas = ListaDeItensDeDominio.DaClasseComOpcaoTodos<Rodada>(nameof(Rodada.Nome), nameof(Rodada.Id),
                      () => this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivas());
 
             modelo = this._servicoDeGestaoDeRodadas.RetonarTodosasRodadas(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));

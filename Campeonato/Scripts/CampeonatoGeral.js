@@ -9,7 +9,7 @@
         };
 
         toastr.success(mensagem, "Sucesso");
-    }
+    };
 
     campeonatoGeral.AdicionarMensagemDeErro = function (mensagem) {
         toastr.options = {
@@ -18,7 +18,7 @@
             "positionClass": "toast-top-right"
         };
         toastr.error(mensagem, "OPS! Algo deu errado");
-    }
+    };
 
     campeonatoGeral.BloquearTela = function () {
         $.blockUI.defaults.border = 'none';
@@ -26,11 +26,11 @@
 
         $(".blockOverlay").css("z-index", "2001");
         $(".blockUI").css("z-index", "2002");
-    }
+    };
 
     campeonatoGeral.DesbloquearTela = function () {
         $.unblockUI();
-    }
+    };
 
     campeonatoGeral.ajaxGet = function (url, params, sucesso, falha) {
         if (!params)
@@ -45,9 +45,9 @@
                 falha();
             }
         }).always(function () {
-            gestaoGeral.DesbloquearTela();
+            campeonatoGeral.DesbloquearTela();
         });
-    }
+    };
 
     campeonatoGeral.preencherCombo = function atualizarCombo($combo, valores, aoPreencher, valorSelecionado) {
         $combo.empty();
@@ -67,7 +67,7 @@
 
             $combo.append(opcao);
         });
-    }
+    };
 
     $(document).on("ready", function () {
 
@@ -76,16 +76,16 @@
         $("input[required], select[required]").closest(".form-group").find("label.control-label").append("<span class='obrigatorio'>*</span>");
 
         $("a:not(.no-load)").on("click", function () {
-            gestaoGeral.BloquearTela();
+            campeonatoGeral.BloquearTela();
         });
 
         $(this).ajaxStart(function () {
-            gestaoGeral.BloquearTela();
+            campeonatoGeral.BloquearTela();
         });
 
         $(this).ajaxComplete(function () {
-            gestaoGeral.DesbloquearTela();
-        })
+            campeonatoGeral.DesbloquearTela();
+        });
 
 
         $("form").attr("novalidate", "novalidate");
@@ -117,24 +117,11 @@
 
         });
 
-        jQuery.validator.setDefaults({
-            success: function (label, element) {
-                $(element).closest('.form-group').removeClass('error');
-
-                $(element).tooltip('hide');
-                $(element).removeAttr("data-toggle").removeAttr("data-original-title");
-            },
-
-            errorPlacement: function (error, element) {
-                $(element).attr("data-toggle", "tooltip").attr("data-original-title", error.text());
-            },
-            ignore: []
-        });
-
         $('.dataComAutoComplete').datepicker({
             language: "pt-BR",
             format: "dd/mm/yyyy",
             autoclose: true
         });
     });
-})(window.campeonatoGeral = window.campeonatoGeral || {}, jQuery)
+
+})(window.campeonatoGeral = window.campeonatoGeral || {});

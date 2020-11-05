@@ -1,6 +1,7 @@
 ﻿using Campeonato.Aplicacao.Comum;
 using Campeonato.Aplicacao.GestaoDeUsuarios.Modelos;
 using Campeonato.Dominio.Entidades;
+using Campeonato.Dominio.ObjetosDeValor;
 using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
 using System;
 using System.Collections.Generic;
@@ -13,25 +14,29 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
     public class ServicoDeGestaoDeUsuarios : IServicoDeGestaoDeUsuarios
     {
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
-        public ServicoDeGestaoDeUsuarios(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
+        private readonly IServicoDeGeracaoDeHashSha _servicoDeGeracaoDeHashSha;
+
+        public ServicoDeGestaoDeUsuarios(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, 
+            IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
+            this._servicoDeGeracaoDeHashSha = servicoDeGeracaoDeHashSha;
         }
 
-        public string CadastrarNovoUsuario()
+        public string CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo)
         {
-            try
-            {
+            var usuarioComMesmoLogin = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarAtivoPorLogin(modelo.Email);
 
-                var usuarioComMesmoLogin = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarAtivoPorLogin("teste@gmail.com");
+            if (usuarioComMesmoLogin != null)
+                throw new ExcecaoDeAplicacao("Já existe um usuário com o mesmo login");
 
-                if (usuarioComMesmoLogin != null)
-                    throw new ExcecaoDeAplicacao("Já existe um usuário com o mesmo login");
+            var senha = new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash);
+            var novologin = new LoginUsuario(modelo.Email);
 
-            } catch (Exception ex)
-            {
-                throw new ExcecaoDeAplicacao("Erro ao cadastrar usuário");
-            }
+            var novoUsuario = new Usuario(new Nome(modelo.Nome), novologin, senha);
+
+            this._servicoExternoDePersistencia.RepositorioDeUsuarios.Inserir(novoUsuario);
+            this._servicoExternoDePersistencia.Persistir();
 
             return "Usuário cadastrado com sucesso.";
         }

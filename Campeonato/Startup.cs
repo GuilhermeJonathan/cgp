@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
+using Campeonato.Aplicacao.Util;
+using System.Configuration;
 
 [assembly: OwinStartup(typeof(Campeonato.Startup))]
 
@@ -18,7 +20,7 @@ namespace Campeonato
             var configuracaoDaPaginaDeLogin = "/Login";
             var paginaDeLogin = !string.IsNullOrEmpty(configuracaoDaPaginaDeLogin) ? configuracaoDaPaginaDeLogin : "/Login";
 
-            var configuracaoDoDominio = "http://localhost:50298";
+            var configuracaoDoDominio = VariaveisDeAmbiente.Pegar<string>("NomeDoSite");
 
             var opcoes = new CookieAuthenticationOptions();
             opcoes.AuthenticationType = "ApplicationCookie";
@@ -29,7 +31,7 @@ namespace Campeonato
             opcoes.CookieSecure = CookieSecureOption.SameAsRequest;
             opcoes.CookieDomain = new Uri(configuracaoDoDominio).Host;
 
-            opcoes.CookieName = "campeonato_secure";
+            opcoes.CookieName = VariaveisDeAmbiente.Pegar<string>("NomeDoSite") + "_secure";
 
             app.UseCookieAuthentication(opcoes);
         }

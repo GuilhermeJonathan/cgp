@@ -23,7 +23,6 @@ namespace Campeonato
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js",
                          "~/Scripts/bootstrap.bundle.min.js",
-                        "~/Scripts/adminlte.js",
                        "~/Scripts/core.js",
                        "~/Scripts/demo.js",
                       "~/Scripts/bootstrap.bundle.js"));

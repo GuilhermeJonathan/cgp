@@ -10,7 +10,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
 {
     public interface IServicoDeGestaoDeUsuarios
     {
-        string CadastrarNovoUsuario();
+        string CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo);
         IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos();
     }
 }

@@ -67,7 +67,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body table-responsive p-0">
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
                             colunas.Add(m => m.NomeUsuario).Titled("Usuário");

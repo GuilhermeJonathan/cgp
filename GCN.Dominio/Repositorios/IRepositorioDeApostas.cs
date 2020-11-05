@@ -13,6 +13,6 @@ namespace Campeonato.Dominio.Repositorios
         IList<Aposta> RetornarApostasPorRodada(int rodada);
         Aposta PegarPorId(int id);
         Aposta PegarPorIdRodadaEUsuario(int id, int usuario);
-        IList<Aposta> RetornarApostasParaResultado();
+        IList<Aposta> RetornarApostasParaResultado(int idRodada);
     }
 }

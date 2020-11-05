@@ -1,4 +1,4 @@
-﻿@model Campeonato.Aplicacao.Login.Modelos.ModeloDeLogin
+﻿
 @{
     ViewBag.Title = "Login";
     Layout = null;
@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bolão Brasileirão | Login</title>
+    <title>AdminLTE 3 | Log in</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -26,10 +26,18 @@
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Informe os dados para realizar o Login</p>
-                <form action="@Url.Action("Entrar", "Login")" method="post">
+                <p class="login-box-msg">Informe os dados para se cadastrar</p>
+                <form action="@Url.Action("Cadastrar", "Login")" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" name="login" class="form-control" placeholder="Email">
+                        <input type="text" name="Nome" class="form-control" placeholder="Nome">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" name="Email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -37,7 +45,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="senha" class="form-control" placeholder="Senha">
+                        <input type="password" name="Senha" class="form-control" placeholder="Senha">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -45,45 +53,30 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Lembrar-Me
-                                </label>
-                            </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block right">Cadastrar</button>
                         </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    </div>
+                    <p class="mb-0">
+                        <a href="@Url.Action("Index", "Login")" class="text-center">Login</a>
+                    </p>
+                    <div class="row">
+                        <div class="col-12 text-center" style="color:red;">
+                            @ViewBag.Mensagem
                         </div>
                     </div>
                 </form>
-
-                <p class="mb-1">
-                    <a href="forgot-password.html">Esqueci minha senha</a>
-                </p>
-                <p class="mb-0">
-                    <a href="@Url.Action("Cadastrar", "Login")" class="text-center">Quero me cadastrar</a>
-                </p>
-
-                <div class="row">
-                    <div class="col-12 text-center" style="color:red;">
-                        @ViewBag.Mensagem
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/toastr.min.js"></script>
-    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Scripts/adminlte.js"></script>
-    <script src="~/Scripts/toastr.min.js"></script>
     <script src="~/Scripts/campeonatoGeral.js"></script>
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/adminlte.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
 
     @Html.Partial("_Mensagens")
 </body>
 </html>
+
 

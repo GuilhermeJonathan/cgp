@@ -24,22 +24,25 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Classificação no Campeonato </h3>
+                        <h3 class="card-title">
+                            Classificação no Campeonato
+                            @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
+                        </h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body table-responsive p-0">
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
-                           colunas.Add(m => m.Classificacao).Titled("Classificação");
+                           colunas.Add(m => m.Classificacao).Titled("").SetWidth(30);
                            colunas.Add(m => m.NomeUsuario).Titled("Usuário");
-                           colunas.Add(m => m.Pontuacao).Titled("Pontução");
-                           colunas.Add(m => m.AcertoPlacar).Titled("Placar");
-                           colunas.Add(m => m.AcertoEmpate).Titled("Empates");
-                           colunas.Add(m => m.AcertoGanhador).Titled("Vitórias");
+                           colunas.Add(m => m.Pontuacao).Titled("Pontução").SetWidth(60);
+                           colunas.Add(m => m.AcertoPlacar).Titled("Placar").SetWidth(60);
+                           colunas.Add(m => m.AcertoEmpate).Titled("Empates").SetWidth(60);
+                           colunas.Add(m => m.AcertoGanhador).Titled("Vitórias").SetWidth(60);
 
                        }).WithPaging(30).Sortable(true).EmptyText("Nenhuma aposta encontrada")
                     </div>
@@ -48,4 +51,22 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" language="javascript">
+
+        $(function () {
+
+            $("#Filtro_Rodada").on("change", function () {
+                var idRodada = $(this).val();
+
+                if (!window.location.href.match("Index")) {
+                    window.location.assign("../Resultado/Index/" + idRodada);
+                } else {
+                    window.location.assign("../Index/" + idRodada);
+                }
+            });
+        });
+
+    $('.autoComplete').select2();
+</script>
 

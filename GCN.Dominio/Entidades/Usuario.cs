@@ -15,22 +15,15 @@ namespace Campeonato.Dominio.Entidades
 
         }
 
-        public Usuario(Nome nome, Login login, string senha)
-        {
-            this.Nome = nome;
-            this.Login = login;
-            this.Senha = new Senha(senha);
-        }
-
         public Nome Nome { get; set; }
-        public Login Login { get; private set; }
+        public LoginUsuario Login { get; private set; }
         public Senha Senha { get; private set; }
         public bool Ativo { get; set; }
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
 
         internal void AlterarLogin(string login)
         {
-            this.Login = new Login(login);
+            this.Login = new LoginUsuario(login);
         }
 
         internal void AlteraNome(string nomeFantasia)
@@ -46,7 +39,7 @@ namespace Campeonato.Dominio.Entidades
             this.Senha = senha;
         }
 
-        public Usuario(Nome nome, Login login, Senha senha) : this()
+        public Usuario(Nome nome, LoginUsuario login, Senha senha) : this()
         {
             if (nome == null)
                 throw new ExcecaoDeNegocio("Não é possível criar um usuário sem nome");
@@ -57,8 +50,8 @@ namespace Campeonato.Dominio.Entidades
             this.Nome = nome;
             this.Login = login;
             this.Senha = senha;
-            this.Ativo = true;
-            this.PerfilDeUsuario = PerfilDeUsuario.Administrador;
+            this.Ativo = false;
+            this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
         }
     }
 }

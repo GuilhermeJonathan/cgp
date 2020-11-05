@@ -32,6 +32,9 @@ namespace Campeonato.Aplicacao.Login
             if(usuario == null)
                 throw new ExcecaoDeAplicacao("Usuário e/ou senha inválidos");
 
+            if (!usuario.Ativo)
+                throw new ExcecaoDeAplicacao("Usuário inativo. Ainda não validado pelo Administrador.");
+
             var dadosDaSessao = new Dictionary<string, object>
                 {
                     { "id", usuario.Id },

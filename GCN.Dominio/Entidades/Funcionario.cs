@@ -25,7 +25,7 @@ namespace Campeonato.Dominio
             this.Ativo = true;
             this.Endereco = endereco;
 
-            this.Usuario = new Usuario(new Nome(this.Nome), new Login(email), senha);
+            this.Usuario = new Usuario(new Nome(this.Nome), new LoginUsuario(email), senha);
         }
 
         public string Nome { get; set; }

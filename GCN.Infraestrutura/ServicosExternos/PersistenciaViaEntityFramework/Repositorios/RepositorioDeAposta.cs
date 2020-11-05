@@ -58,13 +58,14 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
            return this._contexto.Set<Aposta>()
                 .Include(a => a.Usuario)
                 .Include(a => a.Jogos)
+                .Include(a => a.Jogos.Select(b => b.Estadio))
                 .Include(a => a.Jogos.Select(b => b.Time1))
                 .Include(a => a.Jogos.Select(b => b.Time2))
                 .Include(a => a.Rodada)
                 .FirstOrDefault(a => a.Rodada.Id == id && a.Usuario.Id == usuario);
         }
 
-        public IList<Aposta> RetornarApostasParaResultado()
+        public IList<Aposta> RetornarApostasParaResultado(int idRodada)
         {
             var query = this._contexto.Set<Aposta>()
                 .Include(a => a.Usuario)
@@ -72,6 +73,9 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
                 .Include(a => a.Jogos)
                 .Include(a => a.Jogos.Select(b => b.Time1))
                 .Include(a => a.Jogos.Select(b => b.Time2)).AsQueryable();
+
+            if (idRodada > 0)
+                query = query.Where(c => c.Rodada.Id == idRodada);
 
             return query.ToList();
         }

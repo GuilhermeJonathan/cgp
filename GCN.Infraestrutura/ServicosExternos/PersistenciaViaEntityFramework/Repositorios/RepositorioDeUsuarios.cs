@@ -15,7 +15,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
         public Usuario PegarAtivoPorLogin(string login)
         {
             var usuario = this._contexto.Set<Usuario>().FirstOrDefault(
-               au => au.Login.Valor == login && au.Ativo == false);
+               au => au.Login.Valor == login && au.Ativo == true);
 
             return usuario != null ? usuario : null;
         }

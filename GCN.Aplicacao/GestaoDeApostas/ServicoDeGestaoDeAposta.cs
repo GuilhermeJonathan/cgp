@@ -133,12 +133,12 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             }
         }
 
-        public ModeloDeListaDeApostas BuscarResultado()
+        public ModeloDeListaDeApostas BuscarResultado(int idRodada)
         {
             try
             {
                 var quantidadeEncontrada = 0;
-                var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasParaResultado();
+                var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasParaResultado(idRodada);
 
                 apostas = apostas.Where(a => a.Jogos.Count > 0).ToList();
 
