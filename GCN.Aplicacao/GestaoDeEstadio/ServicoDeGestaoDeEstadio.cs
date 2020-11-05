@@ -85,7 +85,6 @@ namespace Campeonato.Aplicacao.GestaoDeEstadio
             {
                 throw new ExcecaoDeAplicacao("Não foi possível alterar o estádio: " + ex.InnerException);
             }
-
         }
     }
 }

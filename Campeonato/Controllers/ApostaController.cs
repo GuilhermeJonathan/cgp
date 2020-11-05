@@ -15,8 +15,8 @@ using System.Web.Mvc;
 
 namespace Campeonato.Controllers
 {
+    [TratarErros]
     [Authorize]
-   
     public class ApostaController : Controller
     {
         private readonly IServicoDeGestaoDeApostas _servicoDeGestaoDeApostas;
@@ -101,6 +101,26 @@ namespace Campeonato.Controllers
                 return RedirectToAction(nameof(Index));
             else
                 return RedirectToAction(nameof(MinhasApostas), new { id = id });
+        }
+
+        [TratarErros]
+        [Authorize]
+        [HttpPost]
+        public ActionResult GerarApostaExclusiva(int? Id, int IdRodada, int Usuario)
+        {
+            if (!Id.HasValue)
+                ApostaNaoEncontrada();
+
+            if (Id != null)
+            {
+                var retorno = this._servicoDeGestaoDeApostas.GerarApostaExclusiva(Id.Value, IdRodada, Usuario, User.Logado());
+                this.AdicionarMensagemDeSucesso(retorno);
+            }
+
+            if (!User.EhAdministrador())
+                return RedirectToAction(nameof(Index));
+            else
+                return RedirectToAction(nameof(MinhasApostas), new { id = Id });
         }
 
         private ActionResult ApostaNaoEncontrada()

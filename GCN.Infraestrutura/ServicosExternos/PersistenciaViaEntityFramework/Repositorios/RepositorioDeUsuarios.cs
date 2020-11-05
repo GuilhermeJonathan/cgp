@@ -3,8 +3,7 @@ using Campeonato.Dominio.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
@@ -36,6 +35,39 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             query = query.Where(c => c.Ativo);
 
             return query.OrderBy(a => a.DataDoCadastro).ToList();
+        }
+
+        public IList<Usuario> RetornarUsuariosPorFiltro(string nome, string email, bool ativo, int pagina, int registrosPorPagina, out int quantidadeEncontrada)
+        {
+            var query = this._contexto.Set<Usuario>()
+                .AsQueryable();
+             
+            if(!String.IsNullOrEmpty(nome))
+                query = query.Where(c => c.Nome.Valor.Contains(nome));
+
+            if (!String.IsNullOrEmpty(email))
+                query = query.Where(c => c.Login.Valor.Contains(email));
+
+            query = query.Where(c => c.Ativo == ativo);
+
+            quantidadeEncontrada = query.Count();
+
+            return query.OrderBy(i => i.DataDoCadastro).Skip((pagina - 1) * registrosPorPagina).Take(registrosPorPagina).ToList();
+        }
+
+        public int BuscarQtdUsuariosNovos()
+        {
+            var query = base._contexto.Set<Usuario>().AsQueryable();
+            query = query.Where(i => i.UsuarioNovo);
+            return query.Count();
+        }
+
+        public Usuario BuscarUsuarioComHistorico(int id)
+        {
+            var query = base._contexto.Set<Usuario>()
+                .Include(a => a.HistoricosFinanceiros)
+                .AsQueryable();
+            return query.FirstOrDefault(a => a.Id == id);
         }
     }
 }

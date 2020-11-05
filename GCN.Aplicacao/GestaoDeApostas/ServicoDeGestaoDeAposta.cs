@@ -12,6 +12,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 {
     public class ServicoDeGestaoDeApostas : IServicoDeGestaoDeApostas
     {
+        private const decimal ValorDaAposta = 20;
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
         public ServicoDeGestaoDeApostas(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
         {
@@ -68,8 +69,15 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 
             this._servicoExternoDePersistencia.Persistir();
 
-            return new ModeloDeEdicaoDeAposta(aposta);
-            
+            var modelo = new ModeloDeEdicaoDeAposta(aposta);
+
+            var apostaExclusiva = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarRodadaExclusiva(aposta.Usuario.Id, aposta.Rodada.Id);
+            if(apostaExclusiva != null)
+            {
+                modelo.TemApostaExclusiva = true;
+                modelo.IdApostaExclusiva = apostaExclusiva.Id;
+            }
+            return modelo;
         }
 
         public ModeloDeEdicaoDeAposta VisualizarAposta(int idRodada, int idUsuario)
@@ -78,6 +86,9 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             {
                 var aposta = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarPorIdRodadaEUsuario(idRodada, idUsuario);
                 
+                if(aposta == null)
+                    aposta = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarRodadaExclusiva(idUsuario);
+
                 return new ModeloDeEdicaoDeAposta(aposta);
             }
             catch (Exception ex)
@@ -130,6 +141,52 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             catch (Exception ex)
             {
                 throw new ExcecaoDeAplicacao("Não foi possível salvar aposta: " + ex.InnerException);
+            }
+        }
+
+        public string GerarApostaExclusiva(int id, int idRodada, int idUsuario, UsuarioLogado usuario)
+        {
+            try
+            {
+                var aposta = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarPorId(id);
+                var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(idRodada);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                if (rodada.SituacaoDaRodada == SituacaoDaRodada.Finalizada)
+                    throw new ExcecaoDeAplicacao("Rodada encontra-se finalizada.");
+
+                if (rodada.SituacaoDaRodada == SituacaoDaRodada.Finalizada)
+                {
+                    if (rodada.Fechada)
+                        throw new ExcecaoDeAplicacao("Rodada encontra-se fechada.");
+                }
+
+                if (usuarioBanco.Saldo  < ValorDaAposta)
+                    throw new ExcecaoDeAplicacao("Você não possui créditos para realizar a aposta exclusiva.");
+
+                if (aposta.Rodada.DataPrimeiroJogo.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now)
+                    throw new ExcecaoDeAplicacao("Rodada iniciada. Não é possível alterar as apostas.");
+
+                var novaAposta = new Aposta(usuarioBanco, rodada, TipoDeAposta.Exclusiva);
+
+                if (aposta != null)
+                {
+                    if (aposta.Jogos != null)
+                    {
+                        aposta.Jogos.ToList().ForEach(a => novaAposta.Jogos.Add(new JogoDaAposta(a.DataHoraDoJogo, a.Time1, a.Time2, a.Rodada, a.Estadio, a.PlacarTime1, a.PlacarTime2)));
+                        this._servicoExternoDePersistencia.RepositorioDeApostas.Inserir(novaAposta);
+                    }
+                }
+
+                usuarioBanco.SubtrairCredito($"Rodada Exclusiva {aposta.Rodada.Nome}", ValorDaAposta, usuario.Id);
+
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Aposta gerada com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
             }
         }
 

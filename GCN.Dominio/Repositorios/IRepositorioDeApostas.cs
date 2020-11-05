@@ -14,5 +14,6 @@ namespace Campeonato.Dominio.Repositorios
         Aposta PegarPorId(int id);
         Aposta PegarPorIdRodadaEUsuario(int id, int usuario);
         IList<Aposta> RetornarApostasParaResultado(int idRodada);
+        Aposta PegarRodadaExclusiva(int idUsuario, int idRodada = 0);
     }
 }

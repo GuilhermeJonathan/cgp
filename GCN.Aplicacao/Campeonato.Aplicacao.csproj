@@ -108,6 +108,10 @@
     <Compile Include="GestaoDeTimes\ServicoDeGestaoDeTimes.cs" />
     <Compile Include="GestaoDeUsuarios\IServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeCadastroDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeHistoricoFinanceiroDaLista.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeListaDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeUsuarioDaLista.cs" />
     <Compile Include="GestaoDeUsuarios\ServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="Login\IServicoDeLogin.cs" />

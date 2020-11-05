@@ -13,7 +13,7 @@
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="~/Content/images/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="~/Content/images/avatar-anonimo.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <ul class="navbar-nav ml-auto">
@@ -25,6 +25,18 @@
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                @if (User.EhAdministrador())
+                {
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Usuario")" class="nav-link @Html.Raw(controller == "Usuario" ? "active" : "")">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p> Usuários </p>
+                        <span class="badge badge-info right numeroDeUsuariosNovos"><i class="fas fa-refresh fa-spinner"></i></span>
+                    </a>
+                    
+                </li>
+                }
 
                 @if (User.EhAdministrador())
                 {
@@ -66,7 +78,7 @@
                 <li class="nav-item">
                     <a href="@Url.Action("Index", "Resultado" )" class="nav-link @Html.Raw(controller == "Resultado" ? "active" : "")">
                         <i class="nav-icon fas fa-list"></i>
-                        <p> Classficação </p>
+                        <p> Classficação Geral </p>
                     </a>
                 </li>
             </ul>

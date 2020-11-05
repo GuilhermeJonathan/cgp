@@ -69,59 +69,53 @@
         });
     };
 
-    $(document).on("ready", function () {
+    //$(document).on("ready", function () {
 
-        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    //    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
-        $("input[required], select[required]").closest(".form-group").find("label.control-label").append("<span class='obrigatorio'>*</span>");
+    //    $("input[required], select[required]").closest(".form-group").find("label.control-label").append("<span class='obrigatorio'>*</span>");
 
-        $("a:not(.no-load)").on("click", function () {
-            campeonatoGeral.BloquearTela();
-        });
+    //    $("a:not(.no-load)").on("click", function () {
+    //        campeonatoGeral.BloquearTela();
+    //    });
 
-        $(this).ajaxStart(function () {
-            campeonatoGeral.BloquearTela();
-        });
+    //    $(this).ajaxStart(function () {
+    //        campeonatoGeral.BloquearTela();
+    //    });
 
-        $(this).ajaxComplete(function () {
-            campeonatoGeral.DesbloquearTela();
-        });
+    //    $(this).ajaxComplete(function () {
+    //        campeonatoGeral.DesbloquearTela();
+    //    });
 
 
-        $("form").attr("novalidate", "novalidate");
+    //    $("form").attr("novalidate", "novalidate");
 
-        $("form").on("submit", function () {
+    //    $("form").on("submit", function () {
 
-            var temDados = $(this).attr("data-bloquear-tela");
-            console.log(temDados);
+    //        var temDados = $(this).attr("data-bloquear-tela");
+    //        console.log(temDados);
 
-            if (temDados !== "nao")
-                campeonatoGeral.BloquearTela();
+    //        if (temDados !== "nao")
+    //            campeonatoGeral.BloquearTela();
 
-            if (!$(this).valid()) {
-                var $primeiroInputComErro = $(this).find("input.error:first");
+    //        if (!$(this).valid()) {
+    //            var $primeiroInputComErro = $(this).find("input.error:first");
 
-                if ($primeiroInputComErro.parents(".collapsed-box")) {
-                    $primeiroInputComErro.parents(".collapsed-box").find(".btn-box-tool").click();
-                }
+    //            if ($primeiroInputComErro.parents(".collapsed-box")) {
+    //                $primeiroInputComErro.parents(".collapsed-box").find(".btn-box-tool").click();
+    //            }
 
-                $primeiroInputComErro.focus();
+    //            $primeiroInputComErro.focus();
 
-                campeonatoGeral.DesbloquearTela();
-                return false;
-            }
+    //            campeonatoGeral.DesbloquearTela();
+    //            return false;
+    //        }
 
-            $("form input:not(.data)").unmask();
-            $("form .dinheiro").maskMoney("destroy");
-            $("form .porcentagem").maskMoney("destroy");
+    //        $("form input:not(.data)").unmask();
+    //        $("form .dinheiro").maskMoney("destroy");
+    //        $("form .porcentagem").maskMoney("destroy");
 
-        });
-
-        $('.dataComAutoComplete').datepicker({
-            language: "pt-BR",
-            format: "dd/mm/yyyy",
-            autoclose: true
-        });
-    });
+    //    });
+    //});
 
 })(window.campeonatoGeral = window.campeonatoGeral || {});

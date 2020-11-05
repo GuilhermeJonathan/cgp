@@ -38,6 +38,9 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             this.NomeUsuario = aposta.Usuario.Nome.Valor;
             this.Rodada = aposta.Rodada.Id;
             aposta.Jogos.ToList().ForEach(a => this.Jogos.Add(new ModeloDeJogosDaApostaDaLista(a)));
+
+            this.EhRodadaExclusiva = aposta.TipoDeAposta == TipoDeAposta.Exclusiva ? true : false;
+            this.NomeTipoDeAposta = aposta.TipoDeAposta.ToString();
         }
 
         public int Id { get; set; }
@@ -51,5 +54,9 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public IList<ModeloDeJogosDaApostaDaLista> Jogos { get; set; }
         public bool RodadaFechada { get; set; }
         public bool RodadaPodeAlterar { get; set; }
+        public bool EhRodadaExclusiva { get; set; }
+        public bool TemApostaExclusiva { get; set; }
+        public int IdApostaExclusiva { get; set; }
+        public string NomeTipoDeAposta { get; set; }
     }
 }

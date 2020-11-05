@@ -45,6 +45,7 @@
     <Compile Include="Entidades\Estadio.cs" />
     <Compile Include="Entidades\Funcionario.cs" />
     <Compile Include="Entidades\Entidade.cs" />
+    <Compile Include="Entidades\HistoricoFinanceiro.cs" />
     <Compile Include="Entidades\Jogo.cs" />
     <Compile Include="Entidades\JogoDaAposta.cs" />
     <Compile Include="Entidades\Rodada.cs" />
@@ -67,6 +68,8 @@
     <Compile Include="ObjetosDeValor\SituacaoDoJogo.cs" />
     <Compile Include="ObjetosDeValor\Telefone.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeUsuario.cs" />
+    <Compile Include="ObjetosDeValor\TipoDeAposta.cs" />
+    <Compile Include="ObjetosDeValor\TipoDeOperacao.cs" />
     <Compile Include="ObjetosDeValor\UsuarioLogado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\IRepositorio.cs" />

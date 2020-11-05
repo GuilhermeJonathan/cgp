@@ -171,6 +171,7 @@
     <Compile Include="Controllers\ResultadoController.cs" />
     <Compile Include="Controllers\RodadaController.cs" />
     <Compile Include="Controllers\TimeController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="CustomExtensions\ControllerExtensions.cs" />
     <Compile Include="CustomExtensions\HtmlHelpers.cs" />
     <Compile Include="CustomExtensions\PrincipalExtensions.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Content\escudos\vasco.png" />
     <Content Include="Content\escudos\vitoria.png" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\images\avatar-anonimo.png" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\images\user2-160x160.jpg" />
     <Content Include="Content\toastr.min.css" />
@@ -403,11 +405,14 @@
     <Content Include="Views\Aposta\Visualizar.cshtml" />
     <Content Include="Views\Resultado\Index.cshtml" />
     <Content Include="Views\Login\Cadastrar.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Aposta\_RodadaEspecifica.cshtml" />
+    <Content Include="Views\Usuario\Editar.cshtml" />
+    <Content Include="Views\Usuario\Historico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

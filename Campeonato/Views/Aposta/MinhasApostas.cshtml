@@ -26,31 +26,43 @@
                 <form role="form" action="@Url.Action("SalvarMinhaAposta", "Aposta")" method="post">
                     @if (Model.RodadaFechada)
                     {
-                    <div class="callout callout-info">
-                        <h5>@Model.NomeRodada FECHADA!</h5>
+                        <div class="callout callout-info">
+                            <h5>@Model.NomeRodada FECHADA!</h5>
 
-                        @if (Model.RodadaPodeAlterar)
-                        {
-                            <p>Rodada ainda disponível.</p>}
-                        else
-                        {
-                            <p>Somente é possível realizar alterações até 30 minutos antes do primeiro jogo da Rodada.</p>
-                        }
-                    </div>
-                    }   
+                            @if (Model.RodadaPodeAlterar)
+                            {
+                                <p>Rodada ainda disponível.</p>}
+                            else
+                            {
+                                <p>Somente é possível realizar alterações até 30 minutos antes do primeiro jogo da Rodada.</p>
+                            }
+                        </div>
+                    }
                     <div class="card">
                         <div class="card-header ">
                             <div class="">
                                 <div class="row">
-                                    <div class="col-lg-11">
+                                    <div class="col-lg-3 col-sm-12 col-xs-12">
                                         <h3 class="card-title">
                                             Apostas da Rodada
                                             @Html.DropDownListFor(m => m.Rodada, Model.Rodadas, new { @class = "form-control autoComplete" })
                                         </h3>
+
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
+                                        @if (Model.TemApostaExclusiva)
+                                        {
+                                            <a href="@Url.Action("Visualizar", "Aposta", new { id = Model.IdApostaExclusiva, idUsuario = Model.Usuario })" class="btn btn-default">Visualizar Aposta Exclusiva</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="btn btn-primary apostaEspecifica" data-toggle="modal" data-target="#modalRodadaEspecifica"
+                                               data-id="@Model.Id" data-nomeRodada="@Model.NomeRodada" data-idUsuario="@Model.Usuario" data-idRodada="@Model.IdRodada">Gerar Aposta Exclusiva</a>
+                                        }
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <input hidden name="id" value="@Model.IdRodada" />
                         <div class="card-body">
@@ -112,22 +124,58 @@
     </div>
 </div>
 
-<script type="text/javascript" language="javascript">
-        
-        $(function () {
+@Html.Partial("_RodadaEspecifica")
 
-            $(".placarResultado").bind('input paste', function (e) {
-                var regex = /[^0-9]/g;
-                if ($(this).val().match(regex)) {
-                    $(this).val($(this).val().replace(regex, ''));
+<script type="text/javascript" language="javascript">
+
+    $(function () {
+
+        $(".placarResultado").bind('input paste', function (e) {
+            var regex = /[^0-9]/g;
+            if ($(this).val().match(regex)) {
+                $(this).val($(this).val().replace(regex, ''));
+            }
+        });
+
+        $("#Rodada").on("change", function () {
+            var idRodada = $(this).val();
+            window.location.assign("../MinhasApostas/" + idRodada);
+        });
+
+        $(".apostaEspecifica").button().click(function () {
+            var idAposta = $(this).attr("data-id");
+            var idRodada = $(this).attr("data-idRodada");
+            var idUsuario = $(this).attr("data-idUsuario");
+            var nomeRodada = $(this).attr("data-nomeRodada");
+            
+            var form = $("#modalRodadaEspecifica");
+
+            $(".Id").val(idAposta);
+            $(".IdRodada").val(idRodada);
+            $(".IdUsuario").val(idUsuario);
+            $(".spnTitulo").html(nomeRodada);
+
+            buscarDadosAposta(idRodada, idUsuario, form);
+            form.modal('show');
+        });
+
+        function buscarDadosAposta(idRodada, idUsuario, form) {
+            $.ajax({
+                type: 'GET',
+                url: '../../Usuario/BuscarUsuario',
+                data: 'idUsuario=' + idUsuario,
+                beforeSend: function (resultado) {
+      
+                },
+                success: function (resultado) {
+             
+                    form.modal('show');
+                    $(".txtNome").html(resultado.nome);
+                    $(".txtCredito").html("R$ " + resultado.credito);
                 }
             });
-
-            $("#Rodada").on("change", function () {
-                var idRodada = $(this).val();
-                window.location.assign("../MinhasApostas/" + idRodada);
-            });
-        });
+        }
+    });
 
     $('.autoComplete').select2();
 </script>

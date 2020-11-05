@@ -69,6 +69,20 @@
             $(".voltar").on("click", function () {
                 history.back();
             });
+
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/Usuario/QuantidadeDeUsuariosNovos",
+                    success: function (retorno) {
+                        if (retorno.quantidade > 0) {
+                            $(".numeroDeUsuariosNovos").text(retorno.quantidade);
+                        } else {
+                            $(".numeroDeUsuariosNovos").text("");
+                        }
+                    }
+                });
+            });
         })
     </script>
 </body> 

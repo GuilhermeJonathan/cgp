@@ -1,0 +1,55 @@
+﻿@model Campeonato.Aplicacao.GestaoDeUsuarios.Modelos.ModeloDeEdicaoDeUsuario
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Lista de Históricos Financeiros";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Lista de Históricos Financeiros</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Histórico Financeiro - @Model.Nome</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body table-responsive p-0">
+                        @Html.Grid(Model.HistoricosFinanceiros).Columns(colunas =>
+                        {
+                           colunas.Add(m => m.DataDoCadastro).Titled("Data");
+                           colunas.Add(m => m.TipoDeOperacao).Titled("Operação");
+                           colunas.Add(m => m.Descricao).Titled("Descrição");
+                           colunas.Add(m => m.Valor).Titled("Valor");
+                           colunas.Add(m => m.Saldo).Titled("Saldo");
+                           
+
+                        }).WithPaging(100).Sortable(true).EmptyText("Nenhum histórico financeiro encontrado")
+                    </div>
+                    <div class="card-footer">
+                        @Html.BackButton()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

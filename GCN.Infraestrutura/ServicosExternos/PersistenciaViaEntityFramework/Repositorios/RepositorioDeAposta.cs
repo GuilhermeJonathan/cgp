@@ -1,4 +1,5 @@
 ﻿using Campeonato.Dominio.Entidades;
+using Campeonato.Dominio.ObjetosDeValor;
 using Campeonato.Dominio.Repositorios;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -49,6 +50,9 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             return this._contexto.Set<Aposta>()
                 .Include(a => a.Usuario)
                 .Include(a => a.Jogos)
+                .Include(a => a.Jogos.Select(b => b.Estadio))
+                .Include(a => a.Jogos.Select(b => b.Time1))
+                .Include(a => a.Jogos.Select(b => b.Time2))
                 .Include(a => a.Rodada)
                 .FirstOrDefault(a => a.Id == id);
         }
@@ -77,7 +81,27 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             if (idRodada > 0)
                 query = query.Where(c => c.Rodada.Id == idRodada);
 
+            query = query.Where(c => c.TipoDeAposta == TipoDeAposta.Geral);
+
             return query.ToList();
+        }
+
+        public Aposta PegarRodadaExclusiva( int idUsuario, int idRodada = 0)
+        {
+            var query = this._contexto.Set<Aposta>()
+                .Include(a => a.Usuario)
+                .Include(a => a.Jogos)
+                .Include(a => a.Jogos.Select(b => b.Estadio))
+                .Include(a => a.Jogos.Select(b => b.Time1))
+                .Include(a => a.Jogos.Select(b => b.Time2))
+                .Include(a => a.Rodada).AsQueryable();
+
+            query = query.Where(c => c.TipoDeAposta == TipoDeAposta.Exclusiva);
+
+            if(idRodada > 0)
+                query = query.Where(a => a.Rodada.Id == idRodada);
+
+            return query.FirstOrDefault(a => a.Usuario.Id == idUsuario );
         }
     }
 }

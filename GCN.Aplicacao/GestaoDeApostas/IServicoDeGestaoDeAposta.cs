@@ -12,6 +12,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         ModeloDeListaDeApostas BuscarApostasPorFiltro(ModeloDeFiltroDeAposta filtro, int pagina, int registrosPorPagina = 30);
         ModeloDeEdicaoDeAposta BuscarApostaPorRodada(int idRodada, UsuarioLogado usuario);
         string SalvarMinhaAposta(int id, int[] placar1, int[] placar2, int[] idJogos, UsuarioLogado usuario);
+        string GerarApostaExclusiva(int id, int idRodada, int idUsuario, UsuarioLogado usuario);
         ModeloDeEdicaoDeAposta VisualizarAposta(int idRodada, int idUsuario);
         ModeloDeListaDeApostas BuscarResultado(int idRodada);
     }

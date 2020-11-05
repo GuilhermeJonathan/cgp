@@ -19,7 +19,17 @@ namespace Campeonato.Dominio.Entidades
             this.Jogos = new List<JogoDaAposta>();
             this.Usuario = usuario;
             this.Rodada = rodada;
+            this.TipoDeAposta = TipoDeAposta.Geral;
         }
+
+        public Aposta(Usuario usuario, Rodada rodada, TipoDeAposta tipoDeAposta)
+        {
+            this.Jogos = new List<JogoDaAposta>();
+            this.Usuario = usuario;
+            this.Rodada = rodada;
+            this.TipoDeAposta = tipoDeAposta;
+        }
+
 
         public Usuario Usuario { get; set; }
         public ICollection<JogoDaAposta> Jogos { get; set; }
@@ -29,5 +39,6 @@ namespace Campeonato.Dominio.Entidades
         public int AcertoEmpate { get; set; }
         public int AcertoGanhador { get; set; }
         public SituacaoDaAposta SituacaoDaAposta { get; set; }
+        public TipoDeAposta TipoDeAposta { get; set; }
     }
 }

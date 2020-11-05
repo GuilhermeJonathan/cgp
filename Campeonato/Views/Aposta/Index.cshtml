@@ -72,6 +72,7 @@
                         {
                             colunas.Add(m => m.NomeUsuario).Titled("Usuário");
                             colunas.Add(m => m.NomeRodada).Titled("Rodada");
+                       colunas.Add(m => m.TipoDaAposta).Titled("Tipo");
                             colunas.Add(m => m.DataDoCadastro).Titled("Data Cadastro");
 
                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
