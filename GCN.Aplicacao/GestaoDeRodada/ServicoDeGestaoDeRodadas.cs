@@ -220,7 +220,11 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
                         {
                             pontos += AcertoGanhador;
                             aposta.AcertoGanhador += 1;
-                            jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Ganhador;
+
+                            if (jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2)
+                                jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime1;
+                            else
+                                jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime2;
                         }
 
                         aposta.Pontuacao += pontos;

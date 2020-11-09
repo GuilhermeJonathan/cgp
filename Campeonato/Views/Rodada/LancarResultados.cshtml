@@ -93,6 +93,15 @@
         var valida;
         $(function () {
 
+            var ua = navigator.userAgent;
+            var isAndroid = /Android/i.test(ua);
+            var isChrome = /Chrome/i.test(ua);
+            var isSafari = /Safari/i.test(ua);
+
+            if (isAndroid || isSafari) {
+                $('.placarResultado').attr('type', 'tel');
+            }    
+
             $(".placarResultado").bind('input paste', function (e) {
                 var regex = /[^0-9]/g;
                 if ($(this).val().match(regex)) {

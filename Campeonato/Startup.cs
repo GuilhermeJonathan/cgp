@@ -14,7 +14,7 @@ namespace Campeonato
     {
         public void Configuration(IAppBuilder app)
         {
-            var configuracaoDoTempoDeSessao = "30";
+            var configuracaoDoTempoDeSessao = "15768000";
             var sessaoEmMinutos = !string.IsNullOrEmpty(configuracaoDoTempoDeSessao) ? double.Parse(configuracaoDoTempoDeSessao) : 90;
 
             var configuracaoDaPaginaDeLogin = "/Login";

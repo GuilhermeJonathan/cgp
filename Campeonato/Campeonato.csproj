@@ -409,6 +409,7 @@
     <Content Include="Views\Aposta\_RodadaEspecifica.cshtml" />
     <Content Include="Views\Usuario\Editar.cshtml" />
     <Content Include="Views\Usuario\Historico.cshtml" />
+    <Content Include="Views\Usuario\_CadastrarSaldo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

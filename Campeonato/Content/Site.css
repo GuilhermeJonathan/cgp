@@ -35,11 +35,42 @@
     position: absolute;
 }
 
-@media screen and (max-width: 900px){
+.txtSaldo {
+    width: 30%
+}
 
+.verde{
+   
+   color: #139f11 !important;
+   font-weight: bold;
+}
+
+.amarelo {
+    
+    color: #ff6a00 !important;
+    font-weight: bold;
+}
+
+
+.azul {
+    color: #0b30dd !important;
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 900px) {
     .btnRodadaFechada {
-       
+        padding: 25px 0 0 30px !important;
         width: 200px;
         position: absolute;
     }
+
+    .btnApostaExclusiva{
+        margin-top: 7px;
+    }
+
+    .txtSaldo {
+        width: 100%;
+    }
+
 }

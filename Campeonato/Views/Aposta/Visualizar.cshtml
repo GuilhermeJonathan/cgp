@@ -52,9 +52,9 @@
                                             <p class="text-center">
                                                 <span class="text-muted">@jogo.SiglaTime1</span>
                                                 <img src="../../content/escudos/@jogo.ImagemTime1" style="max-width: 40px;" />
-                                                <input type="text" class="text-muted placarResultado text-center" disabled='disabled' name="placar1[]" maxlength="2" value="@jogo.PlacarTime1">
+                                                <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime1)" disabled='disabled' name="placar1[]" maxlength="2" value="@jogo.PlacarTime1">
                                                 <span style="padding-bottom: 20px;">x</span>
-                                                <input type="text" class="text-muted placarResultado text-center" disabled='disabled'name="placar2[]" maxlength="2" value="@jogo.PlacarTime2">
+                                                <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime2) " disabled='disabled'name="placar2[]" maxlength="2" value="@jogo.PlacarTime2">
 
                                                 <img src="../../content/escudos/@jogo.ImagemTime2" style="max-width: 40px;" />
                                                 <span class="text-muted">@jogo.SiglaTime2</span>
@@ -88,6 +88,15 @@
                             }
                         </div>
                         <div class="card-footer">
+                            @if (Model.RodadaFinalizada)
+                            {
+                                <div class="callout callout-info">
+                                    <h5>LENGENDA PLACAR: </h5>
+                                    <h7> <i class="fas fa-stop verde"></i> Placar exato (3 pontos) </h7>
+                                    <h7> <i class="fas fa-stop amarelo"></i> Empate (2 pontos) </h7>
+                                    <h7> <i class="fas fa-stop azul"></i> Time vencedor (1 ponto) </h7>
+                                </div>
+                            }
                             @Html.BackButton()
                         </div>
                     </div>

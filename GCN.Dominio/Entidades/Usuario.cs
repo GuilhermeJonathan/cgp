@@ -83,7 +83,7 @@ namespace Campeonato.Dominio.Entidades
             this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Debito, idUsuario));
         }
 
-        public void DevolverCredito(string descricao, decimal valor, int idUsuario)
+        public void AdicionarSaldo(string descricao, decimal valor, int idUsuario)
         {
             this.Saldo = Saldo + valor;
             this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Credito, idUsuario));

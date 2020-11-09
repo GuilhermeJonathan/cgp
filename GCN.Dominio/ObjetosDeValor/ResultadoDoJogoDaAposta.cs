@@ -10,6 +10,7 @@ namespace Campeonato.Dominio.ObjetosDeValor
     {
         Placar = 1,
         Empate = 2,
-        Ganhador = 3
+        GanhadorTime1 = 3,
+        GanhadorTime2 = 4
     }
 }

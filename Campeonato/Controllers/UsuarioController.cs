@@ -72,6 +72,27 @@ namespace Campeonato.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult CadastrarSaldo(int? Id, int Saldo)
+        {
+            try
+            {
+                if (!Id.HasValue)
+                    UsuarioNaoEncontrado();
+
+                var retorno = this._servicoDeGestaoDeUsuarios.CadastrarSaldo(Id.Value, Saldo, User.Logado());
+                this.AdicionarMensagemDeSucesso(retorno);
+
+                return RedirectToAction(nameof(Index));
+            } catch(Exception ex)
+            {
+                this.AdicionarMensagemDeErro(ex.Message);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+
         [HttpGet]
         public JsonResult BuscarUsuario(int idUsuario)
         {

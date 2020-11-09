@@ -100,6 +100,31 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             }
         }
 
+        public string CadastrarSaldo(int id, decimal saldo, UsuarioLogado usuario)
+        {
+            try
+            {
+                if (saldo <= 0)
+                    throw new ExcecaoDeAplicacao("Não é possível adicionar saldo negativo à conta");
+
+                var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                if (usuarioParaAlterar != null)
+                {
+                    if(saldo > 0)
+                        usuarioParaAlterar.AdicionarSaldo($"Adição de Saldo", saldo, usuarioBanco.Id);   
+                }
+
+                this._servicoExternoDePersistencia.Persistir();
+                return "Saldo adicionado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
         public int BuscarUsuariosNovos()
         {
             var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarQtdUsuariosNovos();

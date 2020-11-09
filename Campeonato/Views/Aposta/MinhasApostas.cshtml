@@ -24,22 +24,36 @@
         <div class="row">
             <div class="col-lg-12">
                 <form role="form" action="@Url.Action("SalvarMinhaAposta", "Aposta")" method="post">
-                    @if (Model.RodadaFechada)
+                    @if (Model.RodadaFechada && !Model.RodadaFinalizada)
                     {
                         <div class="callout callout-info">
                             <h5>@Model.NomeRodada FECHADA!</h5>
 
                             @if (Model.RodadaPodeAlterar)
                             {
-                                <p>Rodada ainda disponível.</p>}
+                                <p>Rodada em andamento.</p>}
                             else
                             {
                                 <p>Somente é possível realizar alterações até 30 minutos antes do primeiro jogo da Rodada.</p>
                             }
+
+                        </div>
+                    }
+
+                    @if (Model.RodadaFinalizada)
+                    {
+                        <div class="callout callout-info">
+                            <h5>@Model.NomeRodada FINALIZADA!</h5>
+                            <div class="info-box">
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-table"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-number fa-3x"> @Model.Pontuacao ponto(s)</span>
+                                </div>
+                            </div>
                         </div>
                     }
                     <div class="card">
-                        <div class="card-header ">
+                        <div class="card-header ">  
                             <div class="">
                                 <div class="row">
                                     <div class="col-lg-3 col-sm-12 col-xs-12">
@@ -52,11 +66,11 @@
                                     <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
                                         @if (Model.TemApostaExclusiva)
                                         {
-                                            <a href="@Url.Action("Visualizar", "Aposta", new { id = Model.IdApostaExclusiva, idUsuario = Model.Usuario })" class="btn btn-default">Visualizar Aposta Exclusiva</a>
+                                            <a href="@Url.Action("Visualizar", "Aposta", new { id = Model.IdApostaExclusiva, idUsuario = Model.Usuario })" class="btn btn-block btn-default btnApostaExclusiva">Visualizar Aposta Exclusiva</a>
                                         }
                                         else
                                         {
-                                            <a href="#" class="btn btn-primary apostaEspecifica" data-toggle="modal" data-target="#modalRodadaEspecifica"
+                                            <a href="#" class="btn btn-block btn-primary apostaEspecifica btnApostaExclusiva" data-toggle="modal" data-target="#modalRodadaEspecifica"
                                                data-id="@Model.Id" data-nomeRodada="@Model.NomeRodada" data-idUsuario="@Model.Usuario" data-idRodada="@Model.IdRodada">Gerar Aposta Exclusiva</a>
                                         }
                                     </div>
@@ -76,9 +90,9 @@
                                             <p class="text-center">
                                                 <span class="text-muted">@jogo.SiglaTime1</span>
                                                 <img src="../../content/escudos/@jogo.ImagemTime1" style="max-width: 40px;" />
-                                                <input type="text" class="text-muted placarResultado text-center " @(Model.RodadaFechada ? "disabled='disabled'" : "") name="placar1[]" maxlength="2" value="@jogo.PlacarTime1">
+                                                <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime1) " @(Model.RodadaFechada ? "disabled='disabled'" : "") name="placar1[]" maxlength="2" value="@jogo.PlacarTime1">
                                                 <span style="padding-bottom: 20px;">x</span>
-                                                <input type="text" class="text-muted placarResultado text-center" @(Model.RodadaFechada ? "disabled='disabled'" : "") name="placar2[]" maxlength="2" value="@jogo.PlacarTime2">
+                                                <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime2) " @(Model.RodadaFechada ? "disabled='disabled'" : "") name="placar2[]" maxlength="2" value="@jogo.PlacarTime2">
 
                                                 <img src="../../content/escudos/@jogo.ImagemTime2" style="max-width: 40px;" />
                                                 <span class="text-muted">@jogo.SiglaTime2</span>
@@ -116,6 +130,16 @@
                             {
                                 <button type="submit" class="btn btn-primary float-right">Salvar Aposta</button>
                             }
+
+                            @if (Model.RodadaFinalizada)
+                            {
+                                <div class="callout callout-info">
+                                    <h5>LENGENDA PLACAR: </h5>
+                                    <h7> <i class="fas fa-stop verde"></i> Placar exato (3 pontos) </h7>
+                                    <h7> <i class="fas fa-stop amarelo"></i> Empate (2 pontos) </h7>
+                                    <h7> <i class="fas fa-stop azul"></i> Time vencedor (1 ponto) </h7>
+                                </div>
+                            }
                         </div>
                     </div>
                 </form>
@@ -129,6 +153,15 @@
 <script type="text/javascript" language="javascript">
 
     $(function () {
+
+        var ua = navigator.userAgent;
+        var isAndroid = /Android/i.test(ua);
+        var isChrome = /Chrome/i.test(ua);
+        var isSafari = /Safari/i.test(ua);
+
+        if (isAndroid || isSafari) {
+            $('.placarResultado').attr('type', 'tel');
+        }    
 
         $(".placarResultado").bind('input paste', function (e) {
             var regex = /[^0-9]/g;
