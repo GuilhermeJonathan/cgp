@@ -47,7 +47,14 @@
                           
                         </div>
                         <div class="card-footer">
-                            <a href="@Url.Action("MinhasApostas", "Aposta", new { id = Model.Filtro.Rodada } )" class="btn btn-info float-left">Minhas Apostas</a>
+                            @if (User.EhAdministrador())
+                            {
+                                <a href="@Url.Action("VisualizarTodasApostas", "Aposta", new { id = Model.Filtro.Rodada })" class="btn btn-info float-left">Visualizar apostas da rodada</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("MinhasApostas", "Aposta", new { id = Model.Filtro.Rodada })" class="btn btn-info float-left">Minhas Apostas</a>
+                            }
                             <button type="submit" class="btn btn-primary float-right">Buscar</button>
                         </div>
                     </div>

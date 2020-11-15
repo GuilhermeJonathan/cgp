@@ -70,8 +70,15 @@
                                         }
                                         else
                                         {
-                                            <a href="#" class="btn btn-block btn-primary apostaEspecifica btnApostaExclusiva" data-toggle="modal" data-target="#modalRodadaEspecifica"
+                                            <a href="#" class="btn btn-block btn-primary apostaEspecifica btnApostaExclusiva btnBotaoTopo " data-toggle="modal" data-target="#modalRodadaEspecifica"
                                                data-id="@Model.Id" data-nomeRodada="@Model.NomeRodada" data-idUsuario="@Model.Usuario" data-idRodada="@Model.IdRodada">Gerar Aposta Exclusiva</a>
+                                        }
+                                       
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
+                                        @if (Model.RodadaFechada)
+                                        {
+                                            <a href="@Url.Action("VisualizarTodasApostas", "Aposta", new { id = Model.IdRodada, idUsuario = Model.Usuario })" class="btn btn-block btn-primary btnBotaoTopo" >Visualizar apostas da rodada</a>
                                         }
                                     </div>
                                 </div>

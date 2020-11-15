@@ -36,6 +36,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
                 .Include(a => a.Usuario)
                 .Include(a => a.Rodada)
                 .Include(a => a.Jogos)
+                .Include(a => a.Jogos.Select(b => b.Estadio))
                 .Include(a => a.Jogos.Select(b => b.Time1))
                 .Include(a => a.Jogos.Select(b => b.Time2)).AsQueryable();
 

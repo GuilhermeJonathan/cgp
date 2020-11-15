@@ -36,6 +36,23 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             }
         }
 
+        public ModeloDeListaDeApostas BuscarTodasApostasPorRodada(int idRodada)
+        {
+            try
+            {
+                var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorRodada(idRodada);
+                var quantidadeEncontrada = apostas.Count;
+
+                apostas = apostas.Where(a => a.Jogos.Count > 0).OrderByDescending(a => a.Pontuacao).ToList();
+
+                return new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, new ModeloDeFiltroDeAposta());
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar Apostas");
+            }
+        }
+
         public ModeloDeEdicaoDeAposta BuscarApostaPorRodada(int idRodada, UsuarioLogado usuario)
         {
             
@@ -45,37 +62,47 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             {
                 if (aposta.Jogos == null || aposta.Jogos.Count == 0)
                 {
-                    var jogos = this._servicoExternoDePersistencia.RepositorioDeJogos.RetornarJogosPorRodada(aposta.Rodada.Id);
-                    jogos.ToList().ForEach(a => aposta.Jogos.Add(new JogoDaAposta(a.DataHoraDoJogo, a.Time1, a.Time2, a.Rodada, a.Estadio, 0, 0)));
+                    if (usuario.PerfilDeUsuario != PerfilDeUsuario.Administrador)
+                    {
+                        var jogos = this._servicoExternoDePersistencia.RepositorioDeJogos.RetornarJogosPorRodada(aposta.Rodada.Id);
+                        jogos.ToList().ForEach(a => aposta.Jogos.Add(new JogoDaAposta(a.DataHoraDoJogo, a.Time1, a.Time2, a.Rodada, a.Estadio, 0, 0)));
+                    }
                 }
-            } else
+            }
+            else
             {
-                var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(idRodada);
-                if (rodada == null)
-                    throw new ExcecaoDeAplicacao("Rodada não encontrada");
+                if (usuario.PerfilDeUsuario != PerfilDeUsuario.Administrador)
+                {
+                    var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(idRodada);
+                    if (rodada == null)
+                        throw new ExcecaoDeAplicacao("Rodada não encontrada");
 
-                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                    var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
 
-                var novaAposta = new Aposta(usuarioBanco, rodada);
-                    
-                var jogos = this._servicoExternoDePersistencia.RepositorioDeJogos.RetornarJogosPorRodada(rodada.Id);
+                    var novaAposta = new Aposta(usuarioBanco, rodada);
 
-                jogos.ToList().ForEach(a => novaAposta.Jogos.Add(new JogoDaAposta(a.DataHoraDoJogo, a.Time1, a.Time2, a.Rodada, a.Estadio, 0, 0)));
+                    var jogos = this._servicoExternoDePersistencia.RepositorioDeJogos.RetornarJogosPorRodada(rodada.Id);
 
-                this._servicoExternoDePersistencia.RepositorioDeApostas.Inserir(novaAposta);
-                 
-                aposta = novaAposta;
+                    jogos.ToList().ForEach(a => novaAposta.Jogos.Add(new JogoDaAposta(a.DataHoraDoJogo, a.Time1, a.Time2, a.Rodada, a.Estadio, 0, 0)));
+
+                    this._servicoExternoDePersistencia.RepositorioDeApostas.Inserir(novaAposta);
+
+                    aposta = novaAposta;
+                }
             }
 
             this._servicoExternoDePersistencia.Persistir();
 
             var modelo = new ModeloDeEdicaoDeAposta(aposta);
 
-            var apostaExclusiva = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarRodadaExclusiva(aposta.Usuario.Id, aposta.Rodada.Id);
-            if(apostaExclusiva != null)
+            if (aposta != null)
             {
-                modelo.TemApostaExclusiva = true;
-                modelo.IdApostaExclusiva = apostaExclusiva.Id;
+                var apostaExclusiva = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarRodadaExclusiva(aposta.Usuario.Id, aposta.Rodada.Id);
+                if (apostaExclusiva != null)
+                {
+                    modelo.TemApostaExclusiva = true;
+                    modelo.IdApostaExclusiva = apostaExclusiva.Id;
+                }
             }
             return modelo;
         }

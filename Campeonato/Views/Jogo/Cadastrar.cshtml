@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="control-label"> Hora </label>
-                                    <input type="text" class="form-control mascaraHora" name="HoraDoJogo">
+                                    <input type="text" class="form-control mascaraHora" id="horaDojogo" name="HoraDoJogo">
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="control-label"> Estádio </label>
@@ -85,9 +85,36 @@
             zIndexOffset: 99999999
         });
 
+        $("#dataHoraDoJogo").datepicker().on("changeDate", function (e) {
+            $("#horaDojogo").focus();
+        });
+
+        $("#horaDojogo").keyup(function (e) {
+            if ($(this).val().length == 5) {
+                $("#Estadio").focus();
+                $('#Estadio').select2('open');
+            }
+        });
+
+        $('#Estadio').on('select2:select', function (e) {
+            $("#Time1").focus();
+            $('#Time1').select2('open');
+        });
+
+        $('#Time1').on('select2:select', function (e) {
+            $("#Time2").focus();
+            $('#Time2').select2('open');
+        });
+
+        $('#Time2').on('select2:select', function (e) {
+            $("#Rodada").focus();
+            $('#Rodada').select2('open');
+        });
+
         $('.mascaraData').mask('00/00/0000');
         $('.mascaraHora').mask('00:00');
 
         $('.autoComplete').select2();
+
     })
 </script>

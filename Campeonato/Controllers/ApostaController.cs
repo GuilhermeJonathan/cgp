@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
+using NReco.PdfGenerator;
+using System.Web.Routing;
 
 namespace Campeonato.Controllers
 {
@@ -88,6 +91,47 @@ namespace Campeonato.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        public ActionResult VisualizarTodasApostas(int? id, int? idUsuario)
+        {
+            if (!id.HasValue)
+                ApostaNaoEncontrada();
+
+            var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value);
+            modelo.Filtro.Rodada = id.Value;
+            return View(modelo);
+        }
+
+        [HttpGet]
+        public ActionResult VisualizarTodasApostasPDF(int? id)
+        {
+            try
+            {
+                if (!id.HasValue)
+                    ApostaNaoEncontrada();
+
+                var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value);
+
+                var nomeRodada = modelo.Lista.FirstOrDefault().NomeRodada;
+                ViewBag.NomeRodada = nomeRodada;
+
+                var ViewAsString = FakeController.RenderViewToString("Aposta", "VisualizarTodasApostasPDF", modelo);
+                var htmlToPdf = new HtmlToPdfConverter();
+
+                var pdfBytes = htmlToPdf.GeneratePdf(ViewAsString);
+                FileResult FileResult = new FileContentResult(pdfBytes, "application/pdf");
+                FileResult.FileDownloadName = $"espelhoDa{nomeRodada.Trim()}-{ DateTime.Now.ToString().Trim()}.pdf";
+
+                return FileResult;
+
+            } catch(Exception ex)
+            {
+                ApostaNaoEncontrada();
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         public ActionResult SalvarMinhaAposta(int id, int[] placar1, int[] placar2, int[] idJogos)
         {
@@ -127,6 +171,26 @@ namespace Campeonato.Controllers
         {
             this.AdicionarMensagemDeErro("Aposta não foi encontrada");
             return RedirectToAction(nameof(Index));
+        }
+
+        public class FakeController : ControllerBase
+        {
+            protected override void ExecuteCore() { }
+            public static string RenderViewToString(string controllerName, string viewName, object model)
+            {
+                using (var writer = new StringWriter())
+                {
+                    var routeData = new RouteData();
+                    routeData.Values.Add("controller", controllerName);
+                    var fakeControllerContext = new ControllerContext(new HttpContextWrapper(new HttpContext(new HttpRequest(null, "http://localhost", null), new HttpResponse(null))), routeData, new FakeController());
+                    var razorViewEngine = new RazorViewEngine();
+                    var razorViewResult = razorViewEngine.FindPartialView(fakeControllerContext, viewName, false);
+                    var viewContext = new ViewContext(fakeControllerContext, razorViewResult.View, new ViewDataDictionary(model), new TempDataDictionary(), writer);
+                    razorViewResult.View.Render(viewContext, writer);
+                    return writer.ToString();
+
+                }
+            }
         }
 
     }
