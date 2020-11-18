@@ -50,6 +50,11 @@ namespace Campeonato.Controllers
                 modelo = this._servicoDeGestaoDeApostas.BuscarApostasPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
                 this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
 
+                if (modelo.Filtro.Rodada == 0)
+                    modelo.Filtro.RodadaParaLink = rodadaAtiva;
+                else
+                    modelo.Filtro.RodadaParaLink = modelo.Filtro.Rodada;
+
                 if (rodadaAtiva > 0)
                     modelo.Filtro.Rodada = rodadaAtiva;
 

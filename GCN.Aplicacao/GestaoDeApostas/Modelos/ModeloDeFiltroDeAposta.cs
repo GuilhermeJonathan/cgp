@@ -18,6 +18,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public int Usuario { get; set; }
         public IEnumerable<SelectListItem> Usuarios { get; set; }
         public int Rodada { get; set; }
+        public int RodadaParaLink { get; set; }
         public IEnumerable<SelectListItem> Rodadas { get; set; }
     }
 }

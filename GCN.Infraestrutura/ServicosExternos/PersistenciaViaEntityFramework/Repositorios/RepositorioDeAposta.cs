@@ -87,6 +87,19 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             return query.ToList();
         }
 
+        public IList<JogoDaAposta> RetornarJogosDaApostaParaAlterar(int idRodada, int time1, int time2)
+        {
+            var query = this._contexto.Set<JogoDaAposta>()
+                .Include(a => a.Time1)
+                .Include(a => a.Time2).AsQueryable();
+
+            query = query.Where(c => c.Rodada.Id == idRodada);
+            query = query.Where(c => c.Time1.Id == time1 && c.Time2.Id == time2);
+
+            return query.ToList();
+        }
+
+
         public Aposta PegarRodadaExclusiva( int idUsuario, int idRodada = 0)
         {
             var query = this._contexto.Set<Aposta>()

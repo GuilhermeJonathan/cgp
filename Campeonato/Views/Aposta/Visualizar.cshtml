@@ -24,9 +24,18 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <form role="form" action="@Url.Action("SalvarMinhaAposta", "Aposta")" method="post" >
+                <form role="form" action="@Url.Action("SalvarMinhaAposta", "Aposta")" method="post">
                     <div class="callout callout-info">
                         <h5>Visualização da @Model.NomeRodada (@Model.NomeTipoDeAposta) - @Model.NomeUsuario</h5>
+                        @if (Model.RodadaFinalizada)
+                        {
+                            <div class="info-box">
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-table"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-number fa-3x"> @Model.Pontuacao ponto(s)</span>
+                                </div>
+                            </div>
+                        }
                     </div>
                     <div class="card">
                         <div class="card-header ">
@@ -54,7 +63,7 @@
                                                 <img src="../../content/escudos/@jogo.ImagemTime1" style="max-width: 40px;" />
                                                 <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime1)" disabled='disabled' name="placar1[]" maxlength="2" value="@jogo.PlacarTime1">
                                                 <span style="padding-bottom: 20px;">x</span>
-                                                <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime2) " disabled='disabled'name="placar2[]" maxlength="2" value="@jogo.PlacarTime2">
+                                                <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime2) " disabled='disabled' name="placar2[]" maxlength="2" value="@jogo.PlacarTime2">
 
                                                 <img src="../../content/escudos/@jogo.ImagemTime2" style="max-width: 40px;" />
                                                 <span class="text-muted">@jogo.SiglaTime2</span>

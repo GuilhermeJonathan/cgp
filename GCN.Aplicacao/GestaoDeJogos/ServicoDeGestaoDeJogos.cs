@@ -131,6 +131,15 @@ namespace Campeonato.Aplicacao.GestaoDeJogos
             var time1 = this._servicoExternoDePersistencia.RepositorioDeTimes.BuscarPorId(modelo.Time1);
             var time2 = this._servicoExternoDePersistencia.RepositorioDeTimes.BuscarPorId(modelo.Time2);
 
+            var jogosDaAposta = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarJogosDaApostaParaAlterar(rodada.Id, time1.Id, time2.Id);
+            if(jogosDaAposta != null)
+            {
+                foreach (var jogoDaAposta in jogosDaAposta)
+                {
+                    jogoDaAposta.AlterarDadosDoJogo(dataHoraDoJogo, estadio);
+                }
+            }
+
             jogo.AlterarDadosDoJogo(dataHoraDoJogo, estadio, time1, time2, rodada);
 
             this._servicoExternoDePersistencia.Persistir();

@@ -69,7 +69,7 @@
 
                             <div class="custom-control custom-switch btnRodadaFechada left">
                                 <input type="checkbox" class="custom-control-input btnFecharRodada" id="@rodada.Id" data-id="@rodada.Id" @(rodada.Fechada ? "checked" : "") @(User.EhAdministrador() ? "" : "disabled")>
-                                <label class="custom-control-label" for="@rodada.Id"> FECHADA</label>
+                                <label class="custom-control-label" for="@rodada.Id"> ABERTA</label>
                             </div>
                             <div class="card-tools">
                                 @if (User.EhAdministrador())

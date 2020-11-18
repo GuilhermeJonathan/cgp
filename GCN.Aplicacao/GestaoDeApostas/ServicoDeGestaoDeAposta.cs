@@ -159,6 +159,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                             contador++;
                         }
                     }
+                    aposta.SituacaoDaAposta = SituacaoDaAposta.Salva;
                 }
 
                 this._servicoExternoDePersistencia.Persistir();

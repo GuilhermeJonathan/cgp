@@ -37,7 +37,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             this.Usuario = aposta.Usuario.Id;
             this.NomeUsuario = aposta.Usuario.Nome.Valor;
             this.Rodada = aposta.Rodada.Id;
-            aposta.Jogos.ToList().ForEach(a => this.Jogos.Add(new ModeloDeJogosDaApostaDaLista(a)));
+            aposta.Jogos.OrderBy(a => a.DataHoraDoJogo).ToList().ForEach(a => this.Jogos.Add(new ModeloDeJogosDaApostaDaLista(a)));
 
             this.EhRodadaExclusiva = aposta.TipoDeAposta == TipoDeAposta.Exclusiva ? true : false;
             this.NomeTipoDeAposta = aposta.TipoDeAposta.ToString();

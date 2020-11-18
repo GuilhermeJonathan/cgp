@@ -63,18 +63,24 @@
                                         </h3>
 
                                     </div>
-                                    <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
-                                        @if (Model.TemApostaExclusiva)
-                                        {
+                                    
+                                    @if (Model.TemApostaExclusiva)
+                                    {
+                                        <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
                                             <a href="@Url.Action("Visualizar", "Aposta", new { id = Model.IdApostaExclusiva, idUsuario = Model.Usuario })" class="btn btn-block btn-default btnApostaExclusiva">Visualizar Aposta Exclusiva</a>
-                                        }
-                                        else
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        if (!Model.RodadaFechada)
                                         {
+                                        <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
                                             <a href="#" class="btn btn-block btn-primary apostaEspecifica btnApostaExclusiva btnBotaoTopo " data-toggle="modal" data-target="#modalRodadaEspecifica"
-                                               data-id="@Model.Id" data-nomeRodada="@Model.NomeRodada" data-idUsuario="@Model.Usuario" data-idRodada="@Model.IdRodada">Gerar Aposta Exclusiva</a>
+                                                data-id="@Model.Id" data-nomeRodada="@Model.NomeRodada" data-idUsuario="@Model.Usuario" data-idRodada="@Model.IdRodada">Gerar Aposta Exclusiva</a>
+                                        </div>
                                         }
-                                       
-                                    </div>
+                                    }
+
                                     <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
                                         @if (Model.RodadaFechada)
                                         {

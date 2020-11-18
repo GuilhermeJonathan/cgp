@@ -35,5 +35,11 @@ namespace Campeonato.Dominio.Entidades
         public int PlacarTime2 { get; set; }
         public SituacaoDoJogo SituacaoDoJogo { get; set; }
         public ResultadoDoJogoDaAposta ResultadoDoJogoDaAposta { get; set; }
+
+        public void AlterarDadosDoJogo(DateTime dataHoraDoJogo, Estadio estadio)
+        {
+            this.DataHoraDoJogo = dataHoraDoJogo;
+            this.Estadio = estadio;
+        }
     }
 }

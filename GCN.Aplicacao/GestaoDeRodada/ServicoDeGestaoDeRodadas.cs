@@ -195,41 +195,44 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
             {
                 foreach (var aposta in apostas)
                 {
-                    foreach (var jogoDaAposta in aposta.Jogos)
+                    if (aposta.SituacaoDaAposta == SituacaoDaAposta.Salva)
                     {
-                        var jogoDaRodada = jogosDaRodada.FirstOrDefault( a => a.Time1.Id == jogoDaAposta.Time1.Id && a.Time2.Id == jogoDaAposta.Time2.Id);
-                        var timeGanhador = jogoDaRodada.PlacarTime1 == jogoDaRodada.PlacarTime2 ? 0 : jogoDaRodada.PlacarTime1 > jogoDaRodada.PlacarTime2 ? jogoDaRodada.Time1.Id : jogoDaRodada.Time2.Id;
-                        var timeGanhadorAposta = jogoDaAposta.PlacarTime1 == jogoDaAposta.PlacarTime2 ? 0 : jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2 ? jogoDaAposta.Time1.Id : jogoDaAposta.Time2.Id;
-
-                        //Acerto Placar
-                        if (jogoDaAposta.PlacarTime1 == jogoDaRodada.PlacarTime1 && jogoDaAposta.PlacarTime2 == jogoDaRodada.PlacarTime2)
+                        foreach (var jogoDaAposta in aposta.Jogos)
                         {
-                            pontos += AcertoPlacar;
-                            aposta.AcertoPlacar += 1;
-                            jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Placar;
-                        }
-                        //Acerto Empate
-                        else if (timeGanhador == 0 && timeGanhadorAposta == 0)
-                        {
-                            pontos += AcertoEmpate;
-                            aposta.AcertoEmpate += 1;
-                            jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Empate;
-                        }
-                        //Acerto TimeGanhador
-                        else if (timeGanhador == timeGanhadorAposta)
-                        {
-                            pontos += AcertoGanhador;
-                            aposta.AcertoGanhador += 1;
+                            var jogoDaRodada = jogosDaRodada.FirstOrDefault(a => a.Time1.Id == jogoDaAposta.Time1.Id && a.Time2.Id == jogoDaAposta.Time2.Id);
+                            var timeGanhador = jogoDaRodada.PlacarTime1 == jogoDaRodada.PlacarTime2 ? 0 : jogoDaRodada.PlacarTime1 > jogoDaRodada.PlacarTime2 ? jogoDaRodada.Time1.Id : jogoDaRodada.Time2.Id;
+                            var timeGanhadorAposta = jogoDaAposta.PlacarTime1 == jogoDaAposta.PlacarTime2 ? 0 : jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2 ? jogoDaAposta.Time1.Id : jogoDaAposta.Time2.Id;
 
-                            if (jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2)
-                                jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime1;
-                            else
-                                jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime2;
-                        }
+                            //Acerto Placar
+                            if (jogoDaAposta.PlacarTime1 == jogoDaRodada.PlacarTime1 && jogoDaAposta.PlacarTime2 == jogoDaRodada.PlacarTime2)
+                            {
+                                pontos += AcertoPlacar;
+                                aposta.AcertoPlacar += 1;
+                                jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Placar;
+                            }
+                            //Acerto Empate
+                            else if (timeGanhador == 0 && timeGanhadorAposta == 0)
+                            {
+                                pontos += AcertoEmpate;
+                                aposta.AcertoEmpate += 1;
+                                jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Empate;
+                            }
+                            //Acerto TimeGanhador
+                            else if (timeGanhador == timeGanhadorAposta)
+                            {
+                                pontos += AcertoGanhador;
+                                aposta.AcertoGanhador += 1;
 
-                        aposta.Pontuacao += pontos;
-                        aposta.SituacaoDaAposta = SituacaoDaAposta.Finalizada;
-                        pontos = 0;
+                                if (jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2)
+                                    jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime1;
+                                else
+                                    jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime2;
+                            }
+
+                            aposta.Pontuacao += pontos;
+                            aposta.SituacaoDaAposta = SituacaoDaAposta.Finalizada;
+                            pontos = 0;
+                        }
                     }
                 }
             }

@@ -49,7 +49,7 @@
                         <div class="card-footer">
                             @if (User.EhAdministrador())
                             {
-                                <a href="@Url.Action("VisualizarTodasApostas", "Aposta", new { id = Model.Filtro.Rodada })" class="btn btn-info float-left">Visualizar apostas da rodada</a>
+                                <a href="@Url.Action("VisualizarTodasApostas", "Aposta", new { id = Model.Filtro.RodadaParaLink })" class="btn btn-info float-left">Visualizar apostas da rodada</a>
                             }
                             else
                             {

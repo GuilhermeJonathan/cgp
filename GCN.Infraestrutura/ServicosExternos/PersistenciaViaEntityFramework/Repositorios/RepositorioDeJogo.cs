@@ -31,7 +31,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
                 query = query.Where(c => c.DataHoraDoJogo >= dataDoJogo && c.DataHoraDoJogo <= dataDoJogo);
 
             quantidadeEncontrada = query.Count();
-            return query.OrderBy(a => a.Rodada.SituacaoDaRodada).ThenBy( b => b.Rodada.Ordem).ToList();
+            return query.OrderBy(a => a.Rodada.SituacaoDaRodada).ThenBy( b => b.Rodada.Ordem).ThenBy( c => c.DataHoraDoJogo).ToList();
         }
 
         public IList<Jogo> RetornarTodosJogos()

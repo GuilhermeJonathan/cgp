@@ -9,7 +9,8 @@ namespace Campeonato.Dominio.ObjetosDeValor
     public enum SituacaoDaAposta
     {
         Atual = 1,
-        Futura = 2,
-        Finalizada = 3
+        Salva = 2,
+        Futura = 3,
+        Finalizada = 4
     }
 }
