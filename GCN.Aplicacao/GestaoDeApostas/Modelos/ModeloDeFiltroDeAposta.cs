@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Campeonato.Dominio.ObjetosDeValor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,5 +21,6 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public int Rodada { get; set; }
         public int RodadaParaLink { get; set; }
         public IEnumerable<SelectListItem> Rodadas { get; set; }
+        public TipoDeAposta TipoDeAposta { get; set; }
     }
 }

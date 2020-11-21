@@ -28,14 +28,14 @@
 
                 @if (User.EhAdministrador())
                 {
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Usuario")" class="nav-link @Html.Raw(controller == "Usuario" ? "active" : "")">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p> Usuários </p>
-                        <span class="badge badge-info right numeroDeUsuariosNovos"><i class="fas fa-sync-alt fa-spin"></i></span>
-                    </a>
-                    
-                </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Usuario")" class="nav-link @Html.Raw(controller == "Usuario" ? "active" : "")">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p> Usuários </p>
+                            <span class="badge badge-info right numeroDeUsuariosNovos"><i class="fas fa-sync-alt fa-spin"></i></span>
+                        </a>
+
+                    </li>
                 }
 
                 @if (User.EhAdministrador())
@@ -73,6 +73,12 @@
                     <a href="@Url.Action("Index", "Aposta" )" class="nav-link @Html.Raw(controller == "Aposta" ? "active" : "")">
                         <i class="nav-icon fas fa-receipt"></i>
                         <p> Apostas </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "ApostaExclusiva" )" class="nav-link @Html.Raw(controller == "ApostaExclusiva" ? "active" : "")">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <p> Apostas Exclusivas</p>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -30,6 +30,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             this.AcertoEmpate = aposta.AcertoEmpate;
             this.AcertoGanhador = aposta.AcertoGanhador;
             this.TipoDaAposta = aposta.TipoDeAposta.ToString();
+            this.ValorDaAposta = aposta.Valor.ToString("f");
         }
 
         public ModeloDeApostaDaLista(int id, string nome,  int classificacao, int pontuacao, int acertoPlacar, int acertoEmpate, int acertoGanhador)
@@ -58,5 +59,6 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public int AcertoEmpate { get; set; }
         public int AcertoGanhador { get; set; }
         public string TipoDaAposta { get; set; }
+        public string ValorDaAposta { get; set; }
     }
 }

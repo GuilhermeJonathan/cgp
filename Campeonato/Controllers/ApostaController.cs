@@ -15,6 +15,7 @@ using System.Web.Mvc;
 using System.IO;
 using NReco.PdfGenerator;
 using System.Web.Routing;
+using Campeonato.Dominio.ObjetosDeValor;
 
 namespace Campeonato.Controllers
 {
@@ -38,7 +39,6 @@ namespace Campeonato.Controllers
         {
             var rodadaAtiva = this._servicoDeGestaoDeRodadas.BuscarRodadaAtiva();
 
-
             if (User.EhAdministrador())
             {
                 modelo.Filtro.Usuarios = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<ModeloDeUsuarioDaLista>(nameof(ModeloDeUsuarioDaLista.Nome), nameof(ModeloDeUsuarioDaLista.Id),
@@ -47,6 +47,7 @@ namespace Campeonato.Controllers
                 modelo.Filtro.Rodadas = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Rodada>(nameof(Rodada.Nome), nameof(Rodada.Id),
                         () => this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivas());
 
+                modelo.Filtro.TipoDeAposta = TipoDeAposta.Geral;
                 modelo = this._servicoDeGestaoDeApostas.BuscarApostasPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
                 this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
 

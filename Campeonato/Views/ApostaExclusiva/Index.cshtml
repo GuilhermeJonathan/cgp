@@ -1,0 +1,88 @@
+﻿@model Campeonato.Aplicacao.GestaoDeApostas.Modelos.ModeloDeListaDeApostas
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Apostas Exclusivas";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">Apostas Exclusivas</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="callout callout-info">
+                    <div class="col-lg-6 col-sm-12 col-xs-12">
+                        <h5 class="card-title">
+                            Premiação da Rodada
+                            @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
+                        </h5>
+
+                    </div>
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-dollar-sign"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-number fa-2x"> @Model.QtdJogos jogos - @Model.ValorDaRodada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Apostas Exclusivas </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        @Html.Grid(Model.Lista).Columns(colunas =>
+                        {
+                            colunas.Add(m => m.NomeUsuario).Titled("Usuário");
+                            colunas.Add(m => m.NomeRodada).Titled("Rodada");
+                            colunas.Add(m => m.TipoDaAposta).Titled("Tipo");
+                            colunas.Add(m => m.ValorDaAposta).Titled("Valor da Aposta");
+                            colunas.Add(m => m.DataDoCadastro).Titled("Data Cadastro");
+
+                            colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
+                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Visualizar", "Aposta", new { id = m.Id, idUsuario = m.IdUsuario })" title="Visualizar Aposta" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
+
+                        }).WithPaging(20).Sortable(true).EmptyText("Nenhuma aposta exclusiva encontrada.")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" language="javascript">
+
+    $(function () {
+        $("#Filtro_Rodada").on("change", function () {
+            var idRodada = $(this).val();
+            if (!window.location.href.match("Index")) {
+                window.location.assign("../ApostaExclusiva/Index/" + idRodada);
+            } else {
+                window.location.assign("../Index/" + idRodada);
+            }
+        });
+    });
+
+    $('.autoComplete').select2();
+</script>

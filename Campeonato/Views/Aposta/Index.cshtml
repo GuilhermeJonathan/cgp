@@ -85,7 +85,7 @@
                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
                             m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Visualizar", "Aposta", new { id = m.IdRodada, idUsuario = m.IdUsuario })" title="Visualizar Aposta" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
 
-                        }).WithPaging(30).Sortable(true).EmptyText("Nenhuma aposta encontrada")
+                        }).WithPaging(20).Sortable(true).EmptyText("Nenhuma aposta encontrada")
                     </div>
                 </div>
             </div>

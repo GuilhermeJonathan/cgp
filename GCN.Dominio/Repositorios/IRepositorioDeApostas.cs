@@ -9,7 +9,7 @@ namespace Campeonato.Dominio.Repositorios
 {
     public interface IRepositorioDeApostas : IRepositorio<Aposta>
     {
-        IList<Aposta> RetornarApostasPorFiltro(int usuario, int rodada, out int quantidadeEncontrada);
+        IList<Aposta> RetornarApostasPorFiltro(int usuario, int rodada, int tipoDeAposta, out int quantidadeEncontrada);
         IList<Aposta> RetornarApostasPorRodada(int rodada);
         Aposta PegarPorId(int id);
         Aposta PegarPorIdRodadaEUsuario(int id, int usuario);

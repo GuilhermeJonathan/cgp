@@ -11,7 +11,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
     {
         public RepositorioDeAposta(Contexto contexto) : base(contexto) { }
 
-        public IList<Aposta> RetornarApostasPorFiltro(int usuario, int rodada, out int quantidadeEncontrada)
+        public IList<Aposta> RetornarApostasPorFiltro(int usuario, int rodada, int tipoDeAposta, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Aposta>()
                 .Include(a => a.Usuario)
@@ -25,6 +25,9 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
 
             if (rodada > 0)
                 query = query.Where(c => c.Rodada.Id == rodada);
+            
+            if(tipoDeAposta > 0)
+                query = query.Where(c => (int)c.TipoDeAposta == tipoDeAposta);
 
             quantidadeEncontrada = query.Count();
             return query.OrderBy(a => a.Rodada.Ordem).ThenBy(b => b.Rodada.SituacaoDaRodada).ToList();

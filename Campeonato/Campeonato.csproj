@@ -170,6 +170,7 @@
     <Compile Include="App_Start\InjetorDeDependencia.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApostaController.cs" />
+    <Compile Include="Controllers\ApostaExclusivaController.cs" />
     <Compile Include="Controllers\EstadioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogoController.cs" />
@@ -416,6 +417,7 @@
     <Content Include="Views\Usuario\_CadastrarSaldo.cshtml" />
     <Content Include="Views\Aposta\VisualizarTodasApostas.cshtml" />
     <Content Include="Views\Aposta\VisualizarTodasApostasPDF.cshtml" />
+    <Content Include="Views\ApostaExclusiva\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

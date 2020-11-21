@@ -24,11 +24,11 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             try
             {
                 var quantidadeEncontrada = 0;
-                var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorFiltro(filtro.Usuario, filtro.Rodada, out quantidadeEncontrada);
-
-                apostas = apostas.Where(a => a.Jogos.Count > 0).ToList();
-
-                return new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, filtro);
+                decimal valorTotal = 0;
+                var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorFiltro(filtro.Usuario, filtro.Rodada, (int)filtro.TipoDeAposta, out quantidadeEncontrada);
+                
+                valorTotal = apostas.Sum(a => a.Valor);
+                return new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, valorTotal, filtro);
             }
             catch (Exception ex)
             {
@@ -40,12 +40,14 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         {
             try
             {
+                decimal valorTotal = 0;
                 var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorRodada(idRodada);
                 var quantidadeEncontrada = apostas.Count;
 
                 apostas = apostas.Where(a => a.Jogos.Count > 0).OrderByDescending(a => a.Pontuacao).ToList();
+                valorTotal = apostas.Sum(a => a.Valor);
 
-                return new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, new ModeloDeFiltroDeAposta());
+                return new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, valorTotal, new ModeloDeFiltroDeAposta());
             }
             catch (Exception ex)
             {
@@ -195,7 +197,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 if (aposta.Rodada.DataPrimeiroJogo.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now)
                     throw new ExcecaoDeAplicacao("Rodada iniciada. Não é possível alterar as apostas.");
 
-                var novaAposta = new Aposta(usuarioBanco, rodada, TipoDeAposta.Exclusiva);
+                var novaAposta = new Aposta(usuarioBanco, rodada, TipoDeAposta.Exclusiva, ValorDaAposta);
 
                 if (aposta != null)
                 {
@@ -227,7 +229,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 
                 apostas = apostas.Where(a => a.Jogos.Count > 0).ToList();
 
-                var modelo = new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, new ModeloDeFiltroDeAposta());
+                var modelo = new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, 0, new ModeloDeFiltroDeAposta());
 
                 var apostaAgrupada = apostas.GroupBy(l => l.Usuario.Id).Select(cl => new
                 { 
