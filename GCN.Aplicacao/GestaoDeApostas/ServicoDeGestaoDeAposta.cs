@@ -170,7 +170,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             }
             catch (Exception ex)
             {
-                throw new ExcecaoDeAplicacao("Não foi possível salvar aposta: " + ex.InnerException);
+                throw new ExcecaoDeAplicacao(ex.ToString());
             }
         }
 
@@ -206,6 +206,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                         aposta.Jogos.ToList().ForEach(a => novaAposta.Jogos.Add(new JogoDaAposta(a.DataHoraDoJogo, a.Time1, a.Time2, a.Rodada, a.Estadio, a.PlacarTime1, a.PlacarTime2)));
                         this._servicoExternoDePersistencia.RepositorioDeApostas.Inserir(novaAposta);
                     }
+                    aposta.SituacaoDaAposta = SituacaoDaAposta.Salva;
                 }
 
                 usuarioBanco.SubtrairCredito($"Rodada Exclusiva {aposta.Rodada.Nome}", ValorDaAposta, usuario.Id);
@@ -220,12 +221,12 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             }
         }
 
-        public ModeloDeListaDeApostas BuscarResultado(int idRodada)
+        public ModeloDeListaDeApostas BuscarResultado(int idRodada, TipoDeAposta tipoDeAposta)
         {
             try
             {
                 var quantidadeEncontrada = 0;
-                var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasParaResultado(idRodada);
+                var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasParaResultado(idRodada, tipoDeAposta);
 
                 apostas = apostas.Where(a => a.Jogos.Count > 0).ToList();
 

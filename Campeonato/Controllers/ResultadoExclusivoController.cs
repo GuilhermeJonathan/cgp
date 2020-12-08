@@ -15,12 +15,12 @@ namespace Campeonato.Controllers
 {
     [Authorize]
     [TratarErros]
-    public class ResultadoController : Controller
+    public class ResultadoExclusivoController : Controller
     {
         private readonly IServicoDeGestaoDeApostas _servicoDeGestaoDeApostas;
         private readonly IServicoDeGestaoDeRodadas _servicoDeGestaoDeRodadas;
-        
-        public ResultadoController(IServicoDeGestaoDeApostas servicoDeGestaoDeApostas, IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas)
+
+        public ResultadoExclusivoController(IServicoDeGestaoDeApostas servicoDeGestaoDeApostas, IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas)
         {
             this._servicoDeGestaoDeApostas = servicoDeGestaoDeApostas;
             this._servicoDeGestaoDeRodadas = servicoDeGestaoDeRodadas;
@@ -29,15 +29,22 @@ namespace Campeonato.Controllers
         [Route("{id}")]
         public ActionResult Index(ModeloDeListaDeApostas modelo, int? id)
         {
+            var idRodada = this._servicoDeGestaoDeRodadas.BuscarRodadaAtiva();
+
             if (id.HasValue)
+            {
                 modelo.Filtro.Rodada = id.Value;
-            
-            modelo = this._servicoDeGestaoDeApostas.BuscarResultado(modelo.Filtro.Rodada, TipoDeAposta.Geral);
+                idRodada = id.Value;
+            }
+            else
+                modelo.Filtro.Rodada = idRodada;
+
+            modelo = this._servicoDeGestaoDeApostas.BuscarResultado(modelo.Filtro.Rodada, TipoDeAposta.Exclusiva);
 
             modelo.Filtro.Rodadas = ListaDeItensDeDominio.DaClasseComOpcaoTodos<Rodada>(nameof(Rodada.Nome), nameof(Rodada.Id),
                    () => this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivas());
 
-            modelo.Filtro.Rodada = id.HasValue ? id.Value : 0;
+            modelo.Filtro.Rodada = idRodada;
 
             return View(modelo);
         }

@@ -21,12 +21,19 @@
     </div>
     <div class="container-fluid">
         <div class="row">
+
+        </div>
+        <div class="row">
             <div class="col-lg-12">
+                
                 <div class="callout callout-info">
                     <div class="col-lg-6 col-sm-12 col-xs-12">
                         <h5 class="card-title">
                             Premiação da Rodada
                             @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
+                           
+
+                             
                         </h5>
 
                     </div>
@@ -36,6 +43,7 @@
                             <span class="info-box-number fa-2x"> @Model.QtdJogos jogos - @Model.ValorDaRodada</span>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -44,7 +52,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Lista de Apostas Exclusivas </h3>
+
                         <div class="card-tools">
+                            <a href="@Url.Action("GerarPremiacao", "Rodada", new { id = Model.Filtro.Rodada })" class="btn btn-info right"> Gerar Premiação</a>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
@@ -60,7 +70,7 @@
                             colunas.Add(m => m.DataDoCadastro).Titled("Data Cadastro");
 
                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
-                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Visualizar", "Aposta", new { id = m.Id, idUsuario = m.IdUsuario })" title="Visualizar Aposta" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
+                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Visualizar", "Aposta", new { id = m.IdRodada, idUsuario = m.IdUsuario })" title="Visualizar Aposta" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
 
                         }).WithPaging(20).Sortable(true).EmptyText("Nenhuma aposta exclusiva encontrada.")
                     </div>

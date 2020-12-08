@@ -15,6 +15,6 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         string SalvarMinhaAposta(int id, int[] placar1, int[] placar2, int[] idJogos, UsuarioLogado usuario);
         string GerarApostaExclusiva(int id, int idRodada, int idUsuario, UsuarioLogado usuario);
         ModeloDeEdicaoDeAposta VisualizarAposta(int idRodada, int idUsuario);
-        ModeloDeListaDeApostas BuscarResultado(int idRodada);
+        ModeloDeListaDeApostas BuscarResultado(int idRodada, TipoDeAposta tipoDeAposta);
     }
 }

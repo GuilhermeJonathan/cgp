@@ -74,6 +74,14 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             }
         }
 
+        public IRepositorioDePremiacoes RepositorioDePremiacoes
+        {
+            get
+            {
+                return new RepositorioDePremiacao(this._contexto);
+            }
+        }
+
 
         public void Persistir()
         {

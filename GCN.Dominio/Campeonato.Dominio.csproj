@@ -48,6 +48,7 @@
     <Compile Include="Entidades\HistoricoFinanceiro.cs" />
     <Compile Include="Entidades\Jogo.cs" />
     <Compile Include="Entidades\JogoDaAposta.cs" />
+    <Compile Include="Entidades\Premiacao.cs" />
     <Compile Include="Entidades\Rodada.cs" />
     <Compile Include="Entidades\Time.cs" />
     <Compile Include="Entidades\Usuario.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Repositorios\IRepositorioDeEstadios.cs" />
     <Compile Include="Repositorios\IRepositorioDeFuncionarios.cs" />
     <Compile Include="Repositorios\IRepositorioDeJogos.cs" />
+    <Compile Include="Repositorios\IRepositorioDePremiacoes.cs" />
     <Compile Include="Repositorios\IRepositorioDeRodadas.cs" />
     <Compile Include="Repositorios\IRepositorioDeTimes.cs" />
     <Compile Include="Repositorios\IRepositorioDeUsuarios.cs" />

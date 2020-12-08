@@ -32,7 +32,6 @@ namespace Campeonato.Dominio.Entidades
             this.Valor = valorDaAposta;
         }
 
-
         public Usuario Usuario { get; set; }
         public ICollection<JogoDaAposta> Jogos { get; set; }
         public Rodada Rodada { get; set; }

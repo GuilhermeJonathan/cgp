@@ -73,7 +73,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
                 .FirstOrDefault(a => a.Rodada.Id == id && a.Usuario.Id == usuario);
         }
 
-        public IList<Aposta> RetornarApostasParaResultado(int idRodada)
+        public IList<Aposta> RetornarApostasParaResultado(int idRodada, TipoDeAposta tipoDeAposta)
         {
             var query = this._contexto.Set<Aposta>()
                 .Include(a => a.Usuario)
@@ -85,7 +85,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             if (idRodada > 0)
                 query = query.Where(c => c.Rodada.Id == idRodada);
 
-            query = query.Where(c => c.TipoDeAposta == TipoDeAposta.Geral);
+            query = query.Where(c => c.TipoDeAposta == tipoDeAposta);
 
             return query.ToList();
         }
