@@ -120,5 +120,23 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
 
             return query.FirstOrDefault(a => a.Usuario.Id == idUsuario );
         }
+
+        public Aposta PegarRodadaExclusivaPorId(int idUsuario, int idApostaExclusiva)
+        {
+            var query = this._contexto.Set<Aposta>()
+                .Include(a => a.Usuario)
+                .Include(a => a.Jogos)
+                .Include(a => a.Jogos.Select(b => b.Estadio))
+                .Include(a => a.Jogos.Select(b => b.Time1))
+                .Include(a => a.Jogos.Select(b => b.Time2))
+                .Include(a => a.Rodada).AsQueryable();
+
+            query = query.Where(c => c.TipoDeAposta == TipoDeAposta.Exclusiva);
+
+            if (idApostaExclusiva > 0)
+                query = query.Where(a => a.Id == idApostaExclusiva);
+
+            return query.FirstOrDefault(a => a.Usuario.Id == idUsuario);
+        }
     }
 }

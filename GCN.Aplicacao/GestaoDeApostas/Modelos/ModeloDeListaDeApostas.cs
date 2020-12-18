@@ -25,6 +25,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 
             this.TotalDeRegistros = totalDeRegistros;
             this.ValorDaRodada = valorTotal;
+            this.RodadaAberta = lista.FirstOrDefault() != null ? lista.FirstOrDefault().Rodada.Aberta : false;
             lista.ToList().ForEach(a => this.Lista.Add(new ModeloDeApostaDaLista(a)));
         }
 
@@ -33,6 +34,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public ModeloDeFiltroDeAposta Filtro { get; set; }
         public IList<ModeloDeApostaDaLista> Lista { get; set; }
         public decimal ValorDaRodada { get; set; }
+        public bool RodadaAberta { get; set; }
         public int QtdJogos => TotalDeRegistros;
     }
 }

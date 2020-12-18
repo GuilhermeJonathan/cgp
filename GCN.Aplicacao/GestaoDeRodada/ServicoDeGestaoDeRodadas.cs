@@ -171,7 +171,7 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
 
                 if (rodada != null)
                 {
-                    if(rodada.Fechada)
+                    if(rodada.Aberta)
                         rodada.AbrirRodada(usuarioBanco);
                     else
                         rodada.FecharRodada(usuarioBanco);

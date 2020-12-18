@@ -116,7 +116,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 var aposta = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarPorIdRodadaEUsuario(idRodada, idUsuario);
                 
                 if(aposta == null)
-                    aposta = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarRodadaExclusiva(idUsuario);
+                    aposta = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarRodadaExclusivaPorId(idUsuario, idRodada);
 
                 return new ModeloDeEdicaoDeAposta(aposta);
             }
@@ -141,7 +141,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 
                 if (rodada.SituacaoDaRodada == SituacaoDaRodada.Finalizada)
                 {
-                    if(rodada.Fechada)
+                    if(rodada.Aberta)
                         throw new ExcecaoDeAplicacao("Rodada encontra-se fechada.");
                 }
                     
@@ -187,7 +187,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 
                 if (rodada.SituacaoDaRodada == SituacaoDaRodada.Finalizada)
                 {
-                    if (rodada.Fechada)
+                    if (rodada.Aberta)
                         throw new ExcecaoDeAplicacao("Rodada encontra-se fechada.");
                 }
 
@@ -205,10 +205,10 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                     {
                         aposta.Jogos.ToList().ForEach(a => novaAposta.Jogos.Add(new JogoDaAposta(a.DataHoraDoJogo, a.Time1, a.Time2, a.Rodada, a.Estadio, a.PlacarTime1, a.PlacarTime2)));
                         this._servicoExternoDePersistencia.RepositorioDeApostas.Inserir(novaAposta);
-                    }
-                    aposta.SituacaoDaAposta = SituacaoDaAposta.Salva;
+                    }   
                 }
 
+                novaAposta.SituacaoDaAposta = SituacaoDaAposta.Salva;
                 usuarioBanco.SubtrairCredito($"Rodada Exclusiva {aposta.Rodada.Nome}", ValorDaAposta, usuario.Id);
 
                 this._servicoExternoDePersistencia.Persistir();

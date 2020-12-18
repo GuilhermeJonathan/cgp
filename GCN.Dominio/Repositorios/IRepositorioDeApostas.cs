@@ -17,5 +17,6 @@ namespace Campeonato.Dominio.Repositorios
         IList<Aposta> RetornarApostasParaResultado(int idRodada, TipoDeAposta tipoDeAposta);
         IList<JogoDaAposta> RetornarJogosDaApostaParaAlterar(int idRodada, int time1, int time2);
         Aposta PegarRodadaExclusiva(int idUsuario, int idRodada = 0);
+        Aposta PegarRodadaExclusivaPorId(int idUsuario, int idApostaExclusiva);
     }
 }

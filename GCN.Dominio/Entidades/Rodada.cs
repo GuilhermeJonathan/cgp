@@ -19,7 +19,7 @@ namespace Campeonato.Dominio.Entidades
             this.Nome = nome;
             this.Temporada = temporada;
             this.Ativo = true;
-            this.Fechada = false;
+            this.Aberta = false;
         }
 
         public string Nome { get; set; }
@@ -30,7 +30,7 @@ namespace Campeonato.Dominio.Entidades
         public Usuario UsuarioQueAlterou { get; set; }
         public DateTime DataUltimaAtualizacao { get; set; }
         public bool Ativo { get; set; }
-        public bool Fechada { get; set; }
+        public bool Aberta { get; set; }
         public DateTime DataPrimeiroJogo { get; set; }
 
         public void AlterarRodada(string nome, string temporada, bool ativo)
@@ -59,13 +59,13 @@ namespace Campeonato.Dominio.Entidades
         public void FecharRodada(Usuario usuario)
         {
             this.DataUltimaAtualizacao = DateTime.Now;
-            this.Fechada = true;
+            this.Aberta = true;
         }
 
         public void AbrirRodada(Usuario usuario)
         {
             this.DataUltimaAtualizacao = DateTime.Now;
-            this.Fechada = false;
+            this.Aberta = false;
         }
 
     }

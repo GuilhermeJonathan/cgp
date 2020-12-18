@@ -31,7 +31,7 @@
 
                             @if (Model.RodadaPodeAlterar)
                             {
-                                <p>Rodada em andamento.</p>}
+                                <p>Jogos em andamento.</p>}
                             else
                             {
                                 <p>Somente é possível realizar alterações até 30 minutos antes do primeiro jogo da Rodada.</p>
@@ -56,7 +56,7 @@
                         <div class="card-header ">  
                             <div class="">
                                 <div class="row">
-                                    <div class="col-lg-3 col-sm-12 col-xs-12">
+                                    <div class="col-lg-4 col-sm-12 col-xs-12">
                                         <h3 class="card-title">
                                             Apostas da Rodada
                                             @Html.DropDownListFor(m => m.Rodada, Model.Rodadas, new { @class = "form-control autoComplete" })
@@ -66,7 +66,7 @@
                                     
                                     @if (Model.TemApostaExclusiva)
                                     {
-                                        <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
+                                        <div class="col-lg-4 col-sm-12 col-xs-12 text-center">
                                             <a href="@Url.Action("Visualizar", "Aposta", new { id = Model.IdApostaExclusiva, idUsuario = Model.Usuario })" class="btn btn-block btn-default btnApostaExclusiva">Visualizar Aposta Exclusiva</a>
                                         </div>
                                     }
@@ -74,14 +74,14 @@
                                     {
                                         if (!Model.RodadaFechada)
                                         {
-                                        <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
+                                        <div class="col-lg-4 col-sm-12 col-xs-12 text-center">
                                             <a href="#" class="btn btn-block btn-primary apostaEspecifica btnApostaExclusiva btnBotaoTopo " data-toggle="modal" data-target="#modalRodadaEspecifica"
                                                 data-id="@Model.Id" data-nomeRodada="@Model.NomeRodada" data-idUsuario="@Model.Usuario" data-idRodada="@Model.IdRodada">Gerar Aposta Exclusiva</a>
                                         </div>
                                         }
                                     }
 
-                                    <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
+                                    <div class="col-lg-4 col-sm-12 col-xs-12 text-center">
                                         @if (Model.RodadaFechada)
                                         {
                                             <a href="@Url.Action("VisualizarTodasApostas", "Aposta", new { id = Model.IdRodada, idUsuario = Model.Usuario })" class="btn btn-block btn-primary btnBotaoTopo" >Visualizar apostas da rodada</a>

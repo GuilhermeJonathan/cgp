@@ -19,7 +19,7 @@ namespace Campeonato.Aplicacao.GestaoDeRodada.Modelos
             this.Temporada = rodada.Temporada;
             this.Ativo = rodada.Ativo ? "Sim" : "Não";
             rodada.Jogos.ToList().ForEach(a => this.Jogos.Add(new ModeloDeJogosDaLista(a)));
-            this.Fechada = rodada.Fechada;
+            this.Fechada = rodada.Aberta;
             this.QuantidadeDeJogos = rodada.Jogos.Count;
         }
 
