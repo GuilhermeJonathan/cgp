@@ -36,7 +36,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             }
         }
 
-        public ModeloDeListaDeApostas BuscarTodasApostasPorRodada(int idRodada)
+        public ModeloDeListaDeApostas BuscarTodasApostasPorRodada(int idRodada, UsuarioLogado usuario)
         {
             try
             {
@@ -47,12 +47,62 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 apostas = apostas.Where(a => a.Jogos.Count > 0).OrderByDescending(a => a.Pontuacao).ToList();
                 valorTotal = apostas.Sum(a => a.Valor);
 
-                return new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, valorTotal, new ModeloDeFiltroDeAposta());
+                var modelo = new ModeloDeListaDeApostas(apostas, quantidadeEncontrada, valorTotal, new ModeloDeFiltroDeAposta());
+                modelo.ArquivoHtml = RetornaHtmlDaLista(modelo.Lista.ToList(), modelo.NomeRodada, usuario);
+
+                return modelo;
             }
             catch (Exception ex)
             {
                 throw new ExcecaoDeAplicacao("Erro ao consultar Apostas");
             }
+        }
+
+        public string RetornaHtmlDaLista(List<ModeloDeApostaDaLista> apostas, string nomeDaRodada, UsuarioLogado usuario)
+        {
+
+            StringBuilder html = new StringBuilder();
+
+            html.Append($"<html><head> <meta charset='UTF-8'></head>");
+            html.Append("<style> .table{width: 100%; margin-bottom: 1rem; color: #212529; background-color: transparent;}  .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6;}  .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6;}  .table tbody + tbody { border-top: 2px solid #dee2e6; }  .text-muted { color: #6c757d !important;} .placar { font-size: 16pt; font-weight: bold; } .verde {color: #139f11 !important; font-weight: bold; } .amarelo {color: #ff6a00 !important;font-weight: bold;}");
+            html.Append($"</style>");
+            html.Append($"<body>");
+            html.Append($"<h2>Espelho de Apostas da Rodada {nomeDaRodada}</h2>");
+
+            foreach (var aposta in apostas)
+            {
+                html.Append($"<table class='table'>");
+                html.Append($"<tr><th colspan='4'>{aposta.NomeUsuario} - {aposta.NomeRodada} - {aposta.TipoDaAposta}</th></tr>");
+                html.Append($"<tr><th>Jogo</th><th>Times</th><th>Data</th><th>Local</th></tr>");
+
+                foreach (var jogo in aposta.Jogos)
+                {
+                    html.Append($"<tr><td>");
+                    html.Append($"<span class='text-muted'>{jogo.SiglaTime1}</span>");
+                    html.Append($"<span class='text-muted placar {jogo.CssResultadoTime1}'> {jogo.PlacarTime1} </span>");
+                    html.Append($"<span>x</span>");
+                    html.Append($"<span class='text-muted placar {jogo.CssResultadoTime2}'> {jogo.PlacarTime2} </span>");
+                    html.Append($"<span class='text-muted'>{jogo.SiglaTime2}</span>");
+                    html.Append($"</td>");
+                    html.Append($"<td>");
+                    html.Append($"<span class='text-muted'>{jogo.NomeTime1}</span><br>");
+                    html.Append($"<span class='text-muted'>{jogo.NomeTime2}</span>");
+                    html.Append($"</td>");
+                    html.Append($"<td>");
+                    html.Append($"<p class='d-flex flex-column text-center'><span style='font-weight: bold;'> {jogo.DataDoJogo}</span><span> {jogo.HoraDoJogo}</span></p>");
+                    html.Append($"</td>");
+                    html.Append($"<td>");
+                    html.Append($"<p style='text-align:center;'><span>{jogo.NomeEstadio}</span></p>");
+                    html.Append($"</td>");
+
+                    html.Append($"</tr>");
+                }
+            }
+            html.Append($"</table></body>");
+            html.Append($"<footer class='main-footer'> Emitido pelo {usuario.Nome} em {DateTime.Now.ToShortDateString()}<br> <b>Bolão</b>Brasileirão 2020 - All rights reserved.</footer>");
+
+            html.Append($"</html>");
+            return html.ToString();
         }
 
         public ModeloDeEdicaoDeAposta BuscarApostaPorRodada(int idRodada, UsuarioLogado usuario)

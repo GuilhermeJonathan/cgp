@@ -13,7 +13,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
-using NReco.PdfGenerator;
 using System.Web.Routing;
 using Campeonato.Dominio.ObjetosDeValor;
 
@@ -103,7 +102,7 @@ namespace Campeonato.Controllers
             if (!id.HasValue)
                 ApostaNaoEncontrada();
 
-            var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value);
+            var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value, User.Logado());
             modelo.Filtro.Rodada = id.Value;
             return View(modelo);
         }
@@ -116,20 +115,17 @@ namespace Campeonato.Controllers
                 if (!id.HasValue)
                     ApostaNaoEncontrada();
 
-                var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value);
+                var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value, User.Logado());
 
                 var nomeRodada = modelo.Lista.FirstOrDefault().NomeRodada;
                 ViewBag.NomeRodada = nomeRodada;
-
-                var ViewAsString = FakeController.RenderViewToString("Aposta", "VisualizarTodasApostasPDF", modelo);
-                var htmlToPdf = new HtmlToPdfConverter();
-
-                var pdfBytes = htmlToPdf.GeneratePdf(ViewAsString);
+                
+                var pdfBytes = (new NReco.PdfGenerator.HtmlToPdfConverter()).GeneratePdf(modelo.ArquivoHtml);
+     
                 FileResult FileResult = new FileContentResult(pdfBytes, "application/pdf");
                 FileResult.FileDownloadName = $"espelhoDa{nomeRodada.Trim()}-{ DateTime.Now.ToString().Trim()}.pdf";
-
                 return FileResult;
-
+               
             } catch(Exception ex)
             {
                 ApostaNaoEncontrada();
