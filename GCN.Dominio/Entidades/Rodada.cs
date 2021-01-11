@@ -32,6 +32,7 @@ namespace Campeonato.Dominio.Entidades
         public bool Ativo { get; set; }
         public bool Aberta { get; set; }
         public DateTime DataPrimeiroJogo { get; set; }
+        public string CaminhoArquivo { get; set; }
 
         public void AlterarRodada(string nome, string temporada, bool ativo)
         {
@@ -43,6 +44,11 @@ namespace Campeonato.Dominio.Entidades
         public void IncluirJogoNaRodada(Jogo jogo)
         {
             this.Jogos.Add(jogo);
+        }
+
+        public void AlterarArquivo(string caminhoArquivo)
+        {
+            this.CaminhoArquivo = caminhoArquivo;
         }
 
         public void IncluirAlteracao(DateTime data, Usuario usuario)

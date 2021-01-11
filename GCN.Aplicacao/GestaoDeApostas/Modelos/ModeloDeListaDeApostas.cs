@@ -25,8 +25,20 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 
             this.TotalDeRegistros = totalDeRegistros;
             this.ValorDaRodada = valorTotal;
-            this.RodadaAberta = lista.FirstOrDefault() != null ? lista.FirstOrDefault().Rodada.Aberta : false;
-            this.NomeRodada = lista.FirstOrDefault() != null ? lista.FirstOrDefault().Rodada.Nome : "";
+            var rodada = lista.FirstOrDefault() != null ? lista.FirstOrDefault().Rodada : null;
+            if(rodada != null)
+            {
+                this.RodadaId = rodada.Id;
+                this.RodadaAberta = rodada.Aberta;
+                this.NomeRodada = $"Rodada{rodada.Ordem}";
+                this.TemArquivo = !String.IsNullOrEmpty(rodada.CaminhoArquivo) ? true : false;
+                this.CaminhoArquivo = rodada.CaminhoArquivo;
+            } else
+            {
+                this.RodadaAberta = false;
+                this.NomeRodada = "";
+            }
+            
             lista.ToList().ForEach(a => this.Lista.Add(new ModeloDeApostaDaLista(a)));
         }
 
@@ -34,9 +46,12 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public int TotalDeRegistros { get; set; }
         public ModeloDeFiltroDeAposta Filtro { get; set; }
         public IList<ModeloDeApostaDaLista> Lista { get; set; }
+        public int RodadaId { get; set; }
         public string NomeRodada { get; set; }
         public decimal ValorDaRodada { get; set; }
         public bool RodadaAberta { get; set; }
+        public bool TemArquivo { get; set; }
+        public string CaminhoArquivo { get; set; }
         public int QtdJogos => TotalDeRegistros;
         public string ArquivoHtml { get; set; }
     }

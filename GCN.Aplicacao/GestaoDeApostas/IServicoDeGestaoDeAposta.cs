@@ -13,6 +13,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         ModeloDeListaDeApostas BuscarTodasApostasPorRodada(int idRodada, UsuarioLogado usuario);
         ModeloDeEdicaoDeAposta BuscarApostaPorRodada(int idRodada, UsuarioLogado usuario);
         string SalvarMinhaAposta(int id, int[] placar1, int[] placar2, int[] idJogos, UsuarioLogado usuario);
+        void SalvarArquivoDaRodada(int id, string caminho);
         string GerarApostaExclusiva(int id, int idRodada, int idUsuario, UsuarioLogado usuario);
         ModeloDeEdicaoDeAposta VisualizarAposta(int idRodada, int idUsuario);
         ModeloDeListaDeApostas BuscarResultado(int idRodada, TipoDeAposta tipoDeAposta);

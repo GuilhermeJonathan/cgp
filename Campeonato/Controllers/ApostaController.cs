@@ -15,6 +15,9 @@ using System.Web.Mvc;
 using System.IO;
 using System.Web.Routing;
 using Campeonato.Dominio.ObjetosDeValor;
+using WkHtmlToXSharp;
+using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+using System.Threading.Tasks;
 
 namespace Campeonato.Controllers
 {
@@ -25,13 +28,18 @@ namespace Campeonato.Controllers
         private readonly IServicoDeGestaoDeApostas _servicoDeGestaoDeApostas;
         private readonly IServicoDeGestaoDeRodadas _servicoDeGestaoDeRodadas;
         private readonly IServicoDeGestaoDeUsuarios _servicoDeGestaoDeUsuarios;
+        private readonly IServicoExternoDeArmazenamentoEmNuvem _servicoExternoDeArmazenamentoEmNuvem;
+        private readonly IServicoDeGeracaoDeDocumentosEmPdf _servicoDeGeracaoDeDocumentosEmPdf;
 
         public ApostaController(IServicoDeGestaoDeApostas servicoDeGestaoDeApostas, IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas,
-            IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios)
+            IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios, IServicoExternoDeArmazenamentoEmNuvem servicoExternoDeArmazenamentoEmNuvem,
+            IServicoDeGeracaoDeDocumentosEmPdf servicoDeGeracaoDeDocumentosEmPdf)
         {
             this._servicoDeGestaoDeApostas = servicoDeGestaoDeApostas;
             this._servicoDeGestaoDeRodadas = servicoDeGestaoDeRodadas;
             this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
+            this._servicoExternoDeArmazenamentoEmNuvem = servicoExternoDeArmazenamentoEmNuvem;
+            this._servicoDeGeracaoDeDocumentosEmPdf = servicoDeGeracaoDeDocumentosEmPdf;
         }
 
         public ActionResult Index(ModeloDeListaDeApostas modelo)
@@ -97,40 +105,26 @@ namespace Campeonato.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult VisualizarTodasApostas(int? id, int? idUsuario)
+        public async Task<ActionResult> VisualizarTodasApostas(int? id, int? idUsuario)
         {
             if (!id.HasValue)
                 ApostaNaoEncontrada();
 
             var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value, User.Logado());
+
+            if (!modelo.TemArquivo)
+            {
+                using (Stream enviarParaAzure = new MemoryStream(this._servicoDeGeracaoDeDocumentosEmPdf.CriarPdf(modelo.ArquivoHtml)))
+                {
+                    var nomeArquivo = $"espelhoDa{modelo.NomeRodada.Trim()}.pdf";
+                    string blob = $"espelhos";
+                    var retorno = await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(enviarParaAzure, blob, nomeArquivo.Trim());
+                    this._servicoDeGestaoDeApostas.SalvarArquivoDaRodada(modelo.RodadaId, retorno);
+                }
+            }
+
             modelo.Filtro.Rodada = id.Value;
             return View(modelo);
-        }
-
-        [HttpGet]
-        public ActionResult VisualizarTodasApostasPDF(int? id)
-        {
-            try
-            {
-                if (!id.HasValue)
-                    ApostaNaoEncontrada();
-
-                var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value, User.Logado());
-
-                var nomeRodada = modelo.Lista.FirstOrDefault().NomeRodada;
-                ViewBag.NomeRodada = nomeRodada;
-                
-                var pdfBytes = (new NReco.PdfGenerator.HtmlToPdfConverter()).GeneratePdf(modelo.ArquivoHtml);
-     
-                FileResult FileResult = new FileContentResult(pdfBytes, "application/pdf");
-                FileResult.FileDownloadName = $"espelhoDa{nomeRodada.Trim()}-{ DateTime.Now.ToString().Trim()}.pdf";
-                return FileResult;
-               
-            } catch(Exception ex)
-            {
-                ApostaNaoEncontrada();
-                return RedirectToAction(nameof(Index));
-            }
         }
 
         [Authorize]

@@ -22,6 +22,9 @@ using Campeonato.Aplicacao.GestaoDeJogos;
 using Campeonato.Aplicacao.GestaoDeApostas.Modelos;
 using Campeonato.Aplicacao.GestaoDeUsuarios;
 using Campeonato.Aplicacao.GestaoDePremiacoes;
+using Campeonato.Infraestrutura.ServicosExternos.GeracaoDocumentoEmPDF;
+using Campeonato.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem;
+using Campeonato.Aplicacao.Util;
 
 namespace Campeonato.App_Start
 {
@@ -46,6 +49,10 @@ namespace Campeonato.App_Start
             container.Register<IServicoDeGestaoDeApostas, ServicoDeGestaoDeApostas>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeUsuarios, ServicoDeGestaoDeUsuarios>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDePremiacoes, ServicoDeGestaoDePremiacoes>(Lifestyle.Scoped);
+            container.Register<IServicoDeGeracaoDeDocumentosEmPdf, ServicoDeGeracaoDeDocumentosEmPdf>(Lifestyle.Scoped);
+
+            container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
+               VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")));
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

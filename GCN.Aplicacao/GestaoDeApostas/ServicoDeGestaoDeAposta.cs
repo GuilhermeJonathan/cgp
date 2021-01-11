@@ -2,8 +2,10 @@
 using Campeonato.Dominio.Entidades;
 using Campeonato.Dominio.ObjetosDeValor;
 using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+using Campeonato.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +16,14 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
     {
         private const decimal ValorDaAposta = 20;
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
+      
+        
+
         public ServicoDeGestaoDeApostas(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
+           
+            //this._servicoExternoDeArmazenamentoEmNuvem = new ServicoExternoDeArmazenamentoEmNuvem(VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure"));
         }
 
         public ModeloDeListaDeApostas BuscarApostasPorFiltro(ModeloDeFiltroDeAposta filtro, int pagina, int registrosPorPagina = 30)
@@ -224,6 +231,25 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             }
         }
 
+        public void SalvarArquivoDaRodada(int id, string caminho)
+        {
+            try
+            {
+                var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(id);
+               
+                if (rodada != null)
+                {
+                    rodada.AlterarArquivo(caminho);
+                }
+
+                this._servicoExternoDePersistencia.Persistir();
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.ToString());
+            }
+        }
+
         public string GerarApostaExclusiva(int id, int idRodada, int idUsuario, UsuarioLogado usuario)
         {
             try
@@ -312,6 +338,5 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 throw new ExcecaoDeAplicacao("Erro ao consultar Apostas");
             }
         }
-
     }
 }
