@@ -64,5 +64,21 @@ namespace Campeonato.Controllers
            
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult Visualizar(int? idAposta, int? idUsuario)
+        {
+            if (!idAposta.HasValue)
+                ApostaNaoEncontrada();
+
+            var modelo = this._servicoDeGestaoDeApostas.VisualizarApostaExclusiva(idAposta.Value, idUsuario.Value);
+            return View(modelo);
+        }
+
+        private ActionResult ApostaNaoEncontrada()
+        {
+            this.AdicionarMensagemDeErro("Aposta não foi encontrada");
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

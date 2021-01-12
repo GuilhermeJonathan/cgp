@@ -183,6 +183,19 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             }
         }
 
+        public ModeloDeEdicaoDeAposta VisualizarApostaExclusiva(int idAposta, int idUsuario)
+        {
+            try
+            {
+                var aposta = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarRodadaExclusivaPorId(idUsuario, idAposta);
+                return new ModeloDeEdicaoDeAposta(aposta);
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar aposta");
+            }
+        }
+
         public string SalvarMinhaAposta(int id, int[] placar1, int[] placar2, int[] idJogos, UsuarioLogado usuario)
         {
             try

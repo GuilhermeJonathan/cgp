@@ -16,6 +16,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         void SalvarArquivoDaRodada(int id, string caminho);
         string GerarApostaExclusiva(int id, int idRodada, int idUsuario, UsuarioLogado usuario);
         ModeloDeEdicaoDeAposta VisualizarAposta(int idRodada, int idUsuario);
+        ModeloDeEdicaoDeAposta VisualizarApostaExclusiva(int idAposta, int idUsuario);
         ModeloDeListaDeApostas BuscarResultado(int idRodada, TipoDeAposta tipoDeAposta);
     }
 }
