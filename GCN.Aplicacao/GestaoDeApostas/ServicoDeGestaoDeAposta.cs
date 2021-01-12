@@ -190,6 +190,8 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 var contador = 0;
 
                 var aposta = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarPorIdRodadaEUsuario(id, usuario.Id);
+                var apostaExclusiva = this._servicoExternoDePersistencia.RepositorioDeApostas.PegarRodadaExclusiva(usuario.Id, id);
+
                 var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(id);
                 var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
 
@@ -202,7 +204,6 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                         throw new ExcecaoDeAplicacao("Rodada encontra-se fechada.");
                 }
                     
-
                 if(aposta.Rodada.DataPrimeiroJogo.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now)
                     throw new ExcecaoDeAplicacao("Rodada iniciada. Não é possível alterar as apostas.");
 
@@ -219,6 +220,23 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                         }
                     }
                     aposta.SituacaoDaAposta = SituacaoDaAposta.Salva;
+                }
+
+                contador = 0;
+                if (apostaExclusiva != null)
+                {
+                    if (apostaExclusiva.Jogos != null)
+                    {
+                        var idJogosExclusivos = apostaExclusiva.Jogos.Select(a => a.Id).ToArray();
+                        foreach (var idJogo in idJogosExclusivos)
+                        {
+                            var jogo = this._servicoExternoDePersistencia.RepositorioDeJogos.PegarJogoDaApostaPorId(idJogo);
+                            jogo.PlacarTime1 = placar1[contador];
+                            jogo.PlacarTime2 = placar2[contador];
+                            contador++;
+                        }
+                    }
+                    apostaExclusiva.SituacaoDaAposta = SituacaoDaAposta.Salva;
                 }
 
                 this._servicoExternoDePersistencia.Persistir();
