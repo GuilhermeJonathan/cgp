@@ -140,7 +140,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
         public ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id)
         {
             var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioComHistorico(id);
-            usuario.HistoricosFinanceiros = usuario.HistoricosFinanceiros.OrderBy(a => a.DataDoCadastro).ToList();
+            usuario.HistoricosFinanceiros = usuario.HistoricosFinanceiros.OrderByDescending(a => a.DataDoCadastro).ToList();
 
             return new ModeloDeEdicaoDeUsuario(usuario);
         }

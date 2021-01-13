@@ -57,6 +57,11 @@
     font-weight: bold;
 }
 
+.vermelho {
+    color: #fb0404 !important;
+    font-weight: bold;
+} 
+
 .btnBotaoTopo {
     width: 80%;
 }

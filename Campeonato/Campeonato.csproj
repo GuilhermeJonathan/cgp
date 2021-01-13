@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ApostaController.cs" />
     <Compile Include="Controllers\ApostaExclusivaController.cs" />
     <Compile Include="Controllers\EstadioController.cs" />
+    <Compile Include="Controllers\ExtratoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -435,6 +436,7 @@
     <Content Include="Views\ResultadoExclusivo\Index.cshtml" />
     <Content Include="Views\Premiacao\Index.cshtml" />
     <Content Include="Views\ApostaExclusiva\Visualizar.cshtml" />
+    <Content Include="Views\Extrato\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

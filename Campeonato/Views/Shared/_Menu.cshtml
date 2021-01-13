@@ -57,6 +57,15 @@
                         </a>
                     </li>
                 }
+                 @if (!User.EhAdministrador())
+                 {
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Extrato")" class="nav-link @Html.Raw(controller == "Extrato" ? "active" : "")">
+                            <i class="nav-icon fas fa-dollar-sign"></i>
+                            <p> Extrato Financeiro </p>
+                        </a>
+                    </li>
+                }
                 <li class="nav-item">
                     <a href="@Url.Action("Index", "Jogo" )" class="nav-link @Html.Raw(controller == "Jogo" ? "active" : "")">
                         <i class="nav-icon fas  fa-futbol"></i>
