@@ -28,6 +28,19 @@
                             Classificação da Rodada
                             @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
                         </h3>
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-table"></i></span>
+                            <div class="info-box-content">
+                                @if (!Model.RodadaFinalizada)
+                                {
+                                    <span class="info-box-number fa-1x"> RESULTADO PARCIAL</span>
+                                }
+                                else
+                                {
+                                    <span class="info-box-number fa-1x"> RESULTADO FINAL</span>
+                                }
+                            </div>
+                        </div>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-minus"></i>

@@ -33,12 +33,13 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 this.NomeRodada = $"Rodada{rodada.Ordem}";
                 this.TemArquivo = !String.IsNullOrEmpty(rodada.CaminhoArquivo) ? true : false;
                 this.CaminhoArquivo = rodada.CaminhoArquivo;
+                this.RodadaFinalizada = rodada.SituacaoDaRodada == Dominio.ObjetosDeValor.SituacaoDaRodada.Finalizada;
             } else
             {
                 this.RodadaAberta = false;
                 this.NomeRodada = "";
             }
-            
+
             lista.ToList().ForEach(a => this.Lista.Add(new ModeloDeApostaDaLista(a)));
         }
 
@@ -54,5 +55,6 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public string CaminhoArquivo { get; set; }
         public int QtdJogos => TotalDeRegistros;
         public string ArquivoHtml { get; set; }
+        public bool RodadaFinalizada { get; set; }
     }
 }

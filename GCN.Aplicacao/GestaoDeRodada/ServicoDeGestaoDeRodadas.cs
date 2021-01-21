@@ -147,9 +147,10 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
                         rodada.SituacaoDaRodada = SituacaoDaRodada.Finalizada;
                         var proximaRodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.BuscarProximaRodada();
                         proximaRodada.SituacaoDaRodada = SituacaoDaRodada.Atual;
-                        var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorRodada(rodada.Id);
-                        ProcessarResultado(rodada.Jogos.ToList(), apostas.ToList());
                     }
+
+                    var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorRodada(rodada.Id);
+                    ProcessarResultado(rodada.Jogos.ToList(), apostas.ToList());
                 }
 
                 this._servicoExternoDePersistencia.Persistir();
@@ -203,36 +204,45 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
                             var timeGanhador = jogoDaRodada.PlacarTime1 == jogoDaRodada.PlacarTime2 ? 0 : jogoDaRodada.PlacarTime1 > jogoDaRodada.PlacarTime2 ? jogoDaRodada.Time1.Id : jogoDaRodada.Time2.Id;
                             var timeGanhadorAposta = jogoDaAposta.PlacarTime1 == jogoDaAposta.PlacarTime2 ? 0 : jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2 ? jogoDaAposta.Time1.Id : jogoDaAposta.Time2.Id;
 
-                            //Acerto Placar
-                            if (jogoDaAposta.PlacarTime1 == jogoDaRodada.PlacarTime1 && jogoDaAposta.PlacarTime2 == jogoDaRodada.PlacarTime2)
+                            if (jogoDaRodada.SituacaoDoJogo == SituacaoDoJogo.Finalizado)
                             {
-                                pontos += AcertoPlacar;
-                                aposta.AcertoPlacar += 1;
-                                jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Placar;
-                            }
-                            //Acerto Empate
-                            else if (timeGanhador == 0 && timeGanhadorAposta == 0)
-                            {
-                                pontos += AcertoEmpate;
-                                aposta.AcertoEmpate += 1;
-                                jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Empate;
-                            }
-                            //Acerto TimeGanhador
-                            else if (timeGanhador == timeGanhadorAposta)
-                            {
-                                pontos += AcertoGanhador;
-                                aposta.AcertoGanhador += 1;
+                                if (jogoDaAposta.SituacaoDoJogo == SituacaoDoJogo.AJogar)
+                                {
+                                    //Acerto Placar
+                                    if (jogoDaAposta.PlacarTime1 == jogoDaRodada.PlacarTime1 && jogoDaAposta.PlacarTime2 == jogoDaRodada.PlacarTime2)
+                                    {
+                                        pontos += AcertoPlacar;
+                                        aposta.AcertoPlacar += 1;
+                                        jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Placar;
+                                    }
+                                    //Acerto Empate
+                                    else if (timeGanhador == 0 && timeGanhadorAposta == 0)
+                                    {
+                                        pontos += AcertoEmpate;
+                                        aposta.AcertoEmpate += 1;
+                                        jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.Empate;
+                                    }
+                                    //Acerto TimeGanhador
+                                    else if (timeGanhador == timeGanhadorAposta)
+                                    {
+                                        pontos += AcertoGanhador;
+                                        aposta.AcertoGanhador += 1;
 
-                                if (jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2)
-                                    jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime1;
-                                else
-                                    jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime2;
-                            }
+                                        if (jogoDaAposta.PlacarTime1 > jogoDaAposta.PlacarTime2)
+                                            jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime1;
+                                        else
+                                            jogoDaAposta.ResultadoDoJogoDaAposta = ResultadoDoJogoDaAposta.GanhadorTime2;
+                                    }
 
-                            aposta.Pontuacao += pontos;
-                            aposta.SituacaoDaAposta = SituacaoDaAposta.Finalizada;
-                            pontos = 0;
+                                    jogoDaAposta.SituacaoDoJogo = SituacaoDoJogo.Finalizado;
+                                    aposta.Pontuacao += pontos;
+                                }
+                                pontos = 0;  
+                            }
                         }
+
+                        if (!aposta.Jogos.Any(a => a.SituacaoDoJogo == SituacaoDoJogo.AJogar))
+                            aposta.SituacaoDaAposta = SituacaoDaAposta.Finalizada;
                     }
                 }
             }

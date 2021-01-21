@@ -77,15 +77,15 @@
                     <div class="card-body table-responsive p-0">
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
-                            colunas.Add(m => m.NomeUsuario).Titled("Usuário");
-                            colunas.Add(m => m.NomeRodada).Titled("Rodada");
-                       colunas.Add(m => m.TipoDaAposta).Titled("Tipo");
-                            colunas.Add(m => m.DataDoCadastro).Titled("Data Cadastro");
-
                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
                             m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Visualizar", "Aposta", new { id = m.IdRodada, idUsuario = m.IdUsuario })" title="Visualizar Aposta" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
 
-                        }).WithPaging(20).Sortable(true).EmptyText("Nenhuma aposta encontrada")
+                             colunas.Add(m => m.NomeUsuario).Titled("Usuário");
+                             colunas.Add(m => m.NomeRodada).Titled("Rodada");
+                             colunas.Add(m => m.TipoDaAposta).Titled("Tipo");
+                             colunas.Add(m => m.DataDoCadastro).Titled("Data Cadastro");
+
+                         }).WithPaging(20).Sortable(true).EmptyText("Nenhuma aposta encontrada")
                     </div>
                 </div>
             </div>
