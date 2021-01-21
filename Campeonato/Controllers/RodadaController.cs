@@ -92,11 +92,18 @@ namespace Campeonato.Controllers
         [HttpPost]
         public ActionResult LancarResultados(int id, string[] placar1, string[] placar2, int[] idJogos)
         {
-            if (idJogos != null)
+            if (User.EhAdministrador() || User.EhInterno())
             {
-                var retorno = this._servicoDeGestaoDeRodadas.CadastrarResultados(id, placar1, placar2, idJogos, User.Logado());
-                this.AdicionarMensagemDeSucesso(retorno);
+                if (idJogos != null)
+                {
+                    var retorno = this._servicoDeGestaoDeRodadas.CadastrarResultados(id, placar1, placar2, idJogos, User.Logado());
+                    this.AdicionarMensagemDeSucesso(retorno);
+                }
+            } else
+            {
+                this.AdicionarMensagemDeErro("Você não tem permissão para lançar jogos.");
             }
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -68,11 +68,11 @@
                             <h3 class="card-title"> @rodada.Nome </h3>
 
                             <div class="custom-control custom-switch btnRodadaFechada left">
-                                <input type="checkbox" class="custom-control-input btnFecharRodada" id="@rodada.Id" data-id="@rodada.Id" @(rodada.Fechada ? "checked" : "") @(User.EhAdministrador() ? "" : "disabled")>
+                                <input type="checkbox" class="custom-control-input btnFecharRodada" id="@rodada.Id" data-id="@rodada.Id" @(rodada.Fechada ? "checked" : "") @(User.EhAdministrador() || User.EhInterno() ? "" : "disabled")>
                                 <label class="custom-control-label" for="@rodada.Id"> ABERTA</label>
                             </div>
                             <div class="card-tools">
-                                @if (User.EhAdministrador())
+                                @if (User.EhAdministrador() || User.EhInterno())
                                 {
                                     <a href="@Url.Action("LancarResultados", "Rodada", new { id = rodada.Id })" class="btn btn-info right"> Lançar Resultados</a>
                                 }

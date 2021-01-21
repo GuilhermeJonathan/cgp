@@ -25,6 +25,9 @@ namespace Campeonato.Controllers
         [HttpGet]
         public ActionResult Index(ModeloDeListaDeUsuarios modelo)
         {
+            if (!User.EhAdministrador())
+                UsuarioSemPermissao();
+
             modelo = this._servicoDeGestaoDeUsuarios.RetonarUsuariosPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
             return View(modelo);
@@ -34,6 +37,9 @@ namespace Campeonato.Controllers
         [HttpGet]
         public ActionResult Editar(int? id)
         {
+            if (!User.EhAdministrador())
+                UsuarioSemPermissao();
+
             if (!id.HasValue)
                 UsuarioNaoEncontrado();
 
@@ -46,6 +52,9 @@ namespace Campeonato.Controllers
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeUsuario modelo)
         {
+            if (!User.EhAdministrador())
+                UsuarioSemPermissao();
+
             var retorno = this._servicoDeGestaoDeUsuarios.AlterarDadosDoUsuario(modelo, User.Logado());
 
             this.AdicionarMensagemDeSucesso(retorno);
@@ -78,12 +87,15 @@ namespace Campeonato.Controllers
         {
             try
             {
+                if (!User.EhAdministrador())
+                    UsuarioSemPermissao();
+
                 if (!Id.HasValue)
                     UsuarioNaoEncontrado();
 
                 var retorno = this._servicoDeGestaoDeUsuarios.CadastrarSaldo(Id.Value, Saldo, User.Logado());
                 this.AdicionarMensagemDeSucesso(retorno);
-
+               
                 return RedirectToAction(nameof(Index));
             } catch(Exception ex)
             {
@@ -116,6 +128,12 @@ namespace Campeonato.Controllers
         private ActionResult UsuarioNaoEncontrado()
         {
             this.AdicionarMensagemDeErro("Usuário não encontrado");
+            return RedirectToAction(nameof(Index));
+        }
+
+        private ActionResult UsuarioSemPermissao()
+        {
+            this.AdicionarMensagemDeErro("Usuário sem permissão para esta funcionalidade.");
             return RedirectToAction(nameof(Index));
         }
     }
