@@ -83,4 +83,9 @@
         width: 100%;
     }
 
+    .placarResultado {
+        width: 60px;
+        font-size: 20pt;
+        text-align: center;
+    }
 }

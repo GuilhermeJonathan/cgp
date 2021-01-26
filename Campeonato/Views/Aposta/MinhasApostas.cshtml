@@ -103,6 +103,7 @@
                                             <p class="text-center">
                                                 <span class="text-muted">@jogo.SiglaTime1</span>
                                                 <img src="../../content/escudos/@jogo.ImagemTime1" style="max-width: 40px;" />
+
                                                 <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime1) " @(Model.RodadaFechada ? "disabled='disabled'" : "") name="placar1[]" maxlength="2" value="@jogo.PlacarTime1">
                                                 <span style="padding-bottom: 20px;">x</span>
                                                 <input type="text" class="text-muted placarResultado text-center @(jogo.CssResultadoTime2) " @(Model.RodadaFechada ? "disabled='disabled'" : "") name="placar2[]" maxlength="2" value="@jogo.PlacarTime2">
@@ -181,6 +182,10 @@
             if ($(this).val().match(regex)) {
                 $(this).val($(this).val().replace(regex, ''));
             }
+        });
+
+        $(".placarResultado").focus(function () {
+             $(this).select();
         });
 
         $("#Rodada").on("change", function () {
