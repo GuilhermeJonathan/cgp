@@ -49,6 +49,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             {
                 decimal valorTotal = 0;
                 var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorRodada(idRodada);
+                apostas = apostas.Where(a => a.TipoDeAposta == TipoDeAposta.Exclusiva).ToList();
                 var quantidadeEncontrada = apostas.Count;
 
                 apostas = apostas.Where(a => a.Jogos.Count > 0).OrderByDescending(a => a.Pontuacao).ToList();
@@ -316,7 +317,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 }
 
                 novaAposta.SituacaoDaAposta = SituacaoDaAposta.Salva;
-                usuarioBanco.SubtrairCredito($"Rodada Exclusiva {aposta.Rodada.Nome}", ValorDaAposta, usuario.Id);
+                usuarioBanco.SubtrairCredito($"Rodada Exclusiva {aposta.Rodada.Nome}", ValorDaAposta, usuario.Id, TipoDeSolicitacaoFinanceira.Aposta);
 
                 this._servicoExternoDePersistencia.Persistir();
 

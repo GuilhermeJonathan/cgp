@@ -36,5 +36,23 @@ namespace Campeonato.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult RetirarSaldo(int Saldo)
+        {
+            try
+            {
+                var retorno = this._servicoDeGestaoDeUsuarios.RetirarSaldo(Saldo, User.Logado());
+                this.AdicionarMensagemDeSucesso(retorno);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                this.AdicionarMensagemDeErro(ex.Message);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

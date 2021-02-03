@@ -18,6 +18,9 @@ using Campeonato.Dominio.ObjetosDeValor;
 using WkHtmlToXSharp;
 using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
 using System.Threading.Tasks;
+using System.Globalization;
+using System.Threading;
+using System.Configuration;
 
 namespace Campeonato.Controllers
 {
@@ -40,6 +43,7 @@ namespace Campeonato.Controllers
             this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
             this._servicoExternoDeArmazenamentoEmNuvem = servicoExternoDeArmazenamentoEmNuvem;
             this._servicoDeGeracaoDeDocumentosEmPdf = servicoDeGeracaoDeDocumentosEmPdf;
+            ConfigurarGlobalizacaoParaPortugues();
         }
 
         public ActionResult Index(ModeloDeListaDeApostas modelo)
@@ -187,6 +191,13 @@ namespace Campeonato.Controllers
 
                 }
             }
+        }
+
+        private static void ConfigurarGlobalizacaoParaPortugues()
+        {
+            CultureInfo culture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
         }
 
     }

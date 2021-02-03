@@ -77,10 +77,10 @@ namespace Campeonato.Dominio.Entidades
             this.Ativo = false;
         }
 
-        public void SubtrairCredito(string descricao, decimal valor, int idUsuario)
+        public void SubtrairCredito(string descricao, decimal valor, int idUsuario, TipoDeSolicitacaoFinanceira tipoDeSolicitacaoDeFinanceiro)
         {
             this.Saldo = Saldo - valor;
-            this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Debito, idUsuario, TipoDeSolicitacaoFinanceira.Aposta));
+            this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Debito, idUsuario, tipoDeSolicitacaoDeFinanceiro));
         }
 
         public void AdicionarSaldo(string descricao, decimal valor, int idUsuario, TipoDeSolicitacaoFinanceira tipoDeSolicitacaoDeFinanceiro)

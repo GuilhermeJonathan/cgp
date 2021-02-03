@@ -20,5 +20,6 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
         int BuscarUsuariosNovos();
         ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id);
+        string RetirarSaldo(decimal saldo, UsuarioLogado usuario);
     }
 }
