@@ -43,14 +43,14 @@
                         {
                            colunas.Add(m => m.DataDoCadastro).Titled("Data");
                            colunas.Add(m => m.TipoDeOperacao).Titled("Operação");
+                           colunas.Add(m => m.TipoDeSolicitacaoFinanceira).Titled("Solicitação");
                            colunas.Add(m => m.Descricao).Titled("Descrição");
                       
                            colunas.Add().Encoded(false).Sanitized(false).Titled("Valor").SetWidth(30).RenderValueAs(
                                 m => @<div class="btn-group btn-group-sm @m.CssValor"> @m.ValorTexto </div>);
 
                             colunas.Add(m => m.Saldo).Sortable(false).Titled("Saldo R$");
-
-
+                            
                         }).WithPaging(100).Sortable(true).EmptyText("Nenhum histórico financeiro encontrado")
                     </div>
                     <div class="card-footer">

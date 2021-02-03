@@ -83,7 +83,7 @@ namespace Campeonato.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult CadastrarSaldo(int? Id, int Saldo)
+        public ActionResult CadastrarSaldo(int? Id, int Saldo, string TipoFinanceiro)
         {
             try
             {
@@ -93,7 +93,8 @@ namespace Campeonato.Controllers
                 if (!Id.HasValue)
                     UsuarioNaoEncontrado();
 
-                var retorno = this._servicoDeGestaoDeUsuarios.CadastrarSaldo(Id.Value, Saldo, User.Logado());
+              
+                var retorno = this._servicoDeGestaoDeUsuarios.CadastrarSaldo(Id.Value, Saldo, User.Logado(), TipoFinanceiro);
                 this.AdicionarMensagemDeSucesso(retorno);
                
                 return RedirectToAction(nameof(Index));

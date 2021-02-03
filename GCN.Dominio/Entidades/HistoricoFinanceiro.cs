@@ -14,13 +14,14 @@ namespace Campeonato.Dominio.Entidades
 
         }
 
-        public HistoricoFinanceiro(string descricao, decimal valor, decimal saldo, TipoDeOperacao tipoDeOperacao, int idUsuario)
+        public HistoricoFinanceiro(string descricao, decimal valor, decimal saldo, TipoDeOperacao tipoDeOperacao, int idUsuario, TipoDeSolicitacaoFinanceira tipoDeSolicitacaoFinanceira)
         {
             this.Descricao = descricao;
             this.Valor = valor;
             this.Saldo = saldo;
             this.TipoDeOperacao = tipoDeOperacao;
             this.IdUsuarioCadastrou = idUsuario;
+            this.TipoDeSolicitacaoFinanceira = tipoDeSolicitacaoFinanceira;
         }
 
         public string Descricao { get; set; }
@@ -28,5 +29,6 @@ namespace Campeonato.Dominio.Entidades
         public decimal Saldo { get; set; }
         public int IdUsuarioCadastrou { get; set; }
         public TipoDeOperacao TipoDeOperacao { get; set; }
+        public TipoDeSolicitacaoFinanceira TipoDeSolicitacaoFinanceira { get; set; }
     }
 }

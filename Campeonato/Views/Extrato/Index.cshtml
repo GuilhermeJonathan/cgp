@@ -43,6 +43,7 @@
                         {
                            colunas.Add(m => m.DataDoCadastro).Titled("Data");
                            colunas.Add(m => m.TipoDeOperacao).Titled("Operação");
+                           colunas.Add(m => m.TipoDeSolicitacaoFinanceira).Titled("Solicitação");
                            colunas.Add(m => m.Descricao).Titled("Descrição");
 
                            colunas.Add().Encoded(false).Sanitized(false).Titled("Valor").SetWidth(30).RenderValueAs(

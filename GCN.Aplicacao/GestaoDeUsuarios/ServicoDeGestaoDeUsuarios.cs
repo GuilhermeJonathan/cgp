@@ -100,7 +100,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             }
         }
 
-        public string CadastrarSaldo(int id, decimal saldo, UsuarioLogado usuario)
+        public string CadastrarSaldo(int id, decimal saldo, UsuarioLogado usuario, string tipoDeSolicitacaoFinanceira)
         {
             try
             {
@@ -112,8 +112,9 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
 
                 if (usuarioParaAlterar != null)
                 {
-                    if(saldo > 0)
-                        usuarioParaAlterar.AdicionarSaldo($"Adição de Saldo", saldo, usuarioBanco.Id);   
+                    var TipoFinanceiro = tipoDeSolicitacaoFinanceira == "Dinheiro "? TipoDeSolicitacaoFinanceira.Dinheiro : tipoDeSolicitacaoFinanceira == "Premiacao" ? TipoDeSolicitacaoFinanceira.Premiacao : TipoDeSolicitacaoFinanceira.Dinheiro;
+                    if (saldo > 0)
+                        usuarioParaAlterar.AdicionarSaldo($"Adição de Saldo", saldo, usuarioBanco.Id, TipoFinanceiro);   
                 }
 
                 this._servicoExternoDePersistencia.Persistir();

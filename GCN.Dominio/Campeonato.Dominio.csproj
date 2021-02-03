@@ -71,6 +71,7 @@
     <Compile Include="ObjetosDeValor\PerfilDeUsuario.cs" />
     <Compile Include="ObjetosDeValor\TipoDeAposta.cs" />
     <Compile Include="ObjetosDeValor\TipoDeOperacao.cs" />
+    <Compile Include="ObjetosDeValor\TipoDeSolicitacaoDeFinanceiro.cs" />
     <Compile Include="ObjetosDeValor\UsuarioLogado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\IRepositorio.cs" />
