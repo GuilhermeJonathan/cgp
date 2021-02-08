@@ -9,6 +9,7 @@ namespace Campeonato.Dominio.ObjetosDeValor
     public enum SituacaoDoJogo
     {
         AJogar = 1,
-        Finalizado = 2
+        Finalizado = 2,
+        Cancelado = 3
     }
 }

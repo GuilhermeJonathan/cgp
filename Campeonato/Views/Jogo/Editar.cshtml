@@ -52,11 +52,15 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="control-label"> Time de fora </label>
-                                    @Html.DropDownListFor(m => m.Time2, Model.Times2, new { @class = "form-control autoComplete" } )
+                                    @Html.DropDownListFor(m => m.Time2, Model.Times2, new { @class = "form-control autoComplete" })
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="control-label"> Rodadas </label>
                                     @Html.DropDownListFor(m => m.Rodada, Model.Rodadas, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Situação do Jogo </label>
+                                    @Html.DropDownListFor(m => m.SituacaoDoJogo, Model.SituacoesDoJogo, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                         </div>

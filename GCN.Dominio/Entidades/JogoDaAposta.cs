@@ -36,10 +36,11 @@ namespace Campeonato.Dominio.Entidades
         public SituacaoDoJogo SituacaoDoJogo { get; set; }
         public ResultadoDoJogoDaAposta ResultadoDoJogoDaAposta { get; set; }
 
-        public void AlterarDadosDoJogo(DateTime dataHoraDoJogo, Estadio estadio)
+        public void AlterarDadosDoJogo(DateTime dataHoraDoJogo, Estadio estadio, SituacaoDoJogo situacaoDoJogo)
         {
             this.DataHoraDoJogo = dataHoraDoJogo;
             this.Estadio = estadio;
+            this.SituacaoDoJogo = situacaoDoJogo;
         }
     }
 }

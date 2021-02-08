@@ -124,7 +124,7 @@ namespace Campeonato.Aplicacao.GestaoDeJogos
             var jogo = this._servicoExternoDePersistencia.RepositorioDeJogos.BuscarPorId(modelo.Id);
 
             if(jogo.SituacaoDoJogo == SituacaoDoJogo.Finalizado)
-                throw new ExcecaoDeAplicacao("Não é possível o jogo finalizado.");
+                throw new ExcecaoDeAplicacao("Não é possível alterar jogo finalizado.");
 
             var estadio = this._servicoExternoDePersistencia.RepositorioDeEstadios.BuscarPorId(modelo.Estadio);
             var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.BuscarPorId(modelo.Rodada);
@@ -136,11 +136,11 @@ namespace Campeonato.Aplicacao.GestaoDeJogos
             {
                 foreach (var jogoDaAposta in jogosDaAposta)
                 {
-                    jogoDaAposta.AlterarDadosDoJogo(dataHoraDoJogo, estadio);
+                    jogoDaAposta.AlterarDadosDoJogo(dataHoraDoJogo, estadio, modelo.SituacaoDoJogo);
                 }
             }
 
-            jogo.AlterarDadosDoJogo(dataHoraDoJogo, estadio, time1, time2, rodada);
+            jogo.AlterarDadosDoJogo(dataHoraDoJogo, estadio, time1, time2, rodada, modelo.SituacaoDoJogo);
 
             this._servicoExternoDePersistencia.Persistir();
 

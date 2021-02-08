@@ -129,8 +129,11 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
                         }
                         else jogo.LancouResultado = false;
 
-                        if(jogo.DataHoraDoJogo < DateTime.Now)
-                            jogo.SituacaoDoJogo = SituacaoDoJogo.Finalizado;
+                        if(jogo.DataHoraDoJogo < DateTime.Now && jogo.LancouResultado)
+                        {
+                            if(jogo.SituacaoDoJogo != SituacaoDoJogo.Cancelado)
+                                jogo.SituacaoDoJogo = SituacaoDoJogo.Finalizado;
+                        } 
                         else
                             jogo.SituacaoDoJogo = SituacaoDoJogo.AJogar;
                     }

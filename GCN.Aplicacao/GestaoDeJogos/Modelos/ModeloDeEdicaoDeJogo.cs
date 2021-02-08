@@ -1,4 +1,6 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Campeonato.Aplicacao.Util;
+using Campeonato.Dominio.Entidades;
+using Campeonato.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +18,13 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
             this.Times2 = new List<SelectListItem>();
             this.Estadios = new List<SelectListItem>();
             this.Rodadas = new List<SelectListItem>();
+            this.SituacoesDoJogo = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoJogo>();
         }
 
         public ModeloDeEdicaoDeJogo(Jogo jogo)
         {
+            this.SituacoesDoJogo = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoJogo>();
+
             if (jogo == null)
                 return;
 
@@ -30,6 +35,7 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
             this.Time2 = jogo.Time2 != null ? jogo.Time2.Id : 0;
             this.Estadio = jogo.Estadio != null ? jogo.Estadio.Id : 0;
             this.Rodada = jogo.Rodada != null ? jogo.Rodada.Id : 0;
+            this.SituacaoDoJogo = jogo.SituacaoDoJogo;
         }
 
         public int Id { get; set; }
@@ -43,6 +49,8 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
         public IEnumerable<SelectListItem> Estadios { get; set; }
         public int Rodada { get; set; }
         public IEnumerable<SelectListItem> Rodadas { get; set; }
+        public SituacaoDoJogo SituacaoDoJogo { get; set; }
+        public IEnumerable<SelectListItem> SituacoesDoJogo { get; set; }
 
     }
 }
