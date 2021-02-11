@@ -1,4 +1,5 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Campeonato.Aplicacao.Util;
+using Campeonato.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,12 @@ namespace Campeonato.Aplicacao.GestaoDeTimes.Modelos
 
         public ModeloDeTimesDaLista(Time time)
         {
+            var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
             this.Id = time.Id;
             this.Nome = time.Nome;
             this.Sigla = time.Sigla;
             this.NomeComSigla = $"{time.Nome} - {time.Sigla}";
-            this.Imagem = time.Imagem;
+            this.Imagem = $"{caminhoBlob}arquivos/escudos/{time.Imagem}";
             this.DataDoCadastro = time.DataDoCadastro.ToShortDateString();
             this.Ativo = time.Ativo ? "Sim" : "Não";
         }

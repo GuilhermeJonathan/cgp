@@ -68,14 +68,14 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 
         public string RetornaHtmlDaLista(List<ModeloDeApostaDaLista> apostas, string nomeDaRodada, UsuarioLogado usuario)
         {
-
             StringBuilder html = new StringBuilder();
+            var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
 
             html.Append($"<html><head> <meta charset='UTF-8'></head>");
             html.Append("<style> .table{width: 100%; margin-bottom: 1rem; color: #212529; background-color: transparent;}  .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6;}  .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6;}  .table tbody + tbody { border-top: 2px solid #dee2e6; }  .text-muted { color: #6c757d !important;} .placar { font-size: 16pt; font-weight: bold; } .verde {color: #139f11 !important; font-weight: bold; } .amarelo {color: #ff6a00 !important;font-weight: bold;}");
             html.Append($"</style>");
             html.Append($"<body>");
-            html.Append($"<h2>Espelho de Apostas da Rodada {nomeDaRodada}</h2>");
+            html.Append($"<h2>Espelho de Apostas da {nomeDaRodada}</h2>");
 
             foreach (var aposta in apostas)
             {
@@ -86,11 +86,14 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 foreach (var jogo in aposta.Jogos)
                 {
                     html.Append($"<tr><td>");
-                    html.Append($"<span class='text-muted'>{jogo.SiglaTime1}</span>");
+
+                    html.Append($"<span class='text-muted'>{jogo.SiglaTime1}</span>&nbsp;");
+                    html.Append($"<img src='{jogo.ImagemTime1}' style='max-width: 25px; margin-bottom: -10px;'/><span>");
                     html.Append($"<span class='text-muted placar {jogo.CssResultadoTime1}'> {jogo.PlacarTime1} </span>");
                     html.Append($"<span>x</span>");
                     html.Append($"<span class='text-muted placar {jogo.CssResultadoTime2}'> {jogo.PlacarTime2} </span>");
-                    html.Append($"<span class='text-muted'>{jogo.SiglaTime2}</span>");
+                    html.Append($"<img src='{jogo.ImagemTime2}' style='max-width: 25px; margin-bottom: -10px;'/><span>");
+                    html.Append($"&nbsp;<span class='text-muted'>{jogo.SiglaTime2}</span>");
                     html.Append($"</td>");
                     html.Append($"<td>");
                     html.Append($"<span class='text-muted'>{jogo.NomeTime1}</span><br>");

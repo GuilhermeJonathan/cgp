@@ -1,4 +1,5 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Campeonato.Aplicacao.Util;
+using Campeonato.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
 
         public ModeloDeJogosDaApostaDaLista(JogoDaAposta jogoDaAposta)
         {
+            var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
             this.Id = jogoDaAposta.Id;
             this.DataHoraDoJogo = $"{ jogoDaAposta.DataHoraDoJogo.ToString("dddd, dd MMMM")} às {jogoDaAposta.DataHoraDoJogo.ToString("HH:mm")}";
             this.DataDoJogo = $"{ jogoDaAposta.DataHoraDoJogo.ToString("dddd, dd MMMM")}";
@@ -23,14 +25,14 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
 
             if (jogoDaAposta.Time1 != null)
             {
-                this.ImagemTime1 = jogoDaAposta.Time1.Imagem;
+                this.ImagemTime1 = $"{caminhoBlob}arquivos/escudos/{jogoDaAposta.Time1.Imagem}";
                 this.NomeTime1 = jogoDaAposta.Time1.Nome;
                 this.SiglaTime1 = jogoDaAposta.Time1.Sigla;
                 this.PlacarTime1 = jogoDaAposta.PlacarTime1.ToString();
             }
             if (jogoDaAposta.Time2 != null)
             {
-                this.ImagemTime2 = jogoDaAposta.Time2.Imagem;
+                this.ImagemTime2 = $"{caminhoBlob}arquivos/escudos/{jogoDaAposta.Time2.Imagem}";
                 this.NomeTime2 = jogoDaAposta.Time2.Nome;
                 this.SiglaTime2 = jogoDaAposta.Time2.Sigla;
                 this.PlacarTime2 = jogoDaAposta.PlacarTime2.ToString();

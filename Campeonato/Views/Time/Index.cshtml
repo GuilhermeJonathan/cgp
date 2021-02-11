@@ -73,7 +73,7 @@
                            colunas.Add(m => m.DataDoCadastro).Titled("DataDoCadastro");
 
                            colunas.Add().Encoded(false).Sanitized(false).Titled("Escudo").SetWidth(30).RenderValueAs(
-                             m => Html.Raw("<img style='max-width: 30px;' src='../content/escudos/" + m.Imagem + "' </>"));
+                             m => Html.Raw("<img style='max-width: 30px;' src='" + m.Imagem + "' </>"));
 
                              colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
                             m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Editar", "Time", new { id = m.Id })" title="Editar" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></div>);

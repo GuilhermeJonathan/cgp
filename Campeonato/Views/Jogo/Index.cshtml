@@ -77,10 +77,10 @@
                             @Html.Grid(Model.Lista).Columns(colunas =>
                            {
                            colunas.Add().Encoded(false).Sanitized(false).Titled("Casa").SetWidth(60).RenderValueAs(
-                           m => Html.Raw("<img style='max-width: 30px;' src='../content/escudos/" + m.ImagemTime1 + "' </>"));
+                           m => Html.Raw("<img style='max-width: 30px;' src='" + m.ImagemTime1 + "' </>"));
 
                            colunas.Add().Encoded(false).Sanitized(false).Titled("Adversário").SetWidth(60).RenderValueAs(
-                               m => Html.Raw("<img style='max-width: 30px;' src='../content/escudos/" + m.ImagemTime2 + "' </>"));
+                               m => Html.Raw("<img style='max-width: 30px;' src='" + m.ImagemTime2 + "' </>"));
                            colunas.Add(m => m.DataHoraDoJogo).Titled("Data");
 
                            colunas.Add(m => m.NomeRodada).Titled("Rodada");
