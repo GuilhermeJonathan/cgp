@@ -83,6 +83,12 @@ namespace Campeonato.Dominio.Entidades
             this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Debito, idUsuario, tipoDeSolicitacaoDeFinanceiro));
         }
 
+        public void SubtrairCreditoPix(string descricao, decimal valor, int idUsuario, TipoDeSolicitacaoFinanceira tipoDeSolicitacaoDeFinanceiro, TipoDePix tipoDePix, string chavePix)
+        {
+            this.Saldo = Saldo - valor;
+            this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Debito, idUsuario, tipoDeSolicitacaoDeFinanceiro, tipoDePix, chavePix));
+        }
+
         public void AdicionarSaldo(string descricao, decimal valor, int idUsuario, TipoDeSolicitacaoFinanceira tipoDeSolicitacaoDeFinanceiro)
         {
             this.Saldo = Saldo + valor;

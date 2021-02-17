@@ -145,7 +145,8 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
 
             return new ModeloDeEdicaoDeUsuario(usuario);
         }
-        public string RetirarSaldo(decimal saldo, UsuarioLogado usuario)
+
+        public string RetirarSaldo(decimal saldo, UsuarioLogado usuario, int tipoDePix, string chavePix)
         {
             try
             {
@@ -153,7 +154,6 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
                     throw new ExcecaoDeAplicacao("Não é possível retirar saldo negativo da conta");
 
                 var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
-                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
 
                 if (saldo > usuarioParaAlterar.Saldo)
                     throw new ExcecaoDeAplicacao("O pedido de retirada é maior que o saldo da conta.");
@@ -161,7 +161,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
                 if (usuarioParaAlterar != null)
                 {
                     if (saldo > 0)
-                        usuarioParaAlterar.SubtrairCredito($"Pedido de Retirada", saldo, usuarioBanco.Id, TipoDeSolicitacaoFinanceira.Saque);
+                        usuarioParaAlterar.SubtrairCreditoPix($"Pedido de Retirada", saldo, usuarioParaAlterar.Id, TipoDeSolicitacaoFinanceira.Saque, (TipoDePix)tipoDePix, chavePix);
                 }
 
                 this._servicoExternoDePersistencia.Persistir();

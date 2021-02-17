@@ -1,6 +1,6 @@
 ﻿@model Campeonato.Aplicacao.GestaoDeApostas.Modelos.ModeloDeEdicaoDeAposta
 
-<form action="@Url.Action("GerarApostaExclusiva", "Aposta")" method="post" enctype="multipart/form-data">
+<form action="@Url.Action("GerarApostaExclusiva", "Aposta")" id="formGerarAposta" method="post" enctype="multipart/form-data">
 <div class="modal fade" id="modalRodadaEspecifica" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -41,9 +41,20 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                @Html.EditButton("Gerar Aposta")
+                <button type="button" class="btn btn btn-primary pull-right btnGerarAposta"><i class="fa fa-save"></i> Gerar Aposta</button>
             </div>
         </div>
     </div>
 </div>
 </form>
+
+<script type="text/javascript" language="javascript">
+
+    $(function () {
+        $(".btnGerarAposta").button().click(function () {
+            $(this).prop("disabled", true);
+            $("#formGerarAposta").submit();
+        });
+    });
+    
+</script>

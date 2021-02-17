@@ -16,12 +16,14 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios.Modelos
         public ModeloDeEdicaoDeUsuario()
         {
             this.PerfisDeUsuario = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<PerfilDeUsuario>();
+            this.TiposDePix = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<TipoDePix>();
             this.HistoricosFinanceiros = new List<ModeloDeHistoricoFinanceiroDaLista>();
         }
 
         public ModeloDeEdicaoDeUsuario(Usuario usuario)
         {
             this.PerfisDeUsuario = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<PerfilDeUsuario>();
+            this.TiposDePix = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<TipoDePix>();
             this.HistoricosFinanceiros = new List<ModeloDeHistoricoFinanceiroDaLista>();
 
             this.Id = usuario.Id;
@@ -42,5 +44,8 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios.Modelos
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
         public IEnumerable<SelectListItem> PerfisDeUsuario { get; set; }
         public IList<ModeloDeHistoricoFinanceiroDaLista> HistoricosFinanceiros { get; set; }
+        public TipoDePix TipoDePix { get; set; }
+        public IEnumerable<SelectListItem> TiposDePix { get; set; }
+        public string ChavePix { get; set; }
     }
 }

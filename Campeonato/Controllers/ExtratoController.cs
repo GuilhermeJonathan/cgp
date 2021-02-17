@@ -39,11 +39,11 @@ namespace Campeonato.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult RetirarSaldo(int Saldo)
+        public ActionResult RetirarSaldo(int Saldo, int TipoDePix, string ChavePix)
         {
             try
             {
-                var retorno = this._servicoDeGestaoDeUsuarios.RetirarSaldo(Saldo, User.Logado());
+                var retorno = this._servicoDeGestaoDeUsuarios.RetirarSaldo(Saldo, User.Logado(), TipoDePix, ChavePix);
                 this.AdicionarMensagemDeSucesso(retorno);
 
                 return RedirectToAction(nameof(Index));
