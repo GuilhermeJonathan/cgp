@@ -22,8 +22,6 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public ServicoDeGestaoDeApostas(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
-           
-            //this._servicoExternoDeArmazenamentoEmNuvem = new ServicoExternoDeArmazenamentoEmNuvem(VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure"));
         }
 
         public ModeloDeListaDeApostas BuscarApostasPorFiltro(ModeloDeFiltroDeAposta filtro, int pagina, int registrosPorPagina = 30)
@@ -347,6 +345,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 { 
                     Id = cl.First().Id,
                     Nome = cl.First().Usuario.Nome.Valor.ToString(),
+                    idUsuario = cl.First().Usuario.Id,
                     AcertoPlacar = cl.Sum(c => c.AcertoPlacar),
                     AcertoEmpate = cl.Sum(c => c.AcertoEmpate),
                     AcertoGanhador = cl.Sum(c => c.AcertoGanhador),
@@ -362,7 +361,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 apostaAgrupada = apostaAgrupada.OrderByDescending(a => a.Pontuacao).ToList();
                 
                 foreach (var aposta in apostaAgrupada)
-                    modeloFinal.Add(new ModeloDeApostaDaLista(aposta.Id, aposta.Nome, contador++, aposta.Pontuacao, aposta.AcertoPlacar, aposta.AcertoEmpate, aposta.AcertoGanhador));
+                    modeloFinal.Add(new ModeloDeApostaDaLista(aposta.Id, aposta.Nome, contador++, aposta.Pontuacao, aposta.AcertoPlacar, aposta.AcertoEmpate, aposta.AcertoGanhador, aposta.idUsuario));
                 
                 modelo.Lista = modeloFinal;
 

@@ -34,7 +34,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             this.RodadaAberta = aposta.Rodada.Aberta;
         }
 
-        public ModeloDeApostaDaLista(int id, string nome,  int classificacao, int pontuacao, int acertoPlacar, int acertoEmpate, int acertoGanhador)
+        public ModeloDeApostaDaLista(int id, string nome,  int classificacao, int pontuacao, int acertoPlacar, int acertoEmpate, int acertoGanhador, int idUsuario)
         {
             this.Id = id;
             this.NomeUsuario = nome;
@@ -43,6 +43,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             this.AcertoPlacar = acertoPlacar;
             this.AcertoEmpate = acertoEmpate;
             this.AcertoGanhador = acertoGanhador;
+            this.IdUsuario = idUsuario;
         }
 
         public int Classificacao { get; set; }

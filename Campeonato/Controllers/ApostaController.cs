@@ -116,8 +116,8 @@ namespace Campeonato.Controllers
 
             var modelo = this._servicoDeGestaoDeApostas.BuscarTodasApostasPorRodada(id.Value, User.Logado());
 
-            if (!modelo.TemArquivo)
-            {
+            //if (!modelo.TemArquivo)
+            //{
                 using (Stream enviarParaAzure = new MemoryStream(this._servicoDeGeracaoDeDocumentosEmPdf.CriarPdf(modelo.ArquivoHtml)))
                 {
                     var nomeArquivo = $"espelhoDa{modelo.NomeRodada.Trim()}.pdf";
@@ -125,7 +125,7 @@ namespace Campeonato.Controllers
                     var retorno = await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(enviarParaAzure, blob, nomeArquivo.Trim());
                     this._servicoDeGestaoDeApostas.SalvarArquivoDaRodada(modelo.RodadaId, retorno);
                 }
-            }
+            //}
 
             modelo.Filtro.Rodada = id.Value;
             return View(modelo);

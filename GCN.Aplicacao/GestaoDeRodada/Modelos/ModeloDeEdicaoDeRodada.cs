@@ -30,5 +30,8 @@ namespace Campeonato.Aplicacao.GestaoDeRodada.Modelos
         public string Temporada { get; set; }
         public bool Ativo { get; set; }
         public IList<ModeloDeJogosDaLista> Jogos { get; set; }
+        public decimal ValorDasApostas { get; set; }
+        public int PrimeiroColocado { get; set; }
+        public int SegundoColocado { get; set; }
     }
 }

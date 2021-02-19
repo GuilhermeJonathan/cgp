@@ -19,5 +19,6 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
         int BuscarRodadaAtiva();
         string CadastrarResultados(int id, string[] placar1, string[] placar2, int[] idJogos, UsuarioLogado usuario);
         string FecharRodada(int id, UsuarioLogado usuario);
+        ModeloDeEdicaoDeRodada BuscarRodadaParaPremiacao(int id);
     }
 }

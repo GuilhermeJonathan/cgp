@@ -1,4 +1,5 @@
 ﻿using Campeonato.Aplicacao.Comum;
+using Campeonato.Aplicacao.GestaoDeApostas.Modelos;
 using Campeonato.Aplicacao.GestaoDeRodada.Modelos;
 using Campeonato.Dominio.Entidades;
 using Campeonato.Dominio.ObjetosDeValor;
@@ -18,10 +19,12 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
         private static int AcertoGanhador = 1;
         
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
+        private readonly IServicoDeGestaoDeApostas _servicoDeGestaoDeApostas;
 
-        public ServicoDeGestaoDeRodadas(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
+        public ServicoDeGestaoDeRodadas(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoDeGestaoDeApostas servicoDeGestaoDeApostas)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
+            this._servicoDeGestaoDeApostas = servicoDeGestaoDeApostas;
         }
 
         public ModeloDeListaDeRodadas RetonarTodosasRodadas(ModeloDeFiltroDeRodada filtro, int pagina, int registrosPorPagina = 30)
@@ -249,7 +252,34 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
                     }
                 }
             }
+        }
 
+        public ModeloDeEdicaoDeRodada BuscarRodadaParaPremiacao(int id)
+        {
+            try
+            {
+                var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(id);
+                var apostas = this._servicoExternoDePersistencia.RepositorioDeApostas.RetornarApostasPorRodada(rodada.Id);
+                var colocacao = this._servicoDeGestaoDeApostas.BuscarResultado(rodada.Id, TipoDeAposta.Exclusiva);
+
+                var modelo = new ModeloDeEdicaoDeRodada(rodada);
+                modelo.ValorDasApostas = apostas.Where(a => a.Rodada.Id == rodada.Id && a.TipoDeAposta == TipoDeAposta.Exclusiva).Sum(a => a.Valor);
+
+                if (!rodada.Aberta && rodada.SituacaoDaRodada == SituacaoDaRodada.Finalizada)
+                {
+                    if(colocacao != null)
+                    {
+                        modelo.PrimeiroColocado = colocacao.Lista.FirstOrDefault(a => a.Classificacao == 1).IdUsuario;
+                        modelo.SegundoColocado = colocacao.Lista.FirstOrDefault(a => a.Classificacao == 2).IdUsuario;
+                    }
+                }
+
+                return modelo;
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar rodada");
+            }
         }
     }
 }

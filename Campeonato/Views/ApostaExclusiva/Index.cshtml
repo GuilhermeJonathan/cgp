@@ -57,7 +57,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Apostas Exclusivas </h3>
-                        @if (User.EhAdministrador())
+                        @if (User.EhAdministrador() && !Model.LancouPremiacao)
                         {
                             <div class="card-tools">
                                 <a href="@Url.Action("GerarPremiacao", "Premiacao", new { id = Model.Filtro.Rodada })" class="btn btn-info right"> Gerar Premiação</a>

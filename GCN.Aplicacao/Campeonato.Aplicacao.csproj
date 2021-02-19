@@ -93,6 +93,11 @@
     <Compile Include="GestaoDeJogos\Modelos\ModeloDeListaDeJogos.cs" />
     <Compile Include="GestaoDeJogos\ServicoDeGestaoDeJogos.cs" />
     <Compile Include="GestaoDePremiacoes\IServicoDeGestaoDePremiacoes.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDeCadastroDePremiacao.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDeEdicaoDePremiacao.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDeFiltroDePremiacao.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDeListaDePremiacoes.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDePremiacaoDaLista.cs" />
     <Compile Include="GestaoDePremiacoes\ServicoDeGestaoDePremiacoes.cs" />
     <Compile Include="GestaoDeRodada\IServicoDeGestaoDeRodadas.cs" />
     <Compile Include="GestaoDeRodada\Modelos\ModeloDeCadastroDeRodada.cs" />

@@ -57,8 +57,8 @@
                         </a>
                     </li>
                 }
-                 @if (!User.EhAdministrador())
-                 {
+                @if (!User.EhAdministrador())
+                {
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Extrato")" class="nav-link @Html.Raw(controller == "Extrato" ? "active" : "")">
                             <i class="nav-icon fas fa-dollar-sign"></i>
@@ -100,6 +100,12 @@
                     <a href="@Url.Action("Index", "ResultadoExclusivo" )" class="nav-link @Html.Raw(controller == "ResultadoExclusivo" ? "active" : "")">
                         <i class="nav-icon fas fa-list"></i>
                         <p> Classificação Exclusiva </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Premiacao" )" class="nav-link @Html.Raw(controller == "Premiacoao" ? "active" : "")">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <p> Premiações</p>
                     </a>
                 </li>
             </ul>

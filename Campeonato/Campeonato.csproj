@@ -408,6 +408,7 @@
     <Content Include="Views\ApostaExclusiva\Visualizar.cshtml" />
     <Content Include="Views\Extrato\Index.cshtml" />
     <Content Include="Views\Extrato\_RetirarSaldo.cshtml" />
+    <Content Include="Views\Premiacao\GerarPremiacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

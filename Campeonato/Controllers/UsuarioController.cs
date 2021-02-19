@@ -92,8 +92,7 @@ namespace Campeonato.Controllers
 
                 if (!Id.HasValue)
                     UsuarioNaoEncontrado();
-
-              
+                
                 var retorno = this._servicoDeGestaoDeUsuarios.CadastrarSaldo(Id.Value, Saldo, User.Logado(), TipoFinanceiro);
                 this.AdicionarMensagemDeSucesso(retorno);
                

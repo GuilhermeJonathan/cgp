@@ -33,6 +33,7 @@ namespace Campeonato.Dominio.Entidades
         public bool Aberta { get; set; }
         public DateTime DataPrimeiroJogo { get; set; }
         public string CaminhoArquivo { get; set; }
+        public bool LancouPremiacao { get; set; }
 
         public void AlterarRodada(string nome, string temporada, bool ativo)
         {
@@ -64,14 +65,20 @@ namespace Campeonato.Dominio.Entidades
 
         public void FecharRodada(Usuario usuario)
         {
-            this.DataUltimaAtualizacao = DateTime.Now;
+            this.IncluirAlteracao(DateTime.Now, usuario);
             this.Aberta = true;
         }
 
         public void AbrirRodada(Usuario usuario)
         {
-            this.DataUltimaAtualizacao = DateTime.Now;
+            this.IncluirAlteracao(DateTime.Now, usuario);
             this.Aberta = false;
+        }
+
+        public void LancarPremiacao(Usuario usuario)
+        {
+            this.IncluirAlteracao(DateTime.Now, usuario);
+            this.LancouPremiacao = true;
         }
 
     }

@@ -1,7 +1,85 @@
-﻿
+﻿@model Campeonato.Aplicacao.GestaoDePremiacoes.Modelos.ModeloDeListaDePremiacoes
+@using GridMvc.Html
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Premiações";
 }
 
-<h2>Index</h2>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">Premiações</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="@Url.Action("Index", "Premiacao")" method="get">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Buscar Premiações</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Usuários </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Usuario, Model.Filtro.Usuarios, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Rodadas </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Premiações </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        @Html.Grid(Model.Lista).Columns(colunas =>
+                        {
+                             colunas.Add(m => m.NomeRodada).Titled("Rodada");
+                             colunas.Add(m => m.PrimeiroColocado).Titled("Primeiro Colocado");
+                             colunas.Add(m => m.SegundoColocado).Titled("Segundo Colocado");
+                             colunas.Add(m => m.ValorDaPremiacao).Titled("Valor Total");
+                             colunas.Add(m => m.ValorDaAdministracao).Titled("Valor Administração");
+                             colunas.Add(m => m.DataDaPremiacao).Titled("Data Premiação");
+
+                        }).WithPaging(20).Sortable(true).EmptyText("Nenhuma premiação encontrada")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
