@@ -1,4 +1,5 @@
 ﻿using Campeonato.Aplicacao.GestaoDePremiacoes.Modelos;
+using Campeonato.Aplicacao.GestaoDeUsuarios;
 using Campeonato.Dominio.Entidades;
 using Campeonato.Dominio.ObjetosDeValor;
 using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
@@ -13,9 +14,11 @@ namespace Campeonato.Aplicacao.GestaoDePremiacoes
     public class ServicoDeGestaoDePremiacoes : IServicoDeGestaoDePremiacoes
     {
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
-        public ServicoDeGestaoDePremiacoes(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
+        private readonly IServicoDeGestaoDeUsuarios _servicoDeGestaoDeUsuarios;
+        public ServicoDeGestaoDePremiacoes(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
+            this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
         }
 
         public ModeloDeListaDePremiacoes RetonarPremiacoesPorFiltro(ModeloDeFiltroDePremiacao filtro, int pagina, int registrosPorPagina = 30)
@@ -59,7 +62,17 @@ namespace Campeonato.Aplicacao.GestaoDePremiacoes
             
             this._servicoExternoDePersistencia.RepositorioDePremiacoes.Inserir(novaPremiacao);
             if (novaPremiacao != null)
+            {
                 rodada.LancarPremiacao(usuarioBanco);
+                if (modelo.GerarCredito)
+                {
+                    if (valorPremiacaoPrimeiro > 0)
+                        this._servicoDeGestaoDeUsuarios.CadastrarSaldoParaPremiacao(usuarioPrimeiro, valorPremiacaoPrimeiro, usuario, $"Primeiro Colocado na {rodada.Nome}.");
+                    
+                    if (valorPremiacaoSegundo > 0)
+                        this._servicoDeGestaoDeUsuarios.CadastrarSaldoParaPremiacao(usuarioSegundo, valorPremiacaoSegundo, usuario, $"Segundo Colocado na {rodada.Nome}.");
+                }
+            }
 
             this._servicoExternoDePersistencia.Persistir();
 

@@ -15,6 +15,7 @@ namespace Campeonato.Aplicacao.GestaoDePremiacoes.Modelos
             this.UsuariosPrimeiro = new List<SelectListItem>();
             this.UsuariosSegundo = new List<SelectListItem>();
             this.Rodadas = new List<SelectListItem>();
+            this.GerarCredito = true;
         }
 
         public int Rodada { get; set; }
@@ -28,5 +29,7 @@ namespace Campeonato.Aplicacao.GestaoDePremiacoes.Modelos
         public string ValorPremiacaoSegundo { get; set; }
         public string ValorAdministracao { get; set; }
         public string ValorAcumulado { get; set; }
+        public bool GerarCredito { get; set; }
+
     }
 }

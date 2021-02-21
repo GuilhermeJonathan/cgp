@@ -36,9 +36,6 @@ namespace Campeonato.Controllers
 
         public ActionResult Index(ModeloDeListaDePremiacoes modelo)
         {
-            if (!User.EhAdministrador())
-                UsuarioSemPermissao();
-
             modelo.Filtro.Usuarios = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<ModeloDeUsuarioDaLista>(nameof(ModeloDeUsuarioDaLista.Nome), nameof(ModeloDeUsuarioDaLista.Id),
                         () => this._servicoDeGestaoDeUsuarios.RetonarTodosOsUsuariosAtivos());
 

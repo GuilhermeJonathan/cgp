@@ -52,7 +52,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
 
             quantidadeEncontrada = query.Count();
 
-            return query.OrderBy(i => i.DataDoCadastro).Skip((pagina - 1) * registrosPorPagina).Take(registrosPorPagina).ToList();
+            return query.OrderBy(i => i.Nome.Valor).Skip((pagina - 1) * registrosPorPagina).Take(registrosPorPagina).ToList();
         }
 
         public int BuscarQtdUsuariosNovos()

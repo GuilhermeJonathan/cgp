@@ -17,6 +17,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
         ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, int pagina, int registrosPorPagina = 30);
         string AtivarUsuario(int id, UsuarioLogado usuario);
         string CadastrarSaldo(int id, decimal saldo, UsuarioLogado usuario, string tipoDeSolicitacaoFinanceira);
+        string CadastrarSaldoParaPremiacao(Usuario usuario, decimal saldo, UsuarioLogado usuarioLogado, string textoPremiacao);
         int BuscarUsuariosNovos();
         ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id);

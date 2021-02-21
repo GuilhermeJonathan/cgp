@@ -126,6 +126,28 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             }
         }
 
+        public string CadastrarSaldoParaPremiacao(Usuario usuario, decimal saldo, UsuarioLogado usuarioLogado, string textoPremiacao)
+        {
+            try
+            {
+                if (saldo <= 0)
+                    throw new ExcecaoDeAplicacao("Não é possível adicionar saldo negativo à conta");
+
+                if (usuario != null)
+                {
+                    if (saldo > 0)
+                        usuario.AdicionarSaldo(textoPremiacao, saldo, usuarioLogado.Id, TipoDeSolicitacaoFinanceira.Premiacao);
+                }
+
+                this._servicoExternoDePersistencia.Persistir();
+                return "Saldo adicionado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
         public int BuscarUsuariosNovos()
         {
             var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarQtdUsuariosNovos();

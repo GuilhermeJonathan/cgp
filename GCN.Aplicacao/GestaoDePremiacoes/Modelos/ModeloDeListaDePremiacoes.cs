@@ -23,8 +23,8 @@ namespace Campeonato.Aplicacao.GestaoDePremiacoes.Modelos
             if (filtro != null)
                 this.Filtro = filtro;
 
+            this.TotalDeRegistros = totalDeRegistros;
             lista.ToList().ForEach(a => this.Lista.Add(new ModeloDePremiacaoDaLista(a)));
-
         }
 
         public int TotalDeRegistros { get; set; }
