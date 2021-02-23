@@ -78,5 +78,18 @@ namespace Campeonato.Aplicacao.GestaoDePremiacoes
 
             return "Premiação cadastrada com sucesso.";
         }
+
+        public ModeloDeEdicaoDePremiacao BuscarPremiacaoPorId(int id)
+        {
+            try
+            {
+                var premiacao = this._servicoExternoDePersistencia.RepositorioDePremiacoes.PegarPorId(id);
+                return new ModeloDeEdicaoDePremiacao(premiacao);
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar premiação");
+            }
+        }
     }
 }

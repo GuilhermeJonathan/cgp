@@ -12,5 +12,6 @@ namespace Campeonato.Aplicacao.GestaoDePremiacoes
     {
         ModeloDeListaDePremiacoes RetonarPremiacoesPorFiltro(ModeloDeFiltroDePremiacao filtro, int pagina, int registrosPorPagina = 30);
         string CadastrarPremiacao(ModeloDeCadastroDePremiacao modelo, UsuarioLogado usuario);
+        ModeloDeEdicaoDePremiacao BuscarPremiacaoPorId(int id);
     }
 }

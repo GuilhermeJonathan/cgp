@@ -2,6 +2,7 @@
 using Campeonato.Dominio.Repositorios;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,16 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             quantidadeEncontrada = query.Count();
 
             return query.OrderByDescending(i => i.DataDoCadastro).Skip((pagina - 1) * registrosPorPagina).Take(registrosPorPagina).ToList();
+        }
+
+        public Premiacao PegarPorId(int id)
+        {
+            return this._contexto.Set<Premiacao>()
+                .Include(b => b.Rodada)
+                .Include(b => b.PrimeiroColocado)
+                .Include(b => b.SegundoColocado)
+                .Include(b => b.UsuarioQueGerou)
+                .FirstOrDefault(a => a.Id == id);
         }
     }
 }

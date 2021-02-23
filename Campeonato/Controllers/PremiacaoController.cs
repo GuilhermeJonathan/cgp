@@ -91,6 +91,20 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
+        [TratarErros]
+        [HttpGet]
+        public ActionResult Visualizar(int? id)
+        {
+            if (!id.HasValue)
+            {
+                this.AdicionarMensagemDeErro("Premiação não foi encontrada");
+                return RedirectToAction(nameof(Index));
+            }
+
+            var modelo = this._servicoDeGestaoDePremiacoes.BuscarPremiacaoPorId(id.Value);
+            return View(modelo);
+        }
+
         [HttpPost]
         public ActionResult GerarPremiacao(ModeloDeCadastroDePremiacao modelo)
         {
@@ -99,9 +113,9 @@ namespace Campeonato.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private ActionResult RodadaNaoEncontrada()
+        private ActionResult PremiacaoNaoEncontrada()
         {
-            this.AdicionarMensagemDeErro("Rodada não foi encontrada");
+            this.AdicionarMensagemDeErro("Premiação não foi encontrada");
             return RedirectToAction(nameof(Index));
         }
 

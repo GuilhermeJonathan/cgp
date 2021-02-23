@@ -68,6 +68,9 @@
                     <div class="card-body table-responsive p-0">
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
+                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
+                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Visualizar", "Premiacao", new { id = m.Id })" title="Visualizar Aposta" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
+
                              colunas.Add(m => m.NomeRodada).Titled("Rodada");
                              colunas.Add(m => m.PrimeiroColocado).Titled("Primeiro Colocado");
                              colunas.Add(m => m.SegundoColocado).Titled("Segundo Colocado");

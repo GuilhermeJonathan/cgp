@@ -32,9 +32,19 @@
                         </div>
                         <div class="info-box">
                             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-dollar-sign"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-number fa-2x"> Saldo: R$@Model.Credito</span>
-                            </div>
+                            @if (!Request.Browser.IsMobileDevice)
+                            {
+                                <div class="info-box-content">
+                                    <span class="info-box-number fa-2x"> Saldo: R$@Model.Credito</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="info-box-content">
+                                    <span class="info-box-number fa-2x" style="margin-top: -10px;"> Saldo: </span>
+                                    <span class="info-box-number fa-2x" style="margin-top: 15px;">R$@Model.Credito</span>
+                                </div>
+                            }
                         </div>
                     </div>
 
@@ -49,9 +59,9 @@
                            colunas.Add().Encoded(false).Sanitized(false).Titled("Valor").SetWidth(30).RenderValueAs(
                                 m => @<div class="btn-group btn-group-sm @m.CssValor"> @m.ValorTexto </div>);
 
-                 colunas.Add(m => m.Saldo).Sortable(false).Titled("Saldo R$");
+                            colunas.Add(m => m.Saldo).Sortable(false).Titled("Saldo R$");
 
-             }).WithPaging(100).Sortable(true).EmptyText("Nenhum histórico financeiro encontrado")
+                           }).WithPaging(100).Sortable(true).EmptyText("Nenhum histórico financeiro encontrado")
                     </div>
                     <div class="card-footer">
                         @Html.BackButton()
