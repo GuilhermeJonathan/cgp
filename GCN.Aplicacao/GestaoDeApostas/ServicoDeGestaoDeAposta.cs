@@ -14,7 +14,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
 {
     public class ServicoDeGestaoDeApostas : IServicoDeGestaoDeApostas
     {
-        private const decimal ValorDaAposta = 20;
+        private decimal ValorDaAposta = VariaveisDeAmbiente.Pegar<decimal>("ValorDaAposta");
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
       
         

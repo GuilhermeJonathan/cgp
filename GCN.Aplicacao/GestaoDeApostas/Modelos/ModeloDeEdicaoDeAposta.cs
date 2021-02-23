@@ -43,6 +43,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             this.NomeTipoDeAposta = aposta.TipoDeAposta.ToString();
             this.RodadaFinalizada = aposta.Rodada.SituacaoDaRodada == SituacaoDaRodada.Finalizada ? true : false;
             this.Pontuacao = aposta.Pontuacao;
+            this.ValorDaAposta = VariaveisDeAmbiente.Pegar<decimal>("ValorDaAposta").ToString("f");
         }
 
         public int Id { get; set; }
@@ -62,6 +63,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
         public string NomeTipoDeAposta { get; set; }
         public bool RodadaFinalizada { get; set; }
         public int Pontuacao { get; set; }
+        public string ValorDaAposta { get; set; }
 
     }
 }
