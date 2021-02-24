@@ -22,7 +22,10 @@ namespace Campeonato.Dominio.Entidades
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
         public bool UsuarioNovo { get; set; }
         public decimal Saldo { get; set; }
+        public Telefone Telefone { get; set; }
         public ICollection<HistoricoFinanceiro> HistoricosFinanceiros { get; set; }
+        public TipoDePix TipoDePix { get; set; }
+        public string ChavePix { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -66,6 +69,20 @@ namespace Campeonato.Dominio.Entidades
             this.PerfilDeUsuario = perfilDeUsuario;
         }
 
+        public void AlterarMeusDados(string nome, string email, string ddd, string telefone, TipoDePix tipoDePix, string chavePix)
+        {
+            this.Nome = new Nome(nome);
+            this.Login = new LoginUsuario(email);
+
+            if (!String.IsNullOrEmpty(ddd) && !String.IsNullOrEmpty(telefone))
+                this.Telefone = new Telefone(ddd, telefone);
+            else
+                this.Telefone = Telefone.Vazio;
+
+            this.TipoDePix = tipoDePix;
+            this.ChavePix = chavePix;
+        }
+
         public void AtivarUsuario()
         {
             this.UsuarioNovo = false;
@@ -93,6 +110,12 @@ namespace Campeonato.Dominio.Entidades
         {
             this.Saldo = Saldo + valor;
             this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Credito, idUsuario, tipoDeSolicitacaoDeFinanceiro));
+        }
+
+        public void CadastrarPix(TipoDePix tipoDePix, string pix)
+        {
+            this.TipoDePix = tipoDePix;
+            this.ChavePix = pix;
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
     {
         string CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo);
         string AlterarDadosDoUsuario(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
+        string EditarMeusDados(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos();
         ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, int pagina, int registrosPorPagina = 30);
         string AtivarUsuario(int id, UsuarioLogado usuario);
@@ -20,6 +21,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
         string CadastrarSaldoParaPremiacao(Usuario usuario, decimal saldo, UsuarioLogado usuarioLogado, string textoPremiacao);
         int BuscarUsuariosNovos();
         ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id);
+        ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado);
         ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id);
         string RetirarSaldo(decimal saldo, UsuarioLogado usuario, int tipoDePix, string chavePix);
     }

@@ -22,7 +22,8 @@ namespace Campeonato.Dominio.ObjetosDeValor
             if (!TelefoneValido(ddd, numero))
                 throw new ExcecaoDeNegocio("Telefone inválido");
 
-            this.Numero = $"{ddd}{numero}";
+            this.Numero = numero;
+            this.Ddd = ddd;
         }
 
         private static bool TelefoneValido(string ddd, string numero)
@@ -31,6 +32,9 @@ namespace Campeonato.Dominio.ObjetosDeValor
         }
 
         public string Numero { get; set; }
+        public string Ddd { get; set; }
+
+        public static Telefone Vazio => new Telefone("");
 
     }
 }

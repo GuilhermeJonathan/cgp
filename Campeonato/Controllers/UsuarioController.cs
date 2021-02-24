@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Campeonato.Controllers
 {
+    [TratarErros]
     [Authorize]
     public class UsuarioController : Controller
     {
@@ -26,7 +27,7 @@ namespace Campeonato.Controllers
         public ActionResult Index(ModeloDeListaDeUsuarios modelo)
         {
             if (!User.EhAdministrador())
-                UsuarioSemPermissao();
+                return RedirectToAction("Index", "Home");
 
             modelo = this._servicoDeGestaoDeUsuarios.RetonarUsuariosPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
@@ -48,6 +49,23 @@ namespace Campeonato.Controllers
             return View(modelo);
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult MeusDados()
+        {
+            var modelo = this._servicoDeGestaoDeUsuarios.BuscarMeusDados(User.Logado());
+            return View(modelo);
+        }
+        
+        [Authorize]
+        [HttpPost]
+        public ActionResult MeusDados(ModeloDeEdicaoDeUsuario modelo)
+        {
+            var retorno = this._servicoDeGestaoDeUsuarios.EditarMeusDados(modelo, User.Logado());
+
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(MeusDados));
+        }
         [Authorize]
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeUsuario modelo)
@@ -134,7 +152,7 @@ namespace Campeonato.Controllers
         private ActionResult UsuarioSemPermissao()
         {
             this.AdicionarMensagemDeErro("Usuário sem permissão para esta funcionalidade.");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -410,6 +410,7 @@
     <Content Include="Views\Extrato\_RetirarSaldo.cshtml" />
     <Content Include="Views\Premiacao\GerarPremiacao.cshtml" />
     <Content Include="Views\Premiacao\Visualizar.cshtml" />
+    <Content Include="Views\Usuario\MeusDados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

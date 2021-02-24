@@ -57,6 +57,22 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             }
         }
 
+        public string EditarMeusDados(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                usuarioParaAlterar.AlterarMeusDados(modelo.Nome, modelo.Email, modelo.Ddd, modelo.Telefone, modelo.TipoDePix, modelo.ChavePix);
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Meus dados alterado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
         public IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos()
         {
             var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarTodosUsuarios();
@@ -160,6 +176,12 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             return new ModeloDeEdicaoDeUsuario(usuario);
         }
 
+        public ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado)
+        {
+            var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuarioLogado.Id);
+            return new ModeloDeEdicaoDeUsuario(usuario);
+        }
+
         public ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id)
         {
             var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioComHistorico(id);
@@ -183,7 +205,12 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
                 if (usuarioParaAlterar != null)
                 {
                     if (saldo > 0)
+                    {
+                        if(String.IsNullOrEmpty(usuarioParaAlterar.ChavePix))
+                            usuarioParaAlterar.CadastrarPix((TipoDePix)tipoDePix, chavePix);
+
                         usuarioParaAlterar.SubtrairCreditoPix($"Pedido de Retirada", saldo, usuarioParaAlterar.Id, TipoDeSolicitacaoFinanceira.Saque, (TipoDePix)tipoDePix, chavePix);
+                    }
                 }
 
                 this._servicoExternoDePersistencia.Persistir();

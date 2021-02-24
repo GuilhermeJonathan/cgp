@@ -32,13 +32,18 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios.Modelos
             this.Ativo = usuario.Ativo;
             this.Credito = usuario.Saldo.ToString("f");
             this.PerfilDeUsuario = usuario.PerfilDeUsuario;
-
+            this.TipoDePix = usuario.TipoDePix;
+            this.ChavePix = usuario.ChavePix;
+            this.Telefone = usuario.Telefone.Numero;
+            this.Ddd = usuario.Telefone.Ddd;
             usuario.HistoricosFinanceiros.ToList().ForEach(a => this.HistoricosFinanceiros.Add(new ModeloDeHistoricoFinanceiroDaLista(a)));
         }
 
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
+        public string Ddd { get; set; }
+        public string Telefone { get; set; }
         public bool Ativo { get; set; }
         public string Credito { get; set; }
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
