@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InterfaceDeServicosExternos\IServicoDeGeracaoDeDocumentosEmPdf.cs" />
+    <Compile Include="InterfaceDeServicosExternos\IServicoDeNotificacao.cs" />
     <Compile Include="InterfaceDeServicosExternos\IServicoExternoDeArmazenamentoEmNuvem.cs" />
     <Compile Include="InterfaceDeServicosExternos\IServicoExternoDePersistenciaViaEntityFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="ServicosExternos\Autenticacao\AutenticacaoViaCookieOwin\ServicoExternoDeAutenticacaoViaCookieOwin.cs" />
     <Compile Include="ServicosExternos\GeracaoDocumentoEmPDF\ServicoDeGeracaoDeDocumentosEmPdf.cs" />
     <Compile Include="ServicosExternos\InterfacesDeServicosExternos\IServicoExternoDeAutenticacao.cs" />
+    <Compile Include="ServicosExternos\NotificacaoViaSmtp\ContatoDaNotificacao.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Contexto.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeAposta.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeEstadio.cs" />
