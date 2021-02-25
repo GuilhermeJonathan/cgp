@@ -1,5 +1,6 @@
 ﻿using Campeonato.Aplicacao;
 using Campeonato.CustomExtensions;
+using Campeonato.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Campeonato.Filter
 
             this.TratarExcecao(contexto, typeof(HttpRequestValidationException), "Um ou mais campos do formulário contém caracteres especiais inválidos. Ex: < >");
             this.TratarExcecao(contexto, typeof(ExcecaoDeAplicacao));
+            this.TratarExcecao(contexto, typeof(ExcecaoDeNegocio));
             this.TratarExcecao(contexto, typeof(InvalidOperationException));
         }
 

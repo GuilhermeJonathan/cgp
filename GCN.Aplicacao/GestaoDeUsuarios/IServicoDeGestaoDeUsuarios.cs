@@ -14,6 +14,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
         string CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo);
         string AlterarDadosDoUsuario(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         string EditarMeusDados(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
+        string AlterarSenha(ModeloDeEdicaoDeUsuario modelo);
         IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos();
         ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, int pagina, int registrosPorPagina = 30);
         string AtivarUsuario(int id, UsuarioLogado usuario);

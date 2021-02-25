@@ -66,8 +66,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <a href="@Url.Action("Historico", "Usuario", new {id = Model.Id})" class="btn btn-info float-left"> Histórico Financeiro</a>
+                                <div class="col-lg-2">
+                                    <a href="@Url.Action("Historico", "Usuario", new {id = Model.Id})" class="btn btn-info float-left"> Histórico Financeiro</a> 
+                                </div>
+                                <div class="col-lg-2">
+                                    <a href="@Url.Action("AlterarSenha", "Usuario", new {id = Model.Id})" class="btn btn-default float-left"> Alterar Senha</a>
                                 </div>
                             </div>
                         </div>

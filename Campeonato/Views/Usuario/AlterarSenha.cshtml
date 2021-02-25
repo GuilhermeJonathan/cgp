@@ -1,0 +1,54 @@
+﻿@model Campeonato.Aplicacao.GestaoDeUsuarios.Modelos.ModeloDeEdicaoDeUsuario
+
+@{
+    ViewBag.Title = "Alterar Senha";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("MeusDados", "Usuario" )">Meus Dados</a></li>
+                        <li class="breadcrumb-item active">Alterar Senha </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="@Url.Action("AlterarSenha", "Usuario")" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Editar meus dados</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    @Html.InputPasswordFor(a => a.Senha, "Senha", required: true)
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.InputPasswordFor(a => a.RepetirSenha, "Repetir a Senha", required: true)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            @Html.BackButton()
+                            <button type="submit" class="btn btn-success float-right">Editar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

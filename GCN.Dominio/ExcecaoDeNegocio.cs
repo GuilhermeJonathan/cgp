@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Campeonato.Dominio
 {
     [Serializable]
-    class ExcecaoDeNegocio : Exception
+    public class ExcecaoDeNegocio : Exception
     {
         public ExcecaoDeNegocio() { }
         public ExcecaoDeNegocio(string message) : base(message) { }

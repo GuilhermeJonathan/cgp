@@ -66,6 +66,27 @@ namespace Campeonato.Controllers
             this.AdicionarMensagemDeSucesso(retorno);
             return RedirectToAction(nameof(MeusDados));
         }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult AlterarSenha()
+        {
+            var modelo = this._servicoDeGestaoDeUsuarios.BuscarMeusDados(User.Logado());
+            return View(modelo);
+        }
+
+        [TratarErros]
+        [Authorize]
+        [HttpPost]
+        public ActionResult AlterarSenha(ModeloDeEdicaoDeUsuario modelo)
+        {
+            var retorno = this._servicoDeGestaoDeUsuarios.AlterarSenha(modelo);
+
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(MeusDados));
+        }
+
+
         [Authorize]
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeUsuario modelo)

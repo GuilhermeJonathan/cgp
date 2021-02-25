@@ -62,6 +62,15 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             try
             {
                 var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                if (usuarioParaAlterar.Login.Valor != modelo.Email)
+                {
+                    var usuarioComMesmoLogin = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarAtivoPorLogin(modelo.Email);
+
+                    if (usuarioComMesmoLogin != null)
+                        throw new ExcecaoDeAplicacao("Já existe um usuário com o mesmo login");
+                }
+
                 usuarioParaAlterar.AlterarMeusDados(modelo.Nome, modelo.Email, modelo.Ddd, modelo.Telefone, modelo.TipoDePix, modelo.ChavePix);
                 this._servicoExternoDePersistencia.Persistir();
 
@@ -71,6 +80,18 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             {
                 throw new ExcecaoDeAplicacao(ex.Message);
             }
+        }
+
+        public string AlterarSenha(ModeloDeEdicaoDeUsuario modelo)
+        {   
+            if(modelo.Senha != modelo.RepetirSenha)
+                throw new ExcecaoDeAplicacao("As senhas são diferentes.");
+
+            var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(modelo.Id);
+            var senha = new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash);
+            usuarioParaAlterar.AlterarSenha(senha);
+            this._servicoExternoDePersistencia.Persistir();
+            return "Senha alterada com sucesso.";
         }
 
         public IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos()
