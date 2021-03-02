@@ -74,6 +74,11 @@
     <Compile Include="GestaoDeApostas\Modelos\ModeloDeFiltroDeAposta.cs" />
     <Compile Include="GestaoDeApostas\Modelos\ModeloDeListaDeApostas.cs" />
     <Compile Include="GestaoDeApostas\ServicoDeGestaoDeAposta.cs" />
+    <Compile Include="GestaoDeDashboard\IServicoDeGestaoDeDashboard.cs" />
+    <Compile Include="GestaoDeDashboard\Modelos\ModeloDeDashboardDaLista.cs" />
+    <Compile Include="GestaoDeDashboard\Modelos\ModeloDeFiltroDeDashboard.cs" />
+    <Compile Include="GestaoDeDashboard\Modelos\ModeloDeListaDeDashboard.cs" />
+    <Compile Include="GestaoDeDashboard\ServicoDeGestaoDeDashboard.cs" />
     <Compile Include="GestaoDeEstadio\IServicoDeGestaoDeEstadio.cs" />
     <Compile Include="GestaoDeEstadio\Modelos\ModeloDeCadastroDeEstadio.cs" />
     <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEdicaoDeEstadio.cs" />
@@ -115,9 +120,12 @@
     <Compile Include="GestaoDeTimes\ServicoDeGestaoDeTimes.cs" />
     <Compile Include="GestaoDeUsuarios\IServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeCadastroDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeRetirada.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeHistoricoFinanceiro.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeUsuario.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeHistoricoFinanceiroDaLista.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeListaDeHistoricosFinanceiros.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeListaDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeUsuarioDaLista.cs" />
     <Compile Include="GestaoDeUsuarios\ServicoDeGestaoDeUsuarios.cs" />

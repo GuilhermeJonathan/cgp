@@ -37,6 +37,16 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             return query.OrderBy(a => a.DataDoCadastro).ToList();
         }
 
+        public IList<HistoricoFinanceiro> RetornarHistoricosFinanceirosDeSaques()
+        {
+            var query = this._contexto.Set<HistoricoFinanceiro>().Include(a => a.Usuario)
+                .AsQueryable();
+
+            query = query.Where(c => c.TipoDeSolicitacaoFinanceira == Dominio.ObjetosDeValor.TipoDeSolicitacaoFinanceira.Saque && !c.RealizouPagamento);
+
+            return query.OrderBy(a => a.DataDoCadastro).ToList();
+        }
+
         public IList<Usuario> RetornarUsuariosPorFiltro(string nome, string email, bool ativo, int pagina, int registrosPorPagina, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Usuario>()
@@ -67,6 +77,15 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             var query = base._contexto.Set<Usuario>()
                 .Include(a => a.HistoricosFinanceiros)
                 .AsQueryable();
+            return query.FirstOrDefault(a => a.Id == id);
+        }
+
+        public HistoricoFinanceiro BuscarHistoricoComUsuario(int id)
+        {
+            var query = base._contexto.Set<HistoricoFinanceiro>()
+                .Include(a => a.Usuario)
+                .AsQueryable();
+
             return query.FirstOrDefault(a => a.Id == id);
         }
     }

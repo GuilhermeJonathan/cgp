@@ -24,6 +24,9 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
         ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado);
         ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id);
+        ModeloDeListaDeHistoricosFinanceiros BuscarHistoricosParaSaque(ModeloDeFiltroDeHistoricoFinanceiro filtro);
         string RetirarSaldo(decimal saldo, UsuarioLogado usuario, int tipoDePix, string chavePix);
+        ModeloDeEdicaoDeRetirada BuscarRetiradaPorId(int id);
+        string AlterarDadosRetirada(ModeloDeEdicaoDeRetirada modelo, UsuarioLogado usuario);
     }
 }

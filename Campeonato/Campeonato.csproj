@@ -412,6 +412,9 @@
     <Content Include="Views\Premiacao\Visualizar.cshtml" />
     <Content Include="Views\Usuario\MeusDados.cshtml" />
     <Content Include="Views\Usuario\AlterarSenha.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Usuario\Retiradas.cshtml" />
+    <Content Include="Views\Usuario\EditarRetirada.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

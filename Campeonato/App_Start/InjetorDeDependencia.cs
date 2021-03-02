@@ -25,6 +25,7 @@ using Campeonato.Aplicacao.GestaoDePremiacoes;
 using Campeonato.Infraestrutura.ServicosExternos.GeracaoDocumentoEmPDF;
 using Campeonato.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem;
 using Campeonato.Aplicacao.Util;
+using Campeonato.Aplicacao.GestaoDeDashboard;
 
 namespace Campeonato.App_Start
 {
@@ -49,6 +50,7 @@ namespace Campeonato.App_Start
             container.Register<IServicoDeGestaoDeApostas, ServicoDeGestaoDeApostas>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeUsuarios, ServicoDeGestaoDeUsuarios>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDePremiacoes, ServicoDeGestaoDePremiacoes>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeDashboard, ServicoDeGestaoDeDashboard>(Lifestyle.Scoped);
             container.Register<IServicoDeGeracaoDeDocumentosEmPdf, ServicoDeGeracaoDeDocumentosEmPdf>(Lifestyle.Scoped);
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(

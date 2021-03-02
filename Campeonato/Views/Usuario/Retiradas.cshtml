@@ -1,8 +1,8 @@
-﻿@model Campeonato.Aplicacao.GestaoDeApostas.Modelos.ModeloDeListaDeApostas
+﻿@model Campeonato.Aplicacao.GestaoDeUsuarios.Modelos.ModeloDeListaDeHistoricosFinanceiros
 @using GridMvc.Html
 
 @{
-    ViewBag.Title = "Apostas";
+    ViewBag.Title = "Lista de Retiradas";
 }
 
 <div class="content-wrapper">
@@ -13,7 +13,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
-                        <li class="breadcrumb-item active">Apostas</li>
+                        <li class="breadcrumb-item active">Lista de Retiradas</li>
                     </ol>
                 </div>
             </div>
@@ -22,10 +22,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form role="form" action="@Url.Action("Index", "Aposta")" method="get">
+                <form role="form" action="@Url.Action("Retiradas", "Usuario")" method="get">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Buscar Apostas</h3>
+                            <h3 class="card-title">Buscar Usuário</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                     <i class="fas fa-minus"></i>
@@ -34,26 +34,17 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-
                                 <div class="col-lg-6">
                                     <label class="control-label"> Usuários </label>
                                     @Html.DropDownListFor(m => m.Filtro.Usuario, Model.Filtro.Usuarios, new { @class = "form-control autoComplete" })
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="control-label"> Rodadas </label>
-                                    @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
+                                    <label class="control-label"> Realizou Pagamento? </label>
+                                    @Html.CheckBoxFor(m => m.Filtro.Ativo, new { @class = "checkbox" })
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            @if (User.EhAdministrador())
-                            {
-                                <a href="@Url.Action("VisualizarTodasApostas", "Aposta", new { id = Model.Filtro.RodadaParaLink })" class="btn btn-info float-left">Visualizar apostas da rodada</a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("MinhasApostas", "Aposta", new { id = Model.Filtro.Rodada })" class="btn btn-info float-left">Minhas Apostas</a>
-                            }
                             <button type="submit" class="btn btn-primary float-right">Buscar</button>
                         </div>
                     </div>
@@ -66,29 +57,32 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Lista de Apostas </h3>
+                        <h3 class="card-title">Lista de Pedidos de Retirada </h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
                         </div>
                     </div>
+
                     <div class="card-body table-responsive p-0">
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
-                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Visualizar", "Aposta", new { id = m.IdRodada, idUsuario = m.IdUsuario })" title="Visualizar Aposta" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
+                                m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("EditarRetirada", "Usuario", new { id = m.Id })" title="Editar" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
 
-                             colunas.Add(m => m.NomeUsuario).Titled("Usuário");
-                             colunas.Add(m => m.NomeRodada).Titled("Rodada");
-                             colunas.Add(m => m.TipoDaAposta).Titled("Tipo");
-                             colunas.Add(m => m.DataDoCadastro).Titled("Data Cadastro");
+                            colunas.Add(m => m.Usuario).Titled("Usuário");
+                            colunas.Add(m => m.ValorSaque).Titled("Valor Retirada");
+                            colunas.Add(m => m.Saldo).Titled("Saldo");
+                            colunas.Add(m => m.DataDoCadastro).Titled("Data Do Cadastro");
 
-                         }).WithPaging(20).Sortable(true).EmptyText("Nenhuma aposta encontrada")
+                            colunas.Add().Encoded(false).Sanitized(false).SetWidth(80).Css("text-center").Titled("Realizou pagamento").RenderValueAs(
+                            u => Html.Raw(u.RealizouPagamento ? "<i class='fas fa-check'></i>" : "<i class='fas fa-times' title='Não realizou pagamento'></i>"));
+
+                        }).WithPaging(30).Sortable(true).EmptyText("Nenhum pedido de retirada encontrado")
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

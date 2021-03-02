@@ -111,7 +111,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
 
             return new ModeloDeListaDeUsuarios(usuarios, quantidadeEncontrada, filtro);
         }
-        
+
         public string AtivarUsuario(int id, UsuarioLogado usuario)
         {
             try
@@ -211,6 +211,17 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             return new ModeloDeEdicaoDeUsuario(usuario);
         }
 
+
+        public ModeloDeListaDeHistoricosFinanceiros BuscarHistoricosParaSaque(ModeloDeFiltroDeHistoricoFinanceiro filtro)
+        {
+            var historicos = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarHistoricosFinanceirosDeSaques();
+
+            var modelo = new ModeloDeListaDeHistoricosFinanceiros();
+            historicos.ToList().ForEach(a => modelo.Lista.Add(new ModeloDeHistoricoFinanceiroDaLista(a)));
+
+            return new ModeloDeListaDeHistoricosFinanceiros(historicos, historicos.Count, filtro);
+        }
+
         public string RetirarSaldo(decimal saldo, UsuarioLogado usuario, int tipoDePix, string chavePix)
         {
             try
@@ -242,5 +253,29 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
                 throw new ExcecaoDeAplicacao(ex.Message);
             }
         }
+
+        public ModeloDeEdicaoDeRetirada BuscarRetiradaPorId(int id)
+        {
+            var historico = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarHistoricoComUsuario(id);
+            return new ModeloDeEdicaoDeRetirada(historico);
+        }
+
+        public string AlterarDadosRetirada(ModeloDeEdicaoDeRetirada modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                var historico = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarHistoricoComUsuario(modelo.Id);
+
+                historico.AlterarDados(modelo.RealizouPagamento, usuarioBanco, modelo.Comprovante);
+                this._servicoExternoDePersistencia.Persistir();
+                return "Pedido de retirada alterado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
     }
 }

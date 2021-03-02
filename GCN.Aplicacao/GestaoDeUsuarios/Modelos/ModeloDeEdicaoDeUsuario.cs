@@ -22,6 +22,9 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios.Modelos
 
         public ModeloDeEdicaoDeUsuario(Usuario usuario)
         {
+            if (usuario == null)
+                return;
+
             this.PerfisDeUsuario = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<PerfilDeUsuario>();
             this.TiposDePix = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<TipoDePix>();
             this.HistoricosFinanceiros = new List<ModeloDeHistoricoFinanceiroDaLista>();

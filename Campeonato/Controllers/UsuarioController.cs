@@ -86,7 +86,6 @@ namespace Campeonato.Controllers
             return RedirectToAction(nameof(MeusDados));
         }
 
-
         [Authorize]
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeUsuario modelo)
@@ -118,6 +117,52 @@ namespace Campeonato.Controllers
                 this.AdicionarMensagemDeErro(ex.Message);
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult Retiradas(ModeloDeListaDeHistoricosFinanceiros modelo)
+        {
+            try
+            {
+                modelo.Filtro.Usuarios = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<ModeloDeUsuarioDaLista>(nameof(ModeloDeUsuarioDaLista.Nome), nameof(ModeloDeUsuarioDaLista.Id),
+                          () => this._servicoDeGestaoDeUsuarios.RetonarTodosOsUsuariosAtivos());
+
+                modelo = this._servicoDeGestaoDeUsuarios.BuscarHistoricosParaSaque(modelo.Filtro);
+                this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
+                return View(modelo);
+            }
+            catch (Exception ex)
+            {
+                this.AdicionarMensagemDeErro(ex.Message);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult EditarRetirada(int? id)
+        {
+            if (!User.EhAdministrador())
+                UsuarioSemPermissao();
+
+            if (!id.HasValue)
+                UsuarioNaoEncontrado();
+
+            var modelo = this._servicoDeGestaoDeUsuarios.BuscarRetiradaPorId(id.Value);
+
+            return View(modelo);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditarRetirada(ModeloDeEdicaoDeRetirada modelo)
+        {
+            if (!User.EhAdministrador())
+                UsuarioSemPermissao();
+
+            var retorno = this._servicoDeGestaoDeUsuarios.AlterarDadosRetirada(modelo, User.Logado());
+
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction("Retiradas", "Usuario");
         }
 
         [Authorize]

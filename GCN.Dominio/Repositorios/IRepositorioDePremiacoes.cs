@@ -10,6 +10,7 @@ namespace Campeonato.Dominio.Repositorios
     public interface IRepositorioDePremiacoes : IRepositorio<Premiacao>
     {
         IList<Premiacao> RetornarPremiacoesPorFiltro(int rodada, int usuario, int pagina, int registrosPorPagina, out int quantidadeEncontrada);
+        IList<Premiacao> RetornarPremiacoesPorTemporada(string temporada, int usuario);
         Premiacao PegarPorId(int id);
     }
 }

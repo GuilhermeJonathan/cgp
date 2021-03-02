@@ -29,6 +29,20 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             return query.OrderByDescending(i => i.DataDoCadastro).Skip((pagina - 1) * registrosPorPagina).Take(registrosPorPagina).ToList();
         }
 
+        public IList<Premiacao> RetornarPremiacoesPorTemporada(string temporada, int usuario)
+        {
+            var query = this._contexto.Set<Premiacao>()
+                .AsQueryable();
+
+            if (usuario > 0)
+                query = query.Where(c => c.PrimeiroColocado.Id == usuario || c.SegundoColocado.Id == usuario);
+
+            if(!String.IsNullOrEmpty(temporada))
+                query = query.Where(c => c.Rodada.Temporada == temporada);
+
+            return query.OrderByDescending(i => i.DataDoCadastro).ToList();
+        }
+
         public Premiacao PegarPorId(int id)
         {
             return this._contexto.Set<Premiacao>()

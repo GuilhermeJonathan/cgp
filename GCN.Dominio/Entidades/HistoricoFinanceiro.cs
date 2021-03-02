@@ -34,6 +34,7 @@ namespace Campeonato.Dominio.Entidades
             this.TipoDeSolicitacaoFinanceira = tipoDeSolicitacaoFinanceira;
             this.TipoDePix = tipoDePix;
             this.ChavePix = chavePix;
+            this.RealizouPagamento = false;
         }
 
         public string Descricao { get; set; }
@@ -44,5 +45,15 @@ namespace Campeonato.Dominio.Entidades
         public TipoDeSolicitacaoFinanceira TipoDeSolicitacaoFinanceira { get; set; }
         public TipoDePix TipoDePix { get; set; }
         public string ChavePix { get; set; }
+        public bool RealizouPagamento { get; set; }
+        public Usuario Usuario { get; set; }
+        public string Comprovante { get; set; }
+
+        public void AlterarDados(bool realizouPagamento, Usuario usuario, string comprovante)
+        {
+            this.RealizouPagamento = true;
+            this.IdUsuarioCadastrou = usuario.Id;
+            this.Comprovante = comprovante;
+        }
     }
 }
