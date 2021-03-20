@@ -72,7 +72,7 @@
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
                            colunas.Add().Encoded(false).Sanitized(false).Titled("Time").SetWidth(30).RenderValueAs(
-                             m => Html.Raw("<img style='max-width: 30px;' src='../content/escudos/" + m.ImagemTime + "' </>"));
+                             m => Html.Raw("<img style='max-width: 30px;' src='"+ m.ImagemTime + "' </>"));
                            colunas.Add(m => m.Nome).Titled("Nome");
                            colunas.Add(m => m.Cidade).Titled("Cidade");
                            colunas.Add(m => m.Ativo).Titled("Ativo");

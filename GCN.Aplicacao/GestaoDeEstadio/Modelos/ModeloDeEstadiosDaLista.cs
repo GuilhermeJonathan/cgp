@@ -1,4 +1,5 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Campeonato.Aplicacao.Util;
+using Campeonato.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,11 @@ namespace Campeonato.Aplicacao.GestaoDeEstadio.Modelos
 
         public ModeloDeEstadiosDaLista(Estadio estadio)
         {
+            var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
             this.Id = estadio.Id;
             this.Nome = estadio.Nome;
             this.Cidade = estadio.Cidade;
-            this.ImagemTime = estadio.Time != null ? estadio.Time.Imagem : "";
+            this.ImagemTime = estadio.Time != null ? $"{caminhoBlob}arquivos/escudos/{estadio.Time.Imagem}" : "";
             this.DataDoCadastro = estadio.DataDoCadastro.ToShortDateString();
             this.Time = estadio.Time;
             this.Ativo = estadio.Ativo ? "Sim" : "Não";
