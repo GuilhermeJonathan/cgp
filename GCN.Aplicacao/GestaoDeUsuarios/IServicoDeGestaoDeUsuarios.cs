@@ -21,6 +21,7 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
         string CadastrarSaldo(int id, decimal saldo, UsuarioLogado usuario, string tipoDeSolicitacaoFinanceira);
         string CadastrarSaldoParaPremiacao(Usuario usuario, decimal saldo, UsuarioLogado usuarioLogado, string textoPremiacao);
         int BuscarUsuariosNovos();
+        Usuario BuscarSomenteUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado);
         ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id);

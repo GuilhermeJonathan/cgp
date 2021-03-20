@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato.Aplicacao", "GCN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato", "Campeonato\Campeonato.csproj", "{D50DAE33-A3C1-486F-8C7E-98F133EF2BD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato.Infraestrutura.NotificacaoViaSmtp", "Campeonato.Infraestrutura.NotificacaoViaSmtp\Campeonato.Infraestrutura.NotificacaoViaSmtp.csproj", "{A715E645-D65E-4B92-B998-3AF1F01CE06D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato.SendGrid", "Campeonato.SendGrid\Campeonato.SendGrid.csproj", "{AD5A819E-F820-4C22-8687-195276BF2481}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,10 @@ Global
 		{D50DAE33-A3C1-486F-8C7E-98F133EF2BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D50DAE33-A3C1-486F-8C7E-98F133EF2BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D50DAE33-A3C1-486F-8C7E-98F133EF2BD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A715E645-D65E-4B92-B998-3AF1F01CE06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A715E645-D65E-4B92-B998-3AF1F01CE06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A715E645-D65E-4B92-B998-3AF1F01CE06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A715E645-D65E-4B92-B998-3AF1F01CE06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD5A819E-F820-4C22-8687-195276BF2481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5A819E-F820-4C22-8687-195276BF2481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD5A819E-F820-4C22-8687-195276BF2481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5A819E-F820-4C22-8687-195276BF2481}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,7 +56,7 @@ Global
 		{8E93870E-B982-4D35-882E-EC59490F43A6} = {37AF5A2A-7758-48B2-B6EB-930D43683F70}
 		{113F5AB4-5F2E-4840-B082-00CE2936B276} = {2736FB9D-0F41-4C03-8E4E-E9F3D02A9F56}
 		{D50DAE33-A3C1-486F-8C7E-98F133EF2BD5} = {CCB60EE4-D856-4FCD-830B-8A1B5C5321CD}
-		{A715E645-D65E-4B92-B998-3AF1F01CE06D} = {463190CB-2858-452F-9626-7889B332B112}
+		{AD5A819E-F820-4C22-8687-195276BF2481} = {463190CB-2858-452F-9626-7889B332B112}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F21E070C-36BB-4134-8465-6A6DAB6C9A7F}

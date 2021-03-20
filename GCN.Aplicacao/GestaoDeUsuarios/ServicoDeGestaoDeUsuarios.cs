@@ -191,6 +191,11 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
             return usuarios;
         }
 
+        public Usuario BuscarSomenteUsuarioPorId(int id)
+        {
+            return this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(id);
+        }
+
         public ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id)
         {
             var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(id);

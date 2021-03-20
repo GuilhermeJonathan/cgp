@@ -28,8 +28,9 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios.Modelos
             this.Nome = historicoFinanceiro.Usuario.Nome.Valor;
             this.ValorSaque = historicoFinanceiro.Valor.ToString("c");
             this.ValorSaldo = historicoFinanceiro.Saldo.ToString("c");
-            this.TipoDePix = historicoFinanceiro.TipoDePix;
-            this.ChavePix = historicoFinanceiro.ChavePix;
+
+            this.TipoDePix = historicoFinanceiro.TipoDePix == 0 ? historicoFinanceiro.TipoDePix : historicoFinanceiro.Usuario.TipoDePix;
+            this.ChavePix = !string.IsNullOrEmpty(historicoFinanceiro.ChavePix) ? historicoFinanceiro.ChavePix : historicoFinanceiro.Usuario.ChavePix;
             this.RealizouPagamento = !historicoFinanceiro.RealizouPagamento ? true : this.RealizouPagamento;
         }
 

@@ -1,6 +1,7 @@
 ﻿using Campeonato.Aplicacao.GestaoDeDashboard;
 using Campeonato.Aplicacao.GestaoDeDashboard.Modelos;
 using Campeonato.Filter;
+using Campeonato.SendGrid;
 using Campeonato.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace Campeonato.Controllers
     public class HomeController : Controller
     {
         private readonly IServicoDeGestaoDeDashboard _servicoDeGestaoDeDashboard;
-
-        public HomeController(IServicoDeGestaoDeDashboard servicoDeGestaoDeDashboard)
+        private readonly IServicoDeEnvioDeEmails _servicoDeEnvioDeEmails;
+        
+        public HomeController(IServicoDeGestaoDeDashboard servicoDeGestaoDeDashboard, IServicoDeEnvioDeEmails servicoDeEnvioDeEmails)
         {
             this._servicoDeGestaoDeDashboard = servicoDeGestaoDeDashboard;
+            this._servicoDeEnvioDeEmails = servicoDeEnvioDeEmails;
         }
 
         [Authorize]
