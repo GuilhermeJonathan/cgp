@@ -141,9 +141,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GCN.Dominio\Campeonato.Dominio.csproj">
+    <ProjectReference Include="..\GCN.Dominio\Cgp.Dominio.csproj">
       <Project>{8e93870e-b982-4d35-882e-ec59490f43a6}</Project>
-      <Name>Campeonato.Dominio</Name>
+      <Name>Cgp.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

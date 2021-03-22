@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{37AF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestrutura", "{463190CB-2858-452F-9626-7889B332B112}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato.Infraestrutura", "GCN.Infraestrutura\Campeonato.Infraestrutura.csproj", "{2BB21161-BBE2-4E94-94AF-439A8E49B1AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp.Infraestrutura", "GCN.Infraestrutura\Cgp.Infraestrutura.csproj", "{2BB21161-BBE2-4E94-94AF-439A8E49B1AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato.Dominio", "GCN.Dominio\Campeonato.Dominio.csproj", "{8E93870E-B982-4D35-882E-EC59490F43A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp.Dominio", "GCN.Dominio\Cgp.Dominio.csproj", "{8E93870E-B982-4D35-882E-EC59490F43A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato.Aplicacao", "GCN.Aplicacao\Campeonato.Aplicacao.csproj", "{113F5AB4-5F2E-4840-B082-00CE2936B276}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp.Aplicacao", "GCN.Aplicacao\Cgp.Aplicacao.csproj", "{113F5AB4-5F2E-4840-B082-00CE2936B276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato", "Campeonato\Campeonato.csproj", "{D50DAE33-A3C1-486F-8C7E-98F133EF2BD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp", "Campeonato\Cgp.csproj", "{D50DAE33-A3C1-486F-8C7E-98F133EF2BD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campeonato.SendGrid", "Campeonato.SendGrid\Campeonato.SendGrid.csproj", "{AD5A819E-F820-4C22-8687-195276BF2481}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp.SendGrid", "Campeonato.SendGrid\Cgp.SendGrid.csproj", "{AD5A819E-F820-4C22-8687-195276BF2481}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

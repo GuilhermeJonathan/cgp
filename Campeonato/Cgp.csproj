@@ -447,21 +447,21 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Campeonato.SendGrid\Campeonato.SendGrid.csproj">
+    <ProjectReference Include="..\Campeonato.SendGrid\Cgp.SendGrid.csproj">
       <Project>{AD5A819E-F820-4C22-8687-195276BF2481}</Project>
-      <Name>Campeonato.SendGrid</Name>
+      <Name>Cgp.SendGrid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GCN.Aplicacao\Campeonato.Aplicacao.csproj">
+    <ProjectReference Include="..\GCN.Aplicacao\Cgp.Aplicacao.csproj">
       <Project>{113f5ab4-5f2e-4840-b082-00ce2936b276}</Project>
-      <Name>Campeonato.Aplicacao</Name>
+      <Name>Cgp.Aplicacao</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GCN.Dominio\Campeonato.Dominio.csproj">
+    <ProjectReference Include="..\GCN.Dominio\Cgp.Dominio.csproj">
       <Project>{8e93870e-b982-4d35-882e-ec59490f43a6}</Project>
-      <Name>Campeonato.Dominio</Name>
+      <Name>Cgp.Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GCN.Infraestrutura\Campeonato.Infraestrutura.csproj">
+    <ProjectReference Include="..\GCN.Infraestrutura\Cgp.Infraestrutura.csproj">
       <Project>{2bb21161-bbe2-4e94-94af-439a8e49b1ae}</Project>
-      <Name>Campeonato.Infraestrutura</Name>
+      <Name>Cgp.Infraestrutura</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
