@@ -7,8 +7,8 @@
     <ProjectGuid>{AD5A819E-F820-4C22-8687-195276BF2481}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Campeonato.SendGrid</RootNamespace>
-    <AssemblyName>Campeonato.SendGrid</AssemblyName>
+    <RootNamespace>Cgp.SendGrid</RootNamespace>
+    <AssemblyName>Cgp.SendGrid</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

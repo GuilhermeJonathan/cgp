@@ -8,8 +8,8 @@
     <ProjectGuid>{2BB21161-BBE2-4E94-94AF-439A8E49B1AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Campeonato.Infraestrutura</RootNamespace>
-    <AssemblyName>Campeonato.Infraestrutura</AssemblyName>
+    <RootNamespace>Cgp.Infraestrutura</RootNamespace>
+    <AssemblyName>Cgp.Infraestrutura</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

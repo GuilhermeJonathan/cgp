@@ -7,8 +7,8 @@
     <ProjectGuid>{113F5AB4-5F2E-4840-B082-00CE2936B276}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Campeonato.Aplicacao</RootNamespace>
-    <AssemblyName>Campeonato.Aplicacao</AssemblyName>
+    <RootNamespace>Cgp.Aplicacao</RootNamespace>
+    <AssemblyName>Cgp.Aplicacao</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
