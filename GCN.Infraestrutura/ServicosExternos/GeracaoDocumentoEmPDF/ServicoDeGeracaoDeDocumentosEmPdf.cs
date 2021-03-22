@@ -1,4 +1,4 @@
-﻿using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+﻿using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using NReco.PdfGenerator;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.GeracaoDocumentoEmPDF
+namespace Cgp.Infraestrutura.ServicosExternos.GeracaoDocumentoEmPDF
 {
     public class ServicoDeGeracaoDeDocumentosEmPdf : IServicoDeGeracaoDeDocumentosEmPdf
     {

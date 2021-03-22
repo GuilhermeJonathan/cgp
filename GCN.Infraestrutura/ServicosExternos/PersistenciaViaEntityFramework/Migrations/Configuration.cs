@@ -1,4 +1,4 @@
-﻿using Campeonato.Dominio;
+﻿using Cgp.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Migrations
+namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<Contexto>
     {

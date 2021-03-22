@@ -1,15 +1,15 @@
-﻿using Campeonato.Aplicacao.GestaoDeDashboard;
-using Campeonato.Aplicacao.GestaoDeDashboard.Modelos;
-using Campeonato.Filter;
-using Campeonato.SendGrid;
-using Campeonato.Web.CustomExtensions;
+﻿using Cgp.Aplicacao.GestaoDeDashboard;
+using Cgp.Aplicacao.GestaoDeDashboard.Modelos;
+using Cgp.Filter;
+using Cgp.SendGrid;
+using Cgp.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato.Controllers
+namespace Cgp.Controllers
 {
     [Authorize]
     [TratarErros]

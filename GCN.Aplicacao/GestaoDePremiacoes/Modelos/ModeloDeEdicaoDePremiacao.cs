@@ -1,11 +1,11 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Cgp.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDePremiacoes.Modelos
+namespace Cgp.Aplicacao.GestaoDePremiacoes.Modelos
 {
     public class ModeloDeEdicaoDePremiacao
     {

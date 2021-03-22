@@ -1,6 +1,6 @@
-﻿using Campeonato.Aplicacao.Util;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Aplicacao.Util;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
+namespace Cgp.Aplicacao.GestaoDeJogos.Modelos
 {
     public class ModeloDeEdicaoDeJogo
     {

@@ -1,8 +1,8 @@
-﻿using Campeonato.Filter;
+﻿using Cgp.Filter;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato
+namespace Cgp
 {
     public class FilterConfig
     {

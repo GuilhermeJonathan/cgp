@@ -1,4 +1,4 @@
-﻿using Campeonato.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
+﻿using Cgp.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookieOwin
+namespace Cgp.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookieOwin
 {
     public class ServicoExternoDeAutenticacaoViaCookieOwin : IServicoExternoDeAutenticacao
     {

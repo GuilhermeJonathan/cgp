@@ -1,13 +1,13 @@
-﻿using Campeonato.Aplicacao.GestaoDeUsuarios.Modelos;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeUsuarios
+namespace Cgp.Aplicacao.GestaoDeUsuarios
 {
     public interface IServicoDeGestaoDeUsuarios
     {

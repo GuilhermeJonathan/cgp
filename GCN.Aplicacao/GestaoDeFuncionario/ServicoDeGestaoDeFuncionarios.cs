@@ -1,16 +1,16 @@
-﻿using Campeonato.Aplicacao.Comum;
-using Campeonato.Aplicacao.GestaoDeFuncionario.Modelos;
-using Campeonato.Dominio;
-using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
-using Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework;
+﻿using Cgp.Aplicacao.Comum;
+using Cgp.Aplicacao.GestaoDeFuncionario.Modelos;
+using Cgp.Dominio;
+using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
+using Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeFuncionarios
+namespace Cgp.Aplicacao.GestaoDeFuncionarios
 {
     public class ServicoDeGestaoDeFuncionarios : IServicoDeGestaoDeFuncionarios
     {

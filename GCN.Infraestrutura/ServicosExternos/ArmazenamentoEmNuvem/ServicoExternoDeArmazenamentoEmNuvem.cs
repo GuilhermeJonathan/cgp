@@ -1,4 +1,4 @@
-﻿using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+﻿using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem
+namespace Cgp.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem
 {
     public class ServicoExternoDeArmazenamentoEmNuvem : IServicoExternoDeArmazenamentoEmNuvem
     {

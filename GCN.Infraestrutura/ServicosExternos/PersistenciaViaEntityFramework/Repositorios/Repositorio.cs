@@ -1,12 +1,12 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Cgp.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Campeonato.Dominio.Repositorios;
+using Cgp.Dominio.Repositorios;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
+namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
     public class Repositorio<T> : IRepositorio<T> where T : Entidade
     {

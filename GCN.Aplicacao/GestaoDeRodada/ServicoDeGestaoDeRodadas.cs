@@ -1,16 +1,16 @@
-﻿using Campeonato.Aplicacao.Comum;
-using Campeonato.Aplicacao.GestaoDeApostas.Modelos;
-using Campeonato.Aplicacao.GestaoDeRodada.Modelos;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+﻿using Cgp.Aplicacao.Comum;
+using Cgp.Aplicacao.GestaoDeApostas.Modelos;
+using Cgp.Aplicacao.GestaoDeRodada.Modelos;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeRodada
+namespace Cgp.Aplicacao.GestaoDeRodada
 {
     public class ServicoDeGestaoDeRodadas : IServicoDeGestaoDeRodadas
     {

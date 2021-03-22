@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeUsuarios.Modelos
+namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
 {
     public class ModeloDeFiltroDeUsuario
     {

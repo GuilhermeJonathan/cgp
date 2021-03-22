@@ -1,6 +1,6 @@
-﻿using Campeonato.Aplicacao.GestaoDeUsuarios;
-using Campeonato.Aplicacao.MontagemDeEmails;
-using Campeonato.Aplicacao.Util;
+﻿using Cgp.Aplicacao.GestaoDeUsuarios;
+using Cgp.Aplicacao.MontagemDeEmails;
+using Cgp.Aplicacao.Util;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.SendGrid
+namespace Cgp.SendGrid
 {
     public class ServicoDeEnvioDeEmails : IServicoDeEnvioDeEmails
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Dominio.Entidades
+namespace Cgp.Dominio.Entidades
 {
     public class Estadio : Entidade
     {

@@ -1,5 +1,5 @@
-﻿using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
-using Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework;
+﻿using Cgp.Infraestrutura.InterfaceDeServicosExternos;
+using Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,28 +9,28 @@ using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using Container = SimpleInjector.Container;
-using Campeonato.Aplicacao.GestaoDeFuncionarios;
+using Cgp.Aplicacao.GestaoDeFuncionarios;
 using System.Web.Mvc;
-using Campeonato.Aplicacao.Comum;
-using Campeonato.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookieOwin;
-using Campeonato.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
-using Campeonato.Aplicacao.Login;
-using Campeonato.Aplicacao.GestaoDeTimes;
-using Campeonato.Aplicacao.GestaoDeEstadio;
-using Campeonato.Aplicacao.GestaoDeRodada;
-using Campeonato.Aplicacao.GestaoDeJogos;
-using Campeonato.Aplicacao.GestaoDeApostas.Modelos;
-using Campeonato.Aplicacao.GestaoDeUsuarios;
-using Campeonato.Aplicacao.GestaoDePremiacoes;
-using Campeonato.Infraestrutura.ServicosExternos.GeracaoDocumentoEmPDF;
-using Campeonato.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem;
-using Campeonato.Aplicacao.Util;
-using Campeonato.Aplicacao.GestaoDeDashboard;
-using Campeonato.SendGrid;
-using Campeonato.Aplicacao.MontagemDeEmails;
-using Campeonato.Aplicacao.GestaoDeTemporadas;
+using Cgp.Aplicacao.Comum;
+using Cgp.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookieOwin;
+using Cgp.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
+using Cgp.Aplicacao.Login;
+using Cgp.Aplicacao.GestaoDeTimes;
+using Cgp.Aplicacao.GestaoDeEstadio;
+using Cgp.Aplicacao.GestaoDeRodada;
+using Cgp.Aplicacao.GestaoDeJogos;
+using Cgp.Aplicacao.GestaoDeApostas.Modelos;
+using Cgp.Aplicacao.GestaoDeUsuarios;
+using Cgp.Aplicacao.GestaoDePremiacoes;
+using Cgp.Infraestrutura.ServicosExternos.GeracaoDocumentoEmPDF;
+using Cgp.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem;
+using Cgp.Aplicacao.Util;
+using Cgp.Aplicacao.GestaoDeDashboard;
+using Cgp.SendGrid;
+using Cgp.Aplicacao.MontagemDeEmails;
+using Cgp.Aplicacao.GestaoDeTemporadas;
 
-namespace Campeonato.App_Start
+namespace Cgp.App_Start
 {
     public class InjetorDeDependencia
     {

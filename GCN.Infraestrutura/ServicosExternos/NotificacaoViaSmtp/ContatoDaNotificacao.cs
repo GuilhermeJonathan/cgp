@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.NotificacaoViaSmtp
+namespace Cgp.Infraestrutura.ServicosExternos.NotificacaoViaSmtp
 {
     public class ContatoDaNotificacao
     {

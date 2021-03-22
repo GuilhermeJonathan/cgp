@@ -1,11 +1,11 @@
-﻿using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Dominio.Repositorios;
+﻿using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Dominio.Repositorios;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
+namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
     public class RepositorioDeAposta : Repositorio<Aposta>, IRepositorioDeApostas
     {

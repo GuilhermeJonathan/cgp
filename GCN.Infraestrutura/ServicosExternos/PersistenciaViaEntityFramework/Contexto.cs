@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Reflection;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
+namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
 {
     public class Contexto : DbContext
     {

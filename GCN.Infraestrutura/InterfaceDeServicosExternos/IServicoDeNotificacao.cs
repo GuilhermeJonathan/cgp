@@ -1,11 +1,11 @@
-﻿using Campeonato.Infraestrutura.ServicosExternos.NotificacaoViaSmtp;
+﻿using Cgp.Infraestrutura.ServicosExternos.NotificacaoViaSmtp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Infraestrutura.InterfaceDeServicosExternos
+namespace Cgp.Infraestrutura.InterfaceDeServicosExternos
 {
     public interface IServicoDeNotificacao
     {

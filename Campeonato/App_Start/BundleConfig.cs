@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Campeonato
+namespace Cgp
 {
     public class BundleConfig
     {

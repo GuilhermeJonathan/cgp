@@ -1,11 +1,11 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Cgp.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeTimes.Modelos
+namespace Cgp.Aplicacao.GestaoDeTimes.Modelos
 {
     public class ModeloDeListaDeTimes
     {

@@ -1,11 +1,11 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Cgp.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeEstadio.Modelos
+namespace Cgp.Aplicacao.GestaoDeEstadio.Modelos
 {
     public class ModeloDeListaDeEstadios
     {

@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
-using Campeonato.Aplicacao.Util;
+using Cgp.Aplicacao.Util;
 using System.Configuration;
 
-[assembly: OwinStartup(typeof(Campeonato.Startup))]
+[assembly: OwinStartup(typeof(Cgp.Startup))]
 
-namespace Campeonato
+namespace Cgp
 {
     public class Startup
     {

@@ -1,11 +1,11 @@
-﻿using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Dominio.Entidades
+namespace Cgp.Dominio.Entidades
 {
     public class Aposta : Entidade
     {

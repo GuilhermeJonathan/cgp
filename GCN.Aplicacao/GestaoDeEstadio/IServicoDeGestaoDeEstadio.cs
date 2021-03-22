@@ -1,13 +1,13 @@
-﻿using Campeonato.Aplicacao.GestaoDeEstadio.Modelos;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Aplicacao.GestaoDeEstadio.Modelos;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeEstadio
+namespace Cgp.Aplicacao.GestaoDeEstadio
 {
     public interface IServicoDeGestaoDeEstadios
     {

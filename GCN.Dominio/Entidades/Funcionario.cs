@@ -1,12 +1,12 @@
-﻿using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Dominio
+namespace Cgp.Dominio
 {
     public class Funcionario : Entidade
     {

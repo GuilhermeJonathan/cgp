@@ -1,14 +1,14 @@
-﻿using Campeonato.Aplicacao.GestaoDeDashboard.Modelos;
-using Campeonato.Aplicacao.GestaoDeUsuarios;
-using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+﻿using Cgp.Aplicacao.GestaoDeDashboard.Modelos;
+using Cgp.Aplicacao.GestaoDeUsuarios;
+using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeDashboard
+namespace Cgp.Aplicacao.GestaoDeDashboard
 {
     public class ServicoDeGestaoDeDashboard : IServicoDeGestaoDeDashboard
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeTimes.Modelos
+namespace Cgp.Aplicacao.GestaoDeTimes.Modelos
 {
     public class ModeloDeFiltroDeTime
     {

@@ -1,12 +1,12 @@
-﻿using Campeonato.Aplicacao.GestaoDeJogos.Modelos;
-using Campeonato.Dominio.Entidades;
+﻿using Cgp.Aplicacao.GestaoDeJogos.Modelos;
+using Cgp.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
+namespace Cgp.Aplicacao.GestaoDeApostas.Modelos
 {
     public class ModeloDeApostaDaLista
     {

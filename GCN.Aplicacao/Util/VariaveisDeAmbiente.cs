@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.Util
+namespace Cgp.Aplicacao.Util
 {
     public static class VariaveisDeAmbiente
     {

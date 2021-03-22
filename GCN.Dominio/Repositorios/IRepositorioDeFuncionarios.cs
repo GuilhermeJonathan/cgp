@@ -1,4 +1,4 @@
-﻿namespace Campeonato.Dominio.Repositorios
+﻿namespace Cgp.Dominio.Repositorios
 {
     public interface IRepositorioDeFuncionarios : IRepositorio<Funcionario>
     {

@@ -1,13 +1,13 @@
-﻿using Campeonato.Aplicacao;
-using Campeonato.CustomExtensions;
-using Campeonato.Dominio;
+﻿using Cgp.Aplicacao;
+using Cgp.CustomExtensions;
+using Cgp.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato.Filter
+namespace Cgp.Filter
 {
     public sealed class TratarErros : FilterAttribute, IExceptionFilter
     {

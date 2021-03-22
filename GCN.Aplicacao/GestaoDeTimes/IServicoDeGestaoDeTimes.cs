@@ -1,13 +1,13 @@
-﻿using Campeonato.Aplicacao.GestaoDeTimes.Modelos;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Aplicacao.GestaoDeTimes.Modelos;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeTimes
+namespace Cgp.Aplicacao.GestaoDeTimes
 {
     public interface IServicoDeGestaoDeTimes
     {

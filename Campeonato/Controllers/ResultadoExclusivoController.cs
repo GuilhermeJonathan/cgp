@@ -1,17 +1,17 @@
-﻿using Campeonato.Aplicacao.GestaoDeApostas.Modelos;
-using Campeonato.Aplicacao.GestaoDeRodada;
-using Campeonato.Aplicacao.Util;
-using Campeonato.CustomExtensions;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Filter;
+﻿using Cgp.Aplicacao.GestaoDeApostas.Modelos;
+using Cgp.Aplicacao.GestaoDeRodada;
+using Cgp.Aplicacao.Util;
+using Cgp.CustomExtensions;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato.Controllers
+namespace Cgp.Controllers
 {
     [Authorize]
     [TratarErros]

@@ -1,12 +1,12 @@
-﻿using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Dominio.ObjetosDeValor.Email;
+﻿using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Dominio.ObjetosDeValor.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Dominio.Entidades
+namespace Cgp.Dominio.Entidades
 {
     public class Usuario : Entidade
     {

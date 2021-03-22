@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.Util
+namespace Cgp.Aplicacao.Util
 {
     public static class ExtensoesDeString
     {

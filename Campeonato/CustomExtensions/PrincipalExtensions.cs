@@ -1,4 +1,4 @@
-﻿using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
 
-namespace Campeonato.Web.CustomExtensions
+namespace Cgp.Web.CustomExtensions
 {
     public static class PrincipalExtensions
     {

@@ -1,17 +1,17 @@
-﻿using Campeonato.Aplicacao.GestaoDeUsuarios;
-using Campeonato.Aplicacao.GestaoDeUsuarios.Modelos;
-using Campeonato.Aplicacao.Login;
-using Campeonato.Aplicacao.Login.Modelos;
-using Campeonato.CustomExtensions;
-using Campeonato.Filter;
-using Campeonato.Web.CustomExtensions;
+﻿using Cgp.Aplicacao.GestaoDeUsuarios;
+using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
+using Cgp.Aplicacao.Login;
+using Cgp.Aplicacao.Login.Modelos;
+using Cgp.CustomExtensions;
+using Cgp.Filter;
+using Cgp.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato.Controllers
+namespace Cgp.Controllers
 {
     [TratarErros]
     public class LoginController : Controller

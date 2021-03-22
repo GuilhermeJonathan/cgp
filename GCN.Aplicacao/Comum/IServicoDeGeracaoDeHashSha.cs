@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.Comum
+namespace Cgp.Aplicacao.Comum
 {
     public interface IServicoDeGeracaoDeHashSha
     {

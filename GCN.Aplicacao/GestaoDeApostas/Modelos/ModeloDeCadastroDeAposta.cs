@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
+namespace Cgp.Aplicacao.GestaoDeApostas.Modelos
 {
     public class ModeloDeCadastroDeAposta
     {

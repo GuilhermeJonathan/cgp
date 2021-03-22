@@ -1,14 +1,14 @@
-﻿using Campeonato.Aplicacao.Comum;
-using Campeonato.Aplicacao.Login.Modelos;
-using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
-using Campeonato.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
+﻿using Cgp.Aplicacao.Comum;
+using Cgp.Aplicacao.Login.Modelos;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
+using Cgp.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.Login
+namespace Cgp.Aplicacao.Login
 {
     public class ServicoDeLogin : IServicoDeLogin
     {

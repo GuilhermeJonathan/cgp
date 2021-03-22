@@ -6,7 +6,7 @@ using System.Web.Http.Filters;
 using System.Web.Mvc;
 using ActionFilterAttribute = System.Web.Mvc.ActionFilterAttribute;
 
-namespace Campeonato.Filter
+namespace Cgp.Filter
 {
     public class ViewModelMenuAttribute : ActionFilterAttribute
     {

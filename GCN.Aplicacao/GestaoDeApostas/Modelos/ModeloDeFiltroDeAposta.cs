@@ -1,4 +1,4 @@
-﻿using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
+namespace Cgp.Aplicacao.GestaoDeApostas.Modelos
 {
     public class ModeloDeFiltroDeAposta
     {

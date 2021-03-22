@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Campeonato.Aplicacao.GestaoDeUsuarios.Modelos
+namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
 {
     public class ModeloDeFiltroDeHistoricoFinanceiro
     {

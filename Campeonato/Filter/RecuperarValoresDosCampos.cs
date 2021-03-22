@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato.Filter
+namespace Cgp.Filter
 {
     public sealed class RecuperarValoresDosCampos : FilterAttribute, IActionFilter
     {

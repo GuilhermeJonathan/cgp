@@ -1,15 +1,15 @@
-﻿using Campeonato.Aplicacao.GestaoDePremiacoes.Modelos;
-using Campeonato.Aplicacao.GestaoDeUsuarios;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+﻿using Cgp.Aplicacao.GestaoDePremiacoes.Modelos;
+using Cgp.Aplicacao.GestaoDeUsuarios;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDePremiacoes
+namespace Cgp.Aplicacao.GestaoDePremiacoes
 {
     public class ServicoDeGestaoDePremiacoes : IServicoDeGestaoDePremiacoes
     {

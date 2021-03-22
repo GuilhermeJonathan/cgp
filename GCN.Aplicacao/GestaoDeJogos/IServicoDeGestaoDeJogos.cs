@@ -1,12 +1,12 @@
-﻿using Campeonato.Aplicacao.GestaoDeJogos.Modelos;
-using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Aplicacao.GestaoDeJogos.Modelos;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeJogos
+namespace Cgp.Aplicacao.GestaoDeJogos
 {
     public interface IServicoDeGestaoDeJogos
     {

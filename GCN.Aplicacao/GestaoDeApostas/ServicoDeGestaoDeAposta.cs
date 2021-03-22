@@ -1,8 +1,8 @@
-﻿using Campeonato.Aplicacao.Util;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
-using Campeonato.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem;
+﻿using Cgp.Aplicacao.Util;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
+using Cgp.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
+namespace Cgp.Aplicacao.GestaoDeApostas.Modelos
 {
     public class ServicoDeGestaoDeApostas : IServicoDeGestaoDeApostas
     {

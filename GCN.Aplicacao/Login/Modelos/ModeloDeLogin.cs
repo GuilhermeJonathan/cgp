@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.Login.Modelos
+namespace Cgp.Aplicacao.Login.Modelos
 {
     public class ModeloDeLogin
     {

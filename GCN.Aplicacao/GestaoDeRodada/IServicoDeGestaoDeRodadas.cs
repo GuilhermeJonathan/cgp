@@ -1,13 +1,13 @@
-﻿using Campeonato.Aplicacao.GestaoDeRodada.Modelos;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
+﻿using Cgp.Aplicacao.GestaoDeRodada.Modelos;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeRodada
+namespace Cgp.Aplicacao.GestaoDeRodada
 {
     public interface IServicoDeGestaoDeRodadas
     {

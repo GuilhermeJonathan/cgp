@@ -1,13 +1,13 @@
-﻿using Campeonato.Dominio.Repositorios;
-using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
-using Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios;
+﻿using Cgp.Dominio.Repositorios;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
+using Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
+namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
 {
     public class ServicoExternoDePersistenciaViaEntityFramework : IServicoExternoDePersistenciaViaEntityFramework
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Infraestrutura.InterfaceDeServicosExternos
+namespace Cgp.Infraestrutura.InterfaceDeServicosExternos
 {
     public interface IServicoDeGeracaoDeDocumentosEmPdf
     {

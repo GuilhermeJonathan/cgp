@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.SendGrid
+namespace Cgp.SendGrid
 {
     public interface IServicoDeEnvioDeEmails
     {

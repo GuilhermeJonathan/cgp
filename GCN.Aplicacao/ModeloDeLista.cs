@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao
+namespace Cgp.Aplicacao
 {
     public abstract class ModeloDeLista<TEntidade, TModeloDaLista, TFiltro> where TFiltro : new() where TModeloDaLista : new() where TEntidade : class
     {

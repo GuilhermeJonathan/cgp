@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Dominio.ObjetosDeValor
+namespace Cgp.Dominio.ObjetosDeValor
 {
     public enum TipoDePix
     {

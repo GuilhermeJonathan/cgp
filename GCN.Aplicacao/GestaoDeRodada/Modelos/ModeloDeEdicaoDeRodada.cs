@@ -1,5 +1,5 @@
-﻿using Campeonato.Aplicacao.GestaoDeJogos.Modelos;
-using Campeonato.Dominio.Entidades;
+﻿using Cgp.Aplicacao.GestaoDeJogos.Modelos;
+using Cgp.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Campeonato.Aplicacao.GestaoDeRodada.Modelos
+namespace Cgp.Aplicacao.GestaoDeRodada.Modelos
 {
     public class ModeloDeEdicaoDeRodada
     {

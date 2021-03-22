@@ -1,14 +1,14 @@
-﻿using Campeonato.Aplicacao.GestaoDeTemporadas.Modelos;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Dominio.ObjetosDeValor;
-using Campeonato.Infraestrutura.InterfaceDeServicosExternos;
+﻿using Cgp.Aplicacao.GestaoDeTemporadas.Modelos;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Aplicacao.GestaoDeTemporadas
+namespace Cgp.Aplicacao.GestaoDeTemporadas
 {
     public class ServicoDeGestaoDeTemporadas : IServicoDeGestaoDeTemporadas
     {

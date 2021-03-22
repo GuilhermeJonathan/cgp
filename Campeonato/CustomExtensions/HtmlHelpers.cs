@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 
-namespace Campeonato.CustomExtensions
+namespace Cgp.CustomExtensions
 {
     public static class HtmlHelpers
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos
+namespace Cgp.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos
 {
     public interface IServicoExternoDeAutenticacao
     {

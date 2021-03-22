@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Campeonato.Aplicacao.GestaoDePremiacoes.Modelos
+namespace Cgp.Aplicacao.GestaoDePremiacoes.Modelos
 {
     public class ModeloDeFiltroDePremiacao
     {

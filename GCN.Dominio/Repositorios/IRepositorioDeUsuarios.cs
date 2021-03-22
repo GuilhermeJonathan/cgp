@@ -1,7 +1,7 @@
-﻿using Campeonato.Dominio.Entidades;
+﻿using Cgp.Dominio.Entidades;
 using System.Collections.Generic;
 
-namespace Campeonato.Dominio.Repositorios
+namespace Cgp.Dominio.Repositorios
 {
     public interface IRepositorioDeUsuarios : IRepositorio<Usuario>
     {

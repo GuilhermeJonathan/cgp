@@ -1,14 +1,14 @@
-﻿using Campeonato.Aplicacao.GestaoDeUsuarios;
-using Campeonato.CustomExtensions;
-using Campeonato.Filter;
-using Campeonato.Web.CustomExtensions;
+﻿using Cgp.Aplicacao.GestaoDeUsuarios;
+using Cgp.CustomExtensions;
+using Cgp.Filter;
+using Cgp.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato.Controllers
+namespace Cgp.Controllers
 {
     public class ExtratoController : Controller
     {

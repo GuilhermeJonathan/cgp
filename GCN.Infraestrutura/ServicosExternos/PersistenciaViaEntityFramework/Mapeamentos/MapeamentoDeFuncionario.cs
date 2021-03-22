@@ -1,4 +1,4 @@
-﻿using Campeonato.Dominio;
+﻿using Cgp.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Mapeamentos
+namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Mapeamentos
 {
     public class MapeamentoDeFuncionario : EntityTypeConfiguration<Funcionario>
     {

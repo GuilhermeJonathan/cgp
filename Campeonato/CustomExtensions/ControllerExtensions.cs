@@ -1,11 +1,11 @@
-﻿using Campeonato.Aplicacao.Util;
+﻿using Cgp.Aplicacao.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato.CustomExtensions
+namespace Cgp.CustomExtensions
 {
     public static class ControllerExtensions
     {

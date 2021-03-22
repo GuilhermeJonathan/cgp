@@ -1,19 +1,19 @@
-﻿using Campeonato.Aplicacao.GestaoDeRodada;
-using Campeonato.Aplicacao.GestaoDeRodada.Modelos;
-using Campeonato.Aplicacao.GestaoDeTemporadas;
-using Campeonato.Aplicacao.GestaoDeTimes;
-using Campeonato.Aplicacao.Util;
-using Campeonato.CustomExtensions;
-using Campeonato.Dominio.Entidades;
-using Campeonato.Filter;
-using Campeonato.Web.CustomExtensions;
+﻿using Cgp.Aplicacao.GestaoDeRodada;
+using Cgp.Aplicacao.GestaoDeRodada.Modelos;
+using Cgp.Aplicacao.GestaoDeTemporadas;
+using Cgp.Aplicacao.GestaoDeTimes;
+using Cgp.Aplicacao.Util;
+using Cgp.CustomExtensions;
+using Cgp.Dominio.Entidades;
+using Cgp.Filter;
+using Cgp.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Campeonato.Controllers
+namespace Cgp.Controllers
 {
     [Authorize]
     [TratarErros]
