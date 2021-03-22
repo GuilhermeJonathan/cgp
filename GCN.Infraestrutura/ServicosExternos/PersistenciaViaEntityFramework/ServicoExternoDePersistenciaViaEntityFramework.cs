@@ -82,6 +82,13 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             }
         }
 
+        public IRepositorioDeTemporadas RepositorioDeTemporadas
+        {
+            get
+            {
+                return new RepositorioDeTemporada(this._contexto);
+            }
+        }
 
         public void Persistir()
         {

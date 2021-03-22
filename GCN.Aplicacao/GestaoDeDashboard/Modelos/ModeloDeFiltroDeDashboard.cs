@@ -14,6 +14,5 @@ namespace Campeonato.Aplicacao.GestaoDeDashboard.Modelos
         }
 
         public int Usuario { get; set; }
-        public string Temporada { get; set; }
     }
 }

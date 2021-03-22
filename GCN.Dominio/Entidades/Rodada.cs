@@ -14,8 +14,9 @@ namespace Campeonato.Dominio.Entidades
             this.Jogos = new List<Jogo>();
         }
 
-        public Rodada(string nome, string temporada)
+        public Rodada(string nome, Temporada temporada, Usuario usuario)
         {
+            this.UsuarioQueAlterou = usuario;
             this.Nome = nome;
             this.Temporada = temporada;
             this.Ativo = true;
@@ -24,18 +25,18 @@ namespace Campeonato.Dominio.Entidades
 
         public string Nome { get; set; }
         public IList<Jogo> Jogos { get; set; }
-        public string Temporada { get; set; }
+        public Temporada Temporada { get; set; }
         public int Ordem { get; set; }
         public SituacaoDaRodada SituacaoDaRodada { get; set; }
         public Usuario UsuarioQueAlterou { get; set; }
-        public DateTime DataUltimaAtualizacao { get; set; }
+        public DateTime? DataUltimaAtualizacao { get; set; }
         public bool Ativo { get; set; }
         public bool Aberta { get; set; }
-        public DateTime DataPrimeiroJogo { get; set; }
+        public DateTime? DataPrimeiroJogo { get; set; }
         public string CaminhoArquivo { get; set; }
         public bool LancouPremiacao { get; set; }
 
-        public void AlterarRodada(string nome, string temporada, bool ativo)
+        public void AlterarRodada(string nome, Temporada temporada, bool ativo)
         {
             this.Nome = nome;
             this.Temporada = temporada;

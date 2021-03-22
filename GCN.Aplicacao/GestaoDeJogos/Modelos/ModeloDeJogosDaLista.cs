@@ -34,6 +34,7 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
             }
 
             this.NomeEstadio = jogo.Estadio != null ? jogo.Estadio.Nome : "";
+            this.NomeTemporada = jogo.Rodada.Temporada != null ? jogo.Rodada.Temporada.Nome : "";
             this.NomeRodada = jogo.Rodada != null ? jogo.Rodada.Nome : "";
         }
 
@@ -49,6 +50,7 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
         public Time Time2 { get; set; }
         public string ImagemTime2 { get; set; }
         public string NomeTime2 { get; set; }
+        public string NomeTemporada { get; set; }
         public string NomeRodada { get; set; }
         public string SiglaTime1 { get; set; }
         public string SiglaTime2 { get; set; }

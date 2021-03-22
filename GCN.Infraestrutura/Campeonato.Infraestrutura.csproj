@@ -113,6 +113,7 @@
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeJogoDaAposta.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDePremiacao.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeRodada.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeTemporada.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeTime.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeUsuario.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Migrations\Configuration.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeJogo.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDePremiacao.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeRodada.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeTemporada.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeTime.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeUsuarios.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\ServicoExternoDePersistenciaViaEntityFramework.cs" />

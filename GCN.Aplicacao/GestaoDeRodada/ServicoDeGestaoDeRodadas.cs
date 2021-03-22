@@ -70,7 +70,9 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
         {
             try
             {
-                var novaRodada = new Rodada(modelo.Nome, modelo.Temporada);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                var temporada = this._servicoExternoDePersistencia.RepositorioDeTemporadas.BuscarPorId(modelo.Temporada);
+                var novaRodada = new Rodada(modelo.Nome, temporada, usuarioBanco);
                 this._servicoExternoDePersistencia.RepositorioDeRodadas.Inserir(novaRodada);
                 this._servicoExternoDePersistencia.Persistir();
 
@@ -87,7 +89,8 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
             try
             {
                 var rodada = this._servicoExternoDePersistencia.RepositorioDeRodadas.PegarPorId(modelo.Id);
-                rodada.AlterarRodada(modelo.Nome, modelo.Temporada, modelo.Ativo);
+                var temporada = this._servicoExternoDePersistencia.RepositorioDeTemporadas.BuscarPorId(modelo.Temporada);
+                rodada.AlterarRodada(modelo.Nome, temporada, modelo.Ativo);
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Rodada alterada com sucesso.";
@@ -101,6 +104,12 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
         public IList<Rodada> RetonarTodosAsRodadasAtivas()
         {
             var rodadas = this._servicoExternoDePersistencia.RepositorioDeRodadas.RetornarTodosAsRodadasAtivas();
+            return rodadas;
+        }
+
+        public IList<Rodada> RetonarTodosAsRodadasAtivasPorTemporada(int temporada)
+        {
+            var rodadas = this._servicoExternoDePersistencia.RepositorioDeRodadas.RetornarTodosAsRodadasAtivasPorTemporada(temporada);
             return rodadas;
         }
 

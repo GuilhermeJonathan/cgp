@@ -26,7 +26,7 @@ namespace Campeonato.Aplicacao.GestaoDeDashboard
             var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
             filtro.Usuario = usuario.PerfilDeUsuario != PerfilDeUsuario.Administrador ? usuarioBanco.Id : 0;
 
-            var premiacoes = this._servicoExternoDePersistencia.RepositorioDePremiacoes.RetornarPremiacoesPorTemporada(filtro.Temporada, filtro.Usuario);
+            var premiacoes = this._servicoExternoDePersistencia.RepositorioDePremiacoes.RetornarPremiacoesPorTemporada(filtro.Usuario);
             var modelo = new ModeloDeListaDeDashboard(premiacoes, 0, filtro); ;
 
             var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarTodosUsuarios();

@@ -2,6 +2,7 @@
 using Campeonato.Aplicacao.GestaoDeJogos;
 using Campeonato.Aplicacao.GestaoDeJogos.Modelos;
 using Campeonato.Aplicacao.GestaoDeRodada;
+using Campeonato.Aplicacao.GestaoDeTemporadas;
 using Campeonato.Aplicacao.GestaoDeTimes;
 using Campeonato.Aplicacao.GestaoDeTimes.Modelos;
 using Campeonato.Aplicacao.Util;
@@ -25,20 +26,25 @@ namespace Campeonato.Controllers
         private readonly IServicoDeGestaoDeTimes _servicoDeGestaoDeTimes;
         private readonly IServicoDeGestaoDeEstadios _servicoDeGestaoDeEstadios;
         private readonly IServicoDeGestaoDeRodadas _servicoDeGestaoDeRodadas;
+        private readonly IServicoDeGestaoDeTemporadas _servicoDeGestaoDeTemporadas;
 
         public JogoController(IServicoDeGestaoDeJogos servicoDeGestaoDeJogos, IServicoDeGestaoDeTimes servicoDeGestaoDeTimes,
-            IServicoDeGestaoDeEstadios servicoDeGestaoDeEstadios, IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas)
+            IServicoDeGestaoDeEstadios servicoDeGestaoDeEstadios, IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas, IServicoDeGestaoDeTemporadas servicoDeGestaoDeTemporadas)
         {
             this._servicoDeGestaoDeJogos = servicoDeGestaoDeJogos;
             this._servicoDeGestaoDeTimes = servicoDeGestaoDeTimes;
             this._servicoDeGestaoDeEstadios = servicoDeGestaoDeEstadios;
             this._servicoDeGestaoDeRodadas = servicoDeGestaoDeRodadas;
+            this._servicoDeGestaoDeTemporadas = servicoDeGestaoDeTemporadas;
         }
 
         public ActionResult Index(ModeloDeListaDeJogos modelo)
         {
             modelo.Filtro.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
                       () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesAtivos());
+
+            modelo.Filtro.Temporadas = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Temporada>(nameof(Temporada.Nome), nameof(Temporada.Id),
+                     () => this._servicoDeGestaoDeTemporadas.RetonarTodasAsTemporadasAtivas());
 
             modelo.Filtro.Rodadas = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Rodada>(nameof(Rodada.Nome), nameof(Rodada.Id),
                      () => this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivas());
@@ -53,6 +59,15 @@ namespace Campeonato.Controllers
         {
             var modelo = new ModeloDeCadastroDeJogo();
 
+            var temporadaAtiva = this._servicoDeGestaoDeTemporadas.BuscarTemporadaAtiva();
+            var rodadaAtiva = this._servicoDeGestaoDeRodadas.BuscarRodadaAtiva();
+
+            if (rodadaAtiva > 0)
+                modelo.Rodada = rodadaAtiva;
+
+            if (temporadaAtiva > 0)
+                modelo.Temporada = temporadaAtiva;
+
             modelo.Times1 = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<ModeloDeTimesDaLista>(nameof(ModeloDeTimesDaLista.NomeComSigla), nameof(ModeloDeTimesDaLista.Id),
                        () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesParaSelect());
 
@@ -62,13 +77,11 @@ namespace Campeonato.Controllers
             modelo.Estadios = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Estadio>(nameof(Estadio.Nome), nameof(Estadio.Id),
                      () => this._servicoDeGestaoDeEstadios.RetonarTodosOsEstadiosAtivos());
 
+            modelo.Temporadas = ListaDeItensDeDominio.DaClasseComOpcaoTodos<Temporada>(nameof(Temporada.Nome), nameof(Temporada.Id),
+                    () => this._servicoDeGestaoDeTemporadas.RetonarTodasAsTemporadasAtivas());
+
             modelo.Rodadas = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Rodada>(nameof(Rodada.Nome), nameof(Rodada.Id),
-                      () => this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivas());
-
-            var rodadaAtiva = this._servicoDeGestaoDeRodadas.BuscarRodadaAtiva();
-
-            if (rodadaAtiva > 0)
-                modelo.Rodada = rodadaAtiva;
+                      () => this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivasPorTemporada(modelo.Temporada));
 
             return View(modelo);
         }

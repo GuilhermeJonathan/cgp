@@ -13,13 +13,15 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
         {
             this.Times = new List<SelectListItem>();
             this.Rodadas = new List<SelectListItem>();
+            this.Temporadas = new List<SelectListItem>();
         }
 
         public string DataHoraDoJogo{ get; set; }
         public int Time { get; set; }
         public IEnumerable<SelectListItem> Times { get; set; }
+        public int Temporada { get; set; }
+        public IEnumerable<SelectListItem> Temporadas { get; set; }
         public int Rodada { get; set; }
         public IEnumerable<SelectListItem> Rodadas { get; set; }
- 
     }
 }

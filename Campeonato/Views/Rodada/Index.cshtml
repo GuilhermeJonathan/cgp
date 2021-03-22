@@ -39,7 +39,8 @@
                                     @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
                                 </div>
                                 <div class="col-lg-6">
-                                    @Html.InputTextFor(a => a.Filtro.Temporada, "Temporada", required: false)
+                                    <label class="control-label"> Temporada </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Temporada, Model.Filtro.Temporadas, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                         </div>

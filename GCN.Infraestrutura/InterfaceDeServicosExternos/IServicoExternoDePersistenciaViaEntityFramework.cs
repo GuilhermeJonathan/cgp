@@ -17,7 +17,7 @@ namespace Campeonato.Infraestrutura.InterfaceDeServicosExternos
         IRepositorioDeJogos RepositorioDeJogos { get; }
         IRepositorioDeApostas RepositorioDeApostas { get; }
         IRepositorioDePremiacoes RepositorioDePremiacoes { get; }
-
+        IRepositorioDeTemporadas RepositorioDeTemporadas { get; }
         void Persistir();
         void Dispose();
     }

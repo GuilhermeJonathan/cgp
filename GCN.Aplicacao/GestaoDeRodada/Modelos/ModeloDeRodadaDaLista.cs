@@ -16,7 +16,7 @@ namespace Campeonato.Aplicacao.GestaoDeRodada.Modelos
 
             this.Id = rodada.Id;
             this.Nome = rodada.Nome;
-            this.Temporada = rodada.Temporada;
+            this.Temporada = rodada.Temporada != null ? rodada.Temporada.Nome : String.Empty;
             this.Ativo = rodada.Ativo ? "Sim" : "Não";
             rodada.Jogos.ToList().ForEach(a => this.Jogos.Add(new ModeloDeJogosDaLista(a)));
             this.Fechada = rodada.Aberta;

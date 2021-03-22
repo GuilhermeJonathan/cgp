@@ -28,6 +28,7 @@ using Campeonato.Aplicacao.Util;
 using Campeonato.Aplicacao.GestaoDeDashboard;
 using Campeonato.SendGrid;
 using Campeonato.Aplicacao.MontagemDeEmails;
+using Campeonato.Aplicacao.GestaoDeTemporadas;
 
 namespace Campeonato.App_Start
 {
@@ -56,6 +57,7 @@ namespace Campeonato.App_Start
             container.Register<IServicoDeGeracaoDeDocumentosEmPdf, ServicoDeGeracaoDeDocumentosEmPdf>(Lifestyle.Scoped);
             container.Register<IServicoDeEnvioDeEmails, ServicoDeEnvioDeEmails>(Lifestyle.Scoped);
             container.Register<IServicoDeMontagemDeEmails, ServicoDeMontagemDeEmails>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeTemporadas, ServicoDeGestaoDeTemporadas>(Lifestyle.Scoped);
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
                VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")));

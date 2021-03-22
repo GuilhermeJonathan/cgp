@@ -31,7 +31,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
             this.Id = aposta.Id;
             this.IdRodada = aposta.Rodada.Id;
             this.NomeRodada = aposta.Rodada.Nome;
-            this.RodadaFechada = aposta.Rodada.SituacaoDaRodada == SituacaoDaRodada.Finalizada ? true : aposta.Rodada.DataPrimeiroJogo.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now ? true : false;
+            this.RodadaFechada = aposta.Rodada.SituacaoDaRodada == SituacaoDaRodada.Finalizada ? true : aposta.Rodada.DataPrimeiroJogo.Value.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now ? true : false;
             this.RodadaPodeAlterar = situacoesRodadaAberta.Contains(aposta.Rodada.SituacaoDaRodada) ? true : false;
 
             this.Usuario = aposta.Usuario.Id;

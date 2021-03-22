@@ -46,17 +46,29 @@
                             <p> Times </p>
                         </a>
                     </li>
-                }
 
-                @if (User.EhAdministrador())
-                {
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Estadio")" class="nav-link @Html.Raw(controller == "Estadio" ? "active" : "")">
-                            <i class="nav-icon fas  fa-home"></i>
+                            <i class="nav-icon fas fa-home"></i>
                             <p> Estádios </p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Temporada")" class="nav-link @Html.Raw(controller == "Temporada" ? "active" : "")">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            <p> Temporadas </p>
+                        </a>
+                    </li>
                 }
+
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Rodada" )" class="nav-link @Html.Raw(controller == "Rodada" ? "active" : "")">
+                        <i class="nav-icon fas fa-table"></i> 
+                        <p> Rodadas </p>
+                    </a>
+                </li>
+
                 @if (!User.EhAdministrador())
                 {
                     <li class="nav-item">
@@ -66,18 +78,14 @@
                         </a>
                     </li>
                 }
+
                 <li class="nav-item">
                     <a href="@Url.Action("Index", "Jogo" )" class="nav-link @Html.Raw(controller == "Jogo" ? "active" : "")">
                         <i class="nav-icon fas  fa-futbol"></i>
                         <p> Jogos </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Rodada" )" class="nav-link @Html.Raw(controller == "Rodada" ? "active" : "")">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p> Rodadas </p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="@Url.Action("Index", "Aposta" )" class="nav-link @Html.Raw(controller == "Aposta" ? "active" : "")">
                         <i class="nav-icon fas fa-receipt"></i>

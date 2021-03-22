@@ -29,7 +29,7 @@ namespace Campeonato.Aplicacao.GestaoDeJogos
                     dataParaFiltro = DateTime.Parse($"{filtro.DataHoraDoJogo} 00:00:00");
                 
                 var quantidadeEncontrada = 0;
-                var jogos = this._servicoExternoDePersistencia.RepositorioDeJogos.RetornarJogosPorFiltro(filtro.Time, filtro.Rodada, dataParaFiltro, out quantidadeEncontrada);
+                var jogos = this._servicoExternoDePersistencia.RepositorioDeJogos.RetornarJogosPorFiltro(filtro.Time, filtro.Temporada, filtro.Rodada, dataParaFiltro, out quantidadeEncontrada);
 
                 return new ModeloDeListaDeJogos(jogos, quantidadeEncontrada, filtro);
             }
@@ -145,8 +145,6 @@ namespace Campeonato.Aplicacao.GestaoDeJogos
             this._servicoExternoDePersistencia.Persistir();
 
             return "Jogo alterado com sucesso.";
- 
         }
-
     }
 }

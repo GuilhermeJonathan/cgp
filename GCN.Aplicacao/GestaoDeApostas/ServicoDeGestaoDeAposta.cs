@@ -219,7 +219,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                         throw new ExcecaoDeAplicacao("Rodada encontra-se fechada.");
                 }
                     
-                if(aposta.Rodada.DataPrimeiroJogo.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now)
+                if(aposta.Rodada.DataPrimeiroJogo.Value.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now)
                     throw new ExcecaoDeAplicacao("Rodada iniciada. Não é possível alterar as apostas.");
 
                 if (aposta != null)
@@ -303,7 +303,7 @@ namespace Campeonato.Aplicacao.GestaoDeApostas.Modelos
                 if (usuarioBanco.Saldo  < ValorDaAposta)
                     throw new ExcecaoDeAplicacao("Você não possui créditos para realizar a aposta exclusiva.");
 
-                if (aposta.Rodada.DataPrimeiroJogo.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now)
+                if (aposta.Rodada.DataPrimeiroJogo.Value.AddMinutes(-VariaveisDeAmbiente.Pegar<int>("TempoParaFechamentoDeRodada")) < DateTime.Now)
                     throw new ExcecaoDeAplicacao("Rodada iniciada. Não é possível alterar as apostas.");
 
                 var novaAposta = new Aposta(usuarioBanco, rodada, TipoDeAposta.Exclusiva, ValorDaAposta);

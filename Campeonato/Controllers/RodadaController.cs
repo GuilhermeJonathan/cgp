@@ -1,5 +1,6 @@
 ﻿using Campeonato.Aplicacao.GestaoDeRodada;
 using Campeonato.Aplicacao.GestaoDeRodada.Modelos;
+using Campeonato.Aplicacao.GestaoDeTemporadas;
 using Campeonato.Aplicacao.GestaoDeTimes;
 using Campeonato.Aplicacao.Util;
 using Campeonato.CustomExtensions;
@@ -18,16 +19,16 @@ namespace Campeonato.Controllers
     [TratarErros]
     public class RodadaController : Controller
     {
-
         private readonly IServicoDeGestaoDeRodadas _servicoDeGestaoDeRodadas;
         private readonly IServicoDeGestaoDeTimes _servicoDeGestaoDeTimes;
+        private readonly IServicoDeGestaoDeTemporadas _servicoDeGestaoDeTemporadas;
 
-        public RodadaController(IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas, IServicoDeGestaoDeTimes servicoDeGestaoDeTimes)
+        public RodadaController(IServicoDeGestaoDeRodadas servicoDeGestaoDeRodadas, IServicoDeGestaoDeTimes servicoDeGestaoDeTimes, IServicoDeGestaoDeTemporadas servicoDeGestaoDeTemporadas)
         {
             this._servicoDeGestaoDeRodadas = servicoDeGestaoDeRodadas;
             this._servicoDeGestaoDeTimes = servicoDeGestaoDeTimes;
+            this._servicoDeGestaoDeTemporadas = servicoDeGestaoDeTemporadas;
         }
-
         
         [HttpGet]
         public ActionResult Index(ModeloDeListaDeRodadas modelo)
@@ -35,6 +36,9 @@ namespace Campeonato.Controllers
             modelo.Filtro.Rodadas = ListaDeItensDeDominio.DaClasseComOpcaoTodos<Rodada>(nameof(Rodada.Nome), nameof(Rodada.Id),
                      () => this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivas());
 
+            modelo.Filtro.Temporadas = ListaDeItensDeDominio.DaClasseComOpcaoTodos<Temporada>(nameof(Temporada.Nome), nameof(Temporada.Id),
+                     () => this._servicoDeGestaoDeTemporadas.RetonarTodasAsTemporadasAtivas());
+            
             modelo = this._servicoDeGestaoDeRodadas.RetonarTodosasRodadas(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
             return View(modelo);
@@ -44,6 +48,10 @@ namespace Campeonato.Controllers
         public ActionResult Cadastrar()
         {
             var modelo = new ModeloDeCadastroDeRodada();
+
+            modelo.Temporadas = ListaDeItensDeDominio.DaClasseComOpcaoTodos<Temporada>(nameof(Temporada.Nome), nameof(Temporada.Id),
+                     () => this._servicoDeGestaoDeTemporadas.RetonarTodasAsTemporadasAtivas());
+
             return View(modelo);
         }
 
@@ -62,6 +70,10 @@ namespace Campeonato.Controllers
                 RodadaNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeRodadas.BuscarRodadaPorId(id.Value);
+
+            modelo.Temporadas = ListaDeItensDeDominio.DaClasseComOpcaoTodos<Temporada>(nameof(Temporada.Nome), nameof(Temporada.Id),
+                     () => this._servicoDeGestaoDeTemporadas.RetonarTodasAsTemporadasAtivas());
+
             return View(modelo);
         }
 
@@ -111,6 +123,13 @@ namespace Campeonato.Controllers
         {
             var modelo = this._servicoDeGestaoDeRodadas.FecharRodada(id, User.Logado());
             return Content(modelo);
+        }
+
+        [HttpGet]
+        public JsonResult BuscarRodadasPorTemporada(int temporada)
+        {
+            var rodadas = this._servicoDeGestaoDeRodadas.RetonarTodosAsRodadasAtivasPorTemporada(temporada);
+            return Json(new { retorno = rodadas.Select(a => new { Nome = a.Nome, Valor = a.Id }) }, JsonRequestBehavior.AllowGet);
         }
     }
 }

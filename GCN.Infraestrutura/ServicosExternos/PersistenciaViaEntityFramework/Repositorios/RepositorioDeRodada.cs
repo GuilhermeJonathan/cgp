@@ -2,7 +2,6 @@
 using Campeonato.Dominio.Repositorios;
 using System;
 using System.Collections.Generic;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -12,7 +11,7 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
     {
         public RepositorioDeRodada(Contexto contexto) : base(contexto) { }
 
-        public IList<Rodada> RetornarTodosAsRodadas(int rodada, string temporada, out int quantidadeEncontrada)
+        public IList<Rodada> RetornarTodosAsRodadas(int rodada, int temporada, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Rodada>()
                 .AsQueryable();
@@ -20,8 +19,8 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             if (rodada > 0)
                 query = query.Where(c => c.Id == rodada);
 
-            if (!string.IsNullOrEmpty(temporada))
-                query = query.Where(c => c.Temporada.Contains(temporada));
+            if (temporada > 0)
+                query = query.Where(c => c.Temporada.Id == temporada);
 
             quantidadeEncontrada = query.Count();
 
@@ -36,9 +35,23 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
             return query.OrderBy(a => a.Ordem).ToList();
         }
 
+        public IList<Rodada> RetornarTodosAsRodadasAtivasPorTemporada(int temporada)
+        {
+            var query = this._contexto.Set<Rodada>().AsQueryable();
+
+            if(temporada > 0)
+                query = query.Where(c => c.Temporada.Id == temporada);
+
+            query = query.Where(c => c.Ativo);
+            return query.OrderBy(a => a.Ordem).ToList();
+        }
+
         public Rodada PegarPorId(int id)
         {
-            return this._contexto.Set<Rodada>().Include(a => a.Jogos).FirstOrDefault(a => a.Id == id);
+            return this._contexto.Set<Rodada>()
+                .Include(a => a.Jogos)
+                .Include(a => a.Temporada)
+                .FirstOrDefault(a => a.Id == id);
         }
 
         public int BuscarRodadaAtiva()
@@ -50,6 +63,5 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
         {
             return this._contexto.Set<Rodada>().FirstOrDefault(a => a.SituacaoDaRodada == Dominio.ObjetosDeValor.SituacaoDaRodada.Futura);
         }
-
     }
 }

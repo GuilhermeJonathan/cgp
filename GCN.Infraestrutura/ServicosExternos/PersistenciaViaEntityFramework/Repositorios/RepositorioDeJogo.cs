@@ -13,16 +13,20 @@ namespace Campeonato.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramew
     {
         public RepositorioDeJogo(Contexto contexto) : base(contexto) { }
 
-        public IList<Jogo> RetornarJogosPorFiltro(int time, int rodada, DateTime dataDoJogo, out int quantidadeEncontrada)
+        public IList<Jogo> RetornarJogosPorFiltro(int time, int temporada, int rodada, DateTime dataDoJogo, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Jogo>().Include(nameof(Jogo.Time1))
                 .Include(nameof(Jogo.Time2))
                 .Include(a => a.Estadio)
                 .Include(a => a.Rodada)
+                .Include(a => a.Rodada.Temporada)
                 .AsQueryable();
 
             if (time > 0)
                 query = query.Where(c => c.Time1.Id == time || c.Time2.Id == time);
+
+            if (temporada > 0)
+                query = query.Where(c => c.Rodada.Temporada.Id == temporada);
 
             if (rodada > 0)
                 query = query.Where(c => c.Rodada.Id == rodada);

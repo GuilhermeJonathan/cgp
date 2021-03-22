@@ -50,6 +50,7 @@
     <Compile Include="Entidades\JogoDaAposta.cs" />
     <Compile Include="Entidades\Premiacao.cs" />
     <Compile Include="Entidades\Rodada.cs" />
+    <Compile Include="Entidades\Temporada.cs" />
     <Compile Include="Entidades\Time.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="ExcecaoDeNegocio.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Repositorios\IRepositorioDeJogos.cs" />
     <Compile Include="Repositorios\IRepositorioDePremiacoes.cs" />
     <Compile Include="Repositorios\IRepositorioDeRodadas.cs" />
+    <Compile Include="Repositorios\IRepositorioDeTemporadas.cs" />
     <Compile Include="Repositorios\IRepositorioDeTimes.cs" />
     <Compile Include="Repositorios\IRepositorioDeUsuarios.cs" />
   </ItemGroup>

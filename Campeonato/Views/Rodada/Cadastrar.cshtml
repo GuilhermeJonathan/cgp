@@ -38,7 +38,8 @@
                                     @Html.InputTextFor(a => a.Nome, "Nome", required: true)
                                 </div>
                                 <div class="col-lg-6">
-                                    @Html.InputTextFor(a => a.Temporada, "Temporada", required: true)
+                                    <label class="control-label"> Temporada </label>
+                                    @Html.DropDownListFor(m => m.Temporada, Model.Temporadas, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                         </div>
@@ -51,5 +52,4 @@
             </div>
         </div>
     </div>
-
 </div>

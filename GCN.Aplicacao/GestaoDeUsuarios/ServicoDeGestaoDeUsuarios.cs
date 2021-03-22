@@ -129,11 +129,11 @@ namespace Campeonato.Aplicacao.GestaoDeUsuarios
 
                 this._servicoExternoDePersistencia.Persistir();
 
-                return "Ususário alterado com sucesso.";
+                return "Usuário alterado com sucesso.";
             }
             catch (Exception ex)
             {
-                throw new ExcecaoDeAplicacao("Não foi possível alterar a rodada: " + ex.InnerException);
+                throw new ExcecaoDeAplicacao("Não foi possível alterar o usuário: " + ex.InnerException);
             }
         }
 

@@ -1,8 +1,8 @@
-﻿@model Campeonato.Aplicacao.GestaoDeRodada.Modelos.ModeloDeEdicaoDeRodada
+﻿@model Campeonato.Aplicacao.GestaoDeTemporadas.Modelos.ModeloDeCadastroDeTemporada
 @using GridMvc.Html
 
 @{
-    ViewBag.Title = "Edição de Rodadas";
+    ViewBag.Title = "Cadastrar Temporada";
 }
 
 <div class="content-wrapper">
@@ -13,7 +13,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
-                        <li class="breadcrumb-item active">Edição de Rodadas</li>
+                        <li class="breadcrumb-item active">Cadastro de Temporada</li>
                     </ol>
                 </div>
             </div>
@@ -22,10 +22,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form role="form" action="@Url.Action("Editar", "Rodada")" method="post">
+                <form role="form" action="@Url.Action("Cadastrar", "Temporada")" method="post">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Edição de Rodadas</h3>
+                            <h3 class="card-title">Cadastrar Temporada</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                     <i class="fas fa-minus"></i>
@@ -34,22 +34,20 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    @Html.InputTextFor(a => a.Nome, "Nome", required: false)
+                                <div class="col-lg-4">
+                                    @Html.InputTextFor(a => a.Nome, "Nome", required: true)
                                 </div>
-                                <div class="col-lg-6">
-                                    <label class="control-label"> Temporada </label>
-                                    @Html.DropDownListFor(m => m.Temporada, Model.Temporadas, new { @class = "form-control autoComplete" })
+                                <div class="col-lg-4">
+                                    @Html.InputTextFor(a => a.Ano, "Ano", required: true)
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="control-label"> Ativo </label>
-                                @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
+                                <div class="col-lg-4">
+                                    @Html.InputTextFor(a => a.Pais, "País", required: true)
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             @Html.BackButton()
-                            <button type="submit" class="btn btn-success float-right">Salvar</button>
+                            <button type="submit" class="btn btn-info float-right">Salvar</button>
                         </div>
                     </div>
                 </form>
@@ -57,19 +55,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(function () {
-
-        $('#dataHoraDoJogo').datepicker({
-            language: "pt-BR", autoclose: true,
-            zIndexOffset: 99999999
-        });
-
-        $('.mascaraData').mask('00/00/0000');
-        $('.mascaraHora').mask('00:00');
-
-        $('.autoComplete').select2();
-    })
-</script>

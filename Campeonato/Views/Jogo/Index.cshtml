@@ -34,15 +34,19 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <label class="control-label"> Data do Jogo</label>
                                     <input type="text" class="form-control dataJogo" name="Filtro.DataHoraDoJogo">
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <label class="control-label"> Times </label>
                                     @Html.DropDownListFor(m => m.Filtro.Time, Model.Filtro.Times, new { @class = "form-control autoComplete" })
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
+                                    <label class="control-label"> Temporada </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Temporada, Model.Filtro.Temporadas, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-3">
                                     <label class="control-label"> Rodada </label>
                                     @Html.DropDownListFor(m => m.Filtro.Rodada, Model.Filtro.Rodadas, new { @class = "form-control autoComplete" })
                                 </div>
@@ -83,6 +87,7 @@
                                m => Html.Raw("<img style='max-width: 30px;' src='" + m.ImagemTime2 + "' </>"));
                            colunas.Add(m => m.DataHoraDoJogo).Titled("Data");
 
+                           colunas.Add(m => m.NomeTemporada).Titled("Temporada");
                            colunas.Add(m => m.NomeRodada).Titled("Rodada");
 
                            colunas.Add(m => m.NomeEstadio).Titled("Local");
@@ -109,5 +114,24 @@
             language: "pt-BR", autoclose: true,
             zIndexOffset: 99999999
         });
+
+
+        $('#Filtro_Temporada').change('select2:select', function (e) {
+            debugger;
+            var temporada = $(this).val();
+            CarregarRodadas(temporada);
+        });
+
+        function CarregarRodadas(temporada) {
+            var rodada = $("#Filtro_Rodada");
+            $.ajax({
+                type: 'GET',
+                url: '/Rodada/BuscarRodadasPorTemporada',
+                data: 'temporada=' + temporada,
+                success: function (resultado) {
+                    campeonatoGeral.preencherCombo(rodada, resultado.retorno, function () { rodada.attr("disable", false) });
+                }
+            });
+        }
     })
 </script>

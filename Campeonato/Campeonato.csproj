@@ -199,6 +199,7 @@
     <Compile Include="Controllers\ResultadoController.cs" />
     <Compile Include="Controllers\ResultadoExclusivoController.cs" />
     <Compile Include="Controllers\RodadaController.cs" />
+    <Compile Include="Controllers\TemporadaController.cs" />
     <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="CustomExtensions\ControllerExtensions.cs" />
@@ -422,6 +423,9 @@
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Usuario\Retiradas.cshtml" />
     <Content Include="Views\Usuario\EditarRetirada.cshtml" />
+    <Content Include="Views\Temporada\Index.cshtml" />
+    <Content Include="Views\Temporada\Cadastrar.cshtml" />
+    <Content Include="Views\Temporada\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -34,6 +34,5 @@ namespace Campeonato.Aplicacao.GestaoDeTimes.Modelos
         public string Imagem { get; set; }
         public string Ativo { get; set; }
         public string DataDoCadastro { get; set; }
-
     }
 }

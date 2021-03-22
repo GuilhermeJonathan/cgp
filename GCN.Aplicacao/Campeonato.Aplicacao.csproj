@@ -111,6 +111,13 @@
     <Compile Include="GestaoDeRodada\Modelos\ModeloDeListaDeRodadas.cs" />
     <Compile Include="GestaoDeRodada\Modelos\ModeloDeRodadaDaLista.cs" />
     <Compile Include="GestaoDeRodada\ServicoDeGestaoDeRodadas.cs" />
+    <Compile Include="GestaoDeTemporadas\IServicoDeGestaoDeTemporadas.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeCadastroDeTemporada.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeEdicaoDeTemporada.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeFiltroDeTemporada.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeListaDeTemporada.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeTemporadaDaLista.cs" />
+    <Compile Include="GestaoDeTemporadas\ServicoDeGestaoDeTemporadas.cs" />
     <Compile Include="GestaoDeTimes\IServicoDeGestaoDeTimes.cs" />
     <Compile Include="GestaoDeTimes\Modelos\ModeloDeCadastroDeTime.cs" />
     <Compile Include="GestaoDeTimes\Modelos\ModeloDeEdicaoDeTime.cs" />
@@ -159,5 +166,6 @@
   <ItemGroup>
     <Content Include="Util\emailPadrao.html" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,6 +13,7 @@ namespace Campeonato.Aplicacao.GestaoDeRodada
     {
         ModeloDeListaDeRodadas RetonarTodosasRodadas(ModeloDeFiltroDeRodada filtro, int pagina, int registrosPorPagina = 30);
         IList<Rodada> RetonarTodosAsRodadasAtivas();
+        IList<Rodada> RetonarTodosAsRodadasAtivasPorTemporada(int temporada);
         ModeloDeEdicaoDeRodada BuscarRodadaPorId(int id);
         string CadastrarRodada(ModeloDeCadastroDeRodada modelo, UsuarioLogado usuario);
         string AlterarDadosDaRodada(ModeloDeEdicaoDeRodada modelo, UsuarioLogado usuario);

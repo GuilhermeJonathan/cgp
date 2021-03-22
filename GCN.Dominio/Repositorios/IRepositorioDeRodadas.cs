@@ -9,8 +9,9 @@ namespace Campeonato.Dominio.Repositorios
 {
     public interface IRepositorioDeRodadas : IRepositorio<Rodada>
     {
-        IList<Rodada> RetornarTodosAsRodadas(int nome, string temporada, out int quantidadeEncontrada);
+        IList<Rodada> RetornarTodosAsRodadas(int nome, int temporada, out int quantidadeEncontrada);
         IList<Rodada> RetornarTodosAsRodadasAtivas();
+        IList<Rodada> RetornarTodosAsRodadasAtivasPorTemporada(int temporada);
         Rodada PegarPorId(int id);
         int BuscarRodadaAtiva();
         Rodada BuscarProximaRodada();

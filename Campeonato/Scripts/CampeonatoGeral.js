@@ -59,8 +59,8 @@
         if (!valores || valores.length <= 0)
             return;
 
-        $.each(valores, function (i, valor) {
-            var opcao = $('<option>').text(valor.Nome).attr('value', valor.Valor);
+        jQuery.each(valores, function (i, valor) {
+            var opcao = jQuery('<option>').text(valor.Nome).attr('value', valor.Valor);
 
             if (valorSelecionado && valorSelecionado.toString() === valor.Valor.toString())
                 opcao.attr("selected", true);

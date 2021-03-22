@@ -15,6 +15,7 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
             this.Times2 = new List<SelectListItem>();
             this.Estadios = new List<SelectListItem>();
             this.Rodadas = new List<SelectListItem>();
+            this.Temporadas = new List<SelectListItem>();
         }
 
         public string DataDoJogo { get; set; }
@@ -25,6 +26,8 @@ namespace Campeonato.Aplicacao.GestaoDeJogos.Modelos
         public IEnumerable<SelectListItem> Times2 { get; set; }
         public int Estadio { get; set; }
         public IEnumerable<SelectListItem> Estadios { get; set; }
+        public int Temporada { get; set; }
+        public IEnumerable<SelectListItem> Temporadas { get; set; }
         public int Rodada { get; set; }
         public IEnumerable<SelectListItem> Rodadas { get; set; }
     }

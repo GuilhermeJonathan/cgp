@@ -9,7 +9,7 @@ namespace Campeonato.Dominio.Repositorios
 {
     public interface IRepositorioDeJogos : IRepositorio<Jogo>
     {
-        IList<Jogo> RetornarJogosPorFiltro(int time, int rodada, DateTime dataDoJogo, out int quantidadeEncontrada);
+        IList<Jogo> RetornarJogosPorFiltro(int time, int temporada, int rodada, DateTime dataDoJogo, out int quantidadeEncontrada);
         IList<Jogo> RetornarTodosJogos();
         IList<Jogo> RetornarJogosPorRodada(int rodada);
         Jogo PegarPorId(int id);
