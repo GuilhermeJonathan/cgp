@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{071E6D6C-9D47-4D1D-8253-6B8E7852C14B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cgp.Aplicacao</RootNamespace>
+    <AssemblyName>Cgp.Aplicacao</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Comum\ExcecaoDeAplicacao.cs" />
+    <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />
+    <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
+    <Compile Include="ExcecaoDeAplicacao.cs" />
+    <Compile Include="GestaoDeApostas\IServicoDeGestaoDeAposta.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeApostaDaLista.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeCadastroDeAposta.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeEdicaoDeAposta.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeFiltroDeAposta.cs" />
+    <Compile Include="GestaoDeApostas\Modelos\ModeloDeListaDeApostas.cs" />
+    <Compile Include="GestaoDeApostas\ServicoDeGestaoDeAposta.cs" />
+    <Compile Include="GestaoDeDashboard\IServicoDeGestaoDeDashboard.cs" />
+    <Compile Include="GestaoDeDashboard\Modelos\ModeloDeDashboardDaLista.cs" />
+    <Compile Include="GestaoDeDashboard\Modelos\ModeloDeFiltroDeDashboard.cs" />
+    <Compile Include="GestaoDeDashboard\Modelos\ModeloDeListaDeDashboard.cs" />
+    <Compile Include="GestaoDeDashboard\ServicoDeGestaoDeDashboard.cs" />
+    <Compile Include="GestaoDeEstadio\IServicoDeGestaoDeEstadio.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeCadastroDeEstadio.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEdicaoDeEstadio.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEstadiosDaLista.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeFiltroDeEstadio.cs" />
+    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeListaDeEstadios.cs" />
+    <Compile Include="GestaoDeEstadio\ServicoDeGestaoDeEstadio.cs" />
+    <Compile Include="GestaoDeFuncionario\IServicoDeGestaoDeFuncionarios.cs" />
+    <Compile Include="GestaoDeFuncionario\Modelos\ModeloDeCadastroDeFuncionario.cs" />
+    <Compile Include="GestaoDeFuncionario\ServicoDeGestaoDeFuncionarios.cs" />
+    <Compile Include="GestaoDeJogos\IServicoDeGestaoDeJogos.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeCadastroDeJogo.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeEdicaoDeJogo.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeFiltroDeJogo.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeJogosDaApostaDaLista.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeJogosDaLista.cs" />
+    <Compile Include="GestaoDeJogos\Modelos\ModeloDeListaDeJogos.cs" />
+    <Compile Include="GestaoDeJogos\ServicoDeGestaoDeJogos.cs" />
+    <Compile Include="GestaoDePremiacoes\IServicoDeGestaoDePremiacoes.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDeCadastroDePremiacao.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDeEdicaoDePremiacao.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDeFiltroDePremiacao.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDeListaDePremiacoes.cs" />
+    <Compile Include="GestaoDePremiacoes\Modelos\ModeloDePremiacaoDaLista.cs" />
+    <Compile Include="GestaoDePremiacoes\ServicoDeGestaoDePremiacoes.cs" />
+    <Compile Include="GestaoDeRodada\IServicoDeGestaoDeRodadas.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeCadastroDeRodada.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeEdicaoDeRodada.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeFiltroDeRodada.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeListaDeRodadas.cs" />
+    <Compile Include="GestaoDeRodada\Modelos\ModeloDeRodadaDaLista.cs" />
+    <Compile Include="GestaoDeRodada\ServicoDeGestaoDeRodadas.cs" />
+    <Compile Include="GestaoDeTemporadas\IServicoDeGestaoDeTemporadas.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeCadastroDeTemporada.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeEdicaoDeTemporada.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeFiltroDeTemporada.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeListaDeTemporada.cs" />
+    <Compile Include="GestaoDeTemporadas\Modelos\ModeloDeTemporadaDaLista.cs" />
+    <Compile Include="GestaoDeTemporadas\ServicoDeGestaoDeTemporadas.cs" />
+    <Compile Include="GestaoDeTimes\IServicoDeGestaoDeTimes.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeCadastroDeTime.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeEdicaoDeTime.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeFiltroDeTime.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeListaDeTimes.cs" />
+    <Compile Include="GestaoDeTimes\Modelos\ModeloDeTimesDaLista.cs" />
+    <Compile Include="GestaoDeTimes\ServicoDeGestaoDeTimes.cs" />
+    <Compile Include="GestaoDeUsuarios\IServicoDeGestaoDeUsuarios.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeCadastroDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeRetirada.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeHistoricoFinanceiro.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeUsuario.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeHistoricoFinanceiroDaLista.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeListaDeHistoricosFinanceiros.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeListaDeUsuarios.cs" />
+    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeUsuarioDaLista.cs" />
+    <Compile Include="GestaoDeUsuarios\ServicoDeGestaoDeUsuarios.cs" />
+    <Compile Include="Login\IServicoDeLogin.cs" />
+    <Compile Include="Login\Modelos\ModeloDeLogin.cs" />
+    <Compile Include="Login\ServicoDeLogin.cs" />
+    <Compile Include="Modelo.cs" />
+    <Compile Include="ModeloDeLista.cs" />
+    <Compile Include="MontagemDeEmails\IServicoDeMontagemDeEmails.cs" />
+    <Compile Include="MontagemDeEmails\ModeloDeEmail.cs" />
+    <Compile Include="MontagemDeEmails\ServicoDeMontagemDeEmails.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\ExtensoesDeString.cs" />
+    <Compile Include="Util\ListaDeItensDeDominio.cs" />
+    <Compile Include="Util\VariaveisDeAmbiente.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Util\emailPadrao.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CGP.Dominio\Cgp.Dominio.csproj">
+      <Project>{664E2FC2-2533-402E-BBB3-7809755F1D39}</Project>
+      <Name>Cgp.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CGP.Infraestrutura\Cgp.Infraestrutura.csproj">
+      <Project>{e2584ef1-f4dd-40ef-8c0b-ab4ef2c6fb71}</Project>
+      <Name>Cgp.Infraestrutura</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
