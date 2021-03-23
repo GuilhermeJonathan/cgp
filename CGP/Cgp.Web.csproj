@@ -219,9 +219,6 @@
     <Content Include="Content\alt\adminlte.pages.min.css" />
     <Content Include="Content\alt\adminlte.plugins.css" />
     <Content Include="Content\alt\adminlte.plugins.min.css" />
-    <Content Include="Content\bola.png" />
-    <Content Include="Content\bola2.jpg" />
-    <Content Include="Content\bola2.png" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -229,6 +226,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\images\avatar-anonimo.png" />
+    <Content Include="Content\logo_pmdf.png" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\images\user2-160x160.jpg" />
     <Content Include="Content\toastr.min.css" />

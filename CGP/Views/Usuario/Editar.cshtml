@@ -45,39 +45,17 @@
                                     <label class="control-label"> Perfil </label>
                                     @Html.DropDownListFor(m => m.PerfilDeUsuario, Model.PerfisDeUsuario, new { @class = "form-control" })
                                 </div>
-                                <div class="col-lg-6">
-                                    <label class="control-label"> Ativo </label>
-                                    @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-lg-1 col-sm-2">
                                     @Html.InputNumberFor(a => a.Ddd, "DDD", required: false)
                                 </div>
                                 <div class="col-lg-5  col-sm-10">
                                     @Html.InputNumberFor(a => a.Telefone, "Telefone", required: false)
                                 </div>
-                                <div class="col-lg-2">
-                                    <label class="control-label"> Tipo de Chave </label>
-                                    @Html.DropDownListFor(m => m.TipoDePix, Model.TiposDePix, new { @class = "form-control" })
-                                </div>
-                                <div class="col-lg-4">
-                                    @Html.InputTextFor(a => a.ChavePix, "Chave Pix", required: false)
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="info-box" style="margin-top: 10px;">
-                                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-dollar-sign"></i></span>
-                                        <div class="info-box-content">
-                                            <span class="info-box-number fa-2x"> R$ @Model.Credito</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <a href="@Url.Action("Historico", "Usuario", new {id = Model.Id})" class="btn btn-info float-left"> Histórico Financeiro</a>
+                                    <label class="control-label"> Ativo </label>
+                                    @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
                                 </div>
                             </div>
                         </div>

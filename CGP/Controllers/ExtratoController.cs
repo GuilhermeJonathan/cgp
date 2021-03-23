@@ -36,23 +36,5 @@ namespace Cgp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-
-        [Authorize]
-        [HttpGet]
-        public ActionResult RetirarSaldo(int Saldo, int TipoDePix, string ChavePix)
-        {
-            try
-            {
-                var retorno = this._servicoDeGestaoDeUsuarios.RetirarSaldo(Saldo, User.Logado(), TipoDePix, ChavePix);
-                this.AdicionarMensagemDeSucesso(retorno);
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                this.AdicionarMensagemDeErro(ex.Message);
-            }
-            return RedirectToAction(nameof(Index));
-        }
     }
 }

@@ -16,7 +16,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public ModeloDeEdicaoDeUsuario()
         {
             this.PerfisDeUsuario = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<PerfilDeUsuario>();
-            this.TiposDePix = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<TipoDePix>();
             this.HistoricosFinanceiros = new List<ModeloDeHistoricoFinanceiroDaLista>();
         }
 
@@ -26,17 +25,13 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
                 return;
 
             this.PerfisDeUsuario = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<PerfilDeUsuario>();
-            this.TiposDePix = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<TipoDePix>();
             this.HistoricosFinanceiros = new List<ModeloDeHistoricoFinanceiroDaLista>();
 
             this.Id = usuario.Id;
             this.Nome = usuario.Nome.Valor;
             this.Email = usuario.Login.Valor;
             this.Ativo = usuario.Ativo;
-            this.Credito = usuario.Saldo.ToString("f");
             this.PerfilDeUsuario = usuario.PerfilDeUsuario;
-            this.TipoDePix = usuario.TipoDePix;
-            this.ChavePix = usuario.ChavePix;
             this.Telefone = usuario.Telefone.Numero;
             this.Ddd = usuario.Telefone.Ddd;
             usuario.HistoricosFinanceiros.ToList().ForEach(a => this.HistoricosFinanceiros.Add(new ModeloDeHistoricoFinanceiroDaLista(a)));
@@ -50,12 +45,8 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public string Ddd { get; set; }
         public string Telefone { get; set; }
         public bool Ativo { get; set; }
-        public string Credito { get; set; }
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
         public IEnumerable<SelectListItem> PerfisDeUsuario { get; set; }
         public IList<ModeloDeHistoricoFinanceiroDaLista> HistoricosFinanceiros { get; set; }
-        public TipoDePix TipoDePix { get; set; }
-        public IEnumerable<SelectListItem> TiposDePix { get; set; }
-        public string ChavePix { get; set; }
     }
 }

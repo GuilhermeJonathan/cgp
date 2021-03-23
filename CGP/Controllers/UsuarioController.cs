@@ -165,35 +165,11 @@ namespace Cgp.Controllers
             return RedirectToAction("Retiradas", "Usuario");
         }
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult CadastrarSaldo(int? Id, int Saldo, string TipoFinanceiro)
-        {
-            try
-            {
-                if (!User.EhAdministrador())
-                    UsuarioSemPermissao();
-
-                if (!Id.HasValue)
-                    UsuarioNaoEncontrado();
-                
-                var retorno = this._servicoDeGestaoDeUsuarios.CadastrarSaldo(Id.Value, Saldo, User.Logado(), TipoFinanceiro);
-                this.AdicionarMensagemDeSucesso(retorno);
-               
-                return RedirectToAction(nameof(Index));
-            } catch(Exception ex)
-            {
-                this.AdicionarMensagemDeErro(ex.Message);
-            }
-            return RedirectToAction(nameof(Index));
-        }
-
-
         [HttpGet]
         public JsonResult BuscarUsuario(int idUsuario)
         {
             var modelo = this._servicoDeGestaoDeUsuarios.BuscarUsuarioPorId(idUsuario);
-            return Json(new { nome = modelo.Nome, credito = modelo.Credito }, JsonRequestBehavior.AllowGet);
+            return Json(new { nome = modelo.Nome}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult AtivarUsuario(int id)

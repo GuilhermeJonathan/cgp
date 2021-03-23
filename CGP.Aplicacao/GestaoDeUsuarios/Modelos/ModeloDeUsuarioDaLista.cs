@@ -17,7 +17,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
             this.DataDoCadastro = usuario.DataDoCadastro.ToShortDateString();
             this.Ativo = usuario.Ativo;
             this.PerfilDeUsuario = usuario.PerfilDeUsuario.ToString();
-            this.Saldo = usuario.Saldo.ToString("c2");
         }
 
         public int Id { get; set; }
@@ -26,6 +25,5 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public string DataDoCadastro { get; set; }
         public bool Ativo { get; set; }
         public string PerfilDeUsuario { get; set; }
-        public string Saldo { get; set; }
     }
 }

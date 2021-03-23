@@ -71,7 +71,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
                         throw new ExcecaoDeAplicacao("Já existe um usuário com o mesmo login");
                 }
 
-                usuarioParaAlterar.AlterarMeusDados(modelo.Nome, modelo.Email, modelo.Ddd, modelo.Telefone, modelo.TipoDePix, modelo.ChavePix);
+                usuarioParaAlterar.AlterarMeusDados(modelo.Nome, modelo.Email, modelo.Ddd, modelo.Telefone);
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Meus dados alterado com sucesso.";
@@ -137,54 +137,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             }
         }
 
-        public string CadastrarSaldo(int id, decimal saldo, UsuarioLogado usuario, string tipoDeSolicitacaoFinanceira)
-        {
-            try
-            {
-                if (saldo <= 0)
-                    throw new ExcecaoDeAplicacao("Não é possível adicionar saldo negativo à conta");
-
-                var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(id);
-                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
-
-                if (usuarioParaAlterar != null)
-                {
-                    var TipoFinanceiro = tipoDeSolicitacaoFinanceira == "Dinheiro "? TipoDeSolicitacaoFinanceira.Dinheiro : tipoDeSolicitacaoFinanceira == "Premiacao" ? TipoDeSolicitacaoFinanceira.Premiacao : TipoDeSolicitacaoFinanceira.Dinheiro;
-                    if (saldo > 0)
-                        usuarioParaAlterar.AdicionarSaldo($"Adição de Saldo", saldo, usuarioBanco.Id, TipoFinanceiro);   
-                }
-
-                this._servicoExternoDePersistencia.Persistir();
-                return "Saldo adicionado com sucesso.";
-            }
-            catch (Exception ex)
-            {
-                throw new ExcecaoDeAplicacao(ex.Message);
-            }
-        }
-
-        public string CadastrarSaldoParaPremiacao(Usuario usuario, decimal saldo, UsuarioLogado usuarioLogado, string textoPremiacao)
-        {
-            try
-            {
-                if (saldo <= 0)
-                    throw new ExcecaoDeAplicacao("Não é possível adicionar saldo negativo à conta");
-
-                if (usuario != null)
-                {
-                    if (saldo > 0)
-                        usuario.AdicionarSaldo(textoPremiacao, saldo, usuarioLogado.Id, TipoDeSolicitacaoFinanceira.Premiacao);
-                }
-
-                this._servicoExternoDePersistencia.Persistir();
-                return "Saldo adicionado com sucesso.";
-            }
-            catch (Exception ex)
-            {
-                throw new ExcecaoDeAplicacao(ex.Message);
-            }
-        }
-
         public int BuscarUsuariosNovos()
         {
             var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarQtdUsuariosNovos();
@@ -225,38 +177,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             historicos.ToList().ForEach(a => modelo.Lista.Add(new ModeloDeHistoricoFinanceiroDaLista(a)));
 
             return new ModeloDeListaDeHistoricosFinanceiros(historicos, historicos.Count, filtro);
-        }
-
-        public string RetirarSaldo(decimal saldo, UsuarioLogado usuario, int tipoDePix, string chavePix)
-        {
-            try
-            {
-                if (saldo <= 0)
-                    throw new ExcecaoDeAplicacao("Não é possível retirar saldo negativo da conta");
-
-                var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
-
-                if (saldo > usuarioParaAlterar.Saldo)
-                    throw new ExcecaoDeAplicacao("O pedido de retirada é maior que o saldo da conta.");
-
-                if (usuarioParaAlterar != null)
-                {
-                    if (saldo > 0)
-                    {
-                        if(String.IsNullOrEmpty(usuarioParaAlterar.ChavePix))
-                            usuarioParaAlterar.CadastrarPix((TipoDePix)tipoDePix, chavePix);
-
-                        usuarioParaAlterar.SubtrairCreditoPix($"Pedido de Retirada", saldo, usuarioParaAlterar.Id, TipoDeSolicitacaoFinanceira.Saque, (TipoDePix)tipoDePix, chavePix);
-                    }
-                }
-
-                this._servicoExternoDePersistencia.Persistir();
-                return "Pedido de retirada realizado com sucesso.";
-            }
-            catch (Exception ex)
-            {
-                throw new ExcecaoDeAplicacao(ex.Message);
-            }
         }
 
         public ModeloDeEdicaoDeRetirada BuscarRetiradaPorId(int id)

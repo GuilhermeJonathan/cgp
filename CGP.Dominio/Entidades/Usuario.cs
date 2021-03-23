@@ -21,11 +21,8 @@ namespace Cgp.Dominio.Entidades
         public bool Ativo { get; set; }
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
         public bool UsuarioNovo { get; set; }
-        public decimal Saldo { get; set; }
         public Telefone Telefone { get; set; }
         public ICollection<HistoricoFinanceiro> HistoricosFinanceiros { get; set; }
-        public TipoDePix TipoDePix { get; set; }
-        public string ChavePix { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -69,7 +66,7 @@ namespace Cgp.Dominio.Entidades
             this.PerfilDeUsuario = perfilDeUsuario;
         }
 
-        public void AlterarMeusDados(string nome, string email, string ddd, string telefone, TipoDePix tipoDePix, string chavePix)
+        public void AlterarMeusDados(string nome, string email, string ddd, string telefone)
         {
             this.Nome = new Nome(nome);
             this.Login = new LoginUsuario(email);
@@ -78,9 +75,6 @@ namespace Cgp.Dominio.Entidades
                 this.Telefone = new Telefone(ddd, telefone);
             else
                 this.Telefone = Telefone.Vazio;
-
-            this.TipoDePix = tipoDePix;
-            this.ChavePix = chavePix;
         }
 
         public void AtivarUsuario()
@@ -92,30 +86,6 @@ namespace Cgp.Dominio.Entidades
         public void InativarUsuario()
         {
             this.Ativo = false;
-        }
-
-        public void SubtrairCredito(string descricao, decimal valor, int idUsuario, TipoDeSolicitacaoFinanceira tipoDeSolicitacaoDeFinanceiro)
-        {
-            this.Saldo = Saldo - valor;
-            this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Debito, idUsuario, tipoDeSolicitacaoDeFinanceiro));
-        }
-
-        public void SubtrairCreditoPix(string descricao, decimal valor, int idUsuario, TipoDeSolicitacaoFinanceira tipoDeSolicitacaoDeFinanceiro, TipoDePix tipoDePix, string chavePix)
-        {
-            this.Saldo = Saldo - valor;
-            this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Debito, idUsuario, tipoDeSolicitacaoDeFinanceiro, tipoDePix, chavePix));
-        }
-
-        public void AdicionarSaldo(string descricao, decimal valor, int idUsuario, TipoDeSolicitacaoFinanceira tipoDeSolicitacaoDeFinanceiro)
-        {
-            this.Saldo = Saldo + valor;
-            this.HistoricosFinanceiros.Add(new HistoricoFinanceiro(descricao, valor, this.Saldo, TipoDeOperacao.Credito, idUsuario, tipoDeSolicitacaoDeFinanceiro));
-        }
-
-        public void CadastrarPix(TipoDePix tipoDePix, string pix)
-        {
-            this.TipoDePix = tipoDePix;
-            this.ChavePix = pix;
         }
     }
 }
