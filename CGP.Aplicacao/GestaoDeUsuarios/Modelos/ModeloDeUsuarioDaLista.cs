@@ -17,6 +17,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
             this.DataDoCadastro = usuario.DataDoCadastro.ToShortDateString();
             this.Ativo = usuario.Ativo;
             this.PerfilDeUsuario = usuario.PerfilDeUsuario.ToString();
+            this.Batalhao = usuario.Batalhao != null ? usuario.Batalhao.Sigla : String.Empty;
         }
 
         public int Id { get; set; }
@@ -25,5 +26,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public string DataDoCadastro { get; set; }
         public bool Ativo { get; set; }
         public string PerfilDeUsuario { get; set; }
+        public string Batalhao { get; set; }
     }
 }

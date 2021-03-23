@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Mapeamentos
 {
-    public class MapeamentoDeTime : EntityTypeConfiguration<Time>
+    public class MapeamentoDeBatalhao : EntityTypeConfiguration<Batalhao>
     {
-        public MapeamentoDeTime()
+        public MapeamentoDeBatalhao()
         {
-            this.ToTable("Times");
+            this.ToTable("Batalhoes");
         }
     }
 }

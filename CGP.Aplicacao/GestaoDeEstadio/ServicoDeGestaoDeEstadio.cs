@@ -57,7 +57,7 @@ namespace Cgp.Aplicacao.GestaoDeEstadio
         {
             try
             {
-                var time = this._servicoExternoDePersistencia.RepositorioDeTimes.PegarPorId(modelo.Time);
+                var time = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(modelo.Time);
                 var novoEstadio = new Estadio(modelo.Nome, modelo.Cidade, time);
                 this._servicoExternoDePersistencia.RepositorioDeEstadios.Inserir(novoEstadio);
                 this._servicoExternoDePersistencia.Persistir();
@@ -75,7 +75,7 @@ namespace Cgp.Aplicacao.GestaoDeEstadio
             try
             {
                 var estadio = this._servicoExternoDePersistencia.RepositorioDeEstadios.PegarPorId(modelo.Id);
-                var time = this._servicoExternoDePersistencia.RepositorioDeTimes.PegarPorId(modelo.Time);
+                var time = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(modelo.Time);
                 estadio.AlterarDados(modelo.Nome, modelo.Cidade, time, modelo.Ativo);
                 this._servicoExternoDePersistencia.Persistir();
 

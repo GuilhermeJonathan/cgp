@@ -34,11 +34,11 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
-        public IRepositorioDeTimes RepositorioDeTimes
+        public IRepositorioDeBatalhoes RepositorioDeBatalhoes
         {
             get
             {
-                return new RepositorioDeTime(this._contexto);
+                return new RepositorioDeBatalhoes(this._contexto);
             }
         }
 
@@ -47,6 +47,14 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             get
             {
                 return new RepositorioDeEstadio(this._contexto);
+            }
+        }
+
+        public IRepositorioDeComandosRegionais RepositorioDeComandosRegionais
+        {
+            get
+            {
+                return new RepositorioDeComandosRegionais(this._contexto);
             }
         }
 

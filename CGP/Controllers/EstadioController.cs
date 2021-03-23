@@ -1,6 +1,6 @@
 ﻿using Cgp.Aplicacao.GestaoDeEstadio;
 using Cgp.Aplicacao.GestaoDeEstadio.Modelos;
-using Cgp.Aplicacao.GestaoDeTimes;
+using Cgp.Aplicacao.GestaoDeBatalhoes;
 using Cgp.Aplicacao.Util;
 using Cgp.CustomExtensions;
 using Cgp.Dominio.Entidades;
@@ -16,9 +16,9 @@ namespace Cgp.Controllers
     public class EstadioController : Controller
     {
         private readonly IServicoDeGestaoDeEstadios _servicoDeGestaoDeEstadios;
-        private readonly IServicoDeGestaoDeTimes _servicoDeGestaoDeTimes;
+        private readonly IServicoDeGestaoDeBatalhoes _servicoDeGestaoDeTimes;
 
-        public EstadioController(IServicoDeGestaoDeEstadios servicoDeGestaoDeEstadios, IServicoDeGestaoDeTimes servicoDeGestaoDeTimes)
+        public EstadioController(IServicoDeGestaoDeEstadios servicoDeGestaoDeEstadios, IServicoDeGestaoDeBatalhoes servicoDeGestaoDeTimes)
         {
             this._servicoDeGestaoDeEstadios = servicoDeGestaoDeEstadios;
             this._servicoDeGestaoDeTimes = servicoDeGestaoDeTimes;
@@ -29,8 +29,8 @@ namespace Cgp.Controllers
         public ActionResult Index(ModeloDeListaDeEstadios modelo)
         {
 
-            modelo.Filtro.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
-                         () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesAtivos());
+            modelo.Filtro.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Nome), nameof(Batalhao.Id),
+                         () => this._servicoDeGestaoDeTimes.RetonarTodosOsBatalhoesAtivos());
 
             modelo = this._servicoDeGestaoDeEstadios.RetonarTodosOsEstadios(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
@@ -43,8 +43,8 @@ namespace Cgp.Controllers
         {
             var modelo = new ModeloDeCadastroDeEstadio();
 
-            modelo.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
-                       () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesAtivos());
+            modelo.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Nome), nameof(Batalhao.Id),
+                       () => this._servicoDeGestaoDeTimes.RetonarTodosOsBatalhoesAtivos());
 
             return View(modelo);
         }
@@ -67,8 +67,8 @@ namespace Cgp.Controllers
 
             var modelo = this._servicoDeGestaoDeEstadios.BuscarEstadioPorId(id.Value);
 
-            modelo.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Time>(nameof(Time.Nome), nameof(Time.Id),
-                         () => this._servicoDeGestaoDeTimes.RetonarTodosOsTimesAtivos());
+            modelo.Times = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Nome), nameof(Batalhao.Id),
+                         () => this._servicoDeGestaoDeTimes.RetonarTodosOsBatalhoesAtivos());
 
             return View(modelo);
         }

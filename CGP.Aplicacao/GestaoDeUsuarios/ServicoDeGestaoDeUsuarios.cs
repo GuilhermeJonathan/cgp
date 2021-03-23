@@ -45,8 +45,9 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         {
             try
             {
+                var batalhao = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(modelo.Batalhao);
                 var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(modelo.Id);
-                usuarioParaAlterar.AlterarDados(modelo.Nome, modelo.Email, modelo.Ativo, modelo.PerfilDeUsuario);
+                usuarioParaAlterar.AlterarDados(modelo.Nome, modelo.Email, modelo.Ativo, modelo.PerfilDeUsuario, batalhao);
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Usuário alterado com sucesso.";
@@ -70,8 +71,9 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
                     if (usuarioComMesmoLogin != null)
                         throw new ExcecaoDeAplicacao("Já existe um usuário com o mesmo login");
                 }
+                var batalhao = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(modelo.Batalhao);
 
-                usuarioParaAlterar.AlterarMeusDados(modelo.Nome, modelo.Email, modelo.Ddd, modelo.Telefone);
+                usuarioParaAlterar.AlterarMeusDados(modelo.Nome, modelo.Email, modelo.Ddd, modelo.Telefone, batalhao);
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Meus dados alterado com sucesso.";
@@ -106,7 +108,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         public ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, int pagina, int registrosPorPagina = 30)
         {
             var quantidadeEncontrada = 0;
-            var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarUsuariosPorFiltro(filtro.Nome, filtro.Email, filtro.Ativo, 
+            var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarUsuariosPorFiltro(filtro.Nome, filtro.Email, filtro.Batalhao, filtro.Ativo, 
                 pagina, registrosPorPagina, out quantidadeEncontrada);
 
             return new ModeloDeListaDeUsuarios(usuarios, quantidadeEncontrada, filtro);
@@ -178,29 +180,5 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
 
             return new ModeloDeListaDeHistoricosFinanceiros(historicos, historicos.Count, filtro);
         }
-
-        public ModeloDeEdicaoDeRetirada BuscarRetiradaPorId(int id)
-        {
-            var historico = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarHistoricoComUsuario(id);
-            return new ModeloDeEdicaoDeRetirada(historico);
-        }
-
-        public string AlterarDadosRetirada(ModeloDeEdicaoDeRetirada modelo, UsuarioLogado usuario)
-        {
-            try
-            {
-                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
-                var historico = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarHistoricoComUsuario(modelo.Id);
-
-                historico.AlterarDados(modelo.RealizouPagamento, usuarioBanco, modelo.Comprovante);
-                this._servicoExternoDePersistencia.Persistir();
-                return "Pedido de retirada alterado com sucesso.";
-            }
-            catch (Exception ex)
-            {
-                throw new ExcecaoDeAplicacao(ex.Message);
-            }
-        }
-
     }
 }

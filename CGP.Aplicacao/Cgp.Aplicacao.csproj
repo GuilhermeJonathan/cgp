@@ -67,6 +67,13 @@
     <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="ExcecaoDeAplicacao.cs" />
+    <Compile Include="GestaoDeComandosRegionais\IServicoDeGestaoDeComandosRegionais.cs" />
+    <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeCadastroDeComandoRegional.cs" />
+    <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeComandosRegionaisDaLista.cs" />
+    <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeEdicaoDeComandoRegional.cs" />
+    <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeFiltroDeComandoRegional.cs" />
+    <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeListaDeComandosRegionais.cs" />
+    <Compile Include="GestaoDeComandosRegionais\ServicoDeGestaoDeComandosRegionais.cs" />
     <Compile Include="GestaoDeDashboard\IServicoDeGestaoDeDashboard.cs" />
     <Compile Include="GestaoDeDashboard\Modelos\ModeloDeDashboardDaLista.cs" />
     <Compile Include="GestaoDeDashboard\Modelos\ModeloDeFiltroDeDashboard.cs" />
@@ -82,16 +89,15 @@
     <Compile Include="GestaoDeFuncionario\IServicoDeGestaoDeFuncionarios.cs" />
     <Compile Include="GestaoDeFuncionario\Modelos\ModeloDeCadastroDeFuncionario.cs" />
     <Compile Include="GestaoDeFuncionario\ServicoDeGestaoDeFuncionarios.cs" />
-    <Compile Include="GestaoDeTimes\IServicoDeGestaoDeTimes.cs" />
-    <Compile Include="GestaoDeTimes\Modelos\ModeloDeCadastroDeTime.cs" />
-    <Compile Include="GestaoDeTimes\Modelos\ModeloDeEdicaoDeTime.cs" />
-    <Compile Include="GestaoDeTimes\Modelos\ModeloDeFiltroDeTime.cs" />
-    <Compile Include="GestaoDeTimes\Modelos\ModeloDeListaDeTimes.cs" />
-    <Compile Include="GestaoDeTimes\Modelos\ModeloDeTimesDaLista.cs" />
-    <Compile Include="GestaoDeTimes\ServicoDeGestaoDeTimes.cs" />
+    <Compile Include="GestaoDeBatalhoes\IServicoDeGestaoDeBatalhoes.cs" />
+    <Compile Include="GestaoDeBatalhoes\Modelos\ModeloDeCadastroDeBatalhao.cs" />
+    <Compile Include="GestaoDeBatalhoes\Modelos\ModeloDeEdicaoDeBatalhao.cs" />
+    <Compile Include="GestaoDeBatalhoes\Modelos\ModeloDeFiltroDeBatalhao.cs" />
+    <Compile Include="GestaoDeBatalhoes\Modelos\ModeloDeListaDeBatalhoes.cs" />
+    <Compile Include="GestaoDeBatalhoes\Modelos\ModeloDeBatalhoesDaLista.cs" />
+    <Compile Include="GestaoDeBatalhoes\ServicoDeGestaoDeBatalhoes.cs" />
     <Compile Include="GestaoDeUsuarios\IServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeCadastroDeUsuario.cs" />
-    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeRetirada.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeUsuario.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeHistoricoFinanceiro.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeUsuario.cs" />
@@ -130,5 +136,6 @@
       <Name>Cgp.Infraestrutura</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

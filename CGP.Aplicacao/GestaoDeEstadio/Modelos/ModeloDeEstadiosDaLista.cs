@@ -21,7 +21,7 @@ namespace Cgp.Aplicacao.GestaoDeEstadio.Modelos
             this.Id = estadio.Id;
             this.Nome = estadio.Nome;
             this.Cidade = estadio.Cidade;
-            this.ImagemTime = estadio.Time != null ? $"{caminhoBlob}arquivos/escudos/{estadio.Time.Imagem}" : "";
+            this.ImagemTime = estadio.Time != null ? $"{caminhoBlob}arquivos/escudos/{estadio.Time.Cidade}" : "";
             this.DataDoCadastro = estadio.DataDoCadastro.ToShortDateString();
             this.Time = estadio.Time;
             this.Ativo = estadio.Ativo ? "Sim" : "Não";
@@ -33,6 +33,6 @@ namespace Cgp.Aplicacao.GestaoDeEstadio.Modelos
         public string Ativo { get; set; }
         public string ImagemTime { get; set; }
         public string DataDoCadastro { get; set; }
-        public Time Time { get; set; }
+        public Batalhao Time { get; set; }
     }
 }

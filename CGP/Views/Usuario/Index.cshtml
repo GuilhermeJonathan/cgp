@@ -40,10 +40,14 @@
                                 <div class="col-lg-6">
                                     @Html.InputTextFor(a => a.Filtro.Email, "Email", required: false)
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="control-label"> Ativo </label>
-                                @Html.CheckBoxFor(m => m.Filtro.Ativo, new { @class = "checkbox" })
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Batalhão </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Batalhao, Model.Filtro.Batalhoes, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Ativo </label>
+                                    @Html.CheckBoxFor(m => m.Filtro.Ativo, new { @class = "checkbox" })
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -73,13 +77,11 @@
                        
                              colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
                                      m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Editar", "Usuario", new { id = m.Id })" title="Editar" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></div>);
-
-                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
-                                   m => @<div class="btn-group btn-group-sm" style="width: 34px;"><a href="@Url.Action("Historico", "Usuario", new { id = m.Id })" title="Histórico Financeiro" class="btn btn-info"><i class="fas fa-history"></i></a></div>);
-
+                       
                                colunas.Add(m => m.Nome).Titled("Nome");
                                colunas.Add(m => m.Email).Titled("Email");
                                colunas.Add(m => m.PerfilDeUsuario).Titled("Perfil");
+                               colunas.Add(m => m.Batalhao).Titled("Perfil");
                                colunas.Add(m => m.DataDoCadastro).Titled("DataDoCadastro");
 
                                 colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(

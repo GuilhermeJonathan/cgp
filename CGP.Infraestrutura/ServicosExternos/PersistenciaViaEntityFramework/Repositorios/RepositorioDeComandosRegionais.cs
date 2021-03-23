@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
-    public class RepositorioDeTime : Repositorio<Time>, IRepositorioDeTimes
+    public class RepositorioDeComandosRegionais : Repositorio<ComandoRegional>, IRepositorioDeComandosRegionais
     {
-        public RepositorioDeTime(Contexto contexto) : base(contexto) { }
+        public RepositorioDeComandosRegionais(Contexto contexto) : base(contexto) { }
 
-        public IList<Time> RetornarTodosOsTimes(string nome, bool ativo, out int quantidadeEncontrada)
+        public IList<ComandoRegional> RetornarTodosOsComandosRegionaisPorFiltro(string nome, bool ativo, out int quantidadeEncontrada)
         {
-            var query = this._contexto.Set<Time>().AsQueryable();
+            var query = this._contexto.Set<ComandoRegional>().AsQueryable();
 
             if (!string.IsNullOrEmpty(nome))
                 query = query.Where(c => c.Nome.Contains(nome));
@@ -25,16 +25,16 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             return query.OrderBy(a => a.Nome).ToList();
         }
 
-        public IList<Time> RetornarTodosOsTimesAtivos()
+        public IList<ComandoRegional> RetornarTodosOsComandosRegionaisAtivos()
         {
-            var query = this._contexto.Set<Time>().AsQueryable();
+            var query = this._contexto.Set<ComandoRegional>().AsQueryable();
             query = query.Where(c => c.Ativo);
             return query.OrderBy(a => a.Nome).ToList();
         }
 
-        public Time PegarPorId(int id)
+        public ComandoRegional PegarPorId(int id)
         {
-            return this._contexto.Set<Time>().FirstOrDefault(a => a.Id == id);
+            return this._contexto.Set<ComandoRegional>().FirstOrDefault(a => a.Id == id);
         }
     }
 }

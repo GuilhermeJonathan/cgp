@@ -192,7 +192,7 @@
     <Compile Include="Controllers\ExtratoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\TimeController.cs" />
+    <Compile Include="Controllers\BatalhaoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="CustomExtensions\ControllerExtensions.cs" />
     <Compile Include="CustomExtensions\HtmlHelpers.cs" />
@@ -372,14 +372,14 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Time\Index.cshtml" />
+    <Content Include="Views\Batalhao\Index.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\Time\Editar.cshtml" />
+    <Content Include="Views\Batalhao\Editar.cshtml" />
     <Content Include="Views\Shared\_Mensagens.cshtml" />
     <Content Include="Views\Estadio\Index.cshtml" />
     <Content Include="Views\Estadio\Editar.cshtml" />
-    <Content Include="Views\Time\Cadastrar.cshtml" />
+    <Content Include="Views\Batalhao\Cadastrar.cshtml" />
     <Content Include="Views\Estadio\Cadastrar.cshtml" />
     <Content Include="Views\Resultado\Index.cshtml" />
     <Content Include="Views\Login\Cadastrar.cshtml" />

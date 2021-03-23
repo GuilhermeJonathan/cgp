@@ -2,7 +2,7 @@
 using Cgp.Aplicacao.GestaoDeDashboard;
 using Cgp.Aplicacao.GestaoDeEstadio;
 using Cgp.Aplicacao.GestaoDeFuncionarios;
-using Cgp.Aplicacao.GestaoDeTimes;
+using Cgp.Aplicacao.GestaoDeBatalhoes;
 using Cgp.Aplicacao.GestaoDeUsuarios;
 using Cgp.Aplicacao.Login;
 using Cgp.Aplicacao.MontagemDeEmails;
@@ -19,6 +19,7 @@ using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using System.Web.Mvc;
 using Container = SimpleInjector.Container;
+using Cgp.Aplicacao.GestaoDeComandosRegionais;
 
 namespace Cgp.App_Start
 {
@@ -35,13 +36,14 @@ namespace Cgp.App_Start
             container.Register<IServicoDeLogin, ServicoDeLogin>(Lifestyle.Scoped);
             container.Register<IServicoDeGeracaoDeHashSha, ServicoDeGeracaoDeHashSha>(Lifestyle.Scoped);
             container.Register<IServicoExternoDeAutenticacao, ServicoExternoDeAutenticacaoViaCookieOwin>(Lifestyle.Scoped);
-            container.Register<IServicoDeGestaoDeTimes, ServicoDeGestaoDeTimes>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeBatalhoes, ServicoDeGestaoDeBatalhoes>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeEstadios, ServicoDeGestaoDeEstadios>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeUsuarios, ServicoDeGestaoDeUsuarios>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeDashboard, ServicoDeGestaoDeDashboard>(Lifestyle.Scoped);
             container.Register<IServicoDeGeracaoDeDocumentosEmPdf, ServicoDeGeracaoDeDocumentosEmPdf>(Lifestyle.Scoped);
             container.Register<IServicoDeEnvioDeEmails, ServicoDeEnvioDeEmails>(Lifestyle.Scoped);
             container.Register<IServicoDeMontagemDeEmails, ServicoDeMontagemDeEmails>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeComandosRegionais, ServicoDeGestaoDeComandosRegionais>(Lifestyle.Scoped);
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
                VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")));

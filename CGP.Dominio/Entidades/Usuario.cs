@@ -23,6 +23,7 @@ namespace Cgp.Dominio.Entidades
         public bool UsuarioNovo { get; set; }
         public Telefone Telefone { get; set; }
         public ICollection<HistoricoFinanceiro> HistoricosFinanceiros { get; set; }
+        public Batalhao Batalhao { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -58,15 +59,16 @@ namespace Cgp.Dominio.Entidades
             this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
         }
 
-        public void AlterarDados(string nome, string email, bool ativo, PerfilDeUsuario perfilDeUsuario)
+        public void AlterarDados(string nome, string email, bool ativo, PerfilDeUsuario perfilDeUsuario, Batalhao batalhao)
         {
             this.Nome = new Nome(nome);
             this.Login = new LoginUsuario(email);
             this.Ativo = ativo;
             this.PerfilDeUsuario = perfilDeUsuario;
+            this.Batalhao = batalhao;
         }
 
-        public void AlterarMeusDados(string nome, string email, string ddd, string telefone)
+        public void AlterarMeusDados(string nome, string email, string ddd, string telefone, Batalhao batalhao)
         {
             this.Nome = new Nome(nome);
             this.Login = new LoginUsuario(email);

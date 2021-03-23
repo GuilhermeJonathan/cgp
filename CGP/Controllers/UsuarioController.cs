@@ -1,7 +1,9 @@
-﻿using Cgp.Aplicacao.GestaoDeUsuarios;
+﻿using Cgp.Aplicacao.GestaoDeBatalhoes;
+using Cgp.Aplicacao.GestaoDeUsuarios;
 using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
 using Cgp.Aplicacao.Util;
 using Cgp.CustomExtensions;
+using Cgp.Dominio.Entidades;
 using Cgp.Filter;
 using Cgp.Web.CustomExtensions;
 using System;
@@ -17,10 +19,12 @@ namespace Cgp.Controllers
     public class UsuarioController : Controller
     {
         private readonly IServicoDeGestaoDeUsuarios _servicoDeGestaoDeUsuarios;
+        private readonly IServicoDeGestaoDeBatalhoes _servicoDeGestaoDeBatalhoes;
 
-        public UsuarioController(IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios)
+        public UsuarioController(IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios, IServicoDeGestaoDeBatalhoes servicoDeGestaoDeBatalhoes)
         {
             this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
+            this._servicoDeGestaoDeBatalhoes = servicoDeGestaoDeBatalhoes;
         }
 
         [HttpGet]
@@ -30,6 +34,10 @@ namespace Cgp.Controllers
                 return RedirectToAction("Index", "Home");
 
             modelo = this._servicoDeGestaoDeUsuarios.RetonarUsuariosPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
+
+            modelo.Filtro.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
+                  () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
+
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
             return View(modelo);
         }
@@ -45,6 +53,9 @@ namespace Cgp.Controllers
                 UsuarioNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeUsuarios.BuscarUsuarioPorId(id.Value);
+
+            modelo.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
+                  () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
 
             return View(modelo);
         }
@@ -95,6 +106,9 @@ namespace Cgp.Controllers
 
             var retorno = this._servicoDeGestaoDeUsuarios.AlterarDadosDoUsuario(modelo, User.Logado());
 
+            modelo.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
+                  () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
+
             this.AdicionarMensagemDeSucesso(retorno);
             return RedirectToAction(nameof(Index));
         }
@@ -135,34 +149,6 @@ namespace Cgp.Controllers
                 this.AdicionarMensagemDeErro(ex.Message);
             }
             return RedirectToAction(nameof(Index));
-        }
-
-        [Authorize]
-        [HttpGet]
-        public ActionResult EditarRetirada(int? id)
-        {
-            if (!User.EhAdministrador())
-                UsuarioSemPermissao();
-
-            if (!id.HasValue)
-                UsuarioNaoEncontrado();
-
-            var modelo = this._servicoDeGestaoDeUsuarios.BuscarRetiradaPorId(id.Value);
-
-            return View(modelo);
-        }
-
-        [Authorize]
-        [HttpPost]
-        public ActionResult EditarRetirada(ModeloDeEdicaoDeRetirada modelo)
-        {
-            if (!User.EhAdministrador())
-                UsuarioSemPermissao();
-
-            var retorno = this._servicoDeGestaoDeUsuarios.AlterarDadosRetirada(modelo, User.Logado());
-
-            this.AdicionarMensagemDeSucesso(retorno);
-            return RedirectToAction("Retiradas", "Usuario");
         }
 
         [HttpGet]

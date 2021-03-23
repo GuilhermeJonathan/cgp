@@ -24,7 +24,5 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado);
         ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id);
         ModeloDeListaDeHistoricosFinanceiros BuscarHistoricosParaSaque(ModeloDeFiltroDeHistoricoFinanceiro filtro);
-        ModeloDeEdicaoDeRetirada BuscarRetiradaPorId(int id);
-        string AlterarDadosRetirada(ModeloDeEdicaoDeRetirada modelo, UsuarioLogado usuario);
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Cgp.Aplicacao.GestaoDeTimes.Modelos.ModeloDeEdicaoDeTime
+﻿@model Cgp.Aplicacao.GestaoDeBatalhoes.Modelos.ModeloDeEdicaoDeBatalhao
 
 @{
     ViewBag.Title = "Editar Time";
@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form role="form" action="@Url.Action("Editar", "Time")" method="post">
+                <form role="form" action="@Url.Action("Editar", "Batalhao")" method="post">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Editar Time</h3>
@@ -37,7 +37,14 @@
                                     @Html.InputTextFor(a => a.Nome, "Nome", required: false)
                                 </div>
                                 <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.Sigla, "Sigla", required: false)
+                                </div>
+                                <div class="col-lg-6">
                                     @Html.InputTextFor(a => a.DataDoCadastro, "Data do Cadastro", required: false, @readonly: true)
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Comando Regional </label>
+                                    @Html.DropDownListFor(m => m.ComandoRegional, Model.ComandosRegionais, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                             <div class="col-lg-6">
