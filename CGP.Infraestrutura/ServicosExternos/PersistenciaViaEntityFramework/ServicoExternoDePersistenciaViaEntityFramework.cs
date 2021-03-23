@@ -58,6 +58,22 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
+        public IRepositorioDeCidades RepositorioDeCidades
+        {
+            get
+            {
+                return new RepositorioDeCidades(this._contexto);
+            }
+        }
+
+        public IRepositorioDeUfs RepositorioDeUfs
+        {
+            get
+            {
+                return new RepositorioDeUfs(this._contexto);
+            }
+        }
+
         public void Persistir()
         {
             this._contexto.SaveChanges();

@@ -84,6 +84,15 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             return query.FirstOrDefault(a => a.Id == id);
         }
 
+        public Usuario BuscarUsuarioCompletoPorId(int id)
+        {
+            var query = base._contexto.Set<Usuario>()
+                .Include(a => a.Batalhao)
+                .Include(a => a.HistoricosFinanceiros)
+                .AsQueryable();
+            return query.FirstOrDefault(a => a.Id == id);
+        }
+
         public HistoricoFinanceiro BuscarHistoricoComUsuario(int id)
         {
             var query = base._contexto.Set<HistoricoFinanceiro>()

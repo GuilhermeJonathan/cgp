@@ -11,10 +11,11 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
     {
         public RepositorioDeBatalhoes(Contexto contexto) : base(contexto) { }
 
-        public IList<Batalhao> RetornarTodosOsBatalhoes(string nome, int comandoRegional, bool ativo, out int quantidadeEncontrada)
+        public IList<Batalhao> RetornarTodosOsBatalhoes(string nome, int comandoRegional, int cidade, bool ativo, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Batalhao>()
                 .Include(a => a.ComandoRegional)
+                .Include(a => a.Cidade)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(nome))
@@ -22,6 +23,9 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             if(comandoRegional > 0)
                 query = query.Where(c => c.ComandoRegional.Id == comandoRegional);
+
+            if (cidade > 0)
+                query = query.Where(c => c.Cidade.Id == cidade);
 
             query = query.Where(c => c.Ativo == ativo);
 
@@ -39,7 +43,10 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
         public Batalhao PegarPorId(int id)
         {
-            return this._contexto.Set<Batalhao>().Include(a => a.ComandoRegional).FirstOrDefault(a => a.Id == id);
+            return this._contexto.Set<Batalhao>()
+                .Include(a => a.ComandoRegional)
+                .Include(a => a.Cidade)
+                .FirstOrDefault(a => a.Id == id);
         }
     }
 }

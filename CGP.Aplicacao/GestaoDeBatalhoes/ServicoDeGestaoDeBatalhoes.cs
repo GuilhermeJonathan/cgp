@@ -24,7 +24,7 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes
             try
             {
                 var quantidadeEncontrada = 0;
-                var batalhoes = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.RetornarTodosOsBatalhoes(filtro.Nome, filtro.ComandoRegional, filtro.Ativo, out quantidadeEncontrada);
+                var batalhoes = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.RetornarTodosOsBatalhoes(filtro.Nome, filtro.ComandoRegional, filtro.Cidade, filtro.Ativo, out quantidadeEncontrada);
 
                 return new ModeloDeListaDeBatalhoes(batalhoes, quantidadeEncontrada, filtro);
             }
@@ -67,8 +67,9 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes
             {
                 var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
                 var comandoRegional = this._servicoExternoDePersistencia.RepositorioDeComandosRegionais.BuscarPorId(modelo.ComandoRegional);
+                var cidade = this._servicoExternoDePersistencia.RepositorioDeCidades.PegarPorId(modelo.Cidade);
 
-                var novoBatalhao = new Batalhao(modelo.Nome, modelo.Sigla, modelo.Cidade, comandoRegional, usuarioBanco);
+                var novoBatalhao = new Batalhao(modelo.Nome, modelo.Sigla, cidade, comandoRegional, usuarioBanco);
                 this._servicoExternoDePersistencia.RepositorioDeBatalhoes.Inserir(novoBatalhao);
                 this._servicoExternoDePersistencia.Persistir();
 
@@ -80,15 +81,16 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes
             }
         }
 
-        public string AlterarDadosDoTime(ModeloDeEdicaoDeBatalhao modelo, UsuarioLogado usuario)
+        public string AlterarDadosDoBatalhao(ModeloDeEdicaoDeBatalhao modelo, UsuarioLogado usuario)
         {
             try
             {
                 var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
                 var comandoRegional = this._servicoExternoDePersistencia.RepositorioDeComandosRegionais.BuscarPorId(modelo.ComandoRegional);
                 var batalhao = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(modelo.Id);
+                var cidade = this._servicoExternoDePersistencia.RepositorioDeCidades.PegarPorId(modelo.Cidade);
 
-                batalhao.AlterarDados(modelo.Nome, modelo.Sigla, comandoRegional, usuarioBanco, modelo.Ativo);
+                batalhao.AlterarDados(modelo.Nome, modelo.Sigla, cidade, comandoRegional, usuarioBanco, modelo.Ativo);
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Batalhão alterado com sucesso.";

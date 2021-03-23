@@ -16,6 +16,6 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes
         IList<ModeloDeBatalhoesDaLista> RetonarTodosOsTimesParaSelect();
         ModeloDeEdicaoDeBatalhao BuscarBatalhaoPorId(int id);
         string CadastrarBatalhao(ModeloDeCadastroDeBatalhao modelo, UsuarioLogado usuario);
-        string AlterarDadosDoTime(ModeloDeEdicaoDeBatalhao modelo, UsuarioLogado usuario);
+        string AlterarDadosDoBatalhao(ModeloDeEdicaoDeBatalhao modelo, UsuarioLogado usuario);
     }
 }

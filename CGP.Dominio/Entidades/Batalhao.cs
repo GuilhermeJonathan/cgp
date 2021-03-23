@@ -13,7 +13,7 @@ namespace Cgp.Dominio.Entidades
             this.Usuarios = new List<Usuario>();
         }
 
-        public Batalhao(string nome, string sigla, string cidade, ComandoRegional comandoRegional, Usuario usuario)
+        public Batalhao(string nome, string sigla, Cidade cidade, ComandoRegional comandoRegional, Usuario usuario)
         {
             this.Nome = nome;
             this.Sigla = sigla;
@@ -25,17 +25,18 @@ namespace Cgp.Dominio.Entidades
 
         public string Nome { get; set; }
         public string Sigla { get; set; }
-        public string Cidade { get; set; }
+        public Cidade Cidade { get; set; }
         public bool Ativo { get; set; }
         public ComandoRegional ComandoRegional { get; set; }
         public Usuario UsuarioQueAlterou { get; set; }
         public ICollection<Usuario> Usuarios { get; set; }
         public DateTime? DataUltimaAtualizacao { get; set; }
 
-        public void AlterarDados(string nome, string sigla, ComandoRegional comando, Usuario usuario, bool ativo)
+        public void AlterarDados(string nome, string sigla, Cidade cidade, ComandoRegional comando, Usuario usuario, bool ativo)
         {
             this.Nome = nome;
             this.Sigla = sigla;
+            this.Cidade = cidade;
             this.ComandoRegional = comando;
             this.Ativo = ativo;
             this.Atualizar(usuario);

@@ -34,11 +34,15 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <label class="control-label"> Comando Regional </label>
                                     @Html.DropDownListFor(m => m.Filtro.ComandoRegional, Model.Filtro.ComandosRegionais, new { @class = "form-control autoComplete" })
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Cidade </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Cidade, Model.Filtro.Cidades, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-4">
                                     @Html.InputTextFor(a => a.Filtro.Nome, "Nome", required: false)
                                 </div>
                             </div>

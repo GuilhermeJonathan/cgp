@@ -40,7 +40,8 @@
                                     @Html.InputTextFor(a => a.Sigla, "Sigla", required: true)
                                 </div>
                                 <div class="col-lg-6">
-                                    @Html.InputTextFor(a => a.Cidade, "Cidade", required: true)
+                                    <label class="control-label"> Cidade </label>
+                                    @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete" })
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="control-label"> Comando Regional </label>

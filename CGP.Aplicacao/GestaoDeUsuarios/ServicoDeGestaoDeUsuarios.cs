@@ -152,13 +152,13 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
 
         public ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id)
         {
-            var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(id);
+            var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioCompletoPorId(id);
             return new ModeloDeEdicaoDeUsuario(usuario);
         }
 
         public ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado)
         {
-            var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuarioLogado.Id);
+            var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioCompletoPorId(usuarioLogado.Id);
             return new ModeloDeEdicaoDeUsuario(usuario);
         }
 

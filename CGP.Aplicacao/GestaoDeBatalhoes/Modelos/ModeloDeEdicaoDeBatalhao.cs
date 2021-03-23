@@ -13,6 +13,7 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes.Modelos
         public ModeloDeEdicaoDeBatalhao()
         {
             this.ComandosRegionais = new List<SelectListItem>(); ;
+            this.Cidades = new List<SelectListItem>(); ;
         }
 
         public ModeloDeEdicaoDeBatalhao(Batalhao batalhao)
@@ -20,7 +21,7 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes.Modelos
             this.Id = batalhao.Id;
             this.Nome = batalhao.Nome;
             this.Sigla = batalhao.Sigla;
-            this.Cidade= batalhao.Cidade;
+            this.Cidade = batalhao.Cidade != null ? batalhao.Cidade.Id : 0;
             this.Ativo = batalhao.Ativo;
             this.ComandoRegional = batalhao.ComandoRegional != null ? batalhao.ComandoRegional.Id : 0;
             this.DataDoCadastro = batalhao.DataDoCadastro.ToShortDateString();
@@ -29,10 +30,11 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes.Modelos
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Sigla { get; set; }
-        public string Cidade { get; set; }
         public bool Ativo { get; set; }
         public string DataDoCadastro { get; set; }
         public int ComandoRegional { get; set; }
         public IEnumerable<SelectListItem> ComandosRegionais { get; set; }
+        public int Cidade { get; set; }
+        public IEnumerable<SelectListItem> Cidades { get; set; }
     }
 }

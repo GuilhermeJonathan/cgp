@@ -67,6 +67,8 @@
     <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="ExcecaoDeAplicacao.cs" />
+    <Compile Include="GestaoDeCidades\IServicoDeGestaoDeCidades.cs" />
+    <Compile Include="GestaoDeCidades\ServicoDeGestaoDeCidades.cs" />
     <Compile Include="GestaoDeComandosRegionais\IServicoDeGestaoDeComandosRegionais.cs" />
     <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeCadastroDeComandoRegional.cs" />
     <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeComandosRegionaisDaLista.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="GestaoDeBatalhoes\Modelos\ModeloDeListaDeBatalhoes.cs" />
     <Compile Include="GestaoDeBatalhoes\Modelos\ModeloDeBatalhoesDaLista.cs" />
     <Compile Include="GestaoDeBatalhoes\ServicoDeGestaoDeBatalhoes.cs" />
+    <Compile Include="GestaoDeUfs\IServicoDeGestaoDeUfs.cs" />
+    <Compile Include="GestaoDeUfs\ServicoDeGestaoDeUfs.cs" />
     <Compile Include="GestaoDeUsuarios\IServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeCadastroDeUsuario.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeUsuario.cs" />

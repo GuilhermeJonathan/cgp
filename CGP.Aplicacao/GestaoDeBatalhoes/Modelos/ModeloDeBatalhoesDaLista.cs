@@ -21,7 +21,7 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes.Modelos
             this.Id = batalhao.Id;
             this.Nome = batalhao.Nome;
             this.Sigla = batalhao.Sigla;
-            this.Cidade = batalhao.Cidade;
+            this.Cidade = batalhao.Cidade != null ? batalhao.Cidade.Descricao : String.Empty;
             this.NomeComando = batalhao.ComandoRegional != null ? batalhao.ComandoRegional.Sigla : String.Empty;
             this.DataDoCadastro = batalhao.DataDoCadastro.ToShortDateString();
             this.Ativo = batalhao.Ativo ? "Sim" : "Não";

@@ -36,6 +36,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
             this.PerfilDeUsuario = usuario.PerfilDeUsuario;
             this.Telefone = usuario.Telefone.Numero;
             this.Ddd = usuario.Telefone.Ddd;
+            this.Batalhao = usuario.Batalhao != null ? usuario.Batalhao.Id : 0;
             usuario.HistoricosFinanceiros.ToList().ForEach(a => this.HistoricosFinanceiros.Add(new ModeloDeHistoricoFinanceiroDaLista(a)));
         }
 

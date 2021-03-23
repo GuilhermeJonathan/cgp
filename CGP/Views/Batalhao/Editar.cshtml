@@ -40,16 +40,22 @@
                                     @Html.InputTextFor(a => a.Sigla, "Sigla", required: false)
                                 </div>
                                 <div class="col-lg-6">
-                                    @Html.InputTextFor(a => a.DataDoCadastro, "Data do Cadastro", required: false, @readonly: true)
+                                    <label class="control-label"> Cidade </label>
+                                    @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete" })
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="control-label"> Comando Regional </label>
                                     @Html.DropDownListFor(m => m.ComandoRegional, Model.ComandosRegionais, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <label class="control-label"> Ativo </label>
-                                @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.DataDoCadastro, "Data do Cadastro", required: false, @readonly: true)
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Ativo </label>
+                                    @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">

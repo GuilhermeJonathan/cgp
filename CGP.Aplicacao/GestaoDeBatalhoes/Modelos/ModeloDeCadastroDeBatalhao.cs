@@ -12,11 +12,13 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes.Modelos
         public ModeloDeCadastroDeBatalhao()
         {
             this.ComandosRegionais = new List<SelectListItem>();
+            this.Cidades = new List<SelectListItem>();
         }
 
         public string Nome { get; set; }
         public string Sigla { get; set; }
-        public string Cidade { get; set; }
+        public int Cidade { get; set; }
+        public IEnumerable<SelectListItem> Cidades { get; set; }
         public int ComandoRegional { get; set; }
         public IEnumerable<SelectListItem> ComandosRegionais { get; set; }
     }
