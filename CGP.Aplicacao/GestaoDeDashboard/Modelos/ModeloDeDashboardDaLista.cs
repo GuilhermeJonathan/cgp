@@ -14,11 +14,6 @@ namespace Cgp.Aplicacao.GestaoDeDashboard.Modelos
 
         }
 
-        public ModeloDeDashboardDaLista(Premiacao premiacao)
-        {
-
-        }
-
         public string Nome { get; set; }
         public string Valor { get; set; }
 

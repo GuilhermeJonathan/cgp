@@ -13,11 +13,6 @@ namespace Cgp.Infraestrutura.InterfaceDeServicosExternos
         IRepositorioDeUsuarios RepositorioDeUsuarios { get; }
         IRepositorioDeTimes RepositorioDeTimes { get; }
         IRepositorioDeEstadios RepositorioDeEstadios { get; }
-        IRepositorioDeRodadas RepositorioDeRodadas { get; }
-        IRepositorioDeJogos RepositorioDeJogos { get; }
-        IRepositorioDeApostas RepositorioDeApostas { get; }
-        IRepositorioDePremiacoes RepositorioDePremiacoes { get; }
-        IRepositorioDeTemporadas RepositorioDeTemporadas { get; }
         void Persistir();
         void Dispose();
     }

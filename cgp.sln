@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp.Aplicacao", "CGP.Aplica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp.SendGrid", "CGP.SendGrid\Cgp.SendGrid.csproj", "{AD5A819E-F820-4C22-8687-195276BF2481}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp", "CGP\Cgp.csproj", "{DB938795-BE03-4CD8-A523-F086D12BF25D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cgp.Web", "CGP\Cgp.Web.csproj", "{DB938795-BE03-4CD8-A523-F086D12BF25D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

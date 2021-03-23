@@ -50,8 +50,7 @@ namespace Cgp.Controllers
                 if (User.EhAdministrador())
                 {
                     var modelo = new ModeloDeListaDeDashboard();
-                    modelo = this._servicoDeGestaoDeDashboard.RetonarDashboardPorFiltro(modelo.Filtro, User.Logado());
-
+                    
                     return View(nameof(Dashboard), modelo);
                 }
             }

@@ -50,46 +50,6 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
-        public IRepositorioDeRodadas RepositorioDeRodadas
-        {
-            get
-            {
-                return new RepositorioDeRodada(this._contexto);
-            }
-        }
-
-        public IRepositorioDeJogos RepositorioDeJogos
-        {
-            get
-            {
-                return new RepositorioDeJogo(this._contexto);
-            }
-        }
-
-        public IRepositorioDeApostas RepositorioDeApostas
-        {
-            get
-            {
-                return new RepositorioDeAposta(this._contexto);
-            }
-        }
-
-        public IRepositorioDePremiacoes RepositorioDePremiacoes
-        {
-            get
-            {
-                return new RepositorioDePremiacao(this._contexto);
-            }
-        }
-
-        public IRepositorioDeTemporadas RepositorioDeTemporadas
-        {
-            get
-            {
-                return new RepositorioDeTemporada(this._contexto);
-            }
-        }
-
         public void Persistir()
         {
             this._contexto.SaveChanges();

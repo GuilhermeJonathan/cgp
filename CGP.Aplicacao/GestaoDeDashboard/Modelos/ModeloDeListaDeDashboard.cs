@@ -15,19 +15,6 @@ namespace Cgp.Aplicacao.GestaoDeDashboard.Modelos
             this.Lista = new List<ModeloDeDashboardDaLista>();
         }
 
-        public ModeloDeListaDeDashboard(IEnumerable<Premiacao> lista, int totalDeRegistros, ModeloDeFiltroDeDashboard filtro = null) : this()
-        {
-            if (lista == null)
-                return;
-
-            if (filtro != null)
-                this.Filtro = filtro;
-
-            this.TotalDeRegistros = totalDeRegistros;
-            this.ValorGeral = lista.Sum(a => a.ValorTotal).ToString("f");
-            this.ValorArrecado = lista.Sum(a => a.ValorAdministracao).ToString("f");
-        }
-
 
         public int TotalDeRegistros { get; set; }
         public string TotalApostas { get; set; }

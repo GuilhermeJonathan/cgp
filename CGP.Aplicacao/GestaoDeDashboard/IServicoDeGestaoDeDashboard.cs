@@ -10,6 +10,5 @@ namespace Cgp.Aplicacao.GestaoDeDashboard
 {
     public interface IServicoDeGestaoDeDashboard
     {
-        ModeloDeListaDeDashboard RetonarDashboardPorFiltro(ModeloDeFiltroDeDashboard filtro, UsuarioLogado usuario);
     }
 }

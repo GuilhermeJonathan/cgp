@@ -20,27 +20,6 @@ namespace Cgp.Aplicacao.GestaoDeDashboard
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
             this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
         }
-
-        public ModeloDeListaDeDashboard RetonarDashboardPorFiltro(ModeloDeFiltroDeDashboard filtro, UsuarioLogado usuario)
-        {
-            var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
-            filtro.Usuario = usuario.PerfilDeUsuario != PerfilDeUsuario.Administrador ? usuarioBanco.Id : 0;
-
-            var premiacoes = this._servicoExternoDePersistencia.RepositorioDePremiacoes.RetornarPremiacoesPorTemporada(filtro.Usuario);
-            var modelo = new ModeloDeListaDeDashboard(premiacoes, 0, filtro); ;
-
-            var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarTodosUsuarios();
-
-            if(usuarios != null)
-            {
-                var saques = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarHistoricosFinanceirosDeSaques();
-                var valorCaixa = usuarios.Sum(a => a.Saldo).ToString("f");
-                modelo.ValorCaixa = valorCaixa;
-                modelo.TotalSaques = saques.Count.ToString();
-            }
-
-            return modelo;
-        }
-
+        
     }
 }

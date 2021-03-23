@@ -53,69 +53,8 @@
                             <p> Estádios </p>
                         </a>
                     </li>
-
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index", "Temporada")" class="nav-link @Html.Raw(controller == "Temporada" ? "active" : "")">
-                            <i class="nav-icon fas fa-calendar-alt"></i>
-                            <p> Temporadas </p>
-                        </a>
-                    </li>
                 }
 
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Rodada" )" class="nav-link @Html.Raw(controller == "Rodada" ? "active" : "")">
-                        <i class="nav-icon fas fa-table"></i> 
-                        <p> Rodadas </p>
-                    </a>
-                </li>
-
-                @if (!User.EhAdministrador())
-                {
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index", "Extrato")" class="nav-link @Html.Raw(controller == "Extrato" ? "active" : "")">
-                            <i class="nav-icon fas fa-dollar-sign"></i>
-                            <p> Extrato Financeiro </p>
-                        </a>
-                    </li>
-                }
-
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Jogo" )" class="nav-link @Html.Raw(controller == "Jogo" ? "active" : "")">
-                        <i class="nav-icon fas  fa-futbol"></i>
-                        <p> Jogos </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Aposta" )" class="nav-link @Html.Raw(controller == "Aposta" ? "active" : "")">
-                        <i class="nav-icon fas fa-receipt"></i>
-                        <p> Apostas </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "ApostaExclusiva" )" class="nav-link @Html.Raw(controller == "ApostaExclusiva" ? "active" : "")">
-                        <i class="nav-icon fas fa-dollar-sign"></i>
-                        <p> Apostas Exclusivas</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Resultado" )" class="nav-link @Html.Raw(controller == "Resultado" ? "active" : "")">
-                        <i class="nav-icon fas fa-list"></i>
-                        <p> Classificação Geral </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "ResultadoExclusivo" )" class="nav-link @Html.Raw(controller == "ResultadoExclusivo" ? "active" : "")">
-                        <i class="nav-icon fas fa-list"></i>
-                        <p> Classificação Exclusiva </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Premiacao" )" class="nav-link @Html.Raw(controller == "Premiacao" ? "active" : "")">
-                        <i class="nav-icon fas fa-dollar-sign"></i>
-                        <p> Premiações</p>
-                    </a>
-                </li>
             </ul>
         </nav>
     </div>
