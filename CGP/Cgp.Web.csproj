@@ -335,9 +335,9 @@
     <Content Include="Content\alt\adminlte.pages.min.css.map" />
     <Content Include="Content\alt\adminlte.plugins.css.map" />
     <Content Include="Content\alt\adminlte.plugins.min.css.map" />
-    <None Include="Properties\PublishProfiles\Campeonato - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\Campeonato - ReadOnly - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\Campeonato - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\caratergeral - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\caratergeral - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\caratergeral - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\campeonatoGeral.js" />
     <Content Include="Scripts\gridmvc.js" />
