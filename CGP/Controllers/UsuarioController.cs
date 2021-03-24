@@ -116,45 +116,7 @@ namespace Cgp.Controllers
             this.AdicionarMensagemDeSucesso(retorno);
             return RedirectToAction(nameof(Index));
         }
-
-        [TratarErros]
-        [Authorize]
-        [HttpGet]
-        public ActionResult Historico(int? id)
-        {
-            try
-            {
-                if (!id.HasValue)
-                    UsuarioNaoEncontrado();
-
-                var modelo = this._servicoDeGestaoDeUsuarios.BuscarUsuarioComHistoricoPorId(id.Value);
-                this.TotalDeRegistrosEncontrados(modelo.HistoricosFinanceiros.Count);
-                return View(modelo);
-            } catch(Exception ex)
-            {
-                this.AdicionarMensagemDeErro(ex.Message);
-            }
-            return RedirectToAction(nameof(Index));
-        }
-
-        public ActionResult Retiradas(ModeloDeListaDeHistoricosFinanceiros modelo)
-        {
-            try
-            {
-                modelo.Filtro.Usuarios = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<ModeloDeUsuarioDaLista>(nameof(ModeloDeUsuarioDaLista.Nome), nameof(ModeloDeUsuarioDaLista.Id),
-                          () => this._servicoDeGestaoDeUsuarios.RetonarTodosOsUsuariosAtivos());
-
-                modelo = this._servicoDeGestaoDeUsuarios.BuscarHistoricosParaSaque(modelo.Filtro);
-                this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
-                return View(modelo);
-            }
-            catch (Exception ex)
-            {
-                this.AdicionarMensagemDeErro(ex.Message);
-            }
-            return RedirectToAction(nameof(Index));
-        }
-
+        
         [HttpGet]
         public JsonResult BuscarUsuario(int idUsuario)
         {

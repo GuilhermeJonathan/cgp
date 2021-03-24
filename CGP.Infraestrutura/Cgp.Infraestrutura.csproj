@@ -108,7 +108,6 @@
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCidade.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeComandosRegionais.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeFuncionario.cs" />
-    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeHistoricoFinanceiro.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeBatalhao.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeUf.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeUsuario.cs" />

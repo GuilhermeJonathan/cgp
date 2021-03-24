@@ -16,7 +16,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public ModeloDeEdicaoDeUsuario()
         {
             this.PerfisDeUsuario = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<PerfilDeUsuario>();
-            this.HistoricosFinanceiros = new List<ModeloDeHistoricoFinanceiroDaLista>();
             this.Batalhoes = new List<SelectListItem>();
         }
 
@@ -26,7 +25,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
                 return;
 
             this.PerfisDeUsuario = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<PerfilDeUsuario>();
-            this.HistoricosFinanceiros = new List<ModeloDeHistoricoFinanceiroDaLista>();
             this.Batalhoes = new List<SelectListItem>();
 
             this.Id = usuario.Id;
@@ -37,7 +35,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
             this.Telefone = usuario.Telefone.Numero;
             this.Ddd = usuario.Telefone.Ddd;
             this.Batalhao = usuario.Batalhao != null ? usuario.Batalhao.Id : 0;
-            usuario.HistoricosFinanceiros.ToList().ForEach(a => this.HistoricosFinanceiros.Add(new ModeloDeHistoricoFinanceiroDaLista(a)));
         }
 
         public int Id { get; set; }
@@ -50,7 +47,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public bool Ativo { get; set; }
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
         public IEnumerable<SelectListItem> PerfisDeUsuario { get; set; }
-        public IList<ModeloDeHistoricoFinanceiroDaLista> HistoricosFinanceiros { get; set; }
         public int Batalhao { get; set; }
         public IEnumerable<SelectListItem> Batalhoes { get; set; }
     }

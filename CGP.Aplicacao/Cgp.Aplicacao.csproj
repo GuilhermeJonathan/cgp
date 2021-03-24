@@ -96,10 +96,7 @@
     <Compile Include="GestaoDeUsuarios\IServicoDeGestaoDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeCadastroDeUsuario.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeEdicaoDeUsuario.cs" />
-    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeHistoricoFinanceiro.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeFiltroDeUsuario.cs" />
-    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeHistoricoFinanceiroDaLista.cs" />
-    <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeListaDeHistoricosFinanceiros.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeListaDeUsuarios.cs" />
     <Compile Include="GestaoDeUsuarios\Modelos\ModeloDeUsuarioDaLista.cs" />
     <Compile Include="GestaoDeUsuarios\ServicoDeGestaoDeUsuarios.cs" />

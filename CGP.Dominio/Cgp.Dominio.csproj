@@ -46,7 +46,6 @@
     <Compile Include="Entidades\Estadio.cs" />
     <Compile Include="Entidades\Funcionario.cs" />
     <Compile Include="Entidades\Entidade.cs" />
-    <Compile Include="Entidades\HistoricoFinanceiro.cs" />
     <Compile Include="Entidades\Batalhao.cs" />
     <Compile Include="Entidades\Uf.cs" />
     <Compile Include="Entidades\Usuario.cs" />
@@ -59,15 +58,9 @@
     <Compile Include="ObjetosDeValor\Login.cs" />
     <Compile Include="ObjetosDeValor\Nome.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeFuncionario.cs" />
-    <Compile Include="ObjetosDeValor\PerfilDeSocio.cs" />
-    <Compile Include="ObjetosDeValor\ResultadoDoJogoDaAposta.cs" />
     <Compile Include="ObjetosDeValor\Senha.cs" />
-    <Compile Include="ObjetosDeValor\SituacaoDaAposta.cs" />
-    <Compile Include="ObjetosDeValor\SituacaoDaRodada.cs" />
-    <Compile Include="ObjetosDeValor\SituacaoDoJogo.cs" />
     <Compile Include="ObjetosDeValor\Telefone.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeUsuario.cs" />
-    <Compile Include="ObjetosDeValor\TipoDeAposta.cs" />
     <Compile Include="ObjetosDeValor\TipoDeOperacao.cs" />
     <Compile Include="ObjetosDeValor\TipoDePix.cs" />
     <Compile Include="ObjetosDeValor\TipoDeSolicitacaoDeFinanceiro.cs" />

@@ -163,24 +163,5 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioCompletoPorId(usuarioLogado.Id);
             return new ModeloDeEdicaoDeUsuario(usuario);
         }
-
-        public ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id)
-        {
-            var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioComHistorico(id);
-            usuario.HistoricosFinanceiros = usuario.HistoricosFinanceiros.OrderByDescending(a => a.DataDoCadastro).ToList();
-
-            return new ModeloDeEdicaoDeUsuario(usuario);
-        }
-
-
-        public ModeloDeListaDeHistoricosFinanceiros BuscarHistoricosParaSaque(ModeloDeFiltroDeHistoricoFinanceiro filtro)
-        {
-            var historicos = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarHistoricosFinanceirosDeSaques();
-
-            var modelo = new ModeloDeListaDeHistoricosFinanceiros();
-            historicos.ToList().ForEach(a => modelo.Lista.Add(new ModeloDeHistoricoFinanceiroDaLista(a)));
-
-            return new ModeloDeListaDeHistoricosFinanceiros(historicos, historicos.Count, filtro);
-        }
     }
 }

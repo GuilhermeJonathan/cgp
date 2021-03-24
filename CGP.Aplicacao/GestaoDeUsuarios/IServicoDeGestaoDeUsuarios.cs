@@ -22,7 +22,5 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         Usuario BuscarSomenteUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado);
-        ModeloDeEdicaoDeUsuario BuscarUsuarioComHistoricoPorId(int id);
-        ModeloDeListaDeHistoricosFinanceiros BuscarHistoricosParaSaque(ModeloDeFiltroDeHistoricoFinanceiro filtro);
     }
 }

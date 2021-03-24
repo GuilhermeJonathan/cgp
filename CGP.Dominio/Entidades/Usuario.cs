@@ -12,7 +12,7 @@ namespace Cgp.Dominio.Entidades
     {
         public Usuario()
         {
-            this.HistoricosFinanceiros = new List<HistoricoFinanceiro>();
+            
         }
 
         public Nome Nome { get; set; }
@@ -22,7 +22,6 @@ namespace Cgp.Dominio.Entidades
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
         public bool UsuarioNovo { get; set; }
         public Telefone Telefone { get; set; }
-        public ICollection<HistoricoFinanceiro> HistoricosFinanceiros { get; set; }
         public Batalhao Batalhao { get; set; }
 
         internal void AlterarLogin(string login)
