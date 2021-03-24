@@ -42,14 +42,6 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
-        public IRepositorioDeEstadios RepositorioDeEstadios
-        {
-            get
-            {
-                return new RepositorioDeEstadio(this._contexto);
-            }
-        }
-
         public IRepositorioDeComandosRegionais RepositorioDeComandosRegionais
         {
             get

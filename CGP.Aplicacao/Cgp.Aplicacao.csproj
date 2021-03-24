@@ -81,13 +81,6 @@
     <Compile Include="GestaoDeDashboard\Modelos\ModeloDeFiltroDeDashboard.cs" />
     <Compile Include="GestaoDeDashboard\Modelos\ModeloDeListaDeDashboard.cs" />
     <Compile Include="GestaoDeDashboard\ServicoDeGestaoDeDashboard.cs" />
-    <Compile Include="GestaoDeEstadio\IServicoDeGestaoDeEstadio.cs" />
-    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeCadastroDeEstadio.cs" />
-    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEdicaoDeEstadio.cs" />
-    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeEstadiosDaLista.cs" />
-    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeFiltroDeEstadio.cs" />
-    <Compile Include="GestaoDeEstadio\Modelos\ModeloDeListaDeEstadios.cs" />
-    <Compile Include="GestaoDeEstadio\ServicoDeGestaoDeEstadio.cs" />
     <Compile Include="GestaoDeFuncionario\IServicoDeGestaoDeFuncionarios.cs" />
     <Compile Include="GestaoDeFuncionario\Modelos\ModeloDeCadastroDeFuncionario.cs" />
     <Compile Include="GestaoDeFuncionario\ServicoDeGestaoDeFuncionarios.cs" />

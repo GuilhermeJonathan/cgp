@@ -1,6 +1,5 @@
 ﻿using Cgp.Aplicacao.Comum;
 using Cgp.Aplicacao.GestaoDeDashboard;
-using Cgp.Aplicacao.GestaoDeEstadio;
 using Cgp.Aplicacao.GestaoDeFuncionarios;
 using Cgp.Aplicacao.GestaoDeBatalhoes;
 using Cgp.Aplicacao.GestaoDeUsuarios;
@@ -38,7 +37,6 @@ namespace Cgp.App_Start
             container.Register<IServicoDeGeracaoDeHashSha, ServicoDeGeracaoDeHashSha>(Lifestyle.Scoped);
             container.Register<IServicoExternoDeAutenticacao, ServicoExternoDeAutenticacaoViaCookieOwin>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeBatalhoes, ServicoDeGestaoDeBatalhoes>(Lifestyle.Scoped);
-            container.Register<IServicoDeGestaoDeEstadios, ServicoDeGestaoDeEstadios>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeUsuarios, ServicoDeGestaoDeUsuarios>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeDashboard, ServicoDeGestaoDeDashboard>(Lifestyle.Scoped);
             container.Register<IServicoDeGeracaoDeDocumentosEmPdf, ServicoDeGeracaoDeDocumentosEmPdf>(Lifestyle.Scoped);

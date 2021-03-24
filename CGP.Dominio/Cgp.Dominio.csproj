@@ -76,7 +76,6 @@
     <Compile Include="Repositorios\IRepositorio.cs" />
     <Compile Include="Repositorios\IRepositorioDeCidades.cs" />
     <Compile Include="Repositorios\IRepositorioDeComandoRegional.cs" />
-    <Compile Include="Repositorios\IRepositorioDeEstadios.cs" />
     <Compile Include="Repositorios\IRepositorioDeFuncionarios.cs" />
     <Compile Include="Repositorios\IRepositorioDeBatalhoes.cs" />
     <Compile Include="Repositorios\IRepositorioDeUfs.cs" />

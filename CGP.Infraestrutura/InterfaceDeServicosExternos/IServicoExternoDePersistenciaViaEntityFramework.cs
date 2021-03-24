@@ -12,7 +12,6 @@ namespace Cgp.Infraestrutura.InterfaceDeServicosExternos
         IRepositorioDeFuncionarios RepositorioDeFuncionarios { get; }
         IRepositorioDeUsuarios RepositorioDeUsuarios { get; }
         IRepositorioDeBatalhoes RepositorioDeBatalhoes { get; }
-        IRepositorioDeEstadios RepositorioDeEstadios { get; }
         IRepositorioDeComandosRegionais RepositorioDeComandosRegionais { get; }
         IRepositorioDeCidades RepositorioDeCidades { get; }
         IRepositorioDeUfs RepositorioDeUfs { get; }
