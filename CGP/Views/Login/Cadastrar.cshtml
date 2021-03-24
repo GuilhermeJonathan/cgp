@@ -1,4 +1,4 @@
-﻿
+﻿@model Cgp.Aplicacao.GestaoDeUsuarios.Modelos.ModeloDeCadastroDeUsuario
 @{
     ViewBag.Title = "Login";
     Layout = null;
@@ -21,8 +21,9 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <img src="~/Content/bola2.png" alt="Logo Campeonato" style="max-height:200px">
-            <a href="#"><b>Bolão</b>Brasileirão</a>
+            <img src="~/Content/logo_pmdf.png" alt="Logo Campeonato" style="max-height:200px">
+            <br />
+            <a href="#"><b>CaráterGeral</b>Policial</a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
@@ -51,6 +52,9 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.DropDownListFor(m => m.Batalhao, Model.Batalhoes, new { @class = "form-control autoComplete" })
                     </div>
                     <div class="row">
                         <div class="col-12">

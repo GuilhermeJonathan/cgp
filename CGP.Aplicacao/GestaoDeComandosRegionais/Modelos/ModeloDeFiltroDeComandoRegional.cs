@@ -8,6 +8,12 @@ namespace Cgp.Aplicacao.GestaoDeComandosRegionais.Modelos
 {
     public class ModeloDeFiltroDeComandoRegional
     {
+        public ModeloDeFiltroDeComandoRegional()
+        {
+            this.Ativo = true;
+        }
 
+        public string Nome { get; set; }
+        public bool Ativo { get; set; }
     }
 }

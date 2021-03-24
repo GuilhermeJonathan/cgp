@@ -99,7 +99,31 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes
             {
                 throw new ExcecaoDeAplicacao("Não foi possível alterar o batalhão: " + ex.InnerException);
             }
-            
+        }
+
+        public string AtivarBatalhao(int id, UsuarioLogado usuario)
+        {
+            try
+            {
+                var batalhao = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                if (batalhao != null)
+                {
+                    if (batalhao.Ativo)
+                        batalhao.Inativar(usuarioBanco);
+                    else
+                        batalhao.Ativar(usuarioBanco);
+                }
+
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Batalhão alterado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível alterar o Batalhão: " + ex.InnerException);
+            }
         }
     }
 }

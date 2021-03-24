@@ -6,7 +6,7 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="@Url.Action("Index", "Home")" class="brand-link">
-        <img src="~/Content/logo_pmdf.png" alt="Logo Campeonato" class="brand-image img-circle elevation-3"
+        <img src="~/Content/logo_pmdf.png" alt="Logo PMDF" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">Caráter Geral Policial</span>
     </a>
@@ -26,7 +26,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                @if (User.EhAdministrador())
+                @if (User.EhAdministrador() || User.EhInterno())
                 {
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Usuario")" class="nav-link @Html.Raw(controller == "Usuario" ? "active" : "")">
@@ -38,19 +38,19 @@
                     </li>
                 }
 
-                @if (User.EhAdministrador())
+                @if (User.EhAdministrador() || User.EhInterno())
                 {
                     <li class="nav-item">
-                        <a href="@Url.Action("Index", "Batalhao")" class="nav-link @Html.Raw(controller == "Time" ? "active" : "")">
-                            <i class="nav-icon fas fa-shield-alt"></i>
-                            <p> Batalhões </p>
+                        <a href="@Url.Action("Index", "ComandoRegional")" class="nav-link @Html.Raw(controller == "Time" ? "active" : "")">
+                            <i class="nav-icon fas fa-user-shield"></i>
+                            <p> Comandos Regionais </p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="@Url.Action("Index", "Estadio")" class="nav-link @Html.Raw(controller == "Estadio" ? "active" : "")">
-                            <i class="nav-icon fas fa-home"></i>
-                            <p> Estádios </p>
+                        <a href="@Url.Action("Index", "Batalhao")" class="nav-link @Html.Raw(controller == "Time" ? "active" : "")">
+                            <i class="nav-icon fas fa-shield-alt"></i>
+                            <p> Batalhões </p>
                         </a>
                     </li>
                 }

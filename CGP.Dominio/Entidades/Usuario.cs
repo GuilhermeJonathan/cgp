@@ -43,7 +43,7 @@ namespace Cgp.Dominio.Entidades
             this.Senha = senha;
         }
 
-        public Usuario(Nome nome, LoginUsuario login, Senha senha) : this()
+        public Usuario(Nome nome, LoginUsuario login, Senha senha, Batalhao batalhao) : this()
         {
             if (nome == null)
                 throw new ExcecaoDeNegocio("Não é possível criar um usuário sem nome");
@@ -56,7 +56,9 @@ namespace Cgp.Dominio.Entidades
             this.Senha = senha;
             this.Ativo = false;
             this.UsuarioNovo = true;
+            this.Telefone = Telefone.Vazio;
             this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
+            this.Batalhao = batalhao;
         }
 
         public void AlterarDados(string nome, string email, bool ativo, PerfilDeUsuario perfilDeUsuario, Batalhao batalhao)

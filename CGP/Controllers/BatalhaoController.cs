@@ -93,6 +93,12 @@ namespace Cgp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public ActionResult AtivarBatalhao(int id)
+        {
+            var modelo = this._servicoDeGestaoDeBatalhoes.AtivarBatalhao(id, User.Logado());
+            return Content(modelo);
+        }
+
         private ActionResult TimeNaoEncontrado()
         {
             this.AdicionarMensagemDeErro("O batalhão não foi encontrado");

@@ -14,13 +14,15 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public ModeloDeCadastroDeUsuario()
         {
             this.PerfisDeUsuario = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<PerfilDeUsuario>();
+            this.Batalhoes = new List<SelectListItem>();
         }
 
-        public ModeloDeCadastroDeUsuario(string nome, string email, string senha)
+        public ModeloDeCadastroDeUsuario(string nome, string email, string senha, int batalhao)
         {
             this.Nome = nome;
             this.Email = email;
             this.Senha = senha;
+            this.Batalhao = batalhao;
             this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
         }
 
@@ -30,5 +32,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public string Email { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
+        public int Batalhao { get; set; }
+        public IEnumerable<SelectListItem> Batalhoes { get; set; }
     }
 }

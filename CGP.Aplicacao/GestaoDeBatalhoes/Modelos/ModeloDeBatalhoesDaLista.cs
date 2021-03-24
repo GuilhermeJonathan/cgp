@@ -24,7 +24,7 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes.Modelos
             this.Cidade = batalhao.Cidade != null ? batalhao.Cidade.Descricao : String.Empty;
             this.NomeComando = batalhao.ComandoRegional != null ? batalhao.ComandoRegional.Sigla : String.Empty;
             this.DataDoCadastro = batalhao.DataDoCadastro.ToShortDateString();
-            this.Ativo = batalhao.Ativo ? "Sim" : "Não";
+            this.Ativo = batalhao.Ativo;
         }
 
         public int Id { get; set; }
@@ -32,7 +32,7 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes.Modelos
         public string Sigla { get; set; }
         public string Cidade { get; set; }
         public string NomeComando { get; set; }
-        public string Ativo { get; set; }
+        public bool Ativo { get; set; }
         public string DataDoCadastro { get; set; }
     }
 }

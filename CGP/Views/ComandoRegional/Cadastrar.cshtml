@@ -1,7 +1,7 @@
-﻿@model Cgp.Aplicacao.GestaoDeBatalhoes.Modelos.ModeloDeCadastroDeBatalhao
+﻿@model Cgp.Aplicacao.GestaoDeComandosRegionais.Modelos.ModeloDeCadastroDeComandoRegional
 
 @{
-    ViewBag.Title = "Cadastro de Batalhão";
+    ViewBag.Title = "Cadastro de Comando Regional";
 }
 
 <div class="content-wrapper">
@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form role="form" action="@Url.Action("Cadastrar", "Batalhao")" method="post">
+                <form role="form" action="@Url.Action("Cadastrar", "ComandoRegional")" method="post">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">@ViewBag.Title</h3>
@@ -38,14 +38,6 @@
                                 </div>
                                 <div class="col-lg-6">
                                     @Html.InputTextFor(a => a.Sigla, "Sigla", required: true)
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="control-label"> Cidade </label>
-                                    @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete" })
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="control-label"> Comando Regional </label>
-                                    @Html.DropDownListFor(m => m.ComandoRegional, Model.ComandosRegionais, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                         </div>

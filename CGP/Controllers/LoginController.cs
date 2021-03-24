@@ -1,8 +1,11 @@
-﻿using Cgp.Aplicacao.GestaoDeUsuarios;
+﻿using Cgp.Aplicacao.GestaoDeBatalhoes;
+using Cgp.Aplicacao.GestaoDeUsuarios;
 using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
 using Cgp.Aplicacao.Login;
 using Cgp.Aplicacao.Login.Modelos;
+using Cgp.Aplicacao.Util;
 using Cgp.CustomExtensions;
+using Cgp.Dominio.Entidades;
 using Cgp.Filter;
 using Cgp.Web.CustomExtensions;
 using System;
@@ -18,11 +21,13 @@ namespace Cgp.Controllers
     {
         private readonly IServicoDeLogin _servicoDeLogin;
         private readonly IServicoDeGestaoDeUsuarios _servicoDeGestaoDeUsuarios;
+        private readonly IServicoDeGestaoDeBatalhoes _servicoDeGestaoDeBatalhoes;
 
-        public LoginController(IServicoDeLogin servicoDeLogin, IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios)
+        public LoginController(IServicoDeLogin servicoDeLogin, IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios, IServicoDeGestaoDeBatalhoes servicoDeGestaoDeBatalhoes)
         {
             _servicoDeLogin = servicoDeLogin;
             this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
+            this._servicoDeGestaoDeBatalhoes = servicoDeGestaoDeBatalhoes;
         }
        
         public ActionResult Index()
@@ -56,20 +61,28 @@ namespace Cgp.Controllers
         public ActionResult Cadastrar()
         {
             var modelo = new ModeloDeCadastroDeUsuario();
+
+            modelo.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoParametro<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
+                  () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos(), "Selecione o batalhão");
+
             return View(modelo);
         }
 
         [TratarErros]
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Cadastrar(string nome, string email, string senha)
+        public ActionResult Cadastrar(string nome, string email, string senha, int? batalhao)
         {
             try
             {
-                var modelo = new ModeloDeCadastroDeUsuario(nome, email, senha);
+                var modelo = new ModeloDeCadastroDeUsuario(nome, email, senha, batalhao.HasValue ? batalhao.Value : 0);
                 var retorno = this._servicoDeGestaoDeUsuarios.CadastrarNovoUsuario(modelo);
                 this.AdicionarMensagemDeSucesso(retorno);
                 ViewBag.Mensagem = "Usuário cadastrado com sucesso. Aguarde contato do Administrador para validação.";
+
+                modelo.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoParametro<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
+                  () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos(), "Selecione o batalhão");
+
                 return View(modelo);
             }
             catch (Exception ex)

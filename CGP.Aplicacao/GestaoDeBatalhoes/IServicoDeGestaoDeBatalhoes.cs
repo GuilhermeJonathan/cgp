@@ -17,5 +17,6 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes
         ModeloDeEdicaoDeBatalhao BuscarBatalhaoPorId(int id);
         string CadastrarBatalhao(ModeloDeCadastroDeBatalhao modelo, UsuarioLogado usuario);
         string AlterarDadosDoBatalhao(ModeloDeEdicaoDeBatalhao modelo, UsuarioLogado usuario);
+        string AtivarBatalhao(int id, UsuarioLogado usuario);
     }
 }

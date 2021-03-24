@@ -3,8 +3,7 @@ using Cgp.Dominio.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
@@ -34,7 +33,9 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
         public ComandoRegional PegarPorId(int id)
         {
-            return this._contexto.Set<ComandoRegional>().FirstOrDefault(a => a.Id == id);
+            return this._contexto.Set<ComandoRegional>()
+                .Include(a =>  a.UsuarioQueAlterou)
+                .FirstOrDefault(a => a.Id == id);
         }
     }
 }

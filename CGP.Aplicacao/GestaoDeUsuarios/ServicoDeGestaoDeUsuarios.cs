@@ -29,11 +29,13 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
 
             if (usuarioComMesmoLogin != null)
                 throw new ExcecaoDeAplicacao("Já existe um usuário com o mesmo login");
+            
+            var batalhao = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(modelo.Batalhao);
 
             var senha = new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash);
             var novologin = new LoginUsuario(modelo.Email);
 
-            var novoUsuario = new Usuario(new Nome(modelo.Nome), novologin, senha);
+            var novoUsuario = new Usuario(new Nome(modelo.Nome), novologin, senha, batalhao);
 
             this._servicoExternoDePersistencia.RepositorioDeUsuarios.Inserir(novoUsuario);
             this._servicoExternoDePersistencia.Persistir();

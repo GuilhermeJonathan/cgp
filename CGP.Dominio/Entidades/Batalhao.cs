@@ -47,5 +47,17 @@ namespace Cgp.Dominio.Entidades
             this.DataUltimaAtualizacao = DateTime.Now;
             this.UsuarioQueAlterou = usuario;
         }
+
+        public void Ativar(Usuario usuario)
+        {
+            this.Ativo = true;
+            Atualizar(usuario);
+        }
+
+        public void Inativar(Usuario usuario)
+        {
+            this.Ativo = false;
+            Atualizar(usuario);
+        }
     }
 }
