@@ -47,30 +47,14 @@
                                 <div class="col-lg-5  col-sm-10">
                                     @Html.InputNumberFor(a => a.Telefone, "Telefone", required: false)
                                 </div>
-                                <div class="col-lg-2">
-                                    <label class="control-label"> Tipo de Chave </label>
-                                    @Html.DropDownListFor(m => m.TipoDePix, Model.TiposDePix, new { @class = "form-control" })
-                                </div>
-                                <div class="col-lg-4">
-                                    @Html.InputTextFor(a => a.ChavePix, "Chave Pix", required: false)
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="info-box" style="margin-top: 10px;">
-                                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-dollar-sign"></i></span>
-                                        <div class="info-box-content">
-                                            <span class="info-box-number fa-2x"> R$ @Model.Credito</span>
-                                        </div>
-                                    </div>
+                                    <label class="control-label"> Batalhão </label>
+                                    @Html.DropDownListFor(m => m.Batalhao, Model.Batalhoes, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-2">
-                                    <a href="@Url.Action("Historico", "Usuario", new {id = Model.Id})" class="btn btn-info float-left"> Histórico Financeiro</a> 
-                                </div>
-                                <div class="col-lg-2">
-                                    <a href="@Url.Action("AlterarSenha", "Usuario", new {id = Model.Id})" class="btn btn-default float-left"> Alterar Senha</a>
+                                    <a href="@Url.Action("AlterarSenha", "Usuario", new {id = Model.Id})" class="btn btn-info float-left"> Alterar Senha</a>
                                 </div>
                             </div>
                         </div>

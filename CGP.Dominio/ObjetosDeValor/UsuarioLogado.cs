@@ -11,7 +11,7 @@ namespace Cgp.Dominio.ObjetosDeValor
         public UsuarioLogado(int id, string nome, string email, PerfilDeUsuario perfilDeUsuario)
         {
             this.Id = id;
-            this.Nome = nome;
+            this.Nome = nome.Contains(' ') ? nome.Split(' ')[0].ToString() : nome;
             this.Email = email;
             this.PerfilDeUsuario = perfilDeUsuario;
         }

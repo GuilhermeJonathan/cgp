@@ -65,6 +65,10 @@ namespace Cgp.Controllers
         public ActionResult MeusDados()
         {
             var modelo = this._servicoDeGestaoDeUsuarios.BuscarMeusDados(User.Logado());
+
+            modelo.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
+                  () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
+
             return View(modelo);
         }
         

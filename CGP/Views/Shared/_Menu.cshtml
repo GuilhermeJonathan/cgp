@@ -26,7 +26,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                @if (User.EhAdministrador() || User.EhInterno())
+                @if (User.EhAdministrador())
                 {
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Usuario")" class="nav-link @Html.Raw(controller == "Usuario" ? "active" : "")">

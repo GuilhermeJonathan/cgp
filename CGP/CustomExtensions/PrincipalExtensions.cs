@@ -69,7 +69,7 @@ namespace Cgp.Web.CustomExtensions
             var claims = ((ClaimsIdentity)usuario.Identity).Claims;
             var claim = claims.FirstOrDefault(c => c.Type == chave.ToLower());
 
-            return claim != null ? claim.Value : string.Empty;
+            return claim != null ? claim.Value.Contains(' ') ? claim.Value.Split(' ')[0] : claim.Value : string.Empty;
         }
     }
 }

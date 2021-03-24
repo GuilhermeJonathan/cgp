@@ -29,8 +29,7 @@ namespace Cgp.Controllers
         {
             if (User.Autenticado())
             {
-                var usuario = User.Logado();
-                ViewBag.Usuario = usuario.Nome;
+                ViewBag.Usuario = User.Logado().Nome;
 
                 if (User.EhAdministrador())
                 {
@@ -38,13 +37,11 @@ namespace Cgp.Controllers
                 }
             }
             return View();
-
         }
 
         [Authorize]
         public ActionResult Dashboard()
         {
-
             if (User.Autenticado())
             {
                 if (User.EhAdministrador())
