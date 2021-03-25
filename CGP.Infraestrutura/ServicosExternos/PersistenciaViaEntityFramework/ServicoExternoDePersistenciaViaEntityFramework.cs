@@ -90,6 +90,14 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
+        public IRepositorioDeVeiculos RepositorioDeVeiculos
+        {
+            get
+            {
+                return new RepositorioDeVeiculos(this._contexto);
+            }
+        }
+
         public void Persistir()
         {
             this._contexto.SaveChanges();

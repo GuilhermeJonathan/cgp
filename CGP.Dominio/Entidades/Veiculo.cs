@@ -13,6 +13,15 @@ namespace Cgp.Dominio.Entidades
 
         }
 
+        public Veiculo(string placa, string marca, string modelo, string ano, string cor)
+        {
+            this.Placa = placa;
+            this.Marca = marca;
+            this.Modelo = modelo;
+            this.Ano = ano;
+            this.Cor = cor;
+        }
+
         public string Placa { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }

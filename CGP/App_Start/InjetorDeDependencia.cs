@@ -25,6 +25,7 @@ using Cgp.ComunicacaoViaHttp;
 using Cgp.Aplicacao.ComunicacaoViaHttp;
 using Cgp.Aplicacao.BuscaVeiculo;
 using Cgp.Aplicacao.GestaoDeCrimes;
+using Cgp.Aplicacao.GestaoDeCaraters;
 
 namespace Cgp.App_Start
 {
@@ -51,6 +52,7 @@ namespace Cgp.App_Start
             container.Register<IServicoDeGestaoDeCidades, ServicoDeGestaoDeCidades>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeVeiculos, ServicoDeGestaoDeVeiculos>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCrimes, ServicoDeGestaoDeCrimes>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeCaraters, ServicoDeGestaoDeCaraters>(Lifestyle.Scoped);
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
                VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")));

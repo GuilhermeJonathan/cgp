@@ -71,6 +71,13 @@
     <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="ComunicacaoViaHttp\IServicoDeComunicacaoViaHttp.cs" />
     <Compile Include="ExcecaoDeAplicacao.cs" />
+    <Compile Include="GestaoDeCaraters\IServicoDeGestaoDeCaraters.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeCadastroDeCarater.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeCaratersDaLista.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeEdicaoDeCarater.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeFiltroDeCarater.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeListaDeCaraters.cs" />
+    <Compile Include="GestaoDeCaraters\ServicoDeGestaoDeCaraters.cs" />
     <Compile Include="GestaoDeVeiculos\IServicoDeGestaoDeVeiculos.cs" />
     <Compile Include="GestaoDeVeiculos\ServicoDeGestaoDeVeiculos.cs" />
     <Compile Include="GestaoDeCidades\IServicoDeGestaoDeCidades.cs" />
@@ -144,7 +151,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GestaoDeCaraters\Modelos\" />
     <Folder Include="GestaoDeVeiculos\Modelos\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,5 +10,6 @@ namespace Cgp.Dominio.Repositorios
     public interface IRepositorioDeVeiculos : IRepositorio<Veiculo>
     {
         Veiculo PegarPorId(int id);
+        Veiculo PegarPorPlaca(string placa);
     }
 }

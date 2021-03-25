@@ -31,7 +31,7 @@ namespace Cgp.Controllers
             {
                 ViewBag.Usuario = User.Logado().Nome;
 
-                if (User.EhAdministrador())
+                if (User.EhAdministrador() || User.EhInterno())
                 {
                     return RedirectToAction(nameof(Dashboard));
                 }

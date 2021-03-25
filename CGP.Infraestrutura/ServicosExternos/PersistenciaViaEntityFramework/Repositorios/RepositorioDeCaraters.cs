@@ -11,6 +11,25 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
     {
         public RepositorioDeCaraters(Contexto contexto) : base(contexto) { }
 
+        public IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, out int quantidadeEncontrada)
+        {
+            var query = this._contexto.Set<Carater>()
+                .Include(a => a.Veiculo)
+                .Include(a => a.Cidade)
+                .Include(a => a.Crime)
+                .AsQueryable();
+            
+            if (cidade > 0)
+                query = query.Where(c => c.Cidade.Id == cidade);
+
+            if (crime > 0)
+                query = query.Where(c => c.Crime.Id == crime);
+
+            quantidadeEncontrada = query.Count();
+
+            return query.OrderByDescending(a => a.DataDoCadastro).ToList();
+        }
+
         public Carater PegarPorId(int id)
         {
             return this._contexto.Set<Carater>()

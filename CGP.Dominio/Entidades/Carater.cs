@@ -14,6 +14,19 @@ namespace Cgp.Dominio.Entidades
 
         }
 
+        public Carater(string descricao, string complementoEndereco, DateTime dataHora, Veiculo veiculo, Cidade cidade, Crime crime, string urlImagem, Usuario usuario)
+        {
+            this.Descricao = descricao;
+            this.ComplementoEndereco = complementoEndereco;
+            this.DataDoCadastro = dataHora;
+            this.Veiculo = veiculo;
+            this.Cidade = cidade;
+            this.Crime = crime;
+            this.UrlImagem = urlImagem;
+            this.UsuarioQueAlterou = usuario;
+            this.SituacaoDoCarater = SituacaoDoCarater.Novo;
+        }
+
         public string Descricao { get; set; }
         public string ComplementoEndereco { get; set; }
         public DateTime? DataHora { get; set; }
@@ -21,5 +34,27 @@ namespace Cgp.Dominio.Entidades
         public Cidade Cidade { get; set; }
         public Crime Crime { get; set; }
         public SituacaoDoCarater SituacaoDoCarater { get; set; }
+        public string UrlImagem { get; set; }
+        public Usuario UsuarioQueAlterou { get; set; }
+        public DateTime? DataUltimaAtualizacao { get; set; }
+
+        public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, SituacaoDoCarater situacao, string urlImagem, Usuario usuario)
+        {
+            this.Descricao = descricao;
+            this.ComplementoEndereco = complementoEndereco;
+            this.DataDoCadastro = dataHora;
+            this.Cidade = cidade;
+            this.Crime = crime;
+            this.Veiculo = veiculo;
+            this.SituacaoDoCarater = situacao;
+            this.UrlImagem = urlImagem;
+            this.Atualizar(usuario);
+        }
+
+        public void Atualizar(Usuario usuario)
+        {
+            this.DataUltimaAtualizacao = DateTime.Now;
+            this.UsuarioQueAlterou = usuario;
+        }
     }
 }

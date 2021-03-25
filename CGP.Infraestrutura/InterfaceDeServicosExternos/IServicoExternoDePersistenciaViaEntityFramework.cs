@@ -18,6 +18,7 @@ namespace Cgp.Infraestrutura.InterfaceDeServicosExternos
         IRepositorioDeVeiculos RepositorioDeCarros { get; }
         IRepositorioDeCrimes RepositorioDeCrimes { get; }
         IRepositorioDeCaraters RepositorioDeCaraters { get; }
+        IRepositorioDeVeiculos RepositorioDeVeiculos { get; }
         void Persistir();
         void Dispose();
     }

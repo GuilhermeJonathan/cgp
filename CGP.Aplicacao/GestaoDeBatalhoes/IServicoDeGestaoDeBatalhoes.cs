@@ -13,7 +13,6 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes
     {
         ModeloDeListaDeBatalhoes RetonarTodosOsBatalhoes(ModeloDeFiltroDeBatalhao filtro, int pagina, int registrosPorPagina = 30);
         IList<Batalhao> RetonarTodosOsBatalhoesAtivos();
-        IList<ModeloDeBatalhoesDaLista> RetonarTodosOsTimesParaSelect();
         ModeloDeEdicaoDeBatalhao BuscarBatalhaoPorId(int id);
         string CadastrarBatalhao(ModeloDeCadastroDeBatalhao modelo, UsuarioLogado usuario);
         string AlterarDadosDoBatalhao(ModeloDeEdicaoDeBatalhao modelo, UsuarioLogado usuario);

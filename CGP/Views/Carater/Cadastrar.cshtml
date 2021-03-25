@@ -1,0 +1,131 @@
+﻿@model Cgp.Aplicacao.GestaoDeCaraters.Modelos.ModeloDeCadastroDeCarater
+
+@{
+    ViewBag.Title = "Cadastro de Caráter";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="@Url.Action("Cadastrar", "Carater")" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">@ViewBag.Title</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label class="control-label"> Placa Veículo </label>
+                                    <input type="text" class="form-control placaVeiculo" id="Placa" name="Placa">
+                                </div>
+                                <div class="col-lg-2">
+                                    @Html.InputTextFor(a => a.MarcaVeiculo, "Marca", required: false)
+                                </div>
+                                <div class="col-lg-2">
+                                    @Html.InputTextFor(a => a.ModeloVeiculo, "Modelo", required: false)
+                                </div>
+                                <div class="col-lg-2">
+                                    @Html.InputTextFor(a => a.AnoVeiculo, "Ano", required: false)
+                                </div>
+                                <div class="col-lg-2">
+                                    @Html.InputTextFor(a => a.CorVeiculo, "Cor", required: false)
+                                </div>
+                                
+                                <div class="row divCarrega">
+                                    <div class="col-lg-12 text-center">
+                                        <span class="description-header"><i class="fas fa-refresh fa-sync"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label class="control-label"> Data </label>
+                                    <input type="text" class="form-control mascaraData" id="data" name="Data" value="@Model.Data">
+                                </div>
+                                <div class="col-lg-2">
+                                    <label class="control-label"> Hora </label>
+                                    <input type="time" class="form-control mascaraHora" id="Hora" name="Hora" value="08:00">
+                                </div>
+                                <div class="col-lg-2">
+                                    <label class="control-label"> Crime </label>
+                                    @Html.DropDownListFor(m => m.Crime, Model.Crimes, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.Descricao, "Descrição", required: false)
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Cidade </label>
+                                    @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.ComplementoEndereco, "Complemento do Endereço", required: true)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            @Html.BackButton()
+                            <button type="submit" class="btn btn-info float-right">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $(".divCarrega").hide();
+
+        $('#data').datepicker({
+            language: "pt-BR", autoclose: true,
+            zIndexOffset: 99999999
+        });
+
+        $(".placaVeiculo").blur(function () {
+            var placa = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '../Carater/BuscarPlacaDoVeiculo',
+                data: 'placa=' + placa,
+                beforeSend: function (resultado) {
+                    $(".divCarrega").show();
+                },
+                success: function (resultado) {
+                    debugger;
+                    $(".divCarrega").hide();
+                    if (resultado.veiculo != undefined) {
+                        $("#MarcaVeiculo").val(resultado.veiculo.model);
+                        $("#ModeloVeiculo").val(resultado.veiculo.name);
+                        $("#AnoVeiculo").val(resultado.veiculo.year);
+                    } else {
+                        campeonatoGeral.AdicionarMensagemDeErro("Veículo não encontrado.");
+                    }
+                }
+            });
+        });
+    })
+</script>

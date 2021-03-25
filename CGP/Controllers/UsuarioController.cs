@@ -41,9 +41,7 @@ namespace Cgp.Controllers
 
             modelo.Filtro.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
                   () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
-
-            var veiculo = await this._servicoDeGestaoDeVeiculos.BuscarPlacaSimples("PBW3539");
-
+            
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
             return View(modelo);
         }

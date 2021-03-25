@@ -40,14 +40,6 @@ namespace Cgp.Aplicacao.GestaoDeBatalhoes
             return batalhoes;
         }
 
-        public IList<ModeloDeBatalhoesDaLista> RetonarTodosOsTimesParaSelect()
-        {
-            var batalhoes = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.RetornarTodosOsBatalhoesAtivos();
-            var modelo = new List<ModeloDeBatalhoesDaLista>();
-            batalhoes.ToList().ForEach(a => modelo.Add(new ModeloDeBatalhoesDaLista(a)));
-            return modelo;
-        }
-
         public ModeloDeEdicaoDeBatalhao BuscarBatalhaoPorId(int id)
         {
             try

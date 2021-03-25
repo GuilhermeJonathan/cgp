@@ -17,5 +17,11 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             return this._contexto.Set<Veiculo>()
                 .FirstOrDefault(a => a.Id == id);
         }
+
+        public Veiculo PegarPorPlaca(string placa)
+        {
+            return this._contexto.Set<Veiculo>()
+                .FirstOrDefault(a => a.Placa.Contains(placa));
+        }
     }
 }
