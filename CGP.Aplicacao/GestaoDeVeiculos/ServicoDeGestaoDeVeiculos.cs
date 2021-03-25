@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cgp.Aplicacao.GestaoDeCarros
+namespace Cgp.Aplicacao.GestaoDeVeiculos
 {
-    public class ServicoDeGestaoDeCarros : IServicoDeGestaoDeCarros
+    public class ServicoDeGestaoDeVeiculos: IServicoDeGestaoDeVeiculos
     {
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
-        public ServicoDeGestaoDeCarros(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
+        public ServicoDeGestaoDeVeiculos(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
         }

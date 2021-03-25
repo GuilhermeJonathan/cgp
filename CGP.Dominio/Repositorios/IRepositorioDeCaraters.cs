@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cgp.Dominio.Repositorios
 {
-    public interface IRepositorioDeCaraters
+    public interface IRepositorioDeCaraters : IRepositorio<Carater>
     {
         Carater PegarPorId(int id);
     }

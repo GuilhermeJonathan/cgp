@@ -53,6 +53,13 @@
                             <p> Batalhões </p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Crime")" class="nav-link @Html.Raw(controller == "Time" ? "active" : "")">
+                            <i class="nav-icon fas fa-gavel"></i>
+                            <p> Crimes </p>
+                        </a>
+                    </li>
                 }
 
             </ul>

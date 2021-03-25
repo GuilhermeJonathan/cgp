@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Cgp.Dominio.Repositorios
 {
-    public interface IRepositorioDeCrimes
+    public interface IRepositorioDeCrimes : IRepositorio<Crime>
     {
         Crime PegarPorId(int id);
+        IList<Crime> RetornarCrimesPorFiltro(string nome, string artigo, bool ativo, out int quantidadeEncontrada);
+        IList<Crime> RetornarTodosOsCrimesAtivos();
     }
 }

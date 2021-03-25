@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cgp.Aplicacao.GestaoDeCarros
+namespace Cgp.Aplicacao.GestaoDeVeiculos
 {
-    public interface IServicoDeGestaoDeCarros
+    public interface IServicoDeGestaoDeVeiculos
     {
 
     }

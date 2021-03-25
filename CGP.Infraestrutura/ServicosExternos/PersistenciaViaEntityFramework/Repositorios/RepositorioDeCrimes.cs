@@ -16,5 +16,29 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .FirstOrDefault(a => a.Id == id);
         }
 
+        public IList<Crime> RetornarCrimesPorFiltro(string nome, string artigo, bool ativo, out int quantidadeEncontrada)
+        {
+            var query = this._contexto.Set<Crime>()
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(nome))
+                query = query.Where(c => c.Nome.Contains(nome));
+
+            if (!string.IsNullOrEmpty(artigo))
+                query = query.Where(c => c.Artigo.Contains(artigo));
+            
+            query = query.Where(c => c.Ativo == ativo);
+
+            quantidadeEncontrada = query.Count();
+
+            return query.OrderBy(a => a.Artigo).ToList();
+        }
+
+        public IList<Crime> RetornarTodosOsCrimesAtivos()
+        {
+            var query = this._contexto.Set<Crime>().AsQueryable();
+            query = query.Where(c => c.Ativo);
+            return query.OrderBy(a => a.Artigo).ToList();
+        }
     }
 }

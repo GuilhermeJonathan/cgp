@@ -20,10 +20,11 @@ using System.Web.Mvc;
 using Container = SimpleInjector.Container;
 using Cgp.Aplicacao.GestaoDeComandosRegionais;
 using Cgp.Aplicacao.GestaoDeCidades;
-using Cgp.Aplicacao.GestaoDeCarros;
+using Cgp.Aplicacao.GestaoDeVeiculos;
 using Cgp.ComunicacaoViaHttp;
 using Cgp.Aplicacao.ComunicacaoViaHttp;
 using Cgp.Aplicacao.BuscaVeiculo;
+using Cgp.Aplicacao.GestaoDeCrimes;
 
 namespace Cgp.App_Start
 {
@@ -48,7 +49,8 @@ namespace Cgp.App_Start
             container.Register<IServicoDeMontagemDeEmails, ServicoDeMontagemDeEmails>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeComandosRegionais, ServicoDeGestaoDeComandosRegionais>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCidades, ServicoDeGestaoDeCidades>(Lifestyle.Scoped);
-            container.Register<IServicoDeGestaoDeCarros, ServicoDeGestaoDeCarros>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeVeiculos, ServicoDeGestaoDeVeiculos>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeCrimes, ServicoDeGestaoDeCrimes>(Lifestyle.Scoped);
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
                VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")));

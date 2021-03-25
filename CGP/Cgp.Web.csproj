@@ -189,6 +189,7 @@
     <Compile Include="App_Start\InjetorDeDependencia.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComandoRegionalController.cs" />
+    <Compile Include="Controllers\CrimeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\BatalhaoController.cs" />
@@ -390,6 +391,9 @@
     <Content Include="Views\ComandoRegional\Cadastrar.cshtml" />
     <Content Include="Views\ComandoRegional\Editar.cshtml" />
     <Content Include="Views\ComandoRegional\Index.cshtml" />
+    <Content Include="Views\Crime\Index.cshtml" />
+    <Content Include="Views\Crime\Editar.cshtml" />
+    <Content Include="Views\Crime\Cadastrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

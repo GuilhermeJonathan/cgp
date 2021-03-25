@@ -71,8 +71,8 @@
     <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="ComunicacaoViaHttp\IServicoDeComunicacaoViaHttp.cs" />
     <Compile Include="ExcecaoDeAplicacao.cs" />
-    <Compile Include="GestaoDeCarros\IServicoDeGestaoDeCarros.cs" />
-    <Compile Include="GestaoDeCarros\ServicoDeGestaoDeCarros.cs" />
+    <Compile Include="GestaoDeVeiculos\IServicoDeGestaoDeVeiculos.cs" />
+    <Compile Include="GestaoDeVeiculos\ServicoDeGestaoDeVeiculos.cs" />
     <Compile Include="GestaoDeCidades\IServicoDeGestaoDeCidades.cs" />
     <Compile Include="GestaoDeCidades\ServicoDeGestaoDeCidades.cs" />
     <Compile Include="GestaoDeComandosRegionais\IServicoDeGestaoDeComandosRegionais.cs" />
@@ -82,6 +82,13 @@
     <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeFiltroDeComandoRegional.cs" />
     <Compile Include="GestaoDeComandosRegionais\Modelos\ModeloDeListaDeComandosRegionais.cs" />
     <Compile Include="GestaoDeComandosRegionais\ServicoDeGestaoDeComandosRegionais.cs" />
+    <Compile Include="GestaoDeCrimes\IServicoDeGestaoDeCrimes.cs" />
+    <Compile Include="GestaoDeCrimes\Modelos\ModeloDeCadastroDeCrime.cs" />
+    <Compile Include="GestaoDeCrimes\Modelos\ModeloDeCrimesDaLista.cs" />
+    <Compile Include="GestaoDeCrimes\Modelos\ModeloDeEdicaoDeCrime.cs" />
+    <Compile Include="GestaoDeCrimes\Modelos\ModeloDeFiltroDeCrime.cs" />
+    <Compile Include="GestaoDeCrimes\Modelos\ModeloDeListaDeCrimes.cs" />
+    <Compile Include="GestaoDeCrimes\ServicoDeGestaoDeCrimes.cs" />
     <Compile Include="GestaoDeDashboard\IServicoDeGestaoDeDashboard.cs" />
     <Compile Include="GestaoDeDashboard\Modelos\ModeloDeDashboardDaLista.cs" />
     <Compile Include="GestaoDeDashboard\Modelos\ModeloDeFiltroDeDashboard.cs" />
@@ -137,7 +144,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GestaoDeCarros\Modelos\" />
+    <Folder Include="GestaoDeCaraters\Modelos\" />
+    <Folder Include="GestaoDeVeiculos\Modelos\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
