@@ -18,7 +18,7 @@ namespace Cgp.Dominio.Entidades
         {
             this.Descricao = descricao;
             this.ComplementoEndereco = complementoEndereco;
-            this.DataDoCadastro = dataHora;
+            this.DataHoraDoFato = dataHora;
             this.Veiculo = veiculo;
             this.Cidade = cidade;
             this.Crime = crime;
@@ -29,7 +29,7 @@ namespace Cgp.Dominio.Entidades
 
         public string Descricao { get; set; }
         public string ComplementoEndereco { get; set; }
-        public DateTime? DataHora { get; set; }
+        public DateTime? DataHoraDoFato { get; set; }
         public Veiculo Veiculo { get; set; }
         public Cidade Cidade { get; set; }
         public Crime Crime { get; set; }
@@ -42,7 +42,7 @@ namespace Cgp.Dominio.Entidades
         {
             this.Descricao = descricao;
             this.ComplementoEndereco = complementoEndereco;
-            this.DataDoCadastro = dataHora;
+            this.DataHoraDoFato = dataHora;
             this.Cidade = cidade;
             this.Crime = crime;
             this.Veiculo = veiculo;

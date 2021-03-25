@@ -15,6 +15,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.Crimes = new List<SelectListItem>();
             this.Cidades = new List<SelectListItem>();
             this.Data = DateTime.Now.ToShortDateString();
+            this.Hora = DateTime.Now.ToShortTimeString();
         }
 
         public string Descricao { get; set; }
@@ -32,5 +33,6 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string MarcaVeiculo { get; set; }
         public string AnoVeiculo{ get; set; }
         public string CorVeiculo { get; set; }
+        public string ChassiVeiculo { get; set; }
     }
 }

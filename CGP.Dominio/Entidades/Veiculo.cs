@@ -13,13 +13,14 @@ namespace Cgp.Dominio.Entidades
 
         }
 
-        public Veiculo(string placa, string marca, string modelo, string ano, string cor)
+        public Veiculo(string placa, string marca, string modelo, string ano, string cor, string chassi)
         {
-            this.Placa = placa;
-            this.Marca = marca;
-            this.Modelo = modelo;
-            this.Ano = ano;
-            this.Cor = cor;
+            this.Placa = Maisculo(placa);
+            this.Marca = Maisculo(marca);
+            this.Modelo = Maisculo(modelo);
+            this.Ano = Maisculo(ano);
+            this.Cor = Maisculo(cor);
+            this.Chassi = Maisculo(chassi);
         }
 
         public string Placa { get; set; }
@@ -32,5 +33,13 @@ namespace Cgp.Dominio.Entidades
         public string Uf { get; set; }
         public string Situacao { get; set; }
 
+        private string Maisculo(string parametro)
+        {
+            var retorno = parametro;
+            if (!String.IsNullOrEmpty(parametro))
+                retorno = parametro.ToUpper();
+
+            return retorno;
+        }
     }
 }

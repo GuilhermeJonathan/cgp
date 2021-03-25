@@ -36,6 +36,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Veiculo)
                 .Include(a => a.Cidade)
                 .Include(a => a.Crime)
+                .Include(a => a.UsuarioQueAlterou)
                 .FirstOrDefault(a => a.Id == id);
         }
     }

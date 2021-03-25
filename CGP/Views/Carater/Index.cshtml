@@ -76,8 +76,10 @@
                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Editar", "Carater", new { id = m.Id })" title="Editar" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></div>);
                             colunas.Add(m => m.PlacaVeiculo).Titled("Placa");
                             colunas.Add(m => m.NomeVeiculo).Titled("Veículo");
+                            colunas.Add(m => m.ChassiVeiculo).Titled("Chassi");
+                            colunas.Add(m => m.CorVeiculo).Titled("Cor");
+                            colunas.Add(m => m.AnoVeiculo).Titled("Ano");
                             colunas.Add(m => m.NomeCrime).Titled("Crime");
-                            colunas.Add(m => m.Descricao).Titled("Descrição");
                             colunas.Add(m => m.NomeCidade).Titled("Cidade");
 
                         }).WithPaging(30).Sortable(true).EmptyText("Nenhum caráter encontrado")

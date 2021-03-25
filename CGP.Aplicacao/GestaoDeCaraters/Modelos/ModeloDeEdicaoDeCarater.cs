@@ -32,9 +32,11 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.Cidade = carater.Cidade != null ? carater.Cidade.Id : 0;
             this.Crime = carater.Crime != null ? carater.Crime.Id : 0;
             
-            this.Data = carater.DataDoCadastro.ToShortDateString();
-            this.Hora = carater.DataDoCadastro.ToShortTimeString();
+            this.Data = carater.DataHoraDoFato.HasValue ? carater.DataHoraDoFato.Value.ToShortDateString() : String.Empty;
+            this.Hora = carater.DataHoraDoFato.HasValue ? carater.DataHoraDoFato.Value.ToShortTimeString() : String.Empty;
             this.UrlImagem = $"{caminhoBlob}/{carater.UrlImagem}";
+            var usuario = carater.UsuarioQueAlterou != null ? carater.UsuarioQueAlterou.Nome.Valor : String.Empty;
+            this.UsuarioCadastro = $"Cadastro por {usuario} no dia {carater.DataDoCadastro.ToString("dd/MM")} às {carater.DataDoCadastro.ToString("HH:mm")}";
 
             if(carater.Veiculo != null)
             {
@@ -44,6 +46,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 this.MarcaVeiculo = carater.Veiculo.Marca;
                 this.AnoVeiculo = carater.Veiculo.Ano;
                 this.CorVeiculo = carater.Veiculo.Cor;
+                this.ChassiVeiculo = carater.Veiculo.Chassi;
             }
         }
 
@@ -66,5 +69,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string MarcaVeiculo { get; set; }
         public string AnoVeiculo { get; set; }
         public string CorVeiculo { get; set; }
+        public string ChassiVeiculo { get; set; }
+        public string UsuarioCadastro { get; set; }
     }
 }

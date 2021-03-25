@@ -21,7 +21,7 @@
     };
 
     campeonatoGeral.BloquearTela = function () {
-        $.blockUI.defaults.border = 'none';
+        
         $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
 
         $(".blockOverlay").css("z-index", "2001");
