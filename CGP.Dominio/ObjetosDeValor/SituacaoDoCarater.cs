@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Cgp.Dominio.ObjetosDeValor
 {
-    public enum TipoDeOperacao
+    public enum SituacaoDoCarater
     {
-        Credito = 1,
-        Debito =2
+        [Description("Novo")]
+        Novo = 1,
+        Localizado =2
     }
 }

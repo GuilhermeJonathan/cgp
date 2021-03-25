@@ -18,12 +18,12 @@ namespace Cgp.Aplicacao.BuscaVeiculo
             this._urlDaApi = url;
         }
 
-        public async Task<ModeloDeBuscaDeCarro> BuscarPlacaSimples(string placa)
+        public async Task<ModeloDeBuscaDeVeiculo> BuscarPlacaSimples(string placa)
         {
             try
             {
         
-                return await this._servicoHttp.Get<ModeloDeBuscaDeCarro>(new Uri($"{this._urlDaApi}/{placa}"));
+                return await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApi}/{placa}"));
             }
             catch (Exception ex)
             {

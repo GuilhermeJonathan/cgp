@@ -15,7 +15,7 @@ namespace Cgp.Infraestrutura.InterfaceDeServicosExternos
         IRepositorioDeComandosRegionais RepositorioDeComandosRegionais { get; }
         IRepositorioDeCidades RepositorioDeCidades { get; }
         IRepositorioDeUfs RepositorioDeUfs { get; }
-        IRepositorioDeCarros RepositorioDeCarros { get; }
+        IRepositorioDeVeiculos RepositorioDeCarros { get; }
         void Persistir();
         void Dispose();
     }

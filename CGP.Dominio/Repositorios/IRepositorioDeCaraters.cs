@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Cgp.Dominio.Repositorios
 {
-    public interface IRepositorioDeCarros : IRepositorio<Carro>
+    public interface IRepositorioDeCaraters
     {
-        Carro PegarPorId(int id);
+        Carater PegarPorId(int id);
     }
 }

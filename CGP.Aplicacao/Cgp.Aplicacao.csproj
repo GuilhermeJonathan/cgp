@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuscaVeiculo\IServicoDeBuscaDeVeiculo.cs" />
-    <Compile Include="BuscaVeiculo\Modelos\ModeloDeBuscaDeCarro.cs" />
+    <Compile Include="BuscaVeiculo\Modelos\ModeloDeBuscaDeVeiculo.cs" />
     <Compile Include="BuscaVeiculo\ServicoDeBuscaDeVeiculo.cs" />
     <Compile Include="Comum\ExcecaoDeAplicacao.cs" />
     <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />

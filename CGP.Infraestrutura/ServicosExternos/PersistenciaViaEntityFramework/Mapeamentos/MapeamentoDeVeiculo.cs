@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Mapeamentos
 {
-    public class MapeamentoDeCarro : EntityTypeConfiguration<Carro>
+    public class MapeamentoDeVeiculo : EntityTypeConfiguration<Veiculo>
     {
-        public MapeamentoDeCarro()
+        public MapeamentoDeVeiculo()
         {
-            this.ToTable("Carros");
+            this.ToTable("Veiculos");
         }
     }
 }

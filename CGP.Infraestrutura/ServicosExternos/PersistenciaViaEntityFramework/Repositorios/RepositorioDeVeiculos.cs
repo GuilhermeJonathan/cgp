@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
-    public class RepositorioDeCarros : Repositorio<Carro>, IRepositorioDeCarros
+    public class RepositorioDeVeiculos : Repositorio<Veiculo>, IRepositorioDeVeiculos
     {
-        public RepositorioDeCarros(Contexto contexto) : base(contexto) { }
+        public RepositorioDeVeiculos(Contexto contexto) : base(contexto) { }
 
-        public Carro PegarPorId(int id)
+        public Veiculo PegarPorId(int id)
         {
-            return this._contexto.Set<Carro>()
+            return this._contexto.Set<Veiculo>()
                 .FirstOrDefault(a => a.Id == id);
         }
     }

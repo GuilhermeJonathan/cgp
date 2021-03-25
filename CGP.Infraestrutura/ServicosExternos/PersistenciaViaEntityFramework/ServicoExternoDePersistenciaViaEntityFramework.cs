@@ -66,11 +66,27 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
-        public IRepositorioDeCarros RepositorioDeCarros
+        public IRepositorioDeVeiculos RepositorioDeCarros
         {
             get
             {
-                return new RepositorioDeCarros(this._contexto);
+                return new RepositorioDeVeiculos(this._contexto);
+            }
+        }
+
+        public IRepositorioDeCaraters RepositorioDeCaraters
+        {
+            get
+            {
+                return new RepositorioDeCaraters(this._contexto);
+            }
+        }
+
+        public IRepositorioDeCrimes RepositorioDeCrimes
+        {
+            get
+            {
+                return new RepositorioDeCrimes(this._contexto);
             }
         }
 

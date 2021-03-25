@@ -105,7 +105,9 @@
     <Compile Include="ServicosExternos\InterfacesDeServicosExternos\IServicoExternoDeAutenticacao.cs" />
     <Compile Include="ServicosExternos\NotificacaoViaSmtp\ContatoDaNotificacao.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Contexto.cs" />
-    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCarro.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCarater.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCrimes.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeVeiculo.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCidade.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeComandoRegional.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeFuncionario.cs" />
@@ -114,13 +116,15 @@
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeUsuario.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Migrations\Configuration.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\Repositorio.cs" />
-    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeCarros.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeCaraters.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeVeiculos.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeCidades.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeComandosRegionais.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeFuncionarios.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeBatalhoes.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeUfs.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeUsuarios.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeCrimes.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\ServicoExternoDePersistenciaViaEntityFramework.cs" />
   </ItemGroup>
   <ItemGroup>

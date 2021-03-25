@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Cgp.Dominio.Entidades
 {
-    public class Carro : Entidade
+    public class Veiculo : Entidade
     {
-        public Carro()
+        public Veiculo()
         {
 
         }

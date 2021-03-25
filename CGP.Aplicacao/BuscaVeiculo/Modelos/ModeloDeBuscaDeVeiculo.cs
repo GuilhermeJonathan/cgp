@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
 {
-    public class ModeloDeBuscaDeCarro
+    public class ModeloDeBuscaDeVeiculo
     {
-        public ModeloDeBuscaDeCarro()
+        public ModeloDeBuscaDeVeiculo()
         {
 
         }
