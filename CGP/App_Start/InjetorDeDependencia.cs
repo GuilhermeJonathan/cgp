@@ -20,6 +20,10 @@ using System.Web.Mvc;
 using Container = SimpleInjector.Container;
 using Cgp.Aplicacao.GestaoDeComandosRegionais;
 using Cgp.Aplicacao.GestaoDeCidades;
+using Cgp.Aplicacao.GestaoDeCarros;
+using Cgp.ComunicacaoViaHttp;
+using Cgp.Aplicacao.ComunicacaoViaHttp;
+using Cgp.Aplicacao.BuscaVeiculo;
 
 namespace Cgp.App_Start
 {
@@ -44,9 +48,14 @@ namespace Cgp.App_Start
             container.Register<IServicoDeMontagemDeEmails, ServicoDeMontagemDeEmails>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeComandosRegionais, ServicoDeGestaoDeComandosRegionais>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCidades, ServicoDeGestaoDeCidades>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaoDeCarros, ServicoDeGestaoDeCarros>(Lifestyle.Scoped);
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
                VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")));
+
+            container.Register<IServicoDeComunicacaoViaHttp, ServicoDeComunicacaoViaHttp>(Lifestyle.Scoped);
+
+            container.Register<IServicoDeBuscaDeVeiculo>(() => new ServicoDeBuscaDeVeiculo(container.GetInstance<IServicoDeComunicacaoViaHttp>(), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoSimples")), Lifestyle.Scoped);
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

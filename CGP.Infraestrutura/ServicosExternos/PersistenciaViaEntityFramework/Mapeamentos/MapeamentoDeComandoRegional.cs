@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Mapeamentos
 {
-    public class MapeamentoDeComandosRegionais : EntityTypeConfiguration<ComandoRegional>
+    public class MapeamentoDeComandoRegional : EntityTypeConfiguration<ComandoRegional>
     {
-        public MapeamentoDeComandosRegionais()
+        public MapeamentoDeComandoRegional()
         {
             this.ToTable("ComandosRegionais");
         }

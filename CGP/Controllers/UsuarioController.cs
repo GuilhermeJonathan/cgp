@@ -1,4 +1,5 @@
-﻿using Cgp.Aplicacao.GestaoDeBatalhoes;
+﻿using Cgp.Aplicacao.BuscaVeiculo;
+using Cgp.Aplicacao.GestaoDeBatalhoes;
 using Cgp.Aplicacao.GestaoDeUsuarios;
 using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
 using Cgp.Aplicacao.Util;
@@ -9,6 +10,7 @@ using Cgp.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,15 +22,17 @@ namespace Cgp.Controllers
     {
         private readonly IServicoDeGestaoDeUsuarios _servicoDeGestaoDeUsuarios;
         private readonly IServicoDeGestaoDeBatalhoes _servicoDeGestaoDeBatalhoes;
+        private readonly IServicoDeBuscaDeVeiculo _servicoDeGestaoDeVeiculos;
 
-        public UsuarioController(IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios, IServicoDeGestaoDeBatalhoes servicoDeGestaoDeBatalhoes)
+        public UsuarioController(IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios, IServicoDeGestaoDeBatalhoes servicoDeGestaoDeBatalhoes, IServicoDeBuscaDeVeiculo servicoDeGestaoDeVeiculos)
         {
             this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
             this._servicoDeGestaoDeBatalhoes = servicoDeGestaoDeBatalhoes;
+            this._servicoDeGestaoDeVeiculos = servicoDeGestaoDeVeiculos;
         }
 
         [HttpGet]
-        public ActionResult Index(ModeloDeListaDeUsuarios modelo)
+        public async Task<ActionResult> Index(ModeloDeListaDeUsuarios modelo)
         {
             if (!User.EhAdministrador())
                 return RedirectToAction("Index", "Home");
@@ -37,6 +41,8 @@ namespace Cgp.Controllers
 
             modelo.Filtro.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
                   () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
+
+            var veiculo = await this._servicoDeGestaoDeVeiculos.BuscarPlacaSimples("PBW3539");
 
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
             return View(modelo);

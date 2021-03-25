@@ -31,14 +31,14 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             quantidadeEncontrada = query.Count();
 
-            return query.OrderBy(a => a.Nome).ToList();
+            return query.OrderBy(a => a.Sigla).ToList();
         }
 
         public IList<Batalhao> RetornarTodosOsBatalhoesAtivos()
         {
             var query = this._contexto.Set<Batalhao>().AsQueryable();
             query = query.Where(c => c.Ativo);
-            return query.OrderBy(a => a.Nome).ToList();
+            return query.OrderBy(a => a.Sigla).ToList();
         }
 
         public Batalhao PegarPorId(int id)

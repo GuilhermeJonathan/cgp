@@ -415,6 +415,10 @@
       <Project>{071e6d6c-9d47-4d1d-8253-6b8e7852c14b}</Project>
       <Name>Cgp.Aplicacao</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cgp.ComunicacaoViaHttp\Cgp.ComunicacaoViaHttp.csproj">
+      <Project>{7C6E9430-31D0-44CD-BC1C-A0411985CEEF}</Project>
+      <Name>Cgp.ComunicacaoViaHttp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CGP.Dominio\Cgp.Dominio.csproj">
       <Project>{664e2fc2-2533-402e-bbb3-7809755f1d39}</Project>
       <Name>Cgp.Dominio</Name>
