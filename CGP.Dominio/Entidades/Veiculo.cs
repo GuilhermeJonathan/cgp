@@ -33,6 +33,15 @@ namespace Cgp.Dominio.Entidades
         public string Uf { get; set; }
         public string Situacao { get; set; }
 
+        public void AlterarDadosVeiculo(string marca, string modelo, string ano, string cor, string chassi)
+        {
+            this.Marca = Maisculo(marca);
+            this.Modelo = Maisculo(modelo);
+            this.Ano = Maisculo(ano);
+            this.Cor = Maisculo(cor);
+            this.Chassi = Maisculo(chassi);
+        }
+
         private string Maisculo(string parametro)
         {
             var retorno = parametro;

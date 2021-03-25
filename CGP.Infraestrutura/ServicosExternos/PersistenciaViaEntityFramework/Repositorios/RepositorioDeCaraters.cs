@@ -27,7 +27,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             quantidadeEncontrada = query.Count();
 
-            return query.OrderByDescending(a => a.DataDoCadastro).ToList();
+            return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
         }
 
         public Carater PegarPorId(int id)

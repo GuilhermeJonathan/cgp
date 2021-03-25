@@ -25,12 +25,13 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.ComplementoEndereco = carater.ComplementoEndereco;
             this.NomeCidade = carater.Cidade != null ? carater.Cidade.Descricao : String.Empty;
             this.NomeCrime = carater.Crime!= null ? $"{carater.Crime.Nome}" : String.Empty;
-            this.DataDoCadastro = carater.DataHoraDoFato != null ? carater.DataHoraDoFato.Value.ToShortDateString() : String.Empty;
+            this.DataDoCadastro = carater.DataHoraDoFato != null ? carater.DataHoraDoFato.Value.ToString("dd/MM/yyyy HH:mm") : String.Empty;
             this.SituacaoDoCarater = carater.SituacaoDoCarater.ToString();
 
             if (carater.Veiculo != null)
             {
-                this.NomeVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Modelo} - {carater.Veiculo.Marca}" : String.Empty;
+                var chassi = !String.IsNullOrEmpty(carater.Veiculo.Chassi) ? $"({carater.Veiculo.Chassi})" : String.Empty;
+                this.NomeVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Modelo} - {carater.Veiculo.Marca} {chassi}" : String.Empty;
                 this.PlacaVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Placa} {carater.Veiculo.Uf}" : String.Empty;
                 this.CorVeiculo = carater.Veiculo.Cor;
                 this.ChassiVeiculo = carater.Veiculo.Chassi;
