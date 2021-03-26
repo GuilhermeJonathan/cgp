@@ -15,5 +15,6 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         ModeloDeEdicaoDeCarater BuscarCaraterPorId(int id);
         string CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario);
         string AlterarDadosDoCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
+        string RealizarBaixaVeiculo(int id, string descricao, int cidade, UsuarioLogado usuario);
     }
 }

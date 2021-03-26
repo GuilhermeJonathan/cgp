@@ -24,7 +24,7 @@ namespace Cgp.Dominio.Entidades
             this.Crime = crime;
             this.UrlImagem = urlImagem;
             this.UsuarioQueAlterou = usuario;
-            this.SituacaoDoCarater = SituacaoDoCarater.Novo;
+            this.SituacaoDoCarater = SituacaoDoCarater.Cadastrado;
         }
 
         public string Descricao { get; set; }
@@ -37,6 +37,9 @@ namespace Cgp.Dominio.Entidades
         public string UrlImagem { get; set; }
         public Usuario UsuarioQueAlterou { get; set; }
         public DateTime? DataUltimaAtualizacao { get; set; }
+        public string DescricaoLocalizado { get; set; }
+        public Cidade CidadeLocalizado { get; set; }
+        public DateTime? DataHoraLocalizacao { get; set; }
 
         public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, SituacaoDoCarater situacao, string urlImagem, Usuario usuario)
         {
@@ -55,6 +58,15 @@ namespace Cgp.Dominio.Entidades
         {
             this.DataUltimaAtualizacao = DateTime.Now;
             this.UsuarioQueAlterou = usuario;
+        }
+
+        public void RealizarBaixaVeiculo(string descricao, Cidade cidadeLocalizado, Usuario usuario)
+        {
+            this.DescricaoLocalizado = descricao;
+            this.CidadeLocalizado = cidadeLocalizado;
+            this.SituacaoDoCarater = SituacaoDoCarater.Localizado;
+            this.DataHoraLocalizacao = DateTime.Now;
+            this.Atualizar(usuario);
         }
     }
 }

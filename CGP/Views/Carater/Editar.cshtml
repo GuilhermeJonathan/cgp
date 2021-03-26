@@ -71,7 +71,7 @@
                                 <div class="col-lg-2">
                                     <label class="control-label"> Crime </label>
                                     @Html.DropDownListFor(m => m.Crime, Model.Crimes, new { @class = "form-control autoComplete" })
-                                    
+
                                 </div>
                                 <div class="col-lg-6">
                                     @Html.InputTextFor(a => a.Descricao, "Descrição", required: true)
@@ -88,14 +88,29 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <label > @Model.UsuarioCadastro </label>
+                                    <label> @Model.UsuarioCadastro </label>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             @Html.BackButton()
-                            <button type="submit" class="btn btn-success float-right">Salvar</button>
+                            
+                            @if (!Model.RealizouBaixa) {<button type="submit" class="btn btn-success float-right">Salvar</button> }
                         </div>
+
+                        @if (Model.RealizouBaixa)
+                        {
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="comment-text">
+                                        <span class="username">@Model.UsuarioLocalizacao.</span> <br />
+                                        @Model.DescricaoLocalizacao - Na cidade de @Model.CidadeLocalizacao .
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
                     </div>
                 </form>
             </div>

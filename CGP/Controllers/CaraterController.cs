@@ -76,7 +76,10 @@ namespace Cgp.Controllers
         public ActionResult Editar(int? id)
         {
             if (!id.HasValue)
-                CaraterNaoEncontrado();
+            {
+                this.AdicionarMensagemDeErro("O caráter não foi encontrado");
+                return RedirectToAction(nameof(Index));
+            }
 
             var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value);
 
@@ -109,6 +112,14 @@ namespace Cgp.Controllers
         {
             var veiculo = await this._servicoDeGestaoDeVeiculos.BuscarPlacaSimples(placa);
             return Json(new { veiculo }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult RealizarBaixa(int? idCarater, string descricao, int? cidade)
+        {
+            var resultado = this._servicoDeGestaoDeCaraters.RealizarBaixaVeiculo(idCarater.Value, descricao, cidade.Value, User.Logado());
+            this.AdicionarMensagemDeSucesso(resultado);
+            return Json(new { resultado }, JsonRequestBehavior.AllowGet);
         }
     }
 }

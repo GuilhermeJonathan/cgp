@@ -9,8 +9,8 @@ namespace Cgp.Dominio.ObjetosDeValor
 {
     public enum SituacaoDoCarater
     {
-        [Description("Novo")]
-        Novo = 1,
+        [Description("Cadastrado")]
+        Cadastrado = 1,
         Localizado =2
     }
 }

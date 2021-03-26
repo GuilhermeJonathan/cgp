@@ -34,17 +34,21 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <label class="control-label"> Data </label>
                                     <input type="text" class="form-control mascaraData" id="data" name="Filtro.DataHora">
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <label class="control-label"> Cidades </label>
                                     @Html.DropDownListFor(m => m.Filtro.Cidade, Model.Filtro.Cidades, new { @class = "form-control autoComplete" })
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <label class="control-label"> Crimes </label>
                                     @Html.DropDownListFor(m => m.Filtro.Crime, Model.Filtro.Crimes, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-label"> Situação do Caráter </label>
+                                    @Html.DropDownListFor(m => m.Filtro.SituacaoDoCarater, Model.Filtro.SituacoesDoCarater, new { @class = "form-control autoComplete" })
                                 </div>
                             </div>
                         </div>
@@ -81,6 +85,7 @@
                             colunas.Add(m => m.NomeCrime).Titled("Crime");
                             colunas.Add(m => m.NomeCidade).Titled("Cidade");
                             colunas.Add(m => m.DataDoCadastro).Titled("Data do Fato");
+                            colunas.Add(m => m.SituacaoDoCarater).Titled("Situação");
 
                         }).WithPaging(30).Sortable(true).EmptyText("Nenhum caráter encontrado")
                     </div>

@@ -48,6 +48,15 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 this.CorVeiculo = carater.Veiculo.Cor;
                 this.ChassiVeiculo = carater.Veiculo.Chassi;
             }
+
+            if(carater.SituacaoDoCarater == SituacaoDoCarater.Localizado)
+            {
+                this.RealizouBaixa = true;
+                this.DescricaoLocalizacao = carater.DescricaoLocalizado;
+                this.DataHoraLocalizacao = carater.DataHoraLocalizacao.HasValue ? carater.DataHoraLocalizacao.Value.ToShortDateString() : String.Empty;
+                this.CidadeLocalizacao = carater.CidadeLocalizado != null ? carater.CidadeLocalizado.Descricao : String.Empty;
+                this.UsuarioLocalizacao = $"Baixa por {usuario} no dia {carater.DataHoraLocalizacao.Value.ToString("dd/MM")} às {carater.DataHoraLocalizacao.Value.ToString("HH:mm")}";
+            }
         }
 
         public int Id { get; set; }
@@ -71,5 +80,11 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }
         public string UsuarioCadastro { get; set; }
+
+        public bool RealizouBaixa { get; set; }
+        public string DescricaoLocalizacao { get; set; }
+        public string CidadeLocalizacao { get; set; }
+        public string DataHoraLocalizacao { get; set; }
+        public string UsuarioLocalizacao { get; set; }
     }
 }

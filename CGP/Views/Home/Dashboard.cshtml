@@ -12,10 +12,25 @@
                     <div class="col-sm-3">
                         <h1 class="m-0 text-dark">Caráter Geral Policial</h1>
                     </div>
-                    <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
-                        <a href="#" class="btn btn-block btn-primary btnBuscarCidades btnBotaoTopo" data-toggle="modal" data-target="#modalBuscarPorCidades">Buscar por Cidades</a>
-                    </div>
-                    <div class="col-sm-6">
+
+                    @if (Request.Browser.IsMobileDevice)
+                    {
+                        <div class="col-lg-5 col-sm-12 col-xs-12 text-center">
+                            <a href="#" class="btn btn-block btn-primary btnBuscarCidades btnBotaoTopo" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Buscar por Cidades</a>
+                            <a href="#" class="btn btn-block btn-default btnBuscarCidades btnBotaoTopo" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-car-alt"></i> Novo Caráter </a>
+                        </div>
+                    }
+                    else
+                    { 
+                        <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
+                            <a href="#" class="btn btn-primary btnBuscarCidades btnBotaoTopo" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Buscar por Cidades</a>
+                        </div>
+                        <div class="col-lg-2 col-sm-12 col-xs-12 text-center">
+                            <a href="#" class="btn btn-default btnBuscarCidades btnBotaoTopo" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-car-alt"></i> Novo Caráter </a>
+                        </div>
+                    }
+
+                    <div class="col-sm-4">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
                             <li class="breadcrumb-item active">@ViewBag.Title</li>
@@ -33,11 +48,13 @@
                         <div class="col-sm-12 col-lg-4">
                             <div class="small-box bg-default">
                                 <div class="inner">
-                                    <h3> @item.PlacaVeiculo </h3>
+                                    <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
                                     <sup style="font-size: 20px"> @item.NomeVeiculo @item.CorVeiculo</sup>
                                     <p style="margin-bottom: 0px !important;"> <span class="@item.CssTipoCrime">@item.NomeCrime </span> no dia @item.DataDoCadastro</p>
                                     <p style="margin-bottom: 0px !important;">@item.NomeCidade - @item.ComplementoEndereco</p>
                                     <p style="margin-bottom: 0px !important;">@item.Descricao</p>
+
+
                                 </div>
                                 <a href="@Url.Action("Editar", "Carater", new { id = item.Id })" target="_blank" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
@@ -57,7 +74,6 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-
                 </div>
                 <div class="modal-body">
                     <div class="card divDados">
@@ -72,7 +88,7 @@
                                 @foreach (var item in Model.Filtro.Cidades)
                                 {
                                     <div class="col-lg-6">
-                                        <input type="checkbox" class="checkbox checkCidades" name="Filtro.CidadesSelecionadas[]" checked="@item.Selected" value="@item.Value"  />
+                                        <input type="checkbox" class="checkbox checkCidades" name="Filtro.CidadesSelecionadas[]" checked="@item.Selected" value="@item.Value" />
                                         <label class="control-label" for="@item.Text">@item.Text</label>
                                     </div>
                                 }
@@ -84,6 +100,47 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
                     <button type="button" class="btn btn btn-primary pull-right btnBuscar">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalRealizarBaixa" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Realizar baixa de Caráter <span class="spnTitulo"></span></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <input type="hidden" class="IdCaraterSelecionado"/>
+                    
+                </div>
+                <div class="modal-body">
+                    <div class="card divDados">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Informe os dados da localização
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="control-label"> Descrição </label>
+                                    <input type="text" class="form-control txtDescricao" />
+                                    <br />
+                                </div>
+                                <div class="col-lg-12">
+                                    <label class="control-label"> Cidade </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Cidade, Model.Filtro.CidadesLocalizacao, new { @class = "form-control autoComplete ddlModal" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn btn-primary pull-right btnRealizarBaixa"><i class='fa fa-save'> </i> Salvar</button>
                 </div>
             </div>
         </div>
@@ -107,6 +164,36 @@
             setTimeout(function () {
                 window.location.reload(1);
             }, 60000); //1 * 60 * 1000
+        });
+
+        $(".btnAbrirBaixa").button().click(function () {
+            var idCarater = $(this).attr("data-id");
+            $(".IdCaraterSelecionado").val(idCarater);
+
+            var form = $("#modalRealizarBaixa");
+            form.modal('show');
+        });
+
+        $(".btnRealizarBaixa").button().click(function () {
+
+            debugger;
+            var idCarater = $(".IdCaraterSelecionado").val();
+            var descricao = $(".txtDescricao").val();
+            var cidade = $("#Filtro_Cidade").select2('val');
+
+            if (cidade == "")
+                campeonatoGeral.AdicionarMensagemDeErro("Selecione a cidade");
+            else {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Carater/RealizarBaixa',
+                    data: 'idCarater=' + idCarater + "&descricao=" + descricao + "&cidade=" + cidade,
+                    success: function (resultado) {
+                        campeonatoGeral.AdicionarMensagemDeSucesso(resultado);
+                        window.location.assign("../Home/Dashboard");
+                    }
+                });
+            }
         });
 
     });

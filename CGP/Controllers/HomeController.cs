@@ -44,12 +44,9 @@ namespace Cgp.Controllers
             if (User.Autenticado())
             {
                 ViewBag.Usuario = User.Logado().Nome;
-
-                if (User.EhAdministrador() || User.EhInterno())
-                {
-                    return RedirectToAction(nameof(Dashboard));
-                }
+                return RedirectToAction(nameof(Dashboard));
             }
+
             return View();
         }
 
@@ -61,6 +58,9 @@ namespace Cgp.Controllers
                 modelo = this._servicoDeGestaoDeCaraters.RetonarCaratersPorCidades(modelo.Filtro);
 
                 modelo.Filtro.Cidades = ListaDeItensDeDominio.DaClasseSemOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
+                () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
+
+                modelo.Filtro.CidadesLocalizacao = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
                 () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
 
                 if (modelo.Filtro.CidadesSelecionadas != null)

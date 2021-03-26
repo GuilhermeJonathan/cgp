@@ -11,7 +11,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
     {
         public RepositorioDeCaraters(Contexto contexto) : base(contexto) { }
 
-        public IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, out int quantidadeEncontrada)
+        public IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, int situacao, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
@@ -24,6 +24,10 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             if (crime > 0)
                 query = query.Where(c => c.Crime.Id == crime);
+
+            if (situacao > 0)
+                query = query.Where(c => (int)c.SituacaoDoCarater == situacao);
+
 
             quantidadeEncontrada = query.Count();
 
@@ -41,6 +45,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             if (cidades != null)
                 query = query.Where(c => cidades.Contains(c.Cidade.Id));
 
+            query = query.Where(c => c.SituacaoDoCarater == Dominio.ObjetosDeValor.SituacaoDoCarater.Cadastrado);
+
             return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
         }
 
@@ -49,6 +55,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             return this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
                 .Include(a => a.Cidade)
+                .Include(a => a.CidadeLocalizado)
                 .Include(a => a.Crime)
                 .Include(a => a.UsuarioQueAlterou)
                 .FirstOrDefault(a => a.Id == id);

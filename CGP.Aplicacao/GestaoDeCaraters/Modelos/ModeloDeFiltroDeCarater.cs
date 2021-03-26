@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Cgp.Aplicacao.Util;
+using Cgp.Dominio.ObjetosDeValor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +16,19 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         {
             this.Crimes = new List<SelectListItem>();
             this.Cidades = new List<SelectListItem>();
+            this.Cidades = new List<SelectListItem>();
+            this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
         }
 
         public string DataHora { get; set; }
         public int Cidade { get; set; }
         public IEnumerable<SelectListItem> Cidades { get; set; }
+        public IEnumerable<SelectListItem> CidadesLocalizacao { get; set; }
         public int Crime { get; set; }
         public IEnumerable<SelectListItem> Crimes { get; set; }
+        public int SituacaoDoCarater { get; set; }
+        public IEnumerable<SelectListItem> SituacoesDoCarater { get; set; }
         public int[] CidadesSelecionadas { get; set; }
+        public string DescricaoLocalizacao { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             try
             {
                 var quantidadeEncontrada = 0;
-                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Cidade, filtro.Crime, out quantidadeEncontrada);
+                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Cidade, filtro.Crime, filtro.SituacaoDoCarater, out quantidadeEncontrada);
 
                 return new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, filtro);
             }
@@ -129,6 +129,25 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             catch (Exception ex)
             {
                 throw new ExcecaoDeAplicacao("Não foi possível alterar o Caráter: " + ex.InnerException);
+            }
+        }
+
+        public string RealizarBaixaVeiculo(int id, string descricao, int cidade, UsuarioLogado usuario)
+        {
+            try
+            {
+                var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                var cidadeBanco = this._servicoExternoDePersistencia.RepositorioDeCidades.PegarPorId(cidade);
+                
+                carater.RealizarBaixaVeiculo(descricao, cidadeBanco, usuarioBanco);
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Baixa realizada com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível realizar baixa: " + ex.InnerException);
             }
         }
     }
