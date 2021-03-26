@@ -37,6 +37,15 @@ namespace Cgp.Aplicacao.Util
             return lista;
         }
 
+        public static IEnumerable<SelectListItem> DaClasseSemOpcaoPadrao<T>(string texto, string valor, Func<IEnumerable<T>> metodoDeBuscaDaLista, int valorSelecionado = 0) where T : class
+        {
+            var lista = new List<SelectListItem>();
+            var listaDeObjetosRetornados = metodoDeBuscaDaLista.Invoke();
+            lista.AddRange(PreencherSelectList<T>(listaDeObjetosRetornados, texto, valor, valorSelecionado));
+
+            return lista;
+        }
+
         public static IEnumerable<SelectListItem> DaClasseComOpcaoParametro<T>(string texto, string valor, Func<IEnumerable<T>> metodoDeBuscaDaLista, string selecione, int valorSelecionado = 0) where T : class
         {
             var lista = new List<SelectListItem> { new SelectListItem { Text = selecione, Value = string.Empty } };

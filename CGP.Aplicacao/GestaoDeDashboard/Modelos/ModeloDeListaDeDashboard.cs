@@ -15,13 +15,7 @@ namespace Cgp.Aplicacao.GestaoDeDashboard.Modelos
             this.Lista = new List<ModeloDeDashboardDaLista>();
         }
 
-
         public int TotalDeRegistros { get; set; }
-        public string TotalApostas { get; set; }
-        public string TotalSaques { get; set; }
-        public string ValorGeral { get; set; }
-        public string ValorArrecado { get; set; }
-        public string ValorCaixa { get; set; }
         public ModeloDeFiltroDeDashboard Filtro { get; set; }
         public IList<ModeloDeDashboardDaLista> Lista { get; set; }
     }

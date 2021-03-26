@@ -10,6 +10,7 @@ namespace Cgp.Dominio.Repositorios
     public interface IRepositorioDeCaraters : IRepositorio<Carater>
     {
         IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, out int quantidadeEncontrada);
+        IList<Carater> RetornarCaratersPorCidades(int[] cidades);
         Carater PegarPorId(int id);
     }
 }

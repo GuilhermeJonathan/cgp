@@ -21,5 +21,6 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public IEnumerable<SelectListItem> Cidades { get; set; }
         public int Crime { get; set; }
         public IEnumerable<SelectListItem> Crimes { get; set; }
+        public int[] CidadesSelecionadas { get; set; }
     }
 }

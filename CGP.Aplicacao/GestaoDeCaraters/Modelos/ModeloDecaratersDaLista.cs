@@ -27,6 +27,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.NomeCrime = carater.Crime!= null ? $"{carater.Crime.Nome}" : String.Empty;
             this.DataDoCadastro = carater.DataHoraDoFato != null ? carater.DataHoraDoFato.Value.ToString("dd/MM/yyyy HH:mm") : String.Empty;
             this.SituacaoDoCarater = carater.SituacaoDoCarater.ToString();
+            this.CssTipoCrime = RetornaCssCrime(NomeCrime);
 
             if (carater.Veiculo != null)
             {
@@ -51,5 +52,26 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string AnoVeiculo { get; set; }
         public string DataDoCadastro { get; set; }
         public string SituacaoDoCarater { get; set; }
+        public string CssTipoCrime { get; set; }
+
+        private string RetornaCssCrime(string crime)
+        {
+            var retorno = String.Empty;
+
+            switch (crime.ToUpper())
+            {
+                case "ROUBO":
+                    retorno = "badge bg-danger";
+                    break;
+                case "FURTO":
+                    retorno = "badge bg-warning";
+                    break;
+                default:
+                    retorno = "badge bg-primary";
+                    break;
+            }
+
+            return retorno;
+        }
     }
 }

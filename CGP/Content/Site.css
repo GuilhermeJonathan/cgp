@@ -15,8 +15,9 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 
-.placar{
-    font-size: 20pt;
+.checkCidades {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
 }
 
 .placarResultado {

@@ -30,6 +30,20 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
         }
 
+        public IList<Carater> RetornarCaratersPorCidades(int[] cidades)
+        {
+            var query = this._contexto.Set<Carater>()
+                .Include(a => a.Veiculo)
+                .Include(a => a.Cidade)
+                .Include(a => a.Crime)
+                .AsQueryable();
+
+            if (cidades != null)
+                query = query.Where(c => cidades.Contains(c.Cidade.Id));
+
+            return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
+        }
+
         public Carater PegarPorId(int id)
         {
             return this._contexto.Set<Carater>()

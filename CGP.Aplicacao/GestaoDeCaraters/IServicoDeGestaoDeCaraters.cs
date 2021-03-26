@@ -11,6 +11,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
     public interface IServicoDeGestaoDeCaraters
     {
         ModeloDeListaDeCaraters RetonarCaratersPorFiltro(ModeloDeFiltroDeCarater filtro, int pagina, int registrosPorPagina = 30);
+        ModeloDeListaDeCaraters RetonarCaratersPorCidades(ModeloDeFiltroDeCarater filtro);
         ModeloDeEdicaoDeCarater BuscarCaraterPorId(int id);
         string CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario);
         string AlterarDadosDoCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);

@@ -1,5 +1,12 @@
-﻿using Cgp.Aplicacao.GestaoDeDashboard;
+﻿using Cgp.Aplicacao.GestaoDeCaraters;
+using Cgp.Aplicacao.GestaoDeCaraters.Modelos;
+using Cgp.Aplicacao.GestaoDeCidades;
+using Cgp.Aplicacao.GestaoDeCrimes;
+using Cgp.Aplicacao.GestaoDeDashboard;
 using Cgp.Aplicacao.GestaoDeDashboard.Modelos;
+using Cgp.Aplicacao.Util;
+using Cgp.CustomExtensions;
+using Cgp.Dominio.Entidades;
 using Cgp.Filter;
 using Cgp.SendGrid;
 using Cgp.Web.CustomExtensions;
@@ -17,11 +24,18 @@ namespace Cgp.Controllers
     {
         private readonly IServicoDeGestaoDeDashboard _servicoDeGestaoDeDashboard;
         private readonly IServicoDeEnvioDeEmails _servicoDeEnvioDeEmails;
-        
-        public HomeController(IServicoDeGestaoDeDashboard servicoDeGestaoDeDashboard, IServicoDeEnvioDeEmails servicoDeEnvioDeEmails)
+        private readonly IServicoDeGestaoDeCaraters _servicoDeGestaoDeCaraters;
+        private readonly IServicoDeGestaoDeCidades _servicoDeGestaoDeCidades;
+        private readonly IServicoDeGestaoDeCrimes _servicoDeGestaoDeCrimes;
+
+        public HomeController(IServicoDeGestaoDeDashboard servicoDeGestaoDeDashboard, IServicoDeEnvioDeEmails servicoDeEnvioDeEmails, IServicoDeGestaoDeCaraters servicoDeGestaoDeCaraters, IServicoDeGestaoDeCidades servicoDeGestaoDeCidades,
+            IServicoDeGestaoDeCrimes servicoDeGestaoDeCrimes)
         {
             this._servicoDeGestaoDeDashboard = servicoDeGestaoDeDashboard;
             this._servicoDeEnvioDeEmails = servicoDeEnvioDeEmails;
+            this._servicoDeGestaoDeCaraters = servicoDeGestaoDeCaraters;
+            this._servicoDeGestaoDeCidades = servicoDeGestaoDeCidades;
+            this._servicoDeGestaoDeCrimes = servicoDeGestaoDeCrimes;
         }
 
         [Authorize]
@@ -40,19 +54,24 @@ namespace Cgp.Controllers
         }
 
         [Authorize]
-        public ActionResult Dashboard()
+        public ActionResult Dashboard(ModeloDeListaDeCaraters modelo)
         {
             if (User.Autenticado())
             {
-                if (User.EhAdministrador())
+                modelo = this._servicoDeGestaoDeCaraters.RetonarCaratersPorCidades(modelo.Filtro);
+
+                modelo.Filtro.Cidades = ListaDeItensDeDominio.DaClasseSemOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
+                () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
+
+                if (modelo.Filtro.CidadesSelecionadas != null)
                 {
-                    var modelo = new ModeloDeListaDeDashboard();
-                    
-                    return View(nameof(Dashboard), modelo);
+                    foreach (var cidade in modelo.Filtro.CidadesSelecionadas)
+                        modelo.Filtro.Cidades.FirstOrDefault(a => a.Value == cidade.ToString()).Selected = true;
                 }
+
+                return View(nameof(Dashboard), modelo);
             }
             return View();
-
         }
 
         public ActionResult Contato()

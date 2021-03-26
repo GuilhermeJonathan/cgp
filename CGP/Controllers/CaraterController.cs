@@ -72,7 +72,6 @@ namespace Cgp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         [HttpGet]
         public ActionResult Editar(int? id)
         {
@@ -99,12 +98,10 @@ namespace Cgp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         private ActionResult CaraterNaoEncontrado()
         {
             this.AdicionarMensagemDeErro("O caráter não foi encontrado");
-            return RedirectToAction(nameof(Index));
-            
+            return RedirectToAction(nameof(Index));   
         }
 
         [HttpGet]

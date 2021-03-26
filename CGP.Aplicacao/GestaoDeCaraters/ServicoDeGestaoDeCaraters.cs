@@ -33,6 +33,19 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
+        public ModeloDeListaDeCaraters RetonarCaratersPorCidades(ModeloDeFiltroDeCarater filtro)
+        {
+            try
+            {
+                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorCidades(filtro.CidadesSelecionadas);
+                return new ModeloDeListaDeCaraters(caraters, 0, filtro);
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar os caráters");
+            }
+        }
+
         public ModeloDeEdicaoDeCarater BuscarCaraterPorId(int id)
         {
             try
