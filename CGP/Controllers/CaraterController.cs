@@ -7,6 +7,7 @@ using Cgp.Aplicacao.Util;
 using Cgp.CustomExtensions;
 using Cgp.Dominio.Entidades;
 using Cgp.Filter;
+using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using Cgp.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
@@ -25,14 +26,16 @@ namespace Cgp.Controllers
         private readonly IServicoDeGestaoDeCidades _servicoDeGestaoDeCidades;
         private readonly IServicoDeGestaoDeCrimes _servicoDeGestaoDeCrimes;
         private readonly IServicoDeBuscaDeVeiculo _servicoDeGestaoDeVeiculos;
+        private readonly IServicoDeGeracaoDeDocumentosEmPdf _servicoDeGeracaoDeDocumentosEmPdf;
 
         public CaraterController(IServicoDeGestaoDeCaraters servicoDeGestaoDeCaraters, IServicoDeGestaoDeCidades servicoDeGestaoDeCidades,
-            IServicoDeGestaoDeCrimes servicoDeGestaoDeCrimes, IServicoDeBuscaDeVeiculo servicoDeGestaoDeVeiculos)
+            IServicoDeGestaoDeCrimes servicoDeGestaoDeCrimes, IServicoDeBuscaDeVeiculo servicoDeGestaoDeVeiculos, IServicoDeGeracaoDeDocumentosEmPdf servicoDeGeracaoDeDocumentosEmPdf)
         {
             this._servicoDeGestaoDeCaraters = servicoDeGestaoDeCaraters;
             this._servicoDeGestaoDeCidades = servicoDeGestaoDeCidades;
             this._servicoDeGestaoDeCrimes = servicoDeGestaoDeCrimes;
             this._servicoDeGestaoDeVeiculos = servicoDeGestaoDeVeiculos;
+            this._servicoDeGeracaoDeDocumentosEmPdf = servicoDeGeracaoDeDocumentosEmPdf;
         }
 
         [HttpGet]

@@ -35,11 +35,13 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
             this.Telefone = usuario.Telefone.Numero;
             this.Ddd = usuario.Telefone.Ddd;
             this.Batalhao = usuario.Batalhao != null ? usuario.Batalhao.Id : 0;
+            this.Matricula = usuario.Matricula;
         }
 
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
+        public string Matricula { get; set; }
         public string Senha { get; set; }
         public string RepetirSenha { get; set; }
         public string Ddd { get; set; }

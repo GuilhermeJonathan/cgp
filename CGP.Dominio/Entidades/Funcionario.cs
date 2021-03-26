@@ -25,7 +25,7 @@ namespace Cgp.Dominio
             this.Ativo = true;
             this.Endereco = endereco;
 
-            this.Usuario = new Usuario(new Nome(this.Nome), new LoginUsuario(email), senha, null);
+            this.Usuario = new Usuario(new Nome(this.Nome), new LoginUsuario(email), senha, null, String.Empty);
         }
 
         public string Nome { get; set; }

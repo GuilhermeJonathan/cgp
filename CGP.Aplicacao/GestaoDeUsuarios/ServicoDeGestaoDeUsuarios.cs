@@ -35,7 +35,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             var senha = new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash);
             var novologin = new LoginUsuario(modelo.Email);
 
-            var novoUsuario = new Usuario(new Nome(modelo.Nome), novologin, senha, batalhao);
+            var novoUsuario = new Usuario(new Nome(modelo.Nome), novologin, senha, batalhao, modelo.Matricula);
 
             this._servicoExternoDePersistencia.RepositorioDeUsuarios.Inserir(novoUsuario);
             this._servicoExternoDePersistencia.Persistir();
@@ -49,7 +49,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             {
                 var batalhao = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(modelo.Batalhao);
                 var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(modelo.Id);
-                usuarioParaAlterar.AlterarDados(modelo.Nome, modelo.Email, modelo.Ativo, modelo.PerfilDeUsuario, batalhao);
+                usuarioParaAlterar.AlterarDados(modelo.Nome, modelo.Email, modelo.Ativo, modelo.PerfilDeUsuario, batalhao, modelo.Matricula);
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Usuário alterado com sucesso.";

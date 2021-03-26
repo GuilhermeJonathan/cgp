@@ -71,11 +71,11 @@ namespace Cgp.Controllers
         [TratarErros]
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Cadastrar(string nome, string email, string senha, int? batalhao)
+        public ActionResult Cadastrar(string nome, string email, string senha, string matricula, int? batalhao)
         {
             try
             {
-                var modelo = new ModeloDeCadastroDeUsuario(nome, email, senha, batalhao.HasValue ? batalhao.Value : 0);
+                var modelo = new ModeloDeCadastroDeUsuario(nome, email, senha, matricula, batalhao.HasValue ? batalhao.Value : 0);
                 var retorno = this._servicoDeGestaoDeUsuarios.CadastrarNovoUsuario(modelo);
                 this.AdicionarMensagemDeSucesso(retorno);
                 ViewBag.Mensagem = "Usuário cadastrado com sucesso. Aguarde contato do Administrador para validação.";

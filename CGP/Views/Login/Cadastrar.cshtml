@@ -54,6 +54,14 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
+                        <input type="text" name="Matricula" class="form-control" placeholder="Matricula">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-key"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
                         @Html.DropDownListFor(m => m.Batalhao, Model.Batalhoes, new { @class = "form-control autoComplete" })
                     </div>
                     <div class="row">
@@ -68,7 +76,7 @@
                         </div>
                     </div>
                     <p class="mb-0">
-                        
+
                     </p>
                     <div class="row">
                         <div class="col-12 text-center" style="color:red;">

@@ -41,7 +41,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-3">
+                                    @Html.InputTextFor(a => a.Matricula, "Matrícula", required: false)
+                                </div>
+                                <div class="col-lg-3">
                                     <label class="control-label"> Perfil </label>
                                     @Html.DropDownListFor(m => m.PerfilDeUsuario, Model.PerfisDeUsuario, new { @class = "form-control" })
                                 </div>
