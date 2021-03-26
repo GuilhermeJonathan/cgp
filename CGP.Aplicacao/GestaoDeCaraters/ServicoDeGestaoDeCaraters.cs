@@ -1,4 +1,5 @@
 ﻿using Cgp.Aplicacao.GestaoDeCaraters.Modelos;
+using Cgp.Aplicacao.Util;
 using Cgp.Dominio.Entidades;
 using Cgp.Dominio.ObjetosDeValor;
 using Cgp.Infraestrutura.InterfaceDeServicosExternos;
@@ -25,7 +26,24 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 var quantidadeEncontrada = 0;
                 var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Cidade, filtro.Crime, filtro.SituacaoDoCarater, out quantidadeEncontrada);
 
-                return new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, filtro);
+                var modelo = new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, filtro);
+                return modelo;
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar os caráters");
+            }
+        }
+
+        public ModeloDeListaDeCaraters BuscarCaraterPorPlaca(string placa)
+        {
+            try
+            {
+                var quantidadeEncontrada = 0;
+                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.BuscarCaratersPorPlaca(placa);
+
+                var modelo = new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, new ModeloDeFiltroDeCarater());
+                return modelo;
             }
             catch (Exception ex)
             {
@@ -149,6 +167,41 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             {
                 throw new ExcecaoDeAplicacao("Não foi possível realizar baixa: " + ex.InnerException);
             }
+        }
+
+        public string RetornaHtmlDaLista(List<ModeloDeCaratersDaLista> caraters, UsuarioLogado usuario)
+        {
+            StringBuilder html = new StringBuilder();
+            var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
+
+            html.Append($"<html><head> <meta charset='UTF-8'></head>");
+            html.Append("<style> .table{width: 100%; margin-bottom: 1rem; color: #212529; background-color: transparent;}  .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6;}  .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6;}  .table tbody + tbody { border-top: 2px solid #dee2e6; }  .text-muted { color: #6c757d !important;} .placar { font-size: 16pt; font-weight: bold; } .verde {color: #139f11 !important; font-weight: bold; } .amarelo {color: #ff6a00 !important;font-weight: bold;}");
+            html.Append($"</style>");
+            html.Append($"<body>");
+            html.Append($"<table class='table'>");
+            html.Append($"<tr><th colspan='4'>RELAÇÃO DE CARÁTER GERAL</th></tr>");
+            html.Append($"<tr><th>PLACA</th><th>MODELO</th><th>COR</th><th>ANO</th><th>CIDADE</th><th>CRIME</th></tr>");
+
+            foreach (var carater in caraters)
+            {   
+                html.Append($"<tr>");
+
+                html.Append($"<td><span class='text-muted'>{carater.PlacaVeiculo}</span></td>");
+                html.Append($"<td><span class='text-muted'>{carater.NomeVeiculo}</span></td>");
+                html.Append($"<td><p style='text-align:center;'><span>{carater.CorVeiculo}</span></p></td>");
+                html.Append($"<td><p style='text-align:center;'><span>{carater.AnoVeiculo}</span></p></td>");
+                html.Append($"<td><p style='text-align:center;'><span>{carater.NomeCidade}</span></p></td>");
+                html.Append($"<td><p style='text-align:center;'><span>{carater.NomeCrime}</span></p></td>");
+                html.Append($"</tr>");
+
+                //html.Append($"<td><p class='d-flex flex-column text-center'><span style='font-weight: bold;'> {jogo.DataDoJogo}</span><span> {jogo.HoraDoJogo}</span></p>");
+            }
+
+            html.Append($"</table></body>");
+            html.Append($"<footer class='main-footer'> Emitido pelo {usuario.Nome} em {DateTime.Now.ToShortDateString()}<br> <b>Bolão</b>Brasileirão 2020 - All rights reserved.</footer>");
+
+            html.Append($"</html>");
+            return html.ToString();
         }
     }
 }

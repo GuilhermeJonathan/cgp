@@ -12,5 +12,6 @@ namespace Cgp.Dominio.Repositorios
         IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, int situacao, out int quantidadeEncontrada);
         IList<Carater> RetornarCaratersPorCidades(int[] cidades);
         Carater PegarPorId(int id);
+        IList<Carater> BuscarCaratersPorPlaca(string placa);
     }
 }

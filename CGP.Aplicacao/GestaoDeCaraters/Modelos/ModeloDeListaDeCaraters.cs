@@ -30,5 +30,6 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public int TotalDeRegistros { get; set; }
         public ModeloDeFiltroDeCarater Filtro { get; set; }
         public IList<ModeloDeCaratersDaLista> Lista { get; set; }
+        public string ArquivoHtml { get; set; }
     }
 }

@@ -124,5 +124,12 @@ namespace Cgp.Controllers
             this.AdicionarMensagemDeSucesso(resultado);
             return Json(new { resultado }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult BuscarCaraterPorPlaca(string placa)
+        {
+            var veiculos = this._servicoDeGestaoDeCaraters.BuscarCaraterPorPlaca(placa);
+            return Json(new { veiculos.Lista }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

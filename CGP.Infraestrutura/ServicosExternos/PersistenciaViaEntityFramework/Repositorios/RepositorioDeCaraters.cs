@@ -60,5 +60,19 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.UsuarioQueAlterou)
                 .FirstOrDefault(a => a.Id == id);
         }
+
+        public IList<Carater> BuscarCaratersPorPlaca(string placa)
+        {
+            var query = this._contexto.Set<Carater>()
+                .Include(a => a.Veiculo)
+                .Include(a => a.Cidade)
+                .Include(a => a.Crime)
+                .AsQueryable();
+
+            if (!String.IsNullOrEmpty(placa))
+                query = query.Where(c => c.Veiculo.Placa.Contains(placa));
+
+            return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
+        }
     }
 }
