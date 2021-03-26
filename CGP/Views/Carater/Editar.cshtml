@@ -78,9 +78,13 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-3">
                                     <label class="control-label"> Cidade </label>
                                     @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-label"> Situação do Caráter </label>
+                                    @Html.DropDownListFor(m => m.SituacaoDoCarater, Model.SituacoesDoCarater, new { @class = "form-control autoComplete", @readonly = true })
                                 </div>
                                 <div class="col-lg-6">
                                     @Html.InputTextFor(a => a.ComplementoEndereco, "Complemento do Endereço", required: false)

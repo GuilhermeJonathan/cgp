@@ -41,7 +41,7 @@ namespace Cgp.Dominio.Entidades
         public Cidade CidadeLocalizado { get; set; }
         public DateTime? DataHoraLocalizacao { get; set; }
 
-        public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, SituacaoDoCarater situacao, string urlImagem, Usuario usuario)
+        public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, string urlImagem, Usuario usuario)
         {
             this.Descricao = descricao;
             this.ComplementoEndereco = complementoEndereco;
@@ -49,7 +49,6 @@ namespace Cgp.Dominio.Entidades
             this.Cidade = cidade;
             this.Crime = crime;
             this.Veiculo = veiculo;
-            this.SituacaoDoCarater = situacao;
             this.UrlImagem = urlImagem;
             this.Atualizar(usuario);
         }

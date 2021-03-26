@@ -24,6 +24,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             if (carater == null)
                 return;
 
+            this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
+
             var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
             this.Id = carater.Id;
             this.Descricao = carater.Descricao;
@@ -37,6 +39,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.UrlImagem = $"{caminhoBlob}/{carater.UrlImagem}";
             var usuario = carater.UsuarioQueAlterou != null ? carater.UsuarioQueAlterou.Nome.Valor : String.Empty;
             this.UsuarioCadastro = $"Cadastro por {usuario} no dia {carater.DataDoCadastro.ToString("dd/MM")} às {carater.DataDoCadastro.ToString("HH:mm")}";
+            this.SituacaoDoCarater = (int)carater.SituacaoDoCarater;
 
             if(carater.Veiculo != null)
             {
@@ -49,13 +52,13 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 this.ChassiVeiculo = carater.Veiculo.Chassi;
             }
 
-            if(carater.SituacaoDoCarater == SituacaoDoCarater.Localizado)
+            if(carater.SituacaoDoCarater == Dominio.ObjetosDeValor.SituacaoDoCarater.Localizado)
             {
                 this.RealizouBaixa = true;
                 this.DescricaoLocalizacao = carater.DescricaoLocalizado;
-                this.DataHoraLocalizacao = carater.DataHoraLocalizacao.HasValue ? carater.DataHoraLocalizacao.Value.ToShortDateString() : String.Empty;
+                var dataHora = carater.DataHoraLocalizacao.HasValue ? carater.DataHoraLocalizacao.Value : DateTime.MinValue;
                 this.CidadeLocalizacao = carater.CidadeLocalizado != null ? carater.CidadeLocalizado.Descricao : String.Empty;
-                this.UsuarioLocalizacao = $"Baixa por {usuario} no dia {carater.DataHoraLocalizacao.Value.ToString("dd/MM")} às {carater.DataHoraLocalizacao.Value.ToString("HH:mm")}";
+                this.UsuarioLocalizacao = $"Baixa por {usuario} no dia {dataHora.ToString("dd/MM")} às {dataHora.ToString("HH:mm")}";
             }
         }
 
@@ -70,7 +73,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public IEnumerable<SelectListItem> Crimes { get; set; }
         public int Veiculo { get; set; }
         public string UrlImagem { get; set; }
-        public SituacaoDoCarater SituacaoDoCarater { get; set; }
+        public int SituacaoDoCarater { get; set; }
         public IEnumerable<SelectListItem> SituacoesDoCarater { get; set; }
         public int IdVeiculo { get; set; }
         public string Placa { get; set; }

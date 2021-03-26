@@ -139,7 +139,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                     dataHoraFato = new DateTime(data.Year, data.Month, data.Day, hora.Hour, hora.Minute, 0);
                 }
 
-                carater.AlterarDados(modelo.Descricao, modelo.ComplementoEndereco, dataHoraFato, cidade, crime, veiculo, modelo.SituacaoDoCarater, modelo.UrlImagem, usuarioBanco);
+                carater.AlterarDados(modelo.Descricao, modelo.ComplementoEndereco, dataHoraFato, cidade, crime, veiculo,  modelo.UrlImagem, usuarioBanco);
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Caráter alterado com sucesso.";
