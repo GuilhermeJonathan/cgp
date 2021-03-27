@@ -23,8 +23,23 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         {
             try
             {
+                DateTime? dataInicial = null;
+                DateTime? dataFinal = null;
+
+                if (!String.IsNullOrEmpty(filtro.DataInicio))
+                {
+                    dataInicial = DateTime.Parse(filtro.DataInicio);
+                    dataInicial = new DateTime(dataInicial.Value.Year, dataInicial.Value.Month, dataInicial.Value.Day, 0, 0, 0);
+                }
+
+                if (!String.IsNullOrEmpty(filtro.DataFim))
+                {
+                    dataFinal = DateTime.Parse(filtro.DataFim);
+                    dataFinal = new DateTime(dataFinal.Value.Year, dataFinal.Value.Month, dataFinal.Value.Day, 23, 59, 59);
+                }
+
                 var quantidadeEncontrada = 0;
-                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Cidade, filtro.Crime, filtro.SituacaoDoCarater, out quantidadeEncontrada);
+                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Cidade, filtro.Crime, filtro.SituacaoDoCarater, dataInicial, dataFinal, out quantidadeEncontrada);
 
                 var modelo = new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, filtro);
                 return modelo;
@@ -55,7 +70,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         {
             try
             {
-                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorCidades(filtro.CidadesSelecionadas);
+                DateTime dataParaBusca = DateTime.Now.AddDays(-3);
+                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorCidades(filtro.CidadesSelecionadas, dataParaBusca);
                 return new ModeloDeListaDeCaraters(caraters, 0, filtro);
             }
             catch (Exception ex)
@@ -79,8 +95,16 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
 
         public string CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario)
         {
+            var mensagemErro = String.Empty;
             try
             {
+                var caraterCadastrado = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarCaraterPorPlaca(modelo.Placa);
+                if (caraterCadastrado != null)
+                {
+                    mensagemErro = "Já existe um caráter para o mesmo veículo.";
+                    throw new ExcecaoDeAplicacao("Já existe um caráter para o mesmo veículo.");
+                }
+
                 DateTime dataHoraFato = new DateTime();
                 var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
                 var crime = this._servicoExternoDePersistencia.RepositorioDeCrimes.BuscarPorId(modelo.Crime);
@@ -108,7 +132,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
             catch (Exception ex)
             {
-                throw new ExcecaoDeAplicacao("Não foi possível incluir o Caráter: " + ex.InnerException);
+                throw new ExcecaoDeAplicacao("Não foi possível incluir o Caráter: " + ex.InnerException + mensagemErro);
             }
         }
 
@@ -169,24 +193,58 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
-        public string RetornaHtmlDaLista(List<ModeloDeCaratersDaLista> caraters, UsuarioLogado usuario)
+        public ModeloDeListaDeCaraters GerarPDFeRetornar(ModeloDeFiltroDeCarater filtro, UsuarioLogado usuario)
+        {
+            try
+            {
+                DateTime? dataInicial = null;
+                DateTime? dataFinal = null;
+
+                if (!String.IsNullOrEmpty(filtro.DataInicio))
+                {
+                    dataInicial = DateTime.Parse(filtro.DataInicio);
+                    dataInicial = new DateTime(dataInicial.Value.Year, dataInicial.Value.Month, dataInicial.Value.Day, 0, 0, 0);
+                }
+
+                if (!String.IsNullOrEmpty(filtro.DataFim))
+                {
+                    dataFinal = DateTime.Parse(filtro.DataFim);
+                    dataFinal = new DateTime(dataFinal.Value.Year, dataFinal.Value.Month, dataFinal.Value.Day, 23, 59, 59);
+                }
+
+                var quantidadeEncontrada = 0;
+                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Cidade, filtro.Crime, filtro.SituacaoDoCarater, dataInicial, dataFinal, out quantidadeEncontrada);
+
+                var modelo = new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, filtro);
+                modelo.ArquivoHtml = RetornaHtmlDaLista(modelo.Lista.ToList(), dataInicial != null? dataInicial.Value : DateTime.MinValue, dataFinal != null ? dataFinal.Value : DateTime.MinValue, usuario);
+                return modelo;
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar os caráters");
+            }
+        }
+
+        private string RetornaHtmlDaLista(List<ModeloDeCaratersDaLista> caraters, DateTime? dataInicial, DateTime? dataFinal, UsuarioLogado usuario)
         {
             StringBuilder html = new StringBuilder();
             var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
 
             html.Append($"<html><head> <meta charset='UTF-8'></head>");
-            html.Append("<style> .table{width: 100%; margin-bottom: 1rem; color: #212529; background-color: transparent;}  .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6;}  .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6;}  .table tbody + tbody { border-top: 2px solid #dee2e6; }  .text-muted { color: #6c757d !important;} .placar { font-size: 16pt; font-weight: bold; } .verde {color: #139f11 !important; font-weight: bold; } .amarelo {color: #ff6a00 !important;font-weight: bold;}");
+            html.Append("<style> .table{width: 100%; margin-bottom: 1rem; color: #212529; background-color: transparent;}  .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6;}  .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6;}  .table tbody + tbody { border-top: 2px solid #dee2e6; }  .text-muted { color: #6c757d !important;} .placa { font-size: 16pt; font-weight: bold; } .verde {color: #139f11 !important; font-weight: bold; } .amarelo {color: #ff6a00 !important;font-weight: bold;}");
             html.Append($"</style>");
             html.Append($"<body>");
             html.Append($"<table class='table'>");
-            html.Append($"<tr><th colspan='4'>RELAÇÃO DE CARÁTER GERAL</th></tr>");
+            html.Append($"<tr><th colspan='6'>RELAÇÃO DE CARÁTER GERAL");
+            if((dataInicial.HasValue && dataInicial != DateTime.MinValue)  && (dataFinal.HasValue && dataFinal != DateTime.MinValue)) html.Append($" - {dataInicial.Value.ToString("dd/MM")} a {dataFinal.Value.ToString("dd/MM/yyyy")}");
+            html.Append($"</th></tr>");
             html.Append($"<tr><th>PLACA</th><th>MODELO</th><th>COR</th><th>ANO</th><th>CIDADE</th><th>CRIME</th></tr>");
 
             foreach (var carater in caraters)
             {   
                 html.Append($"<tr>");
 
-                html.Append($"<td><span class='text-muted'>{carater.PlacaVeiculo}</span></td>");
+                html.Append($"<td><span class='placa'>{carater.PlacaVeiculo.ToUpper()}</span></td>");
                 html.Append($"<td><span class='text-muted'>{carater.NomeVeiculo}</span></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.CorVeiculo}</span></p></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.AnoVeiculo}</span></p></td>");
@@ -194,14 +252,22 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 html.Append($"<td><p style='text-align:center;'><span>{carater.NomeCrime}</span></p></td>");
                 html.Append($"</tr>");
 
-                //html.Append($"<td><p class='d-flex flex-column text-center'><span style='font-weight: bold;'> {jogo.DataDoJogo}</span><span> {jogo.HoraDoJogo}</span></p>");
             }
 
             html.Append($"</table></body>");
-            html.Append($"<footer class='main-footer'> Emitido pelo {usuario.Nome} em {DateTime.Now.ToShortDateString()}<br> <b>Bolão</b>Brasileirão 2020 - All rights reserved.</footer>");
+            html.Append($"<footer class='main-footer'> Emitido por {usuario.Nome} em {DateTime.Now.ToShortDateString()}<br> <b>Caráter Geral</b> Policial 2021(CGP) - All rights reserved.</footer>");
 
             html.Append($"</html>");
             return html.ToString();
+        }
+
+        public bool VerificaCadastroDeCarater(string placa)
+        {
+            var caraterCadastrado = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarCaraterPorPlaca(placa);
+            if (caraterCadastrado != null)
+                return true;
+            else
+                return false;
         }
     }
 }

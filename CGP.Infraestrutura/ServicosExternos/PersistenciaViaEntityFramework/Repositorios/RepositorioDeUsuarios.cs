@@ -14,7 +14,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
         public Usuario PegarAtivoPorLogin(string login)
         {
             var usuario = this._contexto.Set<Usuario>().FirstOrDefault(
-               au => au.Login.Valor == login && au.Ativo == true);
+               au => au.Login.Valor == login);
 
             return usuario != null ? usuario : null;
         }

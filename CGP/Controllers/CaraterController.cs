@@ -11,6 +11,7 @@ using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using Cgp.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -26,21 +27,37 @@ namespace Cgp.Controllers
         private readonly IServicoDeGestaoDeCidades _servicoDeGestaoDeCidades;
         private readonly IServicoDeGestaoDeCrimes _servicoDeGestaoDeCrimes;
         private readonly IServicoDeBuscaDeVeiculo _servicoDeGestaoDeVeiculos;
+        private readonly IServicoExternoDeArmazenamentoEmNuvem _servicoExternoDeArmazenamentoEmNuvem;
         private readonly IServicoDeGeracaoDeDocumentosEmPdf _servicoDeGeracaoDeDocumentosEmPdf;
 
         public CaraterController(IServicoDeGestaoDeCaraters servicoDeGestaoDeCaraters, IServicoDeGestaoDeCidades servicoDeGestaoDeCidades,
-            IServicoDeGestaoDeCrimes servicoDeGestaoDeCrimes, IServicoDeBuscaDeVeiculo servicoDeGestaoDeVeiculos, IServicoDeGeracaoDeDocumentosEmPdf servicoDeGeracaoDeDocumentosEmPdf)
+            IServicoDeGestaoDeCrimes servicoDeGestaoDeCrimes, IServicoDeBuscaDeVeiculo servicoDeGestaoDeVeiculos, IServicoExternoDeArmazenamentoEmNuvem servicoExternoDeArmazenamentoEmNuvem, 
+            IServicoDeGeracaoDeDocumentosEmPdf servicoDeGeracaoDeDocumentosEmPdf)
         {
             this._servicoDeGestaoDeCaraters = servicoDeGestaoDeCaraters;
             this._servicoDeGestaoDeCidades = servicoDeGestaoDeCidades;
             this._servicoDeGestaoDeCrimes = servicoDeGestaoDeCrimes;
             this._servicoDeGestaoDeVeiculos = servicoDeGestaoDeVeiculos;
+            this._servicoExternoDeArmazenamentoEmNuvem = servicoExternoDeArmazenamentoEmNuvem;
             this._servicoDeGeracaoDeDocumentosEmPdf = servicoDeGeracaoDeDocumentosEmPdf;
         }
 
         [HttpGet]
-        public ActionResult Index(ModeloDeListaDeCaraters modelo)
+        public async Task<ActionResult> Index(ModeloDeListaDeCaraters modelo, string exportar)
         {
+            if (exportar == "imprimir")
+            {
+                modelo = this._servicoDeGestaoDeCaraters.GerarPDFeRetornar(modelo.Filtro, User.Logado());
+
+                using (Stream enviarParaAzure = new MemoryStream(this._servicoDeGeracaoDeDocumentosEmPdf.CriarPdf(modelo.ArquivoHtml)))
+                {
+                    var nomeArquivo = $"caraterGeral{DateTime.Now.ToString().Trim()}.pdf";
+                    string blob = $"caraters";
+                    var retorno = await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(enviarParaAzure, blob, nomeArquivo.Trim());
+                    Response.Redirect(retorno, true);
+                }    
+            }
+
             modelo = this._servicoDeGestaoDeCaraters.RetonarCaratersPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
 
             modelo.Filtro.Cidades = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
@@ -130,6 +147,13 @@ namespace Cgp.Controllers
         {
             var veiculos = this._servicoDeGestaoDeCaraters.BuscarCaraterPorPlaca(placa);
             return Json(new { veiculos.Lista }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult VerificaCadastroDeCarater(string placa)
+        {
+            var carater = this._servicoDeGestaoDeCaraters.VerificaCadastroDeCarater(placa);
+            return Json(new { carater }, JsonRequestBehavior.AllowGet);
         }
     }
 }

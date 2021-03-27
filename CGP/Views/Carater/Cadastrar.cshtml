@@ -127,6 +127,21 @@
                     }
                 }
             });
+
+            $.ajax({
+                type: 'GET',
+                url: '../Carater/VerificaCadastroDeCarater',
+                data: 'placa=' + placa,
+                beforeSend: function (resultado) {
+                    $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
+                },
+                success: function (resultado) {
+                    debugger;
+                    $.unblockUI();
+                    if (resultado.carater) { campeonatoGeral.AdicionarMensagemDeErro("Veículo já encontra-se cadastrado em outro caráter."); }
+                }
+            });
         });
+
     })
 </script>

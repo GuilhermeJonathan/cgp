@@ -88,7 +88,7 @@ namespace Cgp.Controllers
             catch (Exception ex)
             {
                 this.AdicionarMensagemDeErro(ex.Message);
-                ViewBag.Mensagem = ex.Message;
+                ViewBag.Mensagem = $"{ex.Message}. Se já realizou o cadastro, aguarde validação do administrador.";
             }
 
             return View(new ModeloDeCadastroDeUsuario());

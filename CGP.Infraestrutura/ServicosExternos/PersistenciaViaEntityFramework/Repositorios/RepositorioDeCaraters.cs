@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using Cgp.Dominio.ObjetosDeValor;
 
 namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
@@ -11,7 +12,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
     {
         public RepositorioDeCaraters(Contexto contexto) : base(contexto) { }
 
-        public IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, int situacao, out int quantidadeEncontrada)
+        public IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, int situacao, DateTime? dataInicial, DateTime? dataFinal, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
@@ -28,13 +29,15 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             if (situacao > 0)
                 query = query.Where(c => (int)c.SituacaoDoCarater == situacao);
 
+            if (dataInicial.HasValue && dataFinal.HasValue)
+                query = query.Where(a => a.DataHoraDoFato >= dataInicial.Value && a.DataHoraDoFato <= dataFinal.Value);
 
             quantidadeEncontrada = query.Count();
 
             return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
         }
 
-        public IList<Carater> RetornarCaratersPorCidades(int[] cidades)
+        public IList<Carater> RetornarCaratersPorCidades(int[] cidades, DateTime dataParaBusca)
         {
             var query = this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
@@ -45,7 +48,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             if (cidades != null)
                 query = query.Where(c => cidades.Contains(c.Cidade.Id));
 
-            query = query.Where(c => c.SituacaoDoCarater == Dominio.ObjetosDeValor.SituacaoDoCarater.Cadastrado);
+            
+            query = query.Where(c => c.SituacaoDoCarater == SituacaoDoCarater.Cadastrado && c.DataHoraDoFato > dataParaBusca);
 
             return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
         }
@@ -74,5 +78,15 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
         }
+
+        public Carater PegarCaraterPorPlaca(string placa)
+        {
+            var carater = this._contexto.Set<Carater>()
+                .Include(a => a.Veiculo)
+                .FirstOrDefault(a => a.Veiculo.Placa == placa && a.SituacaoDoCarater == SituacaoDoCarater.Cadastrado);
+
+            return carater != null ? carater : null;
+        }
+
     }
 }

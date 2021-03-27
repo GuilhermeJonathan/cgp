@@ -20,7 +20,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
         }
 
-        public string DataHora { get; set; }
+        public string DataInicio { get; set; }
+        public string DataFim { get; set; }
         public int Cidade { get; set; }
         public IEnumerable<SelectListItem> Cidades { get; set; }
         public IEnumerable<SelectListItem> CidadesLocalizacao { get; set; }

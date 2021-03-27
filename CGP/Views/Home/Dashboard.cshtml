@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-3">
-                        <h1 class="m-0 text-dark">Caráter Geral Policial</h1>
+                        <h1 class="m-0 text-dark">Caráter Geral 72 horas</h1>
                     </div>
 
                     @if (Request.Browser.IsMobileDevice)
@@ -47,27 +47,34 @@
                         <input type="text" class="form-control txtBuscar" id="txtBuscar" placeholder="Consultar por placa" style="width: 200px;" />
                     </div>
                 </div>
-                <div class="row" id="divDados">
-                    @foreach (var item in Model.Lista)
+                <div class="row" id="divDados" style="margin-top: 10px;">
+                    @if (Model.Lista.Count > 0)
                     {
-                        <div class="col-sm-12 col-lg-4">
-                            <div class="small-box bg-default">
-                                <div class="inner">
-                                    <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
-                                    <sup style="font-size: 20px"> @item.NomeVeiculo @item.CorVeiculo</sup>
-                                    <p style="margin-bottom: 0px !important;"> <span class="@item.CssTipoCrime">@item.NomeCrime </span> no dia  @item.DataDoCadastro</p>
-                                    <p style="margin-bottom: 0px !important;">@item.NomeCidade - @item.ComplementoEndereco</p>
-                                    <p style="margin-bottom: 0px !important;">@item.Descricao</p>
+                        foreach (var item in Model.Lista)
+                        {
+                            <div class="col-sm-12 col-lg-4">
+                                <div class="small-box bg-default">
+                                    <div class="inner">
+                                        <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
+                                        <sup style="font-size: 20px"> @item.NomeVeiculo @item.CorVeiculo</sup>
+                                        <p style="margin-bottom: 0px !important;"> <span class="@item.CssTipoCrime">@item.NomeCrime </span> no dia  @item.DataDoCadastro</p>
+                                        <p style="margin-bottom: 0px !important;">@item.NomeCidade - @item.ComplementoEndereco</p>
+                                        <p style="margin-bottom: 0px !important;">@item.Descricao</p>
+                                    </div>
+                                    <a href="@Url.Action("Editar", "Carater", new { id = item.Id })" target="_blank" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
-                                <a href="@Url.Action("Editar", "Carater", new { id = item.Id })" target="_blank" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                        </div>
+                        }
+                    } else
+                    {
+                        <div class="col-12">
+                            <div class="small-box bg-default">
+                                <div class="inner">Nenhum caráter nas últimas 72 horas.</div>
+                            </div>
+                        </div>   
                     }
                 </div>
-                <div class="row" id="divDadosNovos">
-                    
-                </div>
-
+                <div class="row" id="divDadosNovos" style="margin-top: 10px;"></div>
             </div>
         </div>
     </div>
@@ -201,16 +208,19 @@
                                 $(resultado.Lista).each(function () {
                                     divDados.hide();
                                     
-                                    var teste = $(this);
+                                    var item = $(this);
                                     tabela += "<div class='col-sm-12 col-lg-4'>";
                                     tabela += "<div class='small-box bg-default'> <div class='inner'>";
+
                                     //tabela += "<h3>" + teste[0].PlacaVeiculo + "<button type='button' class='btn btn-xs btn-default ' onClick='abrirBaixa(" + teste[0].Id + ");' data-id='" + teste[0].Id + "'> <i class='fas fa-arrow-alt-circle-down'></i> Realizar Baixa </button></h3>";
-                                    tabela += "<h3>" + teste[0].PlacaVeiculo +"</h3>";
-                                    tabela += "<sup style='font-size: 20px'>" + teste[0].NomeVeiculo + teste[0].CorVeiculo + " </sup>";
-                                    tabela += "<p style='margin-bottom: 0px !important;'> <span class='" + teste[0].CssTipoCrime + "'>" + teste[0].NomeCrime + "</span> no dia" + teste[0].DataDoCadastro + "</p>";
-                                    tabela += "<p style='margin-bottom: 0px !important;'>" + teste[0].NomeCidade + " - " + teste[0].ComplementoEndereco + "</p>";
-                                    tabela += "<p style='margin-bottom: 0px !important;'>" + teste[0].Descricao + "</p>";
-                                    tabela += "</div>" + "<a href='../Carater/Editar/" + teste[0].Id + "' target='_blank' class='small-box-footer' style='color:black !important; '>Mais informações <i class='fas fa-arrow-circle-right'></i></a>";
+                                    tabela += "<h3>" + item[0].PlacaVeiculo;
+                                    if (item[0].VeiculoLocalizado) tabela += "<span class='badge bg-warning'>Veículo localizado.</span>";
+                                    tabela += "</h3>";
+                                    tabela += "<sup style='font-size: 20px'>" + item[0].NomeVeiculo + item[0].CorVeiculo + " </sup>";
+                                    tabela += "<p style='margin-bottom: 0px !important;'> <span class='" + item[0].CssTipoCrime + "'>" + item[0].NomeCrime + "</span> no dia" + item[0].DataDoCadastro + "</p>";
+                                    tabela += "<p style='margin-bottom: 0px !important;'>" + item[0].NomeCidade + " - " + item[0].ComplementoEndereco + "</p>";
+                                    tabela += "<p style='margin-bottom: 0px !important;'>" + item[0].Descricao + "</p>";
+                                    tabela += "</div>" + "<a href='../Carater/Editar/" + item[0].Id + "' target='_blank' class='small-box-footer' style='color:black !important; '>Mais informações <i class='fas fa-arrow-circle-right'></i></a>";
                                     tabela += "</div></div>";
 
                                 });
