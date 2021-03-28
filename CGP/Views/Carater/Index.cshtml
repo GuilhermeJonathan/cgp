@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form role="form" action="@Url.Action("Index", "Carater")" method="get">
+                <form id="formBuscar" action="@Url.Action("Index", "Carater")" method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Buscar Caráter</h3>
@@ -42,24 +42,101 @@
                                     <label class="control-label"> Data Fim </label>
                                     <input type="text" class="form-control mascaraData" id="dataFim" name="Filtro.DataFim" value="@Model.Filtro.DataFim">
                                 </div>
-                                <div class="col-lg-3">
-                                    <label class="control-label"> Cidades </label>
-                                    @Html.DropDownListFor(m => m.Filtro.Cidade, Model.Filtro.Cidades, new { @class = "form-control autoComplete" })
-                                </div>
-                                <div class="col-lg-3">
-                                    <label class="control-label"> Crimes </label>
-                                    @Html.DropDownListFor(m => m.Filtro.Crime, Model.Filtro.Crimes, new { @class = "form-control autoComplete" })
-                                </div>
                                 <div class="col-lg-2">
                                     <label class="control-label"> Situação do Caráter </label>
                                     @Html.DropDownListFor(m => m.Filtro.SituacaoDoCarater, Model.Filtro.SituacoesDoCarater, new { @class = "form-control autoComplete" })
                                 </div>
+                                @*<div class="col-lg-3">
+                                    <label class="control-label"> Crimes </label>
+                                    @Html.DropDownListFor(m => m.Filtro.Crime, Model.Filtro.Crimes, new { @class = "form-control autoComplete" })
+                                </div>*@
+                                <div class="col-lg-3">
+                                    <a href="#" class="btn btn-block btn-default btnBuscarCidades btnNoFormulario" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Selecionar Cidades</a>
+                                </div>
+                                <div class="col-lg-3">
+                                    <a href="#" class="btn btn-block btn-default btnBuscarCrimes btnNoFormulario" data-toggle="modal" data-target="#modalBuscarPorCrimes"> <i class="fas fa-gavel"></i> Selecionar Crimes</a>
+                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-footer">
                             <a href="@Url.Action("Cadastrar", "Carater" )" class="btn btn-info"> <i class="fas fa-car-alt"></i> Novo Caráter </a> &nbsp;
                             <button type='submit' class='btn btn-warning no-load' name="exportar" value="imprimir"> <i class='fa fa-file-pdf'> </i> &nbsp; Imprimir </button>
                             <button type="submit" class="btn btn-primary float-right">Buscar</button>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalBuscarPorCidades" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Selecionar Cidades <span class="spnTitulo"></span></h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card divDados">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                Selecione as cidades desejadas
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                @foreach (var item in Model.Filtro.Cidades)
+                                                {
+                                                    <div class="col-lg-6">
+                                                        <input type="checkbox" class="checkbox checkCidades" name="Filtro.CidadesSelecionadas[]" checked="@item.Selected" value="@item.Value" />
+                                                        <label class="control-label" for="@item.Text">@item.Text</label>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn btn-primary pull-right btnBuscar">Selecionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalBuscarPorCrimes" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Selecionar Crimes <span class="spnTitulo"></span></h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card divDados">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                Selecione os crimes desejados
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                @foreach (var item in Model.Filtro.Crimes)
+                                                {
+                                                    <div class="col-lg-6">
+                                                        <input type="checkbox" class="checkbox checkCrimes" name="Filtro.CrimesSelecionados[]" checked="@item.Selected" value="@item.Value" />
+                                                        <label class="control-label" for="@item.Text">@item.Text</label>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn btn-primary pull-right btnBuscarPorCrimes">Selecionar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -83,16 +160,16 @@
                         {
                            colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Editar", "Carater", new { id = m.Id })" title="Editar" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></div>);
-                            colunas.Add(m => m.PlacaVeiculo).Titled("Placa");
-                            colunas.Add(m => m.NomeVeiculo).Titled("Veículo");
-                            colunas.Add(m => m.CorVeiculo).Titled("Cor");
-                            colunas.Add(m => m.AnoVeiculo).Titled("Ano");
-                            colunas.Add(m => m.NomeCrime).Titled("Crime");
-                            colunas.Add(m => m.NomeCidade).Titled("Cidade");
-                            colunas.Add(m => m.DataDoCadastro).Titled("Data do Fato");
-                            colunas.Add(m => m.SituacaoDoCarater).Titled("Situação");
+                      colunas.Add(m => m.PlacaVeiculo).Titled("Placa");
+                      colunas.Add(m => m.NomeVeiculo).Titled("Veículo");
+                      colunas.Add(m => m.CorVeiculo).Titled("Cor");
+                      colunas.Add(m => m.AnoVeiculo).Titled("Ano");
+                      colunas.Add(m => m.NomeCrime).Titled("Crime");
+                      colunas.Add(m => m.NomeCidade).Titled("Cidade");
+                      colunas.Add(m => m.DataDoFato).Titled("Data do Fato");
+                      colunas.Add(m => m.SituacaoDoCarater).Titled("Situação");
 
-                        }).WithPaging(30).Sortable(true).EmptyText("Nenhum caráter encontrado")
+                  }).WithPaging(30).Sortable(true).EmptyText("Nenhum caráter encontrado")
                     </div>
                 </div>
             </div>
@@ -113,16 +190,24 @@
             zIndexOffset: 99999999
         });
 
-        $(".btn").click(function () {
-            var idCrime = $(this).attr("data-id");
-            $.ajax({
-                type: 'GET',
-                url: '../Crime/AtivarCrime',
-                data: 'id=' + idCrime,
-                success: function (resultado) {
-                    campeonatoGeral.AdicionarMensagemDeSucesso(resultado);
-                }
-            });
+        $(".btnBuscarCidades").button().click(function () {
+            var form = $("#modalBuscarPorCidades");
+            form.modal('show');
+        });
+
+        $(".btnBuscar").button().click(function () {
+            $(this).prop("disabled", true);
+            $("#formBuscar").submit();
+        });
+
+        $(".btnBuscarCrimes").button().click(function () {
+            var form = $("#modalBuscarPorCrimes");
+            form.modal('show');
+        });
+
+        $(".btnBuscarPorCrimes").button().click(function () {
+            $(this).prop("disabled", true);
+            $("#formBuscar").submit();
         });
     })
 </script>

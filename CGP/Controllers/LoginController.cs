@@ -7,10 +7,12 @@ using Cgp.Aplicacao.Util;
 using Cgp.CustomExtensions;
 using Cgp.Dominio.Entidades;
 using Cgp.Filter;
+using Cgp.SendGrid;
 using Cgp.Web.CustomExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,12 +24,14 @@ namespace Cgp.Controllers
         private readonly IServicoDeLogin _servicoDeLogin;
         private readonly IServicoDeGestaoDeUsuarios _servicoDeGestaoDeUsuarios;
         private readonly IServicoDeGestaoDeBatalhoes _servicoDeGestaoDeBatalhoes;
+        private readonly IServicoDeEnvioDeEmails _servicoDeEnvioDeEmails;
 
-        public LoginController(IServicoDeLogin servicoDeLogin, IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios, IServicoDeGestaoDeBatalhoes servicoDeGestaoDeBatalhoes)
+        public LoginController(IServicoDeLogin servicoDeLogin, IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios, IServicoDeGestaoDeBatalhoes servicoDeGestaoDeBatalhoes, IServicoDeEnvioDeEmails servicoDeEnvioDeEmails)
         {
             _servicoDeLogin = servicoDeLogin;
             this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
             this._servicoDeGestaoDeBatalhoes = servicoDeGestaoDeBatalhoes;
+            this._servicoDeEnvioDeEmails = servicoDeEnvioDeEmails;
         }
        
         public ActionResult Index()
@@ -71,14 +75,14 @@ namespace Cgp.Controllers
         [TratarErros]
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Cadastrar(string nome, string email, string senha, string matricula, int? batalhao)
+        public async Task<ActionResult> Cadastrar(string nome, string email, string senha, string matricula, int? batalhao)
         {
             try
             {
                 var modelo = new ModeloDeCadastroDeUsuario(nome, email, senha, matricula, batalhao.HasValue ? batalhao.Value : 0);
-                var retorno = this._servicoDeGestaoDeUsuarios.CadastrarNovoUsuario(modelo);
+                var retorno = await this._servicoDeGestaoDeUsuarios.CadastrarNovoUsuario(modelo);
                 this.AdicionarMensagemDeSucesso(retorno);
-                ViewBag.Mensagem = "Usuário cadastrado com sucesso. Aguarde contato do Administrador para validação.";
+                ViewBag.Mensagem = "Usuário cadastrado com sucesso. Você receberá um email com as orientações.";
 
                 modelo.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoParametro<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
                   () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos(), "Selecione o batalhão");

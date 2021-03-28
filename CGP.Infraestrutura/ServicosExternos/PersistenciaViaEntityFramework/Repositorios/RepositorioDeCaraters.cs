@@ -12,7 +12,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
     {
         public RepositorioDeCaraters(Contexto contexto) : base(contexto) { }
 
-        public IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, int situacao, DateTime? dataInicial, DateTime? dataFinal, out int quantidadeEncontrada)
+        public IList<Carater> RetornarCaratersPorFiltro(int[] cidades, int[] crimes, int situacao, DateTime? dataInicial, DateTime? dataFinal, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
@@ -20,11 +20,11 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Crime)
                 .AsQueryable();
             
-            if (cidade > 0)
-                query = query.Where(c => c.Cidade.Id == cidade);
+            if (cidades != null)
+                query = query.Where(c => cidades.Contains(c.Cidade.Id));
 
-            if (crime > 0)
-                query = query.Where(c => c.Crime.Id == crime);
+            if (crimes != null)
+                query = query.Where(c => crimes.Contains(c.Crime.Id));
 
             if (situacao > 0)
                 query = query.Where(c => (int)c.SituacaoDoCarater == situacao);
@@ -65,7 +65,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .FirstOrDefault(a => a.Id == id);
         }
 
-        public IList<Carater> BuscarCaratersPorPlaca(string placa)
+        public IList<Carater> BuscarCaratersPorFragmentos(string fragmento)
         {
             var query = this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
@@ -73,8 +73,9 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Crime)
                 .AsQueryable();
 
-            if (!String.IsNullOrEmpty(placa))
-                query = query.Where(c => c.Veiculo.Placa.Contains(placa));
+            if (!String.IsNullOrEmpty(fragmento))
+                query = query.Where(c => c.Veiculo.Placa.Contains(fragmento) || c.Veiculo.Marca.Contains(fragmento) || c.Veiculo.Modelo.Contains(fragmento) || c.Veiculo.Cor.Contains(fragmento));
+            
 
             return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
         }

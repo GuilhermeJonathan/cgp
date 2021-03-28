@@ -1,8 +1,10 @@
 ﻿using Cgp.Aplicacao.Comum;
 using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
+using Cgp.Aplicacao.MontagemDeEmails;
 using Cgp.Dominio.Entidades;
 using Cgp.Dominio.ObjetosDeValor;
 using Cgp.Infraestrutura.InterfaceDeServicosExternos;
+using Cgp.SendGrid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,15 +17,19 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
     {
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
         private readonly IServicoDeGeracaoDeHashSha _servicoDeGeracaoDeHashSha;
+        private readonly IServicoDeEnvioDeEmails _servicoDeEnvioDeEmails;
+        private readonly IServicoDeMontagemDeEmails _servicoDeMontagemDeEmails;
 
         public ServicoDeGestaoDeUsuarios(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, 
-            IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha)
+            IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha, IServicoDeEnvioDeEmails servicoDeEnvioDeEmails, IServicoDeMontagemDeEmails servicoDeMontagemDeEmails)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
             this._servicoDeGeracaoDeHashSha = servicoDeGeracaoDeHashSha;
+            this._servicoDeEnvioDeEmails = servicoDeEnvioDeEmails;
+            this._servicoDeMontagemDeEmails = servicoDeMontagemDeEmails;
         }
 
-        public string CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo)
+        public async Task<string> CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo)
         {
             var usuarioComMesmoLogin = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarAtivoPorLogin(modelo.Email);
 
@@ -36,6 +42,10 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             var novologin = new LoginUsuario(modelo.Email);
 
             var novoUsuario = new Usuario(new Nome(modelo.Nome), novologin, senha, batalhao, modelo.Matricula);
+
+            var modeloDeEmail = this._servicoDeMontagemDeEmails.MontarEmailBoasVindas(novoUsuario);
+
+            await this._servicoDeEnvioDeEmails.EnvioDeEmailBoasVindas(novoUsuario, modeloDeEmail.Titulo, modeloDeEmail.Mensagem);
 
             this._servicoExternoDePersistencia.RepositorioDeUsuarios.Inserir(novoUsuario);
             this._servicoExternoDePersistencia.Persistir();

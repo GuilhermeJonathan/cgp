@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cgp.Dominio.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Cgp.SendGrid
 {
     public interface IServicoDeEnvioDeEmails
     {
-        Task EnvioDeEmail();
+        Task EnvioDeEmailBoasVindas(Usuario usuario, string titulo, string mensagem);
     }
 }

@@ -60,10 +60,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CGP.Aplicacao\Cgp.Aplicacao.csproj">
-      <Project>{071e6d6c-9d47-4d1d-8253-6b8e7852c14b}</Project>
-      <Name>Cgp.Aplicacao</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CGP.Dominio\Cgp.Dominio.csproj">
       <Project>{664e2fc2-2533-402e-bbb3-7809755f1d39}</Project>
       <Name>Cgp.Dominio</Name>

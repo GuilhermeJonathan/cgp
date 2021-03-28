@@ -30,7 +30,7 @@
                         </div>
                     }
 
-                    <div class="col-sm-4">
+                    <div class="col-lg-4 col-sm-12">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
                             <li class="breadcrumb-item active">@ViewBag.Title</li>
@@ -44,7 +44,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-2">
-                        <input type="text" class="form-control txtBuscar" id="txtBuscar" placeholder="Consultar por placa" style="width: 200px;" />
+                        <input type="text" class="form-control txtBuscar" id="txtBuscar" placeholder="Consultar por placa, marca, modelo, cor." style="width: 300px;" />
                     </div>
                 </div>
                 <div class="row" id="divDados" style="margin-top: 10px;">
@@ -56,10 +56,10 @@
                                 <div class="small-box bg-default">
                                     <div class="inner">
                                         <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
-                                        <sup style="font-size: 20px"> @item.NomeVeiculo @item.CorVeiculo</sup>
-                                        <p style="margin-bottom: 0px !important;"> <span class="@item.CssTipoCrime">@item.NomeCrime </span> no dia  @item.DataDoCadastro</p>
-                                        <p style="margin-bottom: 0px !important;">@item.NomeCidade - @item.ComplementoEndereco</p>
-                                        <p style="margin-bottom: 0px !important;">@item.Descricao</p>
+                                        <sup style="font-size: 16pt"> @item.NomeVeiculo @item.CorVeiculo</sup>
+                                        <p style="font-size: 14pt; margin-bottom: 0px !important;"> <span class="@item.CssTipoCrime">@item.NomeCrime </span> no dia  @item.DataDoFato</p>
+                                        <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.NomeCidade - @item.ComplementoEndereco</p>
+                                        <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.Descricao</p>
                                     </div>
                                     <a href="@Url.Action("Editar", "Carater", new { id = item.Id })" target="_blank" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
@@ -175,7 +175,7 @@
 
         $(function () {
             setTimeout(function () {
-                window.location.reload(1);
+                $("#formBuscarCarater").submit();
             }, 60000); //1 * 60 * 1000
         });
 
@@ -216,10 +216,10 @@
                                     tabela += "<h3>" + item[0].PlacaVeiculo;
                                     if (item[0].VeiculoLocalizado) tabela += "<span class='badge bg-warning'>Veículo localizado.</span>";
                                     tabela += "</h3>";
-                                    tabela += "<sup style='font-size: 20px'>" + item[0].NomeVeiculo + item[0].CorVeiculo + " </sup>";
-                                    tabela += "<p style='margin-bottom: 0px !important;'> <span class='" + item[0].CssTipoCrime + "'>" + item[0].NomeCrime + "</span> no dia" + item[0].DataDoCadastro + "</p>";
-                                    tabela += "<p style='margin-bottom: 0px !important;'>" + item[0].NomeCidade + " - " + item[0].ComplementoEndereco + "</p>";
-                                    tabela += "<p style='margin-bottom: 0px !important;'>" + item[0].Descricao + "</p>";
+                                    tabela += "<sup style='font-size: 16pt'>" + item[0].NomeVeiculo + item[0].CorVeiculo + " </sup>";
+                                    tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'> <span class='" + item[0].CssTipoCrime + "'>" + item[0].NomeCrime + "</span> no dia" + item[0].DataDoCadastro + "</p>";
+                                    tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'>" + item[0].NomeCidade + " - " + item[0].ComplementoEndereco + "</p>";
+                                    tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'>" + item[0].Descricao + "</p>";
                                     tabela += "</div>" + "<a href='../Carater/Editar/" + item[0].Id + "' target='_blank' class='small-box-footer' style='color:black !important; '>Mais informações <i class='fas fa-arrow-circle-right'></i></a>";
                                     tabela += "</div></div>";
 
@@ -248,9 +248,7 @@
             var form = $("#modalRealizarBaixa");
             form.modal('show');
         });
-
-
-
+        
         $(".btnRealizarBaixa").button().click(function () {
             var idCarater = $(".IdCaraterSelecionado").val();
             var descricao = $(".txtDescricao").val();

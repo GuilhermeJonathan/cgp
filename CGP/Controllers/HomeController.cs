@@ -23,16 +23,14 @@ namespace Cgp.Controllers
     public class HomeController : Controller
     {
         private readonly IServicoDeGestaoDeDashboard _servicoDeGestaoDeDashboard;
-        private readonly IServicoDeEnvioDeEmails _servicoDeEnvioDeEmails;
         private readonly IServicoDeGestaoDeCaraters _servicoDeGestaoDeCaraters;
         private readonly IServicoDeGestaoDeCidades _servicoDeGestaoDeCidades;
         private readonly IServicoDeGestaoDeCrimes _servicoDeGestaoDeCrimes;
 
-        public HomeController(IServicoDeGestaoDeDashboard servicoDeGestaoDeDashboard, IServicoDeEnvioDeEmails servicoDeEnvioDeEmails, IServicoDeGestaoDeCaraters servicoDeGestaoDeCaraters, IServicoDeGestaoDeCidades servicoDeGestaoDeCidades,
+        public HomeController(IServicoDeGestaoDeDashboard servicoDeGestaoDeDashboard, IServicoDeGestaoDeCaraters servicoDeGestaoDeCaraters, IServicoDeGestaoDeCidades servicoDeGestaoDeCidades,
             IServicoDeGestaoDeCrimes servicoDeGestaoDeCrimes)
         {
             this._servicoDeGestaoDeDashboard = servicoDeGestaoDeDashboard;
-            this._servicoDeEnvioDeEmails = servicoDeEnvioDeEmails;
             this._servicoDeGestaoDeCaraters = servicoDeGestaoDeCaraters;
             this._servicoDeGestaoDeCidades = servicoDeGestaoDeCidades;
             this._servicoDeGestaoDeCrimes = servicoDeGestaoDeCrimes;

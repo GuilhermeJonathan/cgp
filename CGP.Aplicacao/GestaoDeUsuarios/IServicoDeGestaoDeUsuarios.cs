@@ -11,7 +11,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
 {
     public interface IServicoDeGestaoDeUsuarios
     {
-        string CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo);
+        Task<string> CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo);
         string AlterarDadosDoUsuario(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         string EditarMeusDados(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         string AlterarSenha(ModeloDeEdicaoDeUsuario modelo);

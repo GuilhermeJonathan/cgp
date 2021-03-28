@@ -42,7 +42,6 @@ namespace Cgp.Controllers
             this._servicoDeGeracaoDeDocumentosEmPdf = servicoDeGeracaoDeDocumentosEmPdf;
         }
 
-        [HttpGet]
         public async Task<ActionResult> Index(ModeloDeListaDeCaraters modelo, string exportar)
         {
             if (exportar == "imprimir")
@@ -60,11 +59,23 @@ namespace Cgp.Controllers
 
             modelo = this._servicoDeGestaoDeCaraters.RetonarCaratersPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
 
-            modelo.Filtro.Cidades = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
+            modelo.Filtro.Cidades = ListaDeItensDeDominio.DaClasseSemOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
                () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
 
-            modelo.Filtro.Crimes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Crime>(nameof(Crime.Nome), nameof(Crime.Id),
+            modelo.Filtro.Crimes = ListaDeItensDeDominio.DaClasseSemOpcaoPadrao<Crime>(nameof(Crime.Nome), nameof(Crime.Id),
                () => this._servicoDeGestaoDeCrimes.RetonarTodosOsCrimesAtivos());
+
+            if (modelo.Filtro.CidadesSelecionadas != null)
+            {
+                foreach (var cidade in modelo.Filtro.CidadesSelecionadas)
+                    modelo.Filtro.Cidades.FirstOrDefault(a => a.Value == cidade.ToString()).Selected = true;
+            }
+
+            if (modelo.Filtro.CrimesSelecionados != null)
+            {
+                foreach (var crime in modelo.Filtro.CrimesSelecionados)
+                    modelo.Filtro.Crimes.FirstOrDefault(a => a.Value == crime.ToString()).Selected = true;
+            }
 
             this.TotalDeRegistrosEncontrados(modelo.TotalDeRegistros);
             return View(modelo);

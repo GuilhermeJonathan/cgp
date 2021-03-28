@@ -67,6 +67,10 @@
     width: 80%;
 }
 
+.btnNoFormulario {
+    margin-top: 30px;
+}
+
 .ddlModal {
     width: 300px !important;
 }
@@ -92,4 +96,5 @@
         font-size: 20pt;
         text-align: center;
     }
+    
 }

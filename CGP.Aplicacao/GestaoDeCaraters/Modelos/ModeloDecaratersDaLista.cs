@@ -25,7 +25,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.ComplementoEndereco = carater.ComplementoEndereco;
             this.NomeCidade = carater.Cidade != null ? carater.Cidade.Descricao : String.Empty;
             this.NomeCrime = carater.Crime!= null ? $"{carater.Crime.Nome}" : String.Empty;
-            this.DataDoCadastro = carater.DataHoraDoFato != null ? carater.DataHoraDoFato.Value.ToString("dd/MM/yyyy HH:mm") : String.Empty;
+            this.DataDoFato = carater.DataHoraDoFato != null ? carater.DataHoraDoFato.Value.ToString("dd/MM/yyyy HH:mm") : String.Empty;
             this.SituacaoDoCarater = carater.SituacaoDoCarater.ToString();
             this.VeiculoLocalizado = carater.SituacaoDoCarater == Dominio.ObjetosDeValor.SituacaoDoCarater.Localizado ? true : false;
             this.CssTipoCrime = RetornaCssCrime(NomeCrime);
@@ -51,7 +51,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }
         public string AnoVeiculo { get; set; }
-        public string DataDoCadastro { get; set; }
+        public string DataDoFato { get; set; }
         public string SituacaoDoCarater { get; set; }
         public string CssTipoCrime { get; set; }
         public bool VeiculoLocalizado { get; set; }

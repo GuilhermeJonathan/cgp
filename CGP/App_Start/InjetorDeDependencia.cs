@@ -46,7 +46,7 @@ namespace Cgp.App_Start
             container.Register<IServicoDeGestaoDeUsuarios, ServicoDeGestaoDeUsuarios>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeDashboard, ServicoDeGestaoDeDashboard>(Lifestyle.Scoped);
             container.Register<IServicoDeGeracaoDeDocumentosEmPdf, ServicoDeGeracaoDeDocumentosEmPdf>(Lifestyle.Scoped);
-            container.Register<IServicoDeEnvioDeEmails, ServicoDeEnvioDeEmails>(Lifestyle.Scoped);
+
             container.Register<IServicoDeMontagemDeEmails, ServicoDeMontagemDeEmails>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeComandosRegionais, ServicoDeGestaoDeComandosRegionais>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCidades, ServicoDeGestaoDeCidades>(Lifestyle.Scoped);
@@ -54,8 +54,12 @@ namespace Cgp.App_Start
             container.Register<IServicoDeGestaoDeCrimes, ServicoDeGestaoDeCrimes>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCaraters, ServicoDeGestaoDeCaraters>(Lifestyle.Scoped);
 
+           
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
                VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")));
+
+            container.Register<IServicoDeEnvioDeEmails>(() => new ServicoDeEnvioDeEmails(
+             VariaveisDeAmbiente.Pegar<string>("chaveSendGrid"), VariaveisDeAmbiente.Pegar<string>("EmailDaEmpresa"), VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")), Lifestyle.Scoped);
 
             container.Register<IServicoDeComunicacaoViaHttp, ServicoDeComunicacaoViaHttp>(Lifestyle.Scoped);
 

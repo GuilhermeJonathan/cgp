@@ -1,6 +1,4 @@
-﻿using Cgp.Aplicacao.GestaoDeUsuarios;
-using Cgp.Aplicacao.MontagemDeEmails;
-using Cgp.Aplicacao.Util;
+﻿using Cgp.Dominio.Entidades;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -13,27 +11,27 @@ namespace Cgp.SendGrid
 {
     public class ServicoDeEnvioDeEmails : IServicoDeEnvioDeEmails
     {
-        private readonly IServicoDeMontagemDeEmails _servicoDeMontagemDeEmails;
-        private readonly IServicoDeGestaoDeUsuarios _servicoDeGestaoDeUsuarios;
+        private readonly string _chave;
+        private readonly string _emailEmpresa;
+        private readonly string _nomeEmpresa;
 
-        public ServicoDeEnvioDeEmails(IServicoDeMontagemDeEmails servicoDeMontagemDeEmails, IServicoDeGestaoDeUsuarios servicoDeGestaoDeUsuarios)
+        public ServicoDeEnvioDeEmails(string chave, string email, string empresa)
         {
-            this._servicoDeMontagemDeEmails = servicoDeMontagemDeEmails;
-            this._servicoDeGestaoDeUsuarios = servicoDeGestaoDeUsuarios;
+            this._chave = chave;
+            this._emailEmpresa = email;
+            this._nomeEmpresa = empresa;
         }
 
-        public async Task EnvioDeEmail()
+        public async Task EnvioDeEmailBoasVindas(Usuario usuario, string titulo, string mensagem)
         {
-            var client = new SendGridClient(VariaveisDeAmbiente.Pegar<string>("chaveSendGrid"));
-            var from = new EmailAddress(VariaveisDeAmbiente.Pegar<string>("EmailDaEmpresa"), VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa"));
-            var usuario = this._servicoDeGestaoDeUsuarios.BuscarSomenteUsuarioPorId(2);
-            var modeloDeEmail = this._servicoDeMontagemDeEmails.MontarEmailBoasVindas(usuario);
-
-            var subject = modeloDeEmail.Titulo;
+            var client = new SendGridClient(_chave);
+            var from = new EmailAddress(_emailEmpresa, _nomeEmpresa);
+            
+            var subject = titulo;
             var to = new EmailAddress(usuario.Login.Valor, usuario.Nome.Valor);
 
-            var plainTextContent = modeloDeEmail.Titulo;
-            var htmlContent = modeloDeEmail.Mensagem;
+            var plainTextContent = titulo;
+            var htmlContent = mensagem;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
         }

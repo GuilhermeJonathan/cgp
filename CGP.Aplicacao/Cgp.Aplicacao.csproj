@@ -149,6 +149,10 @@
       <Project>{e2584ef1-f4dd-40ef-8c0b-ab4ef2c6fb71}</Project>
       <Name>Cgp.Infraestrutura</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CGP.SendGrid\Cgp.SendGrid.csproj">
+      <Project>{ad5a819e-f820-4c22-8687-195276bf2481}</Project>
+      <Name>Cgp.SendGrid</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GestaoDeVeiculos\Modelos\" />

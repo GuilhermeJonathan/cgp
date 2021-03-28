@@ -9,10 +9,10 @@ namespace Cgp.Dominio.Repositorios
 {
     public interface IRepositorioDeCaraters : IRepositorio<Carater>
     {
-        IList<Carater> RetornarCaratersPorFiltro(int cidade, int crime, int situacao, DateTime? dataTarefaInicial, DateTime? dataTarefaFinal, out int quantidadeEncontrada);
+        IList<Carater> RetornarCaratersPorFiltro(int[] cidades, int[] crimes, int situacao, DateTime? dataTarefaInicial, DateTime? dataTarefaFinal, out int quantidadeEncontrada);
         IList<Carater> RetornarCaratersPorCidades(int[] cidades, DateTime dataParaBusca);
         Carater PegarPorId(int id);
-        IList<Carater> BuscarCaratersPorPlaca(string placa);
+        IList<Carater> BuscarCaratersPorFragmentos(string fragmento);
         Carater PegarCaraterPorPlaca(string placa);
     }
 }

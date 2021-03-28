@@ -30,6 +30,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public int SituacaoDoCarater { get; set; }
         public IEnumerable<SelectListItem> SituacoesDoCarater { get; set; }
         public int[] CidadesSelecionadas { get; set; }
+        public int[] CrimesSelecionados { get; set; }
         public string DescricaoLocalizacao { get; set; }
     }
 }

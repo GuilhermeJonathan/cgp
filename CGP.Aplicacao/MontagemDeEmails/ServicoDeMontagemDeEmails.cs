@@ -18,16 +18,17 @@ namespace Cgp.Aplicacao.MontagemDeEmails
 
         public ModeloDeEmail MontarEmailBoasVindas(Usuario usuario)
         {
-            var titulo = $"Bem Vindo(a) ao Bolão Brasileirão";
+            var titulo = $"Bem Vindo(a) ao Caráter Geral Policial";
             string caminho = "arquivos/email/emailPadrao.html";
             string corpo = EfetuarODownloadDoTemplateDeEmail(caminho);
             var mensagem = new StringBuilder();
 
             mensagem.Append($"<p>Olá <b>{ usuario.Nome.Valor }</b>, seu cadastro no {VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")} foi concluído com sucesso!</p>");            
+            mensagem.Append($"<p>Você receberá um email quando o Adminsitrador aprovar seu cadastro.</p>");
             corpo = corpo.Replace("{TITULO}", titulo);
             corpo = corpo.Replace("{MENSAGEM}", mensagem.ToString());
 
-            var link = "bolaobrasileirao.net.br";
+            var link = $"{VariaveisDeAmbiente.Pegar<string>("NomeDoSite")}";
 
             corpo = corpo.Replace("{URL}", link);
             corpo = corpo.Replace("{MENSAGEM}", mensagem.ToString());
@@ -40,7 +41,7 @@ namespace Cgp.Aplicacao.MontagemDeEmails
         {
             string url = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
             string urlDoArquivo = url + caminho;
-            string urlLogoEmpresa = url + "arquivos/logo/bolaoBrasileirao.png";
+            string urlLogoEmpresa = url + "arquivos/logo/logoPmdf.png";
 
             using (WebClient client = new WebClient())
             {
