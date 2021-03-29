@@ -238,13 +238,13 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             html.Append($"<tr><th colspan='7'>RELAÇÃO DE CARÁTER GERAL");
             if((dataInicial.HasValue && dataInicial != DateTime.MinValue)  && (dataFinal.HasValue && dataFinal != DateTime.MinValue)) html.Append($" - {dataInicial.Value.ToString("dd/MM")} a {dataFinal.Value.ToString("dd/MM/yyyy")}");
             html.Append($"</th></tr>");
-            html.Append($"<tr><th>PLACA</th><th>MODELO</th><th>COR</th><th>ANO</th><th>CIDADE</th><th>CRIME</th><th>DATA</th></tr>");
+            html.Append($"<tr><th width='130px'>PLACA</th><th>MODELO</th><th>COR</th><th>ANO</th><th>CIDADE</th><th>CRIME</th><th>DATA</th></tr>");
 
             foreach (var carater in caraters)
             {   
                 html.Append($"<tr>");
 
-                html.Append($"<td><span class='placa'>{carater.PlacaVeiculo.ToUpper()}</span></td>");
+                html.Append($"<td><span class='placa'>{carater.PlacaInvertida.ToUpper()}</span></td>");
                 html.Append($"<td><span class='text-muted'>{carater.NomeVeiculo}</span></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.CorVeiculo}</span></p></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.AnoVeiculo}</span></p></td>");

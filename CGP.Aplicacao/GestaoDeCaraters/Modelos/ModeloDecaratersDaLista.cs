@@ -35,6 +35,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 var chassi = !String.IsNullOrEmpty(carater.Veiculo.Chassi) ? $"({carater.Veiculo.Chassi})" : String.Empty;
                 this.NomeVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Modelo} - {carater.Veiculo.Marca} {chassi}" : String.Empty;
                 this.PlacaVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Placa} {carater.Veiculo.Uf}" : String.Empty;
+                this.PlacaInvertida = carater.Veiculo != null ? $"{carater.Veiculo.Placa.Substring(3,4)}{carater.Veiculo.Placa.Substring(0, 3)} {carater.Veiculo.Uf}" : String.Empty;
                 this.CorVeiculo = carater.Veiculo.Cor;
                 this.ChassiVeiculo = carater.Veiculo.Chassi;
                 this.AnoVeiculo = carater.Veiculo.Ano;
@@ -48,6 +49,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string NomeCrime { get; set; }
         public string NomeVeiculo { get; set; }
         public string PlacaVeiculo { get; set; }
+        public string PlacaInvertida { get; set; }
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }
         public string AnoVeiculo { get; set; }
