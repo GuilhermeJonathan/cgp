@@ -48,6 +48,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             if (carater.Veiculo != null)
             {
                 this.Placa = carater.Veiculo.Placa;
+                this.UfVeiculo = carater.Veiculo.Uf;
                 this.IdVeiculo = carater.Veiculo.Id;
                 this.ModeloVeiculo = carater.Veiculo.Modelo;
                 this.MarcaVeiculo = carater.Veiculo.Marca;
@@ -84,6 +85,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string Placa { get; set; }
         public string ModeloVeiculo { get; set; }
         public string MarcaVeiculo { get; set; }
+        public string UfVeiculo { get; set; }
         public string AnoVeiculo { get; set; }
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }

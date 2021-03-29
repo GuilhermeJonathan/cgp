@@ -166,6 +166,13 @@ namespace Cgp.Controllers
         }
 
         [HttpGet]
+        public async Task<JsonResult> BuscarPlacaDoVeiculoCompleta(string placa)
+        {
+            var veiculo = await this._servicoDeGestaoDeVeiculos.BuscarPlacaComleta(placa);
+            return Json(new { veiculo }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult RealizarBaixa(int? idCarater, string descricao, int? cidade)
         {
             var resultado = this._servicoDeGestaoDeCaraters.RealizarBaixaVeiculo(idCarater.Value, descricao, cidade.Value, User.Logado());

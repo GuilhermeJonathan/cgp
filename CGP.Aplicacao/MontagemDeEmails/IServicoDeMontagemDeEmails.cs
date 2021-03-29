@@ -10,5 +10,6 @@ namespace Cgp.Aplicacao.MontagemDeEmails
     public interface IServicoDeMontagemDeEmails
     {
         ModeloDeEmail MontarEmailBoasVindas(Usuario usuario);
+        ModeloDeEmail MontarEmailCadastroAtivo(Usuario usuario);
     }
 }

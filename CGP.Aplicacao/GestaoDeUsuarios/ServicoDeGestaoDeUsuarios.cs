@@ -44,8 +44,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             var novoUsuario = new Usuario(new Nome(modelo.Nome), novologin, senha, batalhao, modelo.Matricula);
 
             var modeloDeEmail = this._servicoDeMontagemDeEmails.MontarEmailBoasVindas(novoUsuario);
-
-            await this._servicoDeEnvioDeEmails.EnvioDeEmailBoasVindas(novoUsuario, modeloDeEmail.Titulo, modeloDeEmail.Mensagem);
+            await this._servicoDeEnvioDeEmails.EnvioDeEmail(novoUsuario, modeloDeEmail.Titulo, modeloDeEmail.Mensagem);
 
             this._servicoExternoDePersistencia.RepositorioDeUsuarios.Inserir(novoUsuario);
             this._servicoExternoDePersistencia.Persistir();
@@ -128,7 +127,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             return new ModeloDeListaDeUsuarios(usuarios, quantidadeEncontrada, filtro);
         }
 
-        public string AtivarUsuario(int id, UsuarioLogado usuario)
+        public async Task<string> AtivarUsuario(int id, UsuarioLogado usuario)
         {
             try
             {
@@ -140,7 +139,11 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
                     if (usuarioParaAlterar.Ativo)
                         usuarioParaAlterar.InativarUsuario();
                     else
+                    {
+                        var modeloDeEmail = this._servicoDeMontagemDeEmails.MontarEmailCadastroAtivo(usuarioParaAlterar);
+                        await this._servicoDeEnvioDeEmails.EnvioDeEmail(usuarioParaAlterar, modeloDeEmail.Titulo, modeloDeEmail.Mensagem);
                         usuarioParaAlterar.AtivarUsuario();
+                    }
                 }
 
                 this._servicoExternoDePersistencia.Persistir();

@@ -135,9 +135,9 @@ namespace Cgp.Controllers
             return Json(new { nome = modelo.Nome}, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AtivarUsuario(int id)
+        public async Task<ActionResult> AtivarUsuario(int id)
         {
-            var modelo = this._servicoDeGestaoDeUsuarios.AtivarUsuario(id, User.Logado());
+            var modelo = await this._servicoDeGestaoDeUsuarios.AtivarUsuario(id, User.Logado());
             return Content(modelo);
         }
 

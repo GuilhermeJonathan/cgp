@@ -37,6 +37,27 @@ namespace Cgp.Aplicacao.MontagemDeEmails
             return new ModeloDeEmail(titulo, corpo.ToString());
         }
 
+        public ModeloDeEmail MontarEmailCadastroAtivo(Usuario usuario)
+        {
+            var titulo = $"Seu usuário foi ativado no Caráter Geral Policial";
+            string caminho = "arquivos/email/emailPadrao.html";
+            string corpo = EfetuarODownloadDoTemplateDeEmail(caminho);
+            var mensagem = new StringBuilder();
+
+            mensagem.Append($"<p>Olá <b>{ usuario.Nome.Valor }</b>, seu cadastro no {VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")} foi ativado com sucesso!</p>");
+            mensagem.Append($"<p>Para isto, basta acessar o sistema e realizar o login com seus dadoss.</p>");
+            corpo = corpo.Replace("{TITULO}", titulo);
+            corpo = corpo.Replace("{MENSAGEM}", mensagem.ToString());
+
+            var link = $"{VariaveisDeAmbiente.Pegar<string>("NomeDoSite")}";
+
+            corpo = corpo.Replace("{URL}", link);
+            corpo = corpo.Replace("{MENSAGEM}", mensagem.ToString());
+            corpo = corpo.Replace("{DESCRICAO_BOTAO}", "Acesse Agora");
+
+            return new ModeloDeEmail(titulo, corpo.ToString());
+        }
+
         private string EfetuarODownloadDoTemplateDeEmail(string caminho)
         {
             string url = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");

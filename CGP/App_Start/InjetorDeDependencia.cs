@@ -63,7 +63,7 @@ namespace Cgp.App_Start
 
             container.Register<IServicoDeComunicacaoViaHttp, ServicoDeComunicacaoViaHttp>(Lifestyle.Scoped);
 
-            container.Register<IServicoDeBuscaDeVeiculo>(() => new ServicoDeBuscaDeVeiculo(container.GetInstance<IServicoDeComunicacaoViaHttp>(), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoSimples")), Lifestyle.Scoped);
+            container.Register<IServicoDeBuscaDeVeiculo>(() => new ServicoDeBuscaDeVeiculo(container.GetInstance<IServicoDeComunicacaoViaHttp>(), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoSimples"), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoCompleta")), Lifestyle.Scoped);
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

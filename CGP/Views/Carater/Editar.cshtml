@@ -46,10 +46,13 @@
                                 <div class="col-lg-2">
                                     @Html.InputTextFor(a => a.AnoVeiculo, "Ano", required: false)
                                 </div>
+                                <div class="col-lg-1">
+                                    @Html.InputTextFor(a => a.UfVeiculo, "Uf", required: false)
+                                </div>
                                 <div class="col-lg-2">
                                     @Html.InputTextFor(a => a.CorVeiculo, "Cor", required: false)
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-1">
                                     @Html.InputTextFor(a => a.ChassiVeiculo, "Chassi", required: false)
                                 </div>
                                 <div class="row divCarrega">
@@ -151,6 +154,26 @@
                         $("#MarcaVeiculo").val(resultado.veiculo.model);
                         $("#ModeloVeiculo").val(resultado.veiculo.name);
                         $("#AnoVeiculo").val(resultado.veiculo.year);
+                    } else {
+                        campeonatoGeral.AdicionarMensagemDeErro("Veículo não encontrado.");
+                    }
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: '../BuscarPlacaDoVeiculoCompleta',
+                data: 'placa=' + placa,
+                beforeSend: function (resultado) {
+                    $(".divCarrega").show();
+                },
+                success: function (resultado) {
+                    debugger;
+                    $(".divCarrega").hide();
+                    if (resultado.veiculo != undefined) {
+                        $("#UfVeiculo").val(resultado.veiculo.uf);
+                        $("#CorVeiculo").val(resultado.veiculo.cor);
+                        $("#ChassiVeiculo").val(resultado.veiculo.chassiTratado);
                     } else {
                         campeonatoGeral.AdicionarMensagemDeErro("Veículo não encontrado.");
                     }

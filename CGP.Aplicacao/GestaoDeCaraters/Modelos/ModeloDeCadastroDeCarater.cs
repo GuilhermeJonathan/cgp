@@ -30,6 +30,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public int Veiculo { get; set; }
         public string Placa { get; set; }
         public string ModeloVeiculo { get; set; }
+        public string UfVeiculo { get; set; }
         public string MarcaVeiculo { get; set; }
         public string AnoVeiculo{ get; set; }
         public string CorVeiculo { get; set; }

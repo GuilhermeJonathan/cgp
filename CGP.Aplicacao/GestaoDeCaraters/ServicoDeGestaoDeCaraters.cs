@@ -113,7 +113,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
 
                 if (veiculo == null)
                 {
-                    veiculo = new Veiculo(modelo.Placa, modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo);
+                    veiculo = new Veiculo(modelo.Placa, modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo, modelo.UfVeiculo);
                     this._servicoExternoDePersistencia.Persistir();
                 }
 
@@ -149,11 +149,11 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
 
                 if (veiculo == null && !String.IsNullOrEmpty(modelo.Placa))
                 {
-                    veiculo = new Veiculo(modelo.Placa, modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo);
+                    veiculo = new Veiculo(modelo.Placa, modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo, modelo.UfVeiculo);
                     this._servicoExternoDePersistencia.Persistir();
                 } else
                 {
-                    veiculo.AlterarDadosVeiculo(modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo);
+                    veiculo.AlterarDadosVeiculo(modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo, modelo.UfVeiculo);
                 }
 
                 if (!string.IsNullOrEmpty(modelo.Data) && !string.IsNullOrEmpty(modelo.Hora))

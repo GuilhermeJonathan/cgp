@@ -9,6 +9,6 @@ namespace Cgp.SendGrid
 {
     public interface IServicoDeEnvioDeEmails
     {
-        Task EnvioDeEmailBoasVindas(Usuario usuario, string titulo, string mensagem);
+        Task EnvioDeEmail(Usuario usuario, string titulo, string mensagem);
     }
 }

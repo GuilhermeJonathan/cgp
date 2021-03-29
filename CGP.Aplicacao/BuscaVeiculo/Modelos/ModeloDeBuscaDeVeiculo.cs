@@ -17,5 +17,9 @@ namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
         public string model { get; set; }
         public string year { get; set; }
         public string plate { get; set; }
+        public string cor { get; set; }
+        public string chassi { get; set; }
+        public string chassiTratado => !String.IsNullOrEmpty(this.chassi) ? this.chassi.Replace("*", "") : String.Empty;
+        public string uf { get; set; }
     }
 }

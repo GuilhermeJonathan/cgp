@@ -46,10 +46,13 @@
                                 <div class="col-lg-2">
                                     @Html.InputTextFor(a => a.AnoVeiculo, "Ano", required: false)
                                 </div>
+                                <div class="col-lg-1">
+                                    @Html.InputTextFor(a => a.UfVeiculo, "Uf", required: false)
+                                </div>
                                 <div class="col-lg-2">
                                     @Html.InputTextFor(a => a.CorVeiculo, "Cor", required: false)
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-1">
                                     @Html.InputTextFor(a => a.ChassiVeiculo, "Chassi", required: false)
                                 </div>
                             </div>
@@ -116,7 +119,6 @@
                     $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
                 },
                 success: function (resultado) {
-                    debugger;
                     $.unblockUI();
                     if (resultado.veiculo != undefined) {
                         $("#MarcaVeiculo").val(resultado.veiculo.model);
@@ -136,9 +138,28 @@
                     $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
                 },
                 success: function (resultado) {
-                    debugger;
                     $.unblockUI();
                     if (resultado.carater) { campeonatoGeral.AdicionarMensagemDeErro("Veículo já encontra-se cadastrado em outro caráter."); }
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: '../Carater/BuscarPlacaDoVeiculoCompleta',
+                data: 'placa=' + placa,
+                beforeSend: function (resultado) { },
+                success: function (resultado) {
+                    debugger;
+                    $(".divCarrega").hide();
+                    if (resultado.veiculo != undefined) {
+                        $("#UfVeiculo").val(resultado.veiculo.uf);
+                        $("#CorVeiculo").val(resultado.veiculo.cor);
+                        $("#ChassiVeiculo").val(resultado.veiculo.chassiTratado);
+                    } else {
+                        $("#CorVeiculo").val();
+                        $("#ChassiVeiculo").val();
+                        campeonatoGeral.AdicionarMensagemDeErro("Busca de chassi indisponível.");
+                    }
                 }
             });
         });

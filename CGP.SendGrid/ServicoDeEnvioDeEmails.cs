@@ -22,7 +22,7 @@ namespace Cgp.SendGrid
             this._nomeEmpresa = empresa;
         }
 
-        public async Task EnvioDeEmailBoasVindas(Usuario usuario, string titulo, string mensagem)
+        public async Task EnvioDeEmail(Usuario usuario, string titulo, string mensagem)
         {
             var client = new SendGridClient(_chave);
             var from = new EmailAddress(_emailEmpresa, _nomeEmpresa);
