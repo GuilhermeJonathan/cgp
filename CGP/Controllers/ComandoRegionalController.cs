@@ -48,8 +48,11 @@ namespace Cgp.Controllers
         [HttpGet]
         public ActionResult Editar(int? id)
         {
+            if (!User.EhAdministrador() || !User.EhInterno())
+                return UsuarioSemPermissao();
+
             if (!id.HasValue)
-                ComandoNaoEncontrado();
+                return ComandoNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeComandosRegionais.BuscarComandoRegionalPorId(id.Value);
 
@@ -75,6 +78,12 @@ namespace Cgp.Controllers
         {
             this.AdicionarMensagemDeErro("O comando regional não foi encontrado");
             return RedirectToAction(nameof(Index));
+        }
+
+        private ActionResult UsuarioSemPermissao()
+        {
+            this.AdicionarMensagemDeErro("Usuário sem permissão para esta funcionalidade.");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

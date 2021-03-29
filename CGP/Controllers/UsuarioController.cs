@@ -32,10 +32,10 @@ namespace Cgp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(ModeloDeListaDeUsuarios modelo)
+        public ActionResult Index(ModeloDeListaDeUsuarios modelo)
         {
             if (!User.EhAdministrador())
-                return RedirectToAction("Index", "Home");
+                return UsuarioSemPermissao();
 
             modelo = this._servicoDeGestaoDeUsuarios.RetonarUsuariosPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
 
@@ -51,10 +51,10 @@ namespace Cgp.Controllers
         public ActionResult Editar(int? id)
         {
             if (!User.EhAdministrador())
-                UsuarioSemPermissao();
+                return UsuarioSemPermissao();
 
             if (!id.HasValue)
-                UsuarioNaoEncontrado();
+                return UsuarioNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeUsuarios.BuscarUsuarioPorId(id.Value);
 
@@ -117,7 +117,7 @@ namespace Cgp.Controllers
         public ActionResult Editar(ModeloDeEdicaoDeUsuario modelo)
         {
             if (!User.EhAdministrador())
-                UsuarioSemPermissao();
+                return UsuarioSemPermissao();
 
             var retorno = this._servicoDeGestaoDeUsuarios.AlterarDadosDoUsuario(modelo, User.Logado());
 

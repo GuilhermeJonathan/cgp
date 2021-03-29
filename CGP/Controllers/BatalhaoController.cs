@@ -70,8 +70,11 @@ namespace Cgp.Controllers
         [HttpGet]
         public ActionResult Editar(int? id)
         {
+            if (!User.EhAdministrador() && !User.EhInterno())
+                return UsuarioSemPermissao();
+
             if (!id.HasValue)
-                TimeNaoEncontrado();
+                return BatalhaoNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeBatalhoes.BuscarBatalhaoPorId(id.Value);
 
@@ -99,10 +102,16 @@ namespace Cgp.Controllers
             return Content(modelo);
         }
 
-        private ActionResult TimeNaoEncontrado()
+        private ActionResult BatalhaoNaoEncontrado()
         {
             this.AdicionarMensagemDeErro("O batalhão não foi encontrado");
             return RedirectToAction(nameof(Index));
+        }
+
+        private ActionResult UsuarioSemPermissao()
+        {
+            this.AdicionarMensagemDeErro("Usuário sem permissão para esta funcionalidade.");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -49,8 +49,11 @@ namespace Cgp.Controllers
         [HttpGet]
         public ActionResult Editar(int? id)
         {
+            if (!User.EhAdministrador() && !User.EhInterno())
+                return UsuarioSemPermissao();
+
             if (!id.HasValue)
-                CrimeNaoEncontrado();
+                return CrimeNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeCrimes.BuscarCrimePorId(id.Value);
 
@@ -76,6 +79,12 @@ namespace Cgp.Controllers
         {
             this.AdicionarMensagemDeErro("O crime não foi encontrado");
             return RedirectToAction(nameof(Index));
+        }
+
+        private ActionResult UsuarioSemPermissao()
+        {
+            this.AdicionarMensagemDeErro("Usuário sem permissão para esta funcionalidade.");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

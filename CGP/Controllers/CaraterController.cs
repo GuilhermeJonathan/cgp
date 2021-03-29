@@ -107,10 +107,7 @@ namespace Cgp.Controllers
         public ActionResult Editar(int? id)
         {
             if (!id.HasValue)
-            {
-                this.AdicionarMensagemDeErro("O caráter não foi encontrado");
-                return RedirectToAction(nameof(Index));
-            }
+                return CaraterNaoEncontrado();
 
             var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value);
 
@@ -139,11 +136,8 @@ namespace Cgp.Controllers
         public ActionResult Detalhar(int? id)
         {
             if (!id.HasValue)
-            {
-                this.AdicionarMensagemDeErro("O caráter não foi encontrado");
-                return RedirectToAction(nameof(Index));
-            }
-
+                return CaraterNaoEncontrado();
+            
             var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value);
 
             modelo.CidadesLocalizacao = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),

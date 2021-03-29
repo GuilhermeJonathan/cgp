@@ -39,7 +39,7 @@ namespace Cgp.Aplicacao.MontagemDeEmails
 
         public ModeloDeEmail MontarEmailCadastroAtivo(Usuario usuario)
         {
-            var titulo = $"Seu usuário foi ativado no Caráter Geral Policial";
+            var titulo = $"Seu usuário foi ativado no {VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")}";
             string caminho = "arquivos/email/emailPadrao.html";
             string corpo = EfetuarODownloadDoTemplateDeEmail(caminho);
             var mensagem = new StringBuilder();
