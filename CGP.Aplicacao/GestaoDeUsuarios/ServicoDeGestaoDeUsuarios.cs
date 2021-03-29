@@ -85,7 +85,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
                 }
                 var batalhao = this._servicoExternoDePersistencia.RepositorioDeBatalhoes.PegarPorId(modelo.Batalhao);
 
-                usuarioParaAlterar.AlterarMeusDados(modelo.Nome, modelo.Email, modelo.Ddd, modelo.Telefone, batalhao);
+                usuarioParaAlterar.AlterarMeusDados(modelo.Nome, modelo.Email, modelo.Ddd, modelo.Telefone, batalhao, modelo.Matricula);
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Meus dados alterado com sucesso.";
@@ -96,16 +96,18 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             }
         }
 
-        public string AlterarSenha(ModeloDeEdicaoDeUsuario modelo)
+        public Tuple<string, bool> AlterarSenha(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario)
         {   
             if(modelo.Senha != modelo.RepetirSenha)
                 throw new ExcecaoDeAplicacao("As senhas são diferentes.");
+
+            var verificaUsuario = usuario.Id == modelo.Id ? true : false;
 
             var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(modelo.Id);
             var senha = new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash);
             usuarioParaAlterar.AlterarSenha(senha);
             this._servicoExternoDePersistencia.Persistir();
-            return "Senha alterada com sucesso.";
+            return new Tuple<string, bool>("Senha alterada com sucesso.", verificaUsuario);
         }
 
         public IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos()
@@ -171,6 +173,12 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         public ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado)
         {
             var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioCompletoPorId(usuarioLogado.Id);
+            return new ModeloDeEdicaoDeUsuario(usuario);
+        }
+
+        public ModeloDeEdicaoDeUsuario BuscarMeusDadosParaAlterarSenha(int idUsuario)
+        {
+            var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioCompletoPorId(idUsuario);
             return new ModeloDeEdicaoDeUsuario(usuario);
         }
     }

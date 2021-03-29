@@ -72,10 +72,12 @@ namespace Cgp.Dominio.Entidades
             this.Matricula = matricula;
         }
 
-        public void AlterarMeusDados(string nome, string email, string ddd, string telefone, Batalhao batalhao)
+        public void AlterarMeusDados(string nome, string email, string ddd, string telefone, Batalhao batalhao, string matricula)
         {
             this.Nome = new Nome(nome);
             this.Login = new LoginUsuario(email);
+            this.Batalhao = batalhao;
+            this.Matricula = matricula;
 
             if (!String.IsNullOrEmpty(ddd) && !String.IsNullOrEmpty(telefone))
                 this.Telefone = new Telefone(ddd, telefone);

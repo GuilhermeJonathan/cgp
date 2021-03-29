@@ -13,7 +13,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
                         <li class="breadcrumb-item"><a href="@Url.Action("MeusDados", "Usuario" )">Meus Dados</a></li>
-                        <li class="breadcrumb-item active">Alterar Senha </li>
+                        <li class="breadcrumb-item active">@ViewBag.Title</li>
                     </ol>
                 </div>
             </div>
@@ -25,14 +25,23 @@
                 <form role="form" action="@Url.Action("AlterarSenha", "Usuario")" method="post">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Editar meus dados</h3>
+                            <h3 class="card-title">@ViewBag.Title</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </div>
+                            @Html.HiddenFor(a => a.Id)
                         </div>
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.Nome, "Nome", @readonly: true)
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.Email, "Email", @readonly: true)
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     @Html.InputPasswordFor(a => a.Senha, "Senha", required: true)

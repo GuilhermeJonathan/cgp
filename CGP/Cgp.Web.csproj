@@ -384,12 +384,9 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Editar.cshtml" />
     <Content Include="Views\Usuario\Historico.cshtml" />
-    <Content Include="Views\Usuario\_CadastrarSaldo.cshtml" />
     <Content Include="Views\Usuario\MeusDados.cshtml" />
     <Content Include="Views\Usuario\AlterarSenha.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
-    <Content Include="Views\Usuario\Retiradas.cshtml" />
-    <Content Include="Views\Usuario\EditarRetirada.cshtml" />
     <Content Include="Views\ComandoRegional\Cadastrar.cshtml" />
     <Content Include="Views\ComandoRegional\Editar.cshtml" />
     <Content Include="Views\ComandoRegional\Index.cshtml" />

@@ -14,7 +14,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         Task<string> CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo);
         string AlterarDadosDoUsuario(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         string EditarMeusDados(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
-        string AlterarSenha(ModeloDeEdicaoDeUsuario modelo);
+        Tuple<string, bool> AlterarSenha(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos();
         ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, int pagina, int registrosPorPagina = 30);
         string AtivarUsuario(int id, UsuarioLogado usuario);
@@ -22,5 +22,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         Usuario BuscarSomenteUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado);
+        ModeloDeEdicaoDeUsuario BuscarMeusDadosParaAlterarSenha(int idUsuario);
     }
 }

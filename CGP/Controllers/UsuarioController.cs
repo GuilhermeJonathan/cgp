@@ -88,9 +88,14 @@ namespace Cgp.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult AlterarSenha()
+        public ActionResult AlterarSenha(int? id)
         {
-            var modelo = this._servicoDeGestaoDeUsuarios.BuscarMeusDados(User.Logado());
+            var idUsuario = User.Logado().Id;
+
+            if (id.HasValue)
+                idUsuario = id.Value;
+
+            var modelo = this._servicoDeGestaoDeUsuarios.BuscarMeusDadosParaAlterarSenha(idUsuario);
             return View(modelo);
         }
 
@@ -99,10 +104,12 @@ namespace Cgp.Controllers
         [HttpPost]
         public ActionResult AlterarSenha(ModeloDeEdicaoDeUsuario modelo)
         {
-            var retorno = this._servicoDeGestaoDeUsuarios.AlterarSenha(modelo);
-
-            this.AdicionarMensagemDeSucesso(retorno);
-            return RedirectToAction(nameof(MeusDados));
+            var retorno = this._servicoDeGestaoDeUsuarios.AlterarSenha(modelo, User.Logado());
+            this.AdicionarMensagemDeSucesso(retorno.Item1);
+            if (retorno.Item2)
+                return RedirectToAction(nameof(MeusDados));
+            else
+                return RedirectToAction(nameof(Editar), new { id = modelo.Id });
         }
 
         [Authorize]
