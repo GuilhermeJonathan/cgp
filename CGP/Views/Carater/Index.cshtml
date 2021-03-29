@@ -157,17 +157,17 @@
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
                            colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
-                           m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Editar", "Carater", new { id = m.Id })" title="Editar" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a></div>);
-                      colunas.Add(m => m.PlacaVeiculo).Titled("Placa");
-                      colunas.Add(m => m.NomeVeiculo).Titled("Veículo");
-                      colunas.Add(m => m.CorVeiculo).Titled("Cor");
-                      colunas.Add(m => m.AnoVeiculo).Titled("Ano");
-                      colunas.Add(m => m.NomeCrime).Titled("Crime");
-                      colunas.Add(m => m.NomeCidade).Titled("Cidade");
-                      colunas.Add(m => m.DataDoFato).Titled("Data do Fato");
-                      colunas.Add(m => m.SituacaoDoCarater).Titled("Situação");
+                           m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Detalhar", "Carater", new { id = m.Id })" title="Visualizar Caráter" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
+                          colunas.Add(m => m.PlacaVeiculo).Titled("Placa");
+                          colunas.Add(m => m.NomeVeiculo).Titled("Veículo");
+                          colunas.Add(m => m.CorVeiculo).Titled("Cor");
+                          colunas.Add(m => m.AnoVeiculo).Titled("Ano");
+                          colunas.Add(m => m.NomeCrime).Titled("Crime");
+                          colunas.Add(m => m.NomeCidade).Titled("Cidade");
+                          colunas.Add(m => m.DataDoFato).Titled("Data do Fato");
+                          colunas.Add(m => m.SituacaoDoCarater).Titled("Situação");
 
-                  }).WithPaging(30).Sortable(true).EmptyText("Nenhum caráter encontrado")
+                      }).WithPaging(30).Sortable(true).EmptyText("Nenhum caráter encontrado")
                     </div>
                 </div>
             </div>

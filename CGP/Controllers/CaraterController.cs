@@ -120,6 +120,9 @@ namespace Cgp.Controllers
             modelo.Cidades = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
                () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
 
+            modelo.CidadesLocalizacao = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
+            () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
+
             return View(modelo);
         }
 
