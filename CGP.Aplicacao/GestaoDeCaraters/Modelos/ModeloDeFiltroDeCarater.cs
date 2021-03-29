@@ -20,6 +20,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
         }
 
+        public string Placa { get; set; }
         public string DataInicio { get; set; }
         public string DataFim { get; set; }
         public int Cidade { get; set; }
@@ -31,6 +32,6 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public IEnumerable<SelectListItem> SituacoesDoCarater { get; set; }
         public int[] CidadesSelecionadas { get; set; }
         public int[] CrimesSelecionados { get; set; }
-        public string DescricaoLocalizacao { get; set; }
+        public string DescricaoLocalizacao { get; set; }   
     }
 }

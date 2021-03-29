@@ -1,0 +1,158 @@
+﻿@model Cgp.Aplicacao.GestaoDeCaraters.Modelos.ModeloDeEdicaoDeCarater
+
+@{
+    ViewBag.Title = "Detalhar Caráter";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="@Url.Action("Editar", "Carater")" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">@ViewBag.Title</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-sm-12 col-lg-12">
+                                    <div class="small-box bg-default">
+                                        <div class="inner">
+                                            <p2><span style="font-size: 26pt; font-weight: bold;">@Model.Placa </span> <span style="font-size: 18pt"> @Model.ModeloVeiculo @Model.MarcaVeiculo @Model.CorVeiculo</span></p2>
+
+                                            @if (Model.RealizouBaixa) {<span style='font-size: 16pt' class='badge bg-warning'>Veículo localizado.</span>}
+
+                                            <p style="font-size: 16pt; margin-bottom: 0px !important;"> <span class="@Model.CssTipoCrime">@Model.NomeCrime </span> no dia  @Model.Data</p>
+                                            <p style="font-size: 16pt; margin-bottom: 0px !important;">@Model.NomeCidade - @Model.ComplementoEndereco</p>
+                                            <p style="font-size: 16pt; margin-bottom: 0px !important;">@Model.Descricao</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label> @Model.UsuarioCadastro </label>
+                                </div>
+                            </div>
+                            <hr />
+                            @if (Model.RealizouBaixa)
+                            {
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="comment-text">
+                                                <span class="username">@Model.UsuarioLocalizacao.</span> <br />
+                                                @Model.DescricaoLocalizacao - Na cidade de @Model.CidadeLocalizacao .
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            @Html.BackButton() &nbsp;
+                            @if (!Model.RealizouBaixa)
+                            {
+                                <a href="#" class="btn btn-default btnAbrirBaixa" data-id="@Model.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </a> 
+                                <a href="@Url.Action("Editar", "Carater", new { id = Model.Id })" class="btn btn-info float-right"> <i class="fas fa-car-alt"></i> Editar Caráter </a>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalRealizarBaixa" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Realizar baixa de Caráter <span class="spnTitulo"></span></h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <input type="hidden" class="IdCaraterSelecionado" />
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card divDados">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                Informe os dados da localização
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label class="control-label"> Descrição </label>
+                                                    <input type="text" class="form-control txtDescricao" />
+                                                    <br />
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <label class="control-label"> Cidade </label>
+                                                    @Html.DropDownListFor(m => m.Cidade, Model.CidadesLocalizacao, new { @class = "form-control autoComplete ddlModal" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn btn-primary pull-right btnRealizarBaixa"><i class='fa fa-save'> </i> Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        $(".btnAbrirBaixa").button().click(function () {
+            var idCarater = $(this).attr("data-id");
+            $(".IdCaraterSelecionado").val(idCarater);
+            var form = $("#modalRealizarBaixa");
+            form.modal('show');
+        });
+
+        $(".btnRealizarBaixa").button().click(function () {
+            var idCarater = $(".IdCaraterSelecionado").val();
+            var descricao = $(".txtDescricao").val();
+            var cidade = $("#Cidade").select2('val');
+
+            if (cidade == "")
+                campeonatoGeral.AdicionarMensagemDeErro("Selecione a cidade");
+            else {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Carater/RealizarBaixa',
+                    data: 'idCarater=' + idCarater + "&descricao=" + descricao + "&cidade=" + cidade,
+                    success: function (resultado) {
+                        campeonatoGeral.AdicionarMensagemDeSucesso(resultado);
+                        window.location.assign(idCarater);
+                    }
+                });
+            }
+        });
+    })
+</script>

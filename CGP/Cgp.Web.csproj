@@ -396,6 +396,7 @@
     <Content Include="Views\Carater\Index.cshtml" />
     <Content Include="Views\Carater\Editar.cshtml" />
     <Content Include="Views\Carater\Cadastrar.cshtml" />
+    <Content Include="Views\Carater\Detalhar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -61,7 +61,7 @@
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.NomeCidade - @item.ComplementoEndereco</p>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.Descricao</p>
                                     </div>
-                                    <a href="@Url.Action("Editar", "Carater", new { id = item.Id })" target="_blank" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="@Url.Action("Detalhar", "Carater", new { id = item.Id })" target="_blank" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         }
@@ -200,7 +200,6 @@
                         $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
                     },
                     success: function (resultado) {
-                        debugger;
                         $.unblockUI();
                         if (resultado.Lista != undefined) {
 
@@ -212,15 +211,15 @@
                                     tabela += "<div class='col-sm-12 col-lg-4'>";
                                     tabela += "<div class='small-box bg-default'> <div class='inner'>";
 
-                                    //tabela += "<h3>" + teste[0].PlacaVeiculo + "<button type='button' class='btn btn-xs btn-default ' onClick='abrirBaixa(" + teste[0].Id + ");' data-id='" + teste[0].Id + "'> <i class='fas fa-arrow-alt-circle-down'></i> Realizar Baixa </button></h3>";
                                     tabela += "<h3>" + item[0].PlacaVeiculo;
-                                    if (item[0].VeiculoLocalizado) tabela += "<span class='badge bg-warning'>Veículo localizado.</span>";
+                                    if (!item[0].VeiculoLocalizado) tabela += "<a type='button' class='btn btn-xs btn-default' href='../Carater/Detalhar/" + item[0].Id + "'> <i class='fas fa-arrow-alt-circle-down'></i> Realizar Baixa </a>";
                                     tabela += "</h3>";
                                     tabela += "<sup style='font-size: 16pt'>" + item[0].NomeVeiculo + item[0].CorVeiculo + " </sup>";
-                                    tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'> <span class='" + item[0].CssTipoCrime + "'>" + item[0].NomeCrime + "</span> no dia" + item[0].DataDoCadastro + "</p>";
+                                    if (item[0].VeiculoLocalizado) tabela += "<sup style='font-size: 16pt' class='badge bg-warning'>Veículo localizado.</sup>";
+                                    tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'> <span class='" + item[0].CssTipoCrime + "'>" + item[0].NomeCrime + "</span> no dia " + item[0].DataDoFato + "</p>";
                                     tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'>" + item[0].NomeCidade + " - " + item[0].ComplementoEndereco + "</p>";
                                     tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'>" + item[0].Descricao + "</p>";
-                                    tabela += "</div>" + "<a href='../Carater/Editar/" + item[0].Id + "' target='_blank' class='small-box-footer' style='color:black !important; '>Mais informações <i class='fas fa-arrow-circle-right'></i></a>";
+                                    tabela += "</div>" + "<a href='../Carater/Detalhar/" + item[0].Id + "' target='_blank' class='small-box-footer' style='color:black !important; '>Mais informações <i class='fas fa-arrow-circle-right'></i></a>";
                                     tabela += "</div></div>";
 
                                 });

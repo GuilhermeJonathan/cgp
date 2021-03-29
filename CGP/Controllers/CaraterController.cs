@@ -132,6 +132,23 @@ namespace Cgp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public ActionResult Detalhar(int? id)
+        {
+            if (!id.HasValue)
+            {
+                this.AdicionarMensagemDeErro("O caráter não foi encontrado");
+                return RedirectToAction(nameof(Index));
+            }
+
+            var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value);
+
+            modelo.CidadesLocalizacao = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
+              () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
+
+            return View(modelo);
+        }
+
         private ActionResult CaraterNaoEncontrado()
         {
             this.AdicionarMensagemDeErro("O caráter não foi encontrado");

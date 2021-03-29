@@ -12,7 +12,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
     {
         public RepositorioDeCaraters(Contexto contexto) : base(contexto) { }
 
-        public IList<Carater> RetornarCaratersPorFiltro(int[] cidades, int[] crimes, int situacao, DateTime? dataInicial, DateTime? dataFinal, out int quantidadeEncontrada)
+        public IList<Carater> RetornarCaratersPorFiltro(string placa, int[] cidades, int[] crimes, int situacao, DateTime? dataInicial, DateTime? dataFinal, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
@@ -20,6 +20,9 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Crime)
                 .AsQueryable();
             
+            if(!String.IsNullOrEmpty(placa))
+                query = query.Where(c => c.Veiculo.Placa.Contains(placa));
+
             if (cidades != null)
                 query = query.Where(c => cidades.Contains(c.Cidade.Id));
 

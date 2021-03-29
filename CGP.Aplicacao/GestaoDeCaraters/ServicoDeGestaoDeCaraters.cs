@@ -39,7 +39,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 }
 
                 var quantidadeEncontrada = 0;
-                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.CidadesSelecionadas, filtro.CrimesSelecionados, filtro.SituacaoDoCarater, dataInicial, dataFinal, out quantidadeEncontrada);
+                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Placa, filtro.CidadesSelecionadas, filtro.CrimesSelecionados, filtro.SituacaoDoCarater, dataInicial, dataFinal, out quantidadeEncontrada);
 
                 var modelo = new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, filtro);
                 return modelo;
@@ -213,7 +213,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 }
 
                 var quantidadeEncontrada = 0;
-                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.CidadesSelecionadas, filtro.CrimesSelecionados, filtro.SituacaoDoCarater, dataInicial, dataFinal, out quantidadeEncontrada);
+                var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Placa, filtro.CidadesSelecionadas, filtro.CrimesSelecionados, filtro.SituacaoDoCarater, dataInicial, dataFinal, out quantidadeEncontrada);
 
                 var modelo = new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, filtro);
                 modelo.ArquivoHtml = RetornaHtmlDaLista(modelo.Lista.ToList(), dataInicial != null? dataInicial.Value : DateTime.MinValue, dataFinal != null ? dataFinal.Value : DateTime.MinValue, usuario);

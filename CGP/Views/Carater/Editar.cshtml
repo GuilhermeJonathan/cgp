@@ -71,7 +71,6 @@
                                 <div class="col-lg-2">
                                     <label class="control-label"> Crime </label>
                                     @Html.DropDownListFor(m => m.Crime, Model.Crimes, new { @class = "form-control autoComplete" })
-
                                 </div>
                                 <div class="col-lg-6">
                                     @Html.InputTextFor(a => a.Descricao, "Histórico", required: false)
@@ -98,7 +97,6 @@
                         </div>
                         <div class="card-footer">
                             @Html.BackButton()
-                            
                             @if (!Model.RealizouBaixa) {<button type="submit" class="btn btn-success float-right">Salvar</button> }
                         </div>
 

@@ -16,6 +16,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         {
             this.Crimes = new List<SelectListItem>();
             this.Cidades = new List<SelectListItem>();
+            this.CidadesLocalizacao = new List<SelectListItem>();
             this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
         }
 
@@ -33,15 +34,18 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
 
             this.Cidade = carater.Cidade != null ? carater.Cidade.Id : 0;
             this.Crime = carater.Crime != null ? carater.Crime.Id : 0;
-            
+            this.NomeCrime = carater.Crime != null ? $"{carater.Crime.Nome}" : String.Empty;
+            this.NomeCidade = carater.Cidade != null ? $"{carater.Cidade.Descricao}" : String.Empty;
+
             this.Data = carater.DataHoraDoFato.HasValue ? carater.DataHoraDoFato.Value.ToShortDateString() : String.Empty;
             this.Hora = carater.DataHoraDoFato.HasValue ? carater.DataHoraDoFato.Value.ToShortTimeString() : String.Empty;
             this.UrlImagem = $"{caminhoBlob}/{carater.UrlImagem}";
             var usuario = carater.UsuarioQueAlterou != null ? carater.UsuarioQueAlterou.Nome.Valor : String.Empty;
             this.UsuarioCadastro = $"Cadastro por {usuario} no dia {carater.DataDoCadastro.ToString("dd/MM")} às {carater.DataDoCadastro.ToString("HH:mm")}";
             this.SituacaoDoCarater = (int)carater.SituacaoDoCarater;
+            this.CssTipoCrime = RetornaCssCrime(carater.Crime.Nome);
 
-            if(carater.Veiculo != null)
+            if (carater.Veiculo != null)
             {
                 this.Placa = carater.Veiculo.Placa;
                 this.IdVeiculo = carater.Veiculo.Id;
@@ -69,6 +73,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string Hora { get; set; }
         public int Cidade { get; set; }
         public IEnumerable<SelectListItem> Cidades { get; set; }
+        public IEnumerable<SelectListItem> CidadesLocalizacao { get; set; }
         public int Crime { get; set; }
         public IEnumerable<SelectListItem> Crimes { get; set; }
         public int Veiculo { get; set; }
@@ -83,11 +88,33 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }
         public string UsuarioCadastro { get; set; }
-
         public bool RealizouBaixa { get; set; }
         public string DescricaoLocalizacao { get; set; }
         public string CidadeLocalizacao { get; set; }
         public string DataHoraLocalizacao { get; set; }
         public string UsuarioLocalizacao { get; set; }
+        public string CssTipoCrime { get; set; }
+        public string NomeCrime { get; set; }
+        public string NomeCidade { get; set; }
+
+        private string RetornaCssCrime(string crime)
+        {
+            var retorno = String.Empty;
+
+            switch (crime.ToUpper())
+            {
+                case "ROUBO":
+                    retorno = "badge bg-danger";
+                    break;
+                case "FURTO":
+                    retorno = "badge bg-warning";
+                    break;
+                default:
+                    retorno = "badge bg-primary";
+                    break;
+            }
+
+            return retorno;
+        }
     }
 }
