@@ -61,7 +61,7 @@
                                     @foreach (var item in Model.Fotos)
                                     {
                                         <div class="product-image-thumb">
-                                            <img src="@item.Caminho" alt="@item.Descricao" class="fotoCarater">
+                                            <img src="@item.Caminho" alt="@item.Descricao" data-id="@item.Id" class="fotoCarater">
                                         </div>
                                     }
                                 </div>
@@ -112,8 +112,11 @@
         $(".fotoCarater").button().click(function () {
             var url = $(this).attr("src");
             var descricao = $(this).attr("alt");
+            var idFoto = $(this).attr("data-id");
+
             $(".imgFoto").attr("src", url);
             $(".lblDescricao").html(descricao);
+            $(".idFoto").val(idFoto);
             var form = $("#modalVisualizarFoto");
             form.modal('show');
         });
