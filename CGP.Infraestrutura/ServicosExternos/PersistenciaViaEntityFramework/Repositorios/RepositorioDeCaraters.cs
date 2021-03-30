@@ -65,6 +65,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.CidadeLocalizado)
                 .Include(a => a.Crime)
                 .Include(a => a.UsuarioQueAlterou)
+                .Include(a => a.Fotos)
                 .FirstOrDefault(a => a.Id == id);
         }
 
@@ -92,5 +93,10 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             return carater != null ? carater : null;
         }
 
+        public Foto PegarFotoPorId(int id)
+        {
+            return this._contexto.Set<Foto>()
+                .FirstOrDefault(a => a.Id == id);
+        }
     }
 }

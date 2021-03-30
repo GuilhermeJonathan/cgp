@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form role="form" action="@Url.Action("Editar", "Carater")" method="post">
+                <form role="form" id="formEditarCarater" action="@Url.Action("Editar", "Carater")" method="post">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Editar Caráter</h3>
@@ -97,7 +97,28 @@
                                     <label> @Model.UsuarioCadastro </label>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <div id="inserirFoto">Clique aqui para adicionar imagens</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-12 product-image-thumbs">
+                                @foreach (var item in Model.Fotos)
+                                {
+                                <div class="product-image-thumb">
+                                    <img src="@item.Caminho" alt="@item.Descricao"  data-id="@item.Id" class="fotoCarater">
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        <hr />
                         <div class="card-footer">
                             @Html.BackButton() &nbsp;
                             @if (!Model.RealizouBaixa)
@@ -128,6 +149,7 @@
 </div>
 
 @Html.Partial("_RealizarBaixa")
+@Html.Partial("_VisualizarFoto")
 
 <script>
     $(function () {
@@ -205,6 +227,58 @@
                         window.location.assign(idCarater);
                     }
                 });
+            }
+        });
+
+        $(".fotoCarater").button().click(function () {
+            var url = $(this).attr("src");
+            var descricao = $(this).attr("alt");
+            var idFoto = $(this).attr("data-id");
+
+            $(".imgFoto").attr("src", url);
+            $(".lblDescricao").html(descricao);
+            $(".idFoto").val(idFoto);
+            var form = $("#modalVisualizarFoto");
+            form.modal('show');
+        });
+
+        $(".btnExcluirFoto").button().click(function () {
+            var idFoto = $(".idFoto").val();
+
+            $.ajax({
+                type: 'GET',
+                url: '/Carater/ExcluirFoto',
+                data: 'id=' + idFoto,
+                beforeSend: function () {
+                    $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
+                },
+                success: function (resultado) {
+                    $.unblockUI();
+                    campeonatoGeral.AdicionarMensagemDeSucesso(resultado.Status);
+                    document.location.reload(true);
+                }
+            });
+        });
+
+        $("#inserirFoto").uploadFile({
+            url: "@Url.Action("UploadFotos", "Carater", new { id = Model.Id })",
+            fileName: "file",
+
+            maxFileSize: 83886080,
+            maxFileCount: 50,
+            multiple: true,
+            allowedTypes: "png,bmp,jpe,jpg,jpeg,jfif",
+            showStatusAfterSuccess: false,
+
+            dragDropStr: "<span> ou Arraste pra cá! </span>",
+            doneStr: "Enviado",
+            abortStr: "Cancelar",
+            extErrorStr: "Extensão não permitida.",
+            sizeErrorStr: "Foi ultrapassado o tamanho máximo para upload de arquivo",
+            maxFileCountErrorStr: "Foi ultrapassado o limite de upload.",
+            afterUploadAll: function (e) {
+                document.location.reload(true);
+                campeonatoGeral.AdicionarMensagemDeSucesso("Imagem(s) adicionadas com sucesso.");
             }
         });
     })

@@ -1,6 +1,6 @@
 ﻿@model Cgp.Aplicacao.GestaoDeCaraters.Modelos.ModeloDeListaDeCaraters
 @{
-    ViewBag.Title = "Caráter Gerais";
+    ViewBag.Title = "Caráters Gerais";
 }
 <form action="@Url.Action("Dashboard", "Home")" id="formBuscarCarater" method="post" enctype="multipart/form-data">
 
@@ -61,7 +61,7 @@
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.NomeCidade - @item.ComplementoEndereco</p>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.Descricao</p>
                                     </div>
-                                    <a href="@Url.Action("Detalhar", "Carater", new { id = item.Id })" target="_blank" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="@Url.Action("Detalhar", "Carater", new { id = item.Id })" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         }

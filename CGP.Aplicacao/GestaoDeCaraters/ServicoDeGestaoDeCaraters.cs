@@ -1,22 +1,30 @@
-﻿using Cgp.Aplicacao.GestaoDeCaraters.Modelos;
+﻿using Cgp.Aplicacao.Comum;
+using Cgp.Aplicacao.GestaoDeCaraters.Modelos;
 using Cgp.Aplicacao.Util;
 using Cgp.Dominio.Entidades;
 using Cgp.Dominio.ObjetosDeValor;
 using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Cgp.Aplicacao.GestaoDeCaraters
 {
     public class ServicoDeGestaoDeCaraters : IServicoDeGestaoDeCaraters
     {
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
-        public ServicoDeGestaoDeCaraters(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia)
+        private readonly IServicoDeGeracaoDeHashSha _servicoDeGeracaoDeHashSha;
+        private readonly IServicoExternoDeArmazenamentoEmNuvem _servicoExternoDeArmazenamentoEmNuvem;
+
+        public ServicoDeGestaoDeCaraters(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha, IServicoExternoDeArmazenamentoEmNuvem servicoExternoDeArmazenamentoEmNuvem)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
+            this._servicoDeGeracaoDeHashSha = servicoDeGeracaoDeHashSha;
+            this._servicoExternoDeArmazenamentoEmNuvem = servicoExternoDeArmazenamentoEmNuvem;
         }
 
         public ModeloDeListaDeCaraters RetonarCaratersPorFiltro(ModeloDeFiltroDeCarater filtro, int pagina, int registrosPorPagina = 30)
@@ -269,6 +277,75 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 return true;
             else
                 return false;
+        }
+
+        public async Task<string> AdicionarFotos(int id, HttpFileCollectionBase files)
+        {
+            try
+            {
+                var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(id);
+
+                if (carater != null)
+                {
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        HttpPostedFileBase imagem = files[i];
+                        var caminho = _servicoDeGeracaoDeHashSha.GerarParaStream(imagem.InputStream) + ".jpg";
+                        var caminhoBlob = $"fotos";
+
+                        if (carater.VerificarSeJaTemEssaFoto(caminho))
+                            throw new ExcecaoDeAplicacao("Foto já cadastrada");
+
+                        var descricaoFoto = imagem.FileName.Split('.');
+                        var foto = new Foto(carater, descricaoFoto[0], caminho);
+                        carater.Fotos.Add(foto);
+
+                        imagem.InputStream.Position = 0;
+                        await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(imagem.InputStream, caminhoBlob, caminho);
+                        this._servicoExternoDePersistencia.Persistir();
+
+                    }
+
+                    this._servicoExternoDePersistencia.Persistir();
+                }
+
+                return "Fotos adicionadas com sucesso";
+            }
+
+            catch (ExcecaoDeAplicacao ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
+        public string ExcluirFoto(int id)
+        {
+            try
+            {
+                var foto = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarFotoPorId(id);
+
+                if (foto == null)
+                    throw new ExcecaoDeAplicacao("Não foi encontrada a foto para a exclusão");
+
+                foto.InativarFoto();
+                this._servicoExternoDePersistencia.Persistir();
+                return "Foto excluída com sucesso.";
+            }
+
+            catch (ExcecaoDeAplicacao ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
         }
     }
 }

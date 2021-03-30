@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -186,6 +187,28 @@ namespace Cgp.Controllers
         {
             var carater = this._servicoDeGestaoDeCaraters.VerificaCadastroDeCarater(placa);
             return Json(new { carater }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UploadFotos(int id)
+        {
+            try
+            {
+                var retorno = await this._servicoDeGestaoDeCaraters.AdicionarFotos(id, Request.Files);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, System.Web.HttpUtility.HtmlEncode(ex.Message));
+            }
+            var result = new { Status = "Sucesso", Message = "Error Message" };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExcluirFoto(int id)
+        {
+            var retorno = this._servicoDeGestaoDeCaraters.ExcluirFoto(id);
+            var result = new { Status = retorno, Message = "Error Message" };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

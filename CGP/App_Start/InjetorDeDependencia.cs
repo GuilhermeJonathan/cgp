@@ -53,17 +53,16 @@ namespace Cgp.App_Start
             container.Register<IServicoDeGestaoDeVeiculos, ServicoDeGestaoDeVeiculos>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCrimes, ServicoDeGestaoDeCrimes>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCaraters, ServicoDeGestaoDeCaraters>(Lifestyle.Scoped);
-
-           
-            container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
-               VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")));
-
+            
             container.Register<IServicoDeEnvioDeEmails>(() => new ServicoDeEnvioDeEmails(
              VariaveisDeAmbiente.Pegar<string>("chaveSendGrid"), VariaveisDeAmbiente.Pegar<string>("EmailDaEmpresa"), VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")), Lifestyle.Scoped);
 
             container.Register<IServicoDeComunicacaoViaHttp, ServicoDeComunicacaoViaHttp>(Lifestyle.Scoped);
 
             container.Register<IServicoDeBuscaDeVeiculo>(() => new ServicoDeBuscaDeVeiculo(container.GetInstance<IServicoDeComunicacaoViaHttp>(), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoSimples"), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoCompleta")), Lifestyle.Scoped);
+
+            container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
+              VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")), Lifestyle.Scoped);
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

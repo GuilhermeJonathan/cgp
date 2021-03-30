@@ -74,7 +74,16 @@
 .ddlModal {
     width: 300px !important;
 }
-
+.fotoCarater {
+    width: 250px !important;
+    width: 200px !important;
+    cursor: pointer;
+}
+.fotoModal {
+    width: 100% !important;
+    width: 100% !important;
+    cursor: pointer;
+}
 @media screen and (max-width: 900px) {
     .btnRodadaFechada {
         padding: 25px 0 0 30px !important;

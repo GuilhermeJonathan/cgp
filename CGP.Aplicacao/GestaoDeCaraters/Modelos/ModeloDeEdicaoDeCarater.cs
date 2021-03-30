@@ -18,12 +18,17 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.Cidades = new List<SelectListItem>();
             this.CidadesLocalizacao = new List<SelectListItem>();
             this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
+            this.HistoricosDeCaraters = new List<ModeloDeHistoricoDeCaraterDaLista>();
+            this.Fotos = new List<ModeloDeFotosDaLista>();
         }
 
         public ModeloDeEdicaoDeCarater(Carater carater)
         {
             if (carater == null)
                 return;
+
+            this.HistoricosDeCaraters = new List<ModeloDeHistoricoDeCaraterDaLista>();
+            this.Fotos = new List<ModeloDeFotosDaLista>();
 
             this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
 
@@ -43,7 +48,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             var usuario = carater.UsuarioQueAlterou != null ? carater.UsuarioQueAlterou.Nome.Valor : String.Empty;
             this.UsuarioCadastro = $"Cadastro por {usuario} no dia {carater.DataDoCadastro.ToString("dd/MM")} às {carater.DataDoCadastro.ToString("HH:mm")}";
             this.SituacaoDoCarater = (int)carater.SituacaoDoCarater;
-            this.CssTipoCrime = RetornaCssCrime(carater.Crime.Nome);
+            this.CssTipoCrime = RetornaCssCrime(NomeCrime);
 
             if (carater.Veiculo != null)
             {
@@ -65,6 +70,10 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 this.CidadeLocalizacao = carater.CidadeLocalizado != null ? carater.CidadeLocalizado.Descricao : String.Empty;
                 this.UsuarioLocalizacao = $"Baixa por {usuario} no dia {dataHora.ToString("dd/MM")} às {dataHora.ToString("HH:mm")}";
             }
+
+            carater.HistoricosDeCaraters.ToList().ForEach(a => this.HistoricosDeCaraters.Add(new ModeloDeHistoricoDeCaraterDaLista(a)));
+            carater.Fotos.Where(a => a.Ativo).ToList().ForEach(a => this.Fotos.Add(new ModeloDeFotosDaLista(a)));
+
         }
 
         public int Id { get; set; }
@@ -98,6 +107,9 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string CssTipoCrime { get; set; }
         public string NomeCrime { get; set; }
         public string NomeCidade { get; set; }
+
+        public IList<ModeloDeHistoricoDeCaraterDaLista> HistoricosDeCaraters{ get; set; }
+        public IList<ModeloDeFotosDaLista> Fotos { get; set; }
 
         private string RetornaCssCrime(string crime)
         {

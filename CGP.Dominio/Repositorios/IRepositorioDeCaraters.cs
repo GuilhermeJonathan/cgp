@@ -14,5 +14,6 @@ namespace Cgp.Dominio.Repositorios
         Carater PegarPorId(int id);
         IList<Carater> BuscarCaratersPorFragmentos(string fragmento);
         Carater PegarCaraterPorPlaca(string placa);
+        Foto PegarFotoPorId(int id);
     }
 }

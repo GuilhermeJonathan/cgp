@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Cgp.Aplicacao.GestaoDeCaraters
 {
@@ -19,5 +20,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         ModeloDeListaDeCaraters BuscarCaraterPorPlaca(string placa);
         ModeloDeListaDeCaraters GerarPDFeRetornar(ModeloDeFiltroDeCarater filtro, UsuarioLogado usuario);
         bool VerificaCadastroDeCarater(string placa);
+        Task<string> AdicionarFotos(int id, HttpFileCollectionBase files);
+        string ExcluirFoto(int id);
     }
 }

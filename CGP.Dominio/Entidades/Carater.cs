@@ -11,7 +11,8 @@ namespace Cgp.Dominio.Entidades
     {
         public Carater()
         {
-
+            this.HistoricosDeCaraters = new List<HistoricoDeCarater>();
+            this.Fotos = new List<Foto>();
         }
 
         public Carater(string descricao, string complementoEndereco, DateTime dataHora, Veiculo veiculo, Cidade cidade, Crime crime, string urlImagem, Usuario usuario)
@@ -40,6 +41,9 @@ namespace Cgp.Dominio.Entidades
         public string DescricaoLocalizado { get; set; }
         public Cidade CidadeLocalizado { get; set; }
         public DateTime? DataHoraLocalizacao { get; set; }
+        public ICollection<Foto> Fotos { get; set; }
+        public ICollection<HistoricoDeCarater> HistoricosDeCaraters { get; set; }
+        public bool VerificarSeJaTemEssaFoto(string descricao) => this.Fotos.Any(a => a.Caminho == descricao && a.Ativo);
 
         public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, string urlImagem, Usuario usuario)
         {

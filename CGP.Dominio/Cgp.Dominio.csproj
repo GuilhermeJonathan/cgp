@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Entidades\Carater.cs" />
     <Compile Include="Entidades\Crime.cs" />
+    <Compile Include="Entidades\Foto.cs" />
+    <Compile Include="Entidades\HistoricoDeCarater.cs" />
     <Compile Include="Entidades\Veiculo.cs" />
     <Compile Include="Entidades\Cidade.cs" />
     <Compile Include="Entidades\ComandoRegional.cs" />

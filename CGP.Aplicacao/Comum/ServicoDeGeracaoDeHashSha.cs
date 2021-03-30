@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -27,6 +28,31 @@ namespace Cgp.Aplicacao.Comum
             }
 
             return sb.ToString();
+        }
+
+        public string GerarParaStream(Stream s)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream arquivo = new MemoryStream())
+            {
+                int read;
+                while ((read = s.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    arquivo.Write(buffer, 0, read);
+                }
+
+                MD5 alg = MD5.Create();
+
+                arquivo.Position = 0;
+                byte[] byteImagem = arquivo.ToArray();
+
+                byte[] bt = alg.ComputeHash(byteImagem);
+                StringBuilder sb = new System.Text.StringBuilder();
+                foreach (byte aa in bt)
+                    sb.Append(aa.ToString("x2").ToLower());
+
+                return sb.ToString();
+            }
         }
     }
 }

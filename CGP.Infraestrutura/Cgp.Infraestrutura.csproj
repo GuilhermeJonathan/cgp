@@ -107,6 +107,8 @@
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Contexto.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCarater.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCrimes.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeFoto.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeHistoricoDeCarater.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeVeiculo.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCidade.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeComandoRegional.cs" />

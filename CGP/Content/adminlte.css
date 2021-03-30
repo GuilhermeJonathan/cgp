@@ -20510,7 +20510,7 @@ html.maximized-card {
   align-items: stretch;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 2rem;
+  /*margin-top: 2rem;*/
 }
 
 .product-image-thumb {
@@ -20521,7 +20521,7 @@ html.maximized-card {
   display: -ms-flexbox;
   display: flex;
   margin-right: 1rem;
-  max-width: 7rem;
+  max-width: 10rem;
   padding: 0.5rem;
 }
 
@@ -20530,6 +20530,12 @@ html.maximized-card {
   height: auto;
   -ms-flex-item-align: center;
   align-self: center;
+}
+
+.product-image-thumbs span {
+    max-width: 100%;
+    margin-top: 30px;
+    align-self: center;
 }
 
 .product-image-thumb:hover {
