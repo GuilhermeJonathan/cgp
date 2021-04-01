@@ -18,6 +18,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
             this.Ativo = usuario.Ativo;
             this.PerfilDeUsuario = usuario.PerfilDeUsuario.ToString();
             this.Batalhao = usuario.Batalhao != null ? usuario.Batalhao.Sigla : String.Empty;
+            this.Matricula = usuario.Matricula != null ? usuario.Matricula : String.Empty;
         }
 
         public int Id { get; set; }
@@ -27,5 +28,6 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios.Modelos
         public bool Ativo { get; set; }
         public string PerfilDeUsuario { get; set; }
         public string Batalhao { get; set; }
+        public string Matricula { get; set; }
     }
 }

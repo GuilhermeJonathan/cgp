@@ -20,7 +20,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         ModeloDeListaDeCaraters BuscarCaraterPorPlaca(string placa);
         ModeloDeListaDeCaraters GerarPDFeRetornar(ModeloDeFiltroDeCarater filtro, UsuarioLogado usuario);
         bool VerificaCadastroDeCarater(string placa);
-        Task<string> AdicionarFotos(int id, HttpFileCollectionBase files);
-        string ExcluirFoto(int id);
+        Task<string> AdicionarFotos(int id, HttpFileCollectionBase files, UsuarioLogado usuario);
+        string ExcluirFoto(int id, UsuarioLogado usuario);
     }
 }

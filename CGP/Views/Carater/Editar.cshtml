@@ -99,24 +99,25 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 col-lg-4 col-sm-12">
                                     <div class="form-group">
-                                        <div id="inserirFoto">Clique aqui para adicionar imagens</div>
+                                        <div id="inserirFoto">Clique para upload de imagens</div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <hr />
-                        <div class="row">
-                            <div class="col-12 product-image-thumbs">
-                                @foreach (var item in Model.Fotos)
-                                {
-                                <div class="product-image-thumb">
-                                    <img src="@item.Caminho" alt="@item.Descricao"  data-id="@item.Id" class="fotoCarater">
+                            @if (Model.Fotos.Count > 0) {
+                            <hr />
+                            <div class="row">
+                                <div class="col-12 product-image-thumbs">
+                                    @foreach (var item in Model.Fotos)
+                                    {
+                                        <div class="product-image-thumb">
+                                            <img src="@item.Caminho" alt="@item.Descricao" data-id="@item.Id" class="fotoCarater">
+                                        </div>
+                                    }
                                 </div>
-                                }
                             </div>
+                            }
                         </div>
                         <hr />
                         <div class="card-footer">
@@ -269,8 +270,8 @@
             multiple: true,
             allowedTypes: "png,bmp,jpe,jpg,jpeg,jfif",
             showStatusAfterSuccess: false,
-
-            dragDropStr: "<span> ou Arraste pra cá! </span>",
+            
+            dragDropStr: "<span> ou Arraste </span>",
             doneStr: "Enviado",
             abortStr: "Cancelar",
             extErrorStr: "Extensão não permitida.",

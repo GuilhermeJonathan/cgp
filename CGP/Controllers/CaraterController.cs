@@ -194,7 +194,7 @@ namespace Cgp.Controllers
         {
             try
             {
-                var retorno = await this._servicoDeGestaoDeCaraters.AdicionarFotos(id, Request.Files);
+                var retorno = await this._servicoDeGestaoDeCaraters.AdicionarFotos(id, Request.Files, User.Logado());
             }
             catch (Exception ex)
             {
@@ -206,7 +206,7 @@ namespace Cgp.Controllers
 
         public JsonResult ExcluirFoto(int id)
         {
-            var retorno = this._servicoDeGestaoDeCaraters.ExcluirFoto(id);
+            var retorno = this._servicoDeGestaoDeCaraters.ExcluirFoto(id, User.Logado());
             var result = new { Status = retorno, Message = "Error Message" };
             return Json(result, JsonRequestBehavior.AllowGet);
         }

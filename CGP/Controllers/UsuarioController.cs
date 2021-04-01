@@ -32,10 +32,13 @@ namespace Cgp.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(ModeloDeListaDeUsuarios modelo)
+        public ActionResult Index(ModeloDeListaDeUsuarios modelo, bool? Ativo)
         {
             if (!User.EhAdministrador())
                 return UsuarioSemPermissao();
+
+            if (Ativo.HasValue)
+                modelo.Filtro.Ativo = Ativo.Value;
 
             modelo = this._servicoDeGestaoDeUsuarios.RetonarUsuariosPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
 

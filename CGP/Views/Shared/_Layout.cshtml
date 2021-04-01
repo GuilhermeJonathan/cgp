@@ -40,6 +40,9 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-sm-inline-block" style="margin-top: 7px;">
+                    <a href="@Url.Action("Index", "Usuario", new { Ativo = false } )"><span class="badge badge-info right numeroDeUsuariosNovos"> <i class="fas fa-sync-alt fa-spin"></i></span></a>
+                </li>
                 <li class="nav-item d-sm-inline-block">
                     <a href="/Login/Sair" class="nav-link"><i class="fas fa-sign-out-alt"></i>&nbsp;Sair</a>
                 </li>

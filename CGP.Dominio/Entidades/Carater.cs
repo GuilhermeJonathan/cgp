@@ -47,6 +47,8 @@ namespace Cgp.Dominio.Entidades
 
         public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, string urlImagem, Usuario usuario)
         {
+            var descricaoHistorico = String.Empty;
+
             this.Descricao = descricao;
             this.ComplementoEndereco = complementoEndereco;
             this.DataHoraDoFato = dataHora;
@@ -55,12 +57,14 @@ namespace Cgp.Dominio.Entidades
             this.Veiculo = veiculo;
             this.UrlImagem = urlImagem;
             this.Atualizar(usuario);
+
+            this.AdicionarHistorico(new HistoricoDeCarater("Alterou os dados do Caráter", descricaoHistorico, TipoDeHistoricoDeCarater.Historico, usuario, this.Id));
         }
 
         public void Atualizar(Usuario usuario)
         {
             this.DataUltimaAtualizacao = DateTime.Now;
-            this.UsuarioQueAlterou = usuario;
+            //this.UsuarioQueAlterou = usuario;
         }
 
         public void RealizarBaixaVeiculo(string descricao, Cidade cidadeLocalizado, Usuario usuario)
@@ -70,6 +74,15 @@ namespace Cgp.Dominio.Entidades
             this.SituacaoDoCarater = SituacaoDoCarater.Localizado;
             this.DataHoraLocalizacao = DateTime.Now;
             this.Atualizar(usuario);
+        }
+
+        public void AdicionarHistorico(HistoricoDeCarater historico)
+        {
+            if (this.HistoricosDeCaraters == null)
+                this.HistoricosDeCaraters = new List<HistoricoDeCarater>();
+
+            this.DataUltimaAtualizacao = DateTime.Now;
+            this.HistoricosDeCaraters.Add(historico);
         }
     }
 }

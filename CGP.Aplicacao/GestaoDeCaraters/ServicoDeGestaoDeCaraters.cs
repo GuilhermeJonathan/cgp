@@ -133,7 +133,11 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 }
 
                 var novoCarater = new Carater(modelo.Descricao, modelo.ComplementoEndereco, dataHoraFato, veiculo, cidade, crime, modelo.UrlImagem, usuarioBanco);
+
                 this._servicoExternoDePersistencia.RepositorioDeCaraters.Inserir(novoCarater);
+                this._servicoExternoDePersistencia.Persistir();
+
+                novoCarater.AdicionarHistorico(new HistoricoDeCarater("Criou o Caráter", "", TipoDeHistoricoDeCarater.Criacao, usuarioBanco, novoCarater.Id));
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Caráter incluído com sucesso.";
@@ -172,6 +176,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 }
 
                 carater.AlterarDados(modelo.Descricao, modelo.ComplementoEndereco, dataHoraFato, cidade, crime, veiculo,  modelo.UrlImagem, usuarioBanco);
+
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Caráter alterado com sucesso.";
@@ -191,6 +196,10 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 var cidadeBanco = this._servicoExternoDePersistencia.RepositorioDeCidades.PegarPorId(cidade);
                 
                 carater.RealizarBaixaVeiculo(descricao, cidadeBanco, usuarioBanco);
+                var descricaHistorico = $"{descricao} <br>Cidade: {cidadeBanco.Descricao}.";
+
+                carater.AdicionarHistorico(new HistoricoDeCarater("Realizou baixa do Caráter", descricaHistorico, TipoDeHistoricoDeCarater.Baixa, usuarioBanco, carater.Id));
+
                 this._servicoExternoDePersistencia.Persistir();
 
                 return "Baixa realizada com sucesso.";
@@ -279,11 +288,12 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 return false;
         }
 
-        public async Task<string> AdicionarFotos(int id, HttpFileCollectionBase files)
+        public async Task<string> AdicionarFotos(int id, HttpFileCollectionBase files, UsuarioLogado usuario)
         {
             try
             {
                 var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
 
                 if (carater != null)
                 {
@@ -299,11 +309,13 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                         var descricaoFoto = imagem.FileName.Split('.');
                         var foto = new Foto(carater, descricaoFoto[0], caminho);
                         carater.Fotos.Add(foto);
+                        this._servicoExternoDePersistencia.Persistir();
+
+                        carater.AdicionarHistorico(new HistoricoDeCarater("Adicionou uma foto ao caráter", descricaoFoto[0], TipoDeHistoricoDeCarater.Foto, usuarioBanco, foto.Id));
 
                         imagem.InputStream.Position = 0;
                         await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(imagem.InputStream, caminhoBlob, caminho);
                         this._servicoExternoDePersistencia.Persistir();
-
                     }
 
                     this._servicoExternoDePersistencia.Persistir();
@@ -323,16 +335,19 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
-        public string ExcluirFoto(int id)
+        public string ExcluirFoto(int id, UsuarioLogado usuario)
         {
             try
             {
                 var foto = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarFotoPorId(id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
 
                 if (foto == null)
                     throw new ExcecaoDeAplicacao("Não foi encontrada a foto para a exclusão");
 
                 foto.InativarFoto();
+                foto.Carater.AdicionarHistorico(new HistoricoDeCarater("Excluir uma foto do caráter", foto.Descricao, TipoDeHistoricoDeCarater.Foto, usuarioBanco, foto.Id));
+
                 this._servicoExternoDePersistencia.Persistir();
                 return "Foto excluída com sucesso.";
             }
