@@ -233,7 +233,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 var caraters = this._servicoExternoDePersistencia.RepositorioDeCaraters.RetornarCaratersPorFiltro(filtro.Placa, filtro.CidadesSelecionadas, filtro.CrimesSelecionados, filtro.SituacaoDoCarater, dataInicial, dataFinal, out quantidadeEncontrada);
 
                 var modelo = new ModeloDeListaDeCaraters(caraters, quantidadeEncontrada, filtro);
-                modelo.ArquivoHtml = RetornaHtmlDaLista(modelo.Lista.ToList(), dataInicial != null? dataInicial.Value : DateTime.MinValue, dataFinal != null ? dataFinal.Value : DateTime.MinValue, usuario);
+                modelo.ArquivoHtml = RetornaHtmlDaLista(modelo.Lista.OrderBy(a => a.PlacaInicial).ToList(), dataInicial != null? dataInicial.Value : DateTime.MinValue, dataFinal != null ? dataFinal.Value : DateTime.MinValue, usuario);
                 return modelo;
             }
             catch (Exception ex)
@@ -247,29 +247,42 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             StringBuilder html = new StringBuilder();
             var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
 
+            var contador = 0;
+            var dataInicialTratada = dataInicial.Value != DateTime.MinValue ? $" - {dataInicial.Value.ToString("dd/MM")}" : String.Empty;
+            var dataFinalTratada = dataFinal.Value != DateTime.MinValue ? $" a {dataFinal.Value.ToString("dd/MM/yyyy")}" : String.Empty;
             html.Append($"<html><head> <meta charset='UTF-8'></head>");
-            html.Append("<style> .table{width: 100%; margin-bottom: 1rem; color: #212529; background-color: transparent;}  .table th, .table td { padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6;}  .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6;}  .table tbody + tbody { border-top: 2px solid #dee2e6; }  .text-muted { color: #6c757d !important;} .placa { font-size: 16pt; font-weight: bold; } .verde {color: #139f11 !important; font-weight: bold; } .amarelo {color: #ff6a00 !important;font-weight: bold;}");
+            html.Append("<style> .table{width: 100%; margin-bottom: 1rem; color: #212529; background-color: transparent; border: solid 1px #212529;}  .table th, .table td { padding: 0.75rem; vertical-align: top; border: 1px solid #dee2e6;}  .table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6;}  .table tbody + tbody { border-top: 2px solid #dee2e6; }  .text-muted { color: #6c757d !important;} .placa { font-size: 18pt; font-weight: bold; } .verde {color: #139f11 !important; font-weight: bold; } .amarelo {color: #ff6a00 !important;font-weight: bold;}");
             html.Append($"</style>");
             html.Append($"<body>");
             html.Append($"<table class='table'>");
-            html.Append($"<tr><th colspan='7'>RELAÇÃO DE CARÁTER GERAL");
-            if((dataInicial.HasValue && dataInicial != DateTime.MinValue)  && (dataFinal.HasValue && dataFinal != DateTime.MinValue)) html.Append($" - {dataInicial.Value.ToString("dd/MM")} a {dataFinal.Value.ToString("dd/MM/yyyy")}");
+            html.Append($"<tr><th colspan='9'>RELAÇÃO DE CARÁTER GERAL {dataInicialTratada}{dataFinalTratada} ");
             html.Append($"</th></tr>");
-            html.Append($"<tr><th width='130px'>PLACA</th><th>MODELO</th><th>COR</th><th>ANO</th><th>CIDADE</th><th>CRIME</th><th>DATA</th></tr>");
+            html.Append($"<tr><th>NUM</th><th>PLACA</th><th>UF</th><th style'width: 150px;'>MODELO</th><th>COR</th><th>ANO</th><th>CIDADE</th><th>CRIME</th><th>DATA</th></tr>");
 
             foreach (var carater in caraters)
             {   
                 html.Append($"<tr>");
-
-                html.Append($"<td><span class='placa'>{carater.PlacaInvertida.ToUpper()}</span></td>");
-                html.Append($"<td><span class='text-muted'>{carater.NomeVeiculo}</span></td>");
+                html.Append($"<td><span class='placa'>{carater.PlacaInicial.ToUpper()}</span></td>");
+                html.Append($"<td><span class='placa'>{carater.PlacaFinal.ToUpper()}</span></td>");
+                html.Append($"<td><span>{carater.UfVeiculo.ToUpper()}</span></td>");
+                html.Append($"<td><span>{carater.NomeVeiculo}</span></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.CorVeiculo}</span></p></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.AnoVeiculo}</span></p></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.NomeCidade}</span></p></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.NomeCrime}</span></p></td>");
                 html.Append($"<td><p style='text-align:center;'><span>{carater.DataDoFato}</span></p></td>");
                 html.Append($"</tr>");
+                contador++;
+            }
 
+            if (contador <= 15) contador = 6;
+            else contador = 0;
+
+            for (int i = 0; i < contador; i++)
+            {
+                html.Append($"<tr>");
+                for (int j = 0; j < 9; j++)html.Append($"<td style='height: 50px; overflow: hidden; '></td>");
+                html.Append($"</tr>");
             }
 
             html.Append($"</table></body>");

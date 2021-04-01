@@ -24,6 +24,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.Descricao = carater.Descricao;
             this.ComplementoEndereco = carater.ComplementoEndereco;
             this.NomeCidade = carater.Cidade != null ? carater.Cidade.Descricao : String.Empty;
+            this.NomeCidadeAbreviada = carater.Cidade != null ? carater.Cidade.Sigla : String.Empty;
             this.NomeCrime = carater.Crime!= null ? $"{carater.Crime.Nome}" : String.Empty;
             this.DataDoFato = carater.DataHoraDoFato != null ? carater.DataHoraDoFato.Value.ToString("dd/MM/yyyy HH:mm") : String.Empty;
             this.SituacaoDoCarater = carater.SituacaoDoCarater.ToString();
@@ -35,24 +36,29 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 var chassi = !String.IsNullOrEmpty(carater.Veiculo.Chassi) ? $"({carater.Veiculo.Chassi})" : String.Empty;
                 this.NomeVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Modelo} - {carater.Veiculo.Marca} {chassi}" : String.Empty;
                 this.PlacaVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Placa} {carater.Veiculo.Uf}" : String.Empty;
-                this.PlacaInvertida = carater.Veiculo != null ? $"{carater.Veiculo.Placa.Substring(3,4)}{carater.Veiculo.Placa.Substring(0, 3)} {carater.Veiculo.Uf}" : String.Empty;
+                this.PlacaInicial = carater.Veiculo != null ? $"{carater.Veiculo.Placa.Substring(3,4)}" : String.Empty;
+                this.PlacaFinal = carater.Veiculo != null ? $"{carater.Veiculo.Placa.Substring(0,3)}" : String.Empty;
                 this.CorVeiculo = carater.Veiculo.Cor;
+                this.UfVeiculo = !String.IsNullOrEmpty(carater.Veiculo.Uf) ? carater.Veiculo.Uf : String.Empty;
                 this.ChassiVeiculo = carater.Veiculo.Chassi;
-                this.AnoVeiculo = carater.Veiculo.Ano;
+                this.AnoVeiculo = !String.IsNullOrEmpty(carater.Veiculo.Ano) ? carater.Veiculo.Ano.Split('/')[0].ToString() : String.Empty;
             }
         }
 
         public int Id { get; set; }
         public string Descricao { get; set; }
         public string NomeCidade { get; set; }
+        public string NomeCidadeAbreviada { get; set; }
         public string ComplementoEndereco { get; set; }
         public string NomeCrime { get; set; }
         public string NomeVeiculo { get; set; }
         public string PlacaVeiculo { get; set; }
-        public string PlacaInvertida { get; set; }
+        public string PlacaInicial { get; set; }
+        public string PlacaFinal { get; set; }
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }
         public string AnoVeiculo { get; set; }
+        public string UfVeiculo { get; set; }
         public string DataDoFato { get; set; }
         public string SituacaoDoCarater { get; set; }
         public string CssTipoCrime { get; set; }

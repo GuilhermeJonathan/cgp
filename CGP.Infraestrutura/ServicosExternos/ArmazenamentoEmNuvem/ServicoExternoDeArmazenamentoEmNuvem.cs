@@ -55,6 +55,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem
             if (string.IsNullOrEmpty(nomeDoArquivo))
                 throw new ArgumentException("Nome do arquivo não informado");
 
+
             var nomeDoContainer = caminho.Split('\\')[0];
             var diretorio = caminho;
 
@@ -66,7 +67,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.ArmazenamentoEmNuvem
 
             container.CreateIfNotExists();
 
-            var blockBlob = container.GetBlockBlobReference(!string.IsNullOrEmpty(diretorio) ? $"{nomeDoArquivo}" :
+            var blockBlob = container.GetBlockBlobReference(!string.IsNullOrEmpty(diretorio) ? $"{nomeDoArquivo.Trim()}" :
                 nomeDoArquivo);
 
             blockBlob.Properties.ContentType = MimeMapping.GetMimeMapping(nomeDoArquivo);

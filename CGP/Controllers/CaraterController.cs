@@ -51,7 +51,7 @@ namespace Cgp.Controllers
 
                 using (Stream enviarParaAzure = new MemoryStream(this._servicoDeGeracaoDeDocumentosEmPdf.CriarPdf(modelo.ArquivoHtml)))
                 {
-                    var nomeArquivo = $"caraterGeral{DateTime.Now.ToString().Trim()}.pdf";
+                    var nomeArquivo = $"caraterGeral{DateTime.Now.ToString().Trim().Replace('/', '.').Trim()}.pdf";
                     string blob = $"caraters";
                     var retorno = await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(enviarParaAzure, blob, nomeArquivo.Trim());
                     Response.Redirect(retorno, true);
