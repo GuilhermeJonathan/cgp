@@ -26,6 +26,8 @@ using Cgp.Aplicacao.ComunicacaoViaHttp;
 using Cgp.Aplicacao.BuscaVeiculo;
 using Cgp.Aplicacao.GestaoDeCrimes;
 using Cgp.Aplicacao.GestaoDeCaraters;
+using Cgp.Criptografia;
+using Cgp.Aplicacao.Criptografia;
 
 namespace Cgp.App_Start
 {
@@ -58,6 +60,7 @@ namespace Cgp.App_Start
              VariaveisDeAmbiente.Pegar<string>("chaveSendGrid"), VariaveisDeAmbiente.Pegar<string>("EmailDaEmpresa"), VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")), Lifestyle.Scoped);
 
             container.Register<IServicoDeComunicacaoViaHttp, ServicoDeComunicacaoViaHttp>(Lifestyle.Scoped);
+            container.Register<IServicoDeCriptografia, ServicoDeCriptografia>(Lifestyle.Scoped);
 
             container.Register<IServicoDeBuscaDeVeiculo>(() => new ServicoDeBuscaDeVeiculo(container.GetInstance<IServicoDeComunicacaoViaHttp>(), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoSimples"), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoCompleta")), Lifestyle.Scoped);
 

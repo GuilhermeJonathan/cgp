@@ -67,6 +67,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.UsuarioQueAlterou)
                 .Include(a => a.Fotos)
                 .Include(a => a.HistoricosDeCaraters)
+                .Include(a => a.HistoricosDeCaraters.Select(b => b.Usuario))
                 .FirstOrDefault(a => a.Id == id);
         }
 

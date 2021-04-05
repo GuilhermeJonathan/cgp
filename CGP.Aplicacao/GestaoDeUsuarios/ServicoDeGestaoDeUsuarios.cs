@@ -109,6 +109,18 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             return new Tuple<string, bool>("Senha alterada com sucesso.", verificaUsuario);
         }
 
+        public string AlterarSenhaRenovacao(ModeloDeEdicaoDeUsuario modelo)
+        {
+            if (modelo.Senha != modelo.RepetirSenha)
+                throw new ExcecaoDeAplicacao("As senhas são diferentes.");
+
+            var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(modelo.Id);
+            var senha = new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash);
+            usuarioParaAlterar.AlterarSenha(senha);
+            this._servicoExternoDePersistencia.Persistir();
+            return "Senha alterada com sucesso.";
+        }
+
         public IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos()
         {
             var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarTodosUsuarios();

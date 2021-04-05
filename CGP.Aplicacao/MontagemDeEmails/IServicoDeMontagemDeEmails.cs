@@ -11,5 +11,6 @@ namespace Cgp.Aplicacao.MontagemDeEmails
     {
         ModeloDeEmail MontarEmailBoasVindas(Usuario usuario);
         ModeloDeEmail MontarEmailCadastroAtivo(Usuario usuario);
+        ModeloDeEmail MontarEmailRenovacaoSenha(Usuario usuario, string token);
     }
 }

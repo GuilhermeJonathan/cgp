@@ -45,7 +45,7 @@ namespace Cgp.Aplicacao.MontagemDeEmails
             var mensagem = new StringBuilder();
 
             mensagem.Append($"<p>Olá <b>{ usuario.Nome.Valor }</b>, seu cadastro no {VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")} foi ativado com sucesso!</p>");
-            mensagem.Append($"<p>Para isto, basta acessar o sistema e realizar o login com seus dadoss.</p>");
+            mensagem.Append($"<p>Para isto, basta acessar o sistema e realizar o login com seus dados.</p>");
             corpo = corpo.Replace("{TITULO}", titulo);
             corpo = corpo.Replace("{MENSAGEM}", mensagem.ToString());
 
@@ -54,6 +54,27 @@ namespace Cgp.Aplicacao.MontagemDeEmails
             corpo = corpo.Replace("{URL}", link);
             corpo = corpo.Replace("{MENSAGEM}", mensagem.ToString());
             corpo = corpo.Replace("{DESCRICAO_BOTAO}", "Acesse Agora");
+
+            return new ModeloDeEmail(titulo, corpo.ToString());
+        }
+
+        public ModeloDeEmail MontarEmailRenovacaoSenha(Usuario usuario, string token)
+        {
+            var titulo = $"Renovação de Senha - {VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")}";
+            string caminho = "arquivos/email/emailPadrao.html";
+            string corpo = EfetuarODownloadDoTemplateDeEmail(caminho);
+            var mensagem = new StringBuilder();
+
+            mensagem.Append($"<p>Olá <b>{ usuario.Nome.Valor }</b>, você solicitou renovação de senha no {VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")}.</p>");
+            mensagem.Append($"<p>Para isto, basta clicar no link abaixo para renovar sua senha.</p>");
+            corpo = corpo.Replace("{TITULO}", titulo);
+            corpo = corpo.Replace("{MENSAGEM}", mensagem.ToString());
+
+            var link = $"{VariaveisDeAmbiente.Pegar<string>("NomeDoSite")}/EsqueciMinhaSenha/RenovacaoDeSenha?t={token}";
+
+            corpo = corpo.Replace("{URL}", link);
+            corpo = corpo.Replace("{MENSAGEM}", mensagem.ToString());
+            corpo = corpo.Replace("{DESCRICAO_BOTAO}", "Clique para renovar senha");
 
             return new ModeloDeEmail(titulo, corpo.ToString());
         }

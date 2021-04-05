@@ -24,6 +24,8 @@ namespace Cgp.Dominio.Entidades
         public Telefone Telefone { get; set; }
         public Batalhao Batalhao { get; set; }
         public string Matricula { get; set; }
+        public bool EhEstrangeiro { get; set; }
+        public string TokenSenha { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -94,6 +96,11 @@ namespace Cgp.Dominio.Entidades
         public void InativarUsuario()
         {
             this.Ativo = false;
+        }
+
+        public void IncluirToken(string token)
+        {
+            this.TokenSenha = token;
         }
     }
 }

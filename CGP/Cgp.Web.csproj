@@ -191,6 +191,7 @@
     <Compile Include="Controllers\CaraterController.cs" />
     <Compile Include="Controllers\ComandoRegionalController.cs" />
     <Compile Include="Controllers\CrimeController.cs" />
+    <Compile Include="Controllers\EsqueciMinhaSenhaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\BatalhaoController.cs" />
@@ -401,6 +402,8 @@
     <Content Include="Views\Carater\Detalhar.cshtml" />
     <Content Include="Views\Carater\_RealizarBaixa.cshtml" />
     <Content Include="Views\Carater\_VisualizarFoto.cshtml" />
+    <Content Include="Views\EsqueciMinhaSenha\Index.cshtml" />
+    <Content Include="Views\EsqueciMinhaSenha\RenovacaoDeSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -429,6 +432,10 @@
     <ProjectReference Include="..\Cgp.ComunicacaoViaHttp\Cgp.ComunicacaoViaHttp.csproj">
       <Project>{7C6E9430-31D0-44CD-BC1C-A0411985CEEF}</Project>
       <Name>Cgp.ComunicacaoViaHttp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CGP.Criptografia\Cgp.Criptografia.csproj">
+      <Project>{2F33B61A-4F19-4133-8947-E798F76E4062}</Project>
+      <Name>Cgp.Criptografia</Name>
     </ProjectReference>
     <ProjectReference Include="..\CGP.Dominio\Cgp.Dominio.csproj">
       <Project>{664e2fc2-2533-402e-bbb3-7809755f1d39}</Project>

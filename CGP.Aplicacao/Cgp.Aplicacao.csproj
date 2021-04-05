@@ -71,6 +71,7 @@
     <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="Comum\ServicoDeGeracaoDeHashSha.cs" />
     <Compile Include="ComunicacaoViaHttp\IServicoDeComunicacaoViaHttp.cs" />
+    <Compile Include="Criptografia\IServicoDeCriptografia.cs" />
     <Compile Include="ExcecaoDeAplicacao.cs" />
     <Compile Include="GestaoDeCaraters\IServicoDeGestaoDeCaraters.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeCadastroDeCarater.cs" />

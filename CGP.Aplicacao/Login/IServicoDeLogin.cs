@@ -1,4 +1,5 @@
-﻿using Cgp.Aplicacao.Login.Modelos;
+﻿using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
+using Cgp.Aplicacao.Login.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace Cgp.Aplicacao.Login
     public interface IServicoDeLogin
     {
         void Entrar(ModeloDeLogin modelo);
+        Task<string> EnviarEmailEsqueciMinhaSenha(string login);
+        ModeloDeEdicaoDeUsuario ValidarTokenRetornarUsuario(string token);
         void Sair();
     }
 }

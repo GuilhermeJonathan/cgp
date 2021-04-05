@@ -1,6 +1,6 @@
-﻿@model Cgp.Aplicacao.Login.Modelos.ModeloDeLogin
+﻿@model Cgp.Aplicacao.GestaoDeUsuarios.Modelos.ModeloDeEdicaoDeUsuario
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Renovação de Senha";
     Layout = null;
 }
 
@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Caráter Geral Policial | Login</title>
+    <title>Caráter Geral Policial | Renovação de Senha</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -27,18 +27,24 @@
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Informe os dados para realizar o Login</p>
-                <form action="@Url.Action("Entrar", "Login")" method="post">
+                <p class="login-box-msg">Informe os dados para renovar sua senha</p>
+                <form action="@Url.Action("AlterarSenhaRenovacao", "EsqueciMinhaSenha")" method="post">
+                    @Html.HiddenFor(a => a.Id)
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @Html.InputTextFor(a => a.Email, "Login", required: false, @readonly: true)
+                        </div>
+                    </div>
                     <div class="input-group mb-3">
-                        <input type="email" name="login" class="form-control" placeholder="Email">
+                        <input type="password" name="Senha" class="form-control" placeholder="Senha">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="senha" class="form-control" placeholder="Senha">
+                        <input type="password" name="RepetirSenha" class="form-control" placeholder="Repita sua Senha">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -46,45 +52,27 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Lembrar-Me
-                                </label>
-                            </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block right">Alterar Senha</button>
                         </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center" style="color:red;">
+                            @ViewBag.Mensagem
                         </div>
                     </div>
                 </form>
-
-                <p class="mb-1">
-                    <a href="@Url.Action("Index", "EsqueciMinhaSenha")">Esqueci minha senha</a>
-                </p>
-                <p class="mb-0">
-                    <a href="@Url.Action("Cadastrar", "Login")" class="text-center">Quero me cadastrar</a>
-                </p>
-
-                <div class="row">
-                    <div class="col-12 text-center" style="color:red;">
-                        @ViewBag.Mensagem
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/toastr.min.js"></script>
-    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Scripts/adminlte.js"></script>
-    <script src="~/Scripts/toastr.min.js"></script>
     <script src="~/Scripts/campeonatoGeral.js"></script>
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/adminlte.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
 
     @Html.Partial("_Mensagens")
 </body>
 </html>
+
 

@@ -1,6 +1,6 @@
 ﻿@model Cgp.Aplicacao.Login.Modelos.ModeloDeLogin
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Esqueci minha senha";
     Layout = null;
 }
 
@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Caráter Geral Policial | Login</title>
+    <title>Caráter Geral Policial | Esqueci minha senha</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -27,8 +27,8 @@
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Informe os dados para realizar o Login</p>
-                <form action="@Url.Action("Entrar", "Login")" method="post">
+                <p class="login-box-msg">Informe seu email para solicitar a troca de senha.</p>
+                <form action="@Url.Action("EsqueciMinhaSenha", "EsqueciMinhaSenha")" method="post">
                     <div class="input-group mb-3">
                         <input type="email" name="login" class="form-control" placeholder="Email">
                         <div class="input-group-append">
@@ -37,36 +37,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="senha" class="form-control" placeholder="Senha">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Lembrar-Me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block right">Enviar</button>
                         </div>
                     </div>
                 </form>
-
-                <p class="mb-1">
-                    <a href="@Url.Action("Index", "EsqueciMinhaSenha")">Esqueci minha senha</a>
-                </p>
-                <p class="mb-0">
-                    <a href="@Url.Action("Cadastrar", "Login")" class="text-center">Quero me cadastrar</a>
-                </p>
-
                 <div class="row">
                     <div class="col-12 text-center" style="color:red;">
                         @ViewBag.Mensagem
