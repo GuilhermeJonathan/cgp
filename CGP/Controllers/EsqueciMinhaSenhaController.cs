@@ -52,7 +52,6 @@ namespace Cgp.Controllers
 
             return RedirectToAction(nameof(Index), "Login");
         }
-
         
         [TratarErros]
         [HttpGet]

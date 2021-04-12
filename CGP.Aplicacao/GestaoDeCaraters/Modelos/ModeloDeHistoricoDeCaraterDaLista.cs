@@ -37,7 +37,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.IconeDoTipo = RetornaIconeDoTipo(historico.TipoDeHistoricoDeCarater);
             this.TempoDecorrido = TimeAgo(historico.DataDoCadastro);
 
-            this.ExibeBotao = exibeBotao.Contains(historico.TipoDeHistoricoDeCarater);
+            //this.ExibeBotao = exibeBotao.Contains(historico.TipoDeHistoricoDeCarater);
+            this.ExibeBotao = false;
             this.ExibeDescricao = exibeDescricao.Contains(historico.TipoDeHistoricoDeCarater);
 
             if (fotos != null && fotos.Count > 0)

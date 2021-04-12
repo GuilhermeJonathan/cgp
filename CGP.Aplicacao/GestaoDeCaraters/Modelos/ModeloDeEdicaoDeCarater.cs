@@ -35,7 +35,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
             this.Id = carater.Id;
             this.Descricao = carater.Descricao;
-            this.ComplementoEndereco = carater.ComplementoEndereco;
+            this.ComplementoEndereco = !String.IsNullOrEmpty(carater.ComplementoEndereco) ? $" - {carater.ComplementoEndereco}" : String.Empty ;
 
             this.Cidade = carater.Cidade != null ? carater.Cidade.Id : 0;
             this.Crime = carater.Crime != null ? carater.Crime.Id : 0;

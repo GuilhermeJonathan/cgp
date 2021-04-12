@@ -73,6 +73,7 @@ namespace Cgp.Dominio.Entidades
             this.CidadeLocalizado = cidadeLocalizado;
             this.SituacaoDoCarater = SituacaoDoCarater.Localizado;
             this.DataHoraLocalizacao = DateTime.Now;
+            this.UsuarioQueAlterou = usuario;
             this.Atualizar(usuario);
         }
 

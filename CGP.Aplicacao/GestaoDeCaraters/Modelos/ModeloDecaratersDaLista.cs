@@ -34,7 +34,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             if (carater.Veiculo != null)
             {
                 var chassi = !String.IsNullOrEmpty(carater.Veiculo.Chassi) ? $"({carater.Veiculo.Chassi})" : String.Empty;
-                this.NomeVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Modelo} - {carater.Veiculo.Marca} {chassi}" : String.Empty;
+                this.NomeVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Marca} {carater.Veiculo.Modelo} {chassi}" : String.Empty;
                 this.PlacaVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Placa} {carater.Veiculo.Uf}" : String.Empty;
                 this.PlacaInicial = carater.Veiculo != null ? $"{carater.Veiculo.Placa.Substring(3,4)}" : String.Empty;
                 this.PlacaFinal = carater.Veiculo != null ? $"{carater.Veiculo.Placa.Substring(0,3)}" : String.Empty;
