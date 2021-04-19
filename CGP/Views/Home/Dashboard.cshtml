@@ -58,7 +58,7 @@
                                         <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
                                         <sup style="font-size: 16pt"> @item.NomeVeiculo @item.CorVeiculo</sup>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;"> <span class="@item.CssTipoCrime">@item.NomeCrime </span> no dia  @item.DataDoFato</p>
-                                        <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.NomeCidade - @item.ComplementoEndereco</p>
+                                        <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.NomeCidade @item.ComplementoEnderecoTradado</p>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.Descricao</p>
                                     </div>
                                     <a href="@Url.Action("Detalhar", "Carater", new { id = item.Id })" class="small-box-footer" style="color:black !important; ">Mais informações <i class="fas fa-arrow-circle-right"></i></a>

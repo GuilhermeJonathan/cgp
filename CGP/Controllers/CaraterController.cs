@@ -100,8 +100,8 @@ namespace Cgp.Controllers
         public ActionResult Cadastrar(ModeloDeCadastroDeCarater modelo)
         {
             var retorno = this._servicoDeGestaoDeCaraters.CadastrarCarater(modelo, User.Logado());
-            this.AdicionarMensagemDeSucesso(retorno);
-            return RedirectToAction(nameof(Index));
+            this.AdicionarMensagemDeSucesso(retorno.Item1);
+            return RedirectToAction(nameof(Editar), new { id = retorno.Item2 });
         }
 
         [HttpGet]

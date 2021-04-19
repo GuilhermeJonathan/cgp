@@ -23,6 +23,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.Id = carater.Id;
             this.Descricao = carater.Descricao;
             this.ComplementoEndereco = carater.ComplementoEndereco;
+            this.ComplementoEnderecoTradado = !String.IsNullOrEmpty(carater.ComplementoEndereco) ? $" - {carater.ComplementoEndereco}" : String.Empty;
+
             this.NomeCidade = carater.Cidade != null ? carater.Cidade.Descricao : String.Empty;
             this.NomeCidadeAbreviada = carater.Cidade != null ? carater.Cidade.Sigla : String.Empty;
             this.NomeCrime = carater.Crime!= null ? $"{carater.Crime.Nome}" : String.Empty;
@@ -50,6 +52,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string NomeCidade { get; set; }
         public string NomeCidadeAbreviada { get; set; }
         public string ComplementoEndereco { get; set; }
+        public string ComplementoEnderecoTradado { get; set; }
         public string NomeCrime { get; set; }
         public string NomeVeiculo { get; set; }
         public string PlacaVeiculo { get; set; }

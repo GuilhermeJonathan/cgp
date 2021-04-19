@@ -42,6 +42,7 @@ namespace Cgp.Controllers
             if (User.Autenticado())
             {
                 ViewBag.Usuario = User.Logado().Nome;
+                ViewBag.Tutorial = $"{VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob")}/arquivos/TutorialCaraterGeral.pdf";
                 return RedirectToAction(nameof(Dashboard));
             }
 

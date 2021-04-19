@@ -62,7 +62,7 @@ namespace Cgp.App_Start
             container.Register<IServicoDeComunicacaoViaHttp, ServicoDeComunicacaoViaHttp>(Lifestyle.Scoped);
             container.Register<IServicoDeCriptografia, ServicoDeCriptografia>(Lifestyle.Scoped);
 
-            container.Register<IServicoDeBuscaDeVeiculo>(() => new ServicoDeBuscaDeVeiculo(container.GetInstance<IServicoDeComunicacaoViaHttp>(), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoSimples"), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoCompleta")), Lifestyle.Scoped);
+            container.Register<IServicoDeBuscaDeVeiculo>(() => new ServicoDeBuscaDeVeiculo(container.GetInstance<IServicoDeComunicacaoViaHttp>(), VariaveisDeAmbiente.Pegar<string>("urlTokenCortex"), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoSimples"), VariaveisDeAmbiente.Pegar<string>("apiBuscaVeiculoCompleta")), Lifestyle.Scoped);
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
               VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")), Lifestyle.Scoped);

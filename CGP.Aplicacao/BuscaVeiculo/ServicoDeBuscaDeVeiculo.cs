@@ -11,10 +11,12 @@ namespace Cgp.Aplicacao.BuscaVeiculo
     public class ServicoDeBuscaDeVeiculo : IServicoDeBuscaDeVeiculo
     {
         private readonly IServicoDeComunicacaoViaHttp _servicoHttp;
+        private readonly string _urlToken;
         private readonly string _urlDaApi;
         private readonly string _urlDaApiCompleta;
-        public ServicoDeBuscaDeVeiculo(IServicoDeComunicacaoViaHttp servicoHttp, string url, string urlCompleta)
+        public ServicoDeBuscaDeVeiculo(IServicoDeComunicacaoViaHttp servicoHttp, string urlToken, string url, string urlCompleta)
         {
+            this._urlToken = urlToken;
             this._servicoHttp = servicoHttp;
             this._urlDaApi = url;
             this._urlDaApiCompleta = urlCompleta;
@@ -36,6 +38,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo
         {
             try
             {
+                //var token = await this.Autorizar();
                 return await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApiCompleta}/{placa}/json"));
             }
             catch (Exception ex)
@@ -43,5 +46,12 @@ namespace Cgp.Aplicacao.BuscaVeiculo
                 throw;
             }
         }
+
+        private async Task<ModeloDeRespostaDaAutorizacao> Autorizar()
+        {
+            return await this._servicoHttp.PostFormUrlEncoded<ModeloDeAutorizacao, ModeloDeRespostaDaAutorizacao>(
+                    new Uri($"{this._urlToken}"), new ModeloDeAutorizacao());
+        }
+
     }
 }

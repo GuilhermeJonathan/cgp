@@ -35,7 +35,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             var caminhoBlob = VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob");
             this.Id = carater.Id;
             this.Descricao = carater.Descricao;
-            this.ComplementoEndereco = !String.IsNullOrEmpty(carater.ComplementoEndereco) ? $" - {carater.ComplementoEndereco}" : String.Empty ;
+            this.ComplementoEndereco = carater.ComplementoEndereco;
+            this.ComplementoEnderecoTradado = !String.IsNullOrEmpty(carater.ComplementoEndereco) ? $" - {carater.ComplementoEndereco}" : String.Empty ;
 
             this.Cidade = carater.Cidade != null ? carater.Cidade.Id : 0;
             this.Crime = carater.Crime != null ? carater.Crime.Id : 0;
@@ -79,6 +80,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public int Id { get; set; }
         public string Descricao { get; set; }
         public string ComplementoEndereco { get; set; }
+        public string ComplementoEnderecoTradado { get; set; }
         public string Data { get; set; }
         public string Hora { get; set; }
         public int Cidade { get; set; }

@@ -101,7 +101,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
-        public string CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario)
+        public Tuple<string, int> CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario)
         {
             var mensagemErro = String.Empty;
             try
@@ -140,7 +140,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 novoCarater.AdicionarHistorico(new HistoricoDeCarater("Criou o Caráter", "", TipoDeHistoricoDeCarater.Criacao, usuarioBanco, novoCarater.Id));
                 this._servicoExternoDePersistencia.Persistir();
 
-                return "Caráter incluído com sucesso.";
+                return new Tuple<string, int>("Caráter incluído com sucesso.", novoCarater.Id);
             }
             catch (Exception ex)
             {
