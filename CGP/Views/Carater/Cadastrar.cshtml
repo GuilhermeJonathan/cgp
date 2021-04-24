@@ -152,9 +152,10 @@
                     debugger;
                     $(".divCarrega").hide();
                     if (resultado.veiculo != undefined) {
-                        $("#UfVeiculo").val(resultado.veiculo.uf);
+                        debugger;
+                        $("#UfVeiculo").val(resultado.veiculo.ufEmplacamento);
                         $("#CorVeiculo").val(resultado.veiculo.cor);
-                        $("#ChassiVeiculo").val(resultado.veiculo.chassiTratado);
+                        $("#ChassiVeiculo").val(resultado.veiculo.chassi);
                     } else {
                         $("#CorVeiculo").val();
                         $("#ChassiVeiculo").val();

@@ -65,7 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuscaVeiculo\IServicoDeBuscaDeVeiculo.cs" />
+    <Compile Include="BuscaVeiculo\ModelosCortex\Arrendatario.cs" />
+    <Compile Include="BuscaVeiculo\ModelosCortex\Possuidor.cs" />
+    <Compile Include="BuscaVeiculo\ModelosCortex\Proprietario.cs" />
+    <Compile Include="BuscaVeiculo\ModelosCortex\Restricao.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeAutorizacao.cs" />
+    <Compile Include="BuscaVeiculo\ModelosCortex\ModeloDeBuscaCompleto.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeBuscaDeVeiculo.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeRespostaDaAutorizacao.cs" />
     <Compile Include="BuscaVeiculo\ServicoDeBuscaDeVeiculo.cs" />

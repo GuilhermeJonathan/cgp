@@ -1,4 +1,5 @@
 ﻿using Cgp.Aplicacao.BuscaVeiculo.Modelos;
+using Cgp.Aplicacao.BuscaVeiculo.ModelosCortex;
 using Cgp.Aplicacao.ComunicacaoViaHttp;
 using System;
 using System.Collections.Generic;
@@ -34,22 +35,25 @@ namespace Cgp.Aplicacao.BuscaVeiculo
             }
         }
 
-        public async Task<ModeloDeBuscaDeVeiculo> BuscarPlacaComleta(string placa)
+        public async Task<ModeloDeBuscaCompleto> BuscarPlacaComleta(string placa)
         {
             try
             {
-                //var token = await this.Autorizar();
-                return await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApiCompleta}/{placa}/json"));
+                var token = await this.Autorizar();
+                //var retorno = await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApiCompleta}/{placa}/json"));
+                Dictionary<string, string> usuario = new Dictionary<string, string>();
+                usuario.Add("usuario", "02025032161");
+                return await this._servicoHttp.Get<ModeloDeBuscaCompleto>(new Uri($"{this._urlDaApiCompleta}{placa}"), null, new KeyValuePair<string, string>("Bearer", token.Token.Replace("Bearer ", "")), usuario);
             }
             catch (Exception ex)
             {
                 throw;
-            }
+            } 
         }
 
         private async Task<ModeloDeRespostaDaAutorizacao> Autorizar()
         {
-            return await this._servicoHttp.PostFormUrlEncoded<ModeloDeAutorizacao, ModeloDeRespostaDaAutorizacao>(
+            return await this._servicoHttp.PostJson<ModeloDeAutorizacao, ModeloDeRespostaDaAutorizacao>(
                     new Uri($"{this._urlToken}"), new ModeloDeAutorizacao());
         }
 

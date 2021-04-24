@@ -342,6 +342,7 @@
     <None Include="Properties\PublishProfiles\caratergeral - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\caratergeral - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\caratergeral - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\campeonatoGeral.js" />
     <Content Include="Scripts\gridmvc.js" />

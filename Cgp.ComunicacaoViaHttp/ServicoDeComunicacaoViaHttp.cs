@@ -59,7 +59,7 @@ namespace Cgp.ComunicacaoViaHttp
 
         public async Task<TRetorno> PostJson<T, TRetorno>(Uri url, T dados, KeyValuePair<string, string> tokenDeAutorizacao = new KeyValuePair<string, string>(), IDictionary<string, string> cabecalho = null)
         {
-            var resposta = await this.Post<dynamic>(url, dados, tokenDeAutorizacao, cabecalho, this.MontarConteudoJson);
+            var resposta = await this.PostSemToken<dynamic>(url, dados, tokenDeAutorizacao, cabecalho, this.MontarConteudoJson);
             return JsonConvert.DeserializeObject<TRetorno>(resposta);
         }
 
@@ -125,6 +125,41 @@ namespace Cgp.ComunicacaoViaHttp
             }
         }
 
+        private async Task<string> PostSemToken<T>(Uri url, T dados, KeyValuePair<string, string> tokenDeAutorizacao, IDictionary<string, string> cabecalho,
+            Func<object, HttpContent> montarConteudo)
+        {
+            this.MontarCabecalho(cabecalho);
+            
+            using (var conteudo = montarConteudo.Invoke(dados))
+            {
+                try
+                {
+                    using (var resposta = await this._clienteHttp.PostAsync(url, conteudo))
+                    {
+                        if (!resposta.IsSuccessStatusCode)
+                            throw new HttpException((int)resposta.StatusCode, resposta.ReasonPhrase, new HttpRequestException(resposta.ReasonPhrase));
+
+                        var respostaContent = resposta.Content;
+
+                        var conteudoDaResposta = resposta.Headers.ToList().FirstOrDefault(a => a.Key == "Token");
+                        var dataExpiracao = resposta.Headers.ToList().FirstOrDefault(a => a.Key == "expirationDate");
+
+                        var Token = conteudoDaResposta.Value.FirstOrDefault();
+                        var DataExpiration = dataExpiracao.Value.FirstOrDefault();
+
+                        Dictionary<string, string> values = new Dictionary<string, string>();
+                        values.Add("Token", Token);
+                        values.Add("DataExpiration", DataExpiration);
+                        
+                        return JsonConvert.SerializeObject(values);
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    throw new InvalidOperationException("Servidor indisponível");
+                }
+            }
+        }
 
         public void Dispose()
         {
