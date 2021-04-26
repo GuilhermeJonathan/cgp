@@ -16,7 +16,8 @@ namespace Cgp.Dominio.Entidades
         }
 
         public Nome Nome { get; set; }
-        public LoginUsuario Login { get; private set; }
+        public LoginUsuario Login { get; set; }
+        public string Email { get; private set; }
         public Senha Senha { get; private set; }
         public bool Ativo { get; set; }
         public PerfilDeUsuario PerfilDeUsuario { get; set; }
@@ -62,6 +63,20 @@ namespace Cgp.Dominio.Entidades
             this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
             this.Batalhao = batalhao;
             this.Matricula = matricula;
+        }
+
+        public Usuario(Nome nome, Senha senha, string matricula) : this()
+        {
+            if (nome == null)
+                throw new ExcecaoDeNegocio("Não é possível criar um usuário sem nome");
+
+            this.Nome = nome;
+            this.Senha = senha;
+            this.Ativo = true;
+            this.Telefone = Telefone.Vazio;
+            this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
+            this.Matricula = matricula;
+            this.Login = LoginUsuario.Vazio;
         }
 
         public void AlterarDados(string nome, string email, bool ativo, PerfilDeUsuario perfilDeUsuario, Batalhao batalhao, string matricula)

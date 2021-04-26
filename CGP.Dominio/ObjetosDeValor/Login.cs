@@ -19,5 +19,7 @@ namespace Cgp.Dominio.ObjetosDeValor
         }
 
         public string Valor { get; private set; }
+
+        public static LoginUsuario Vazio => new LoginUsuario(Email.Email.Vazio.Endereco);
     }
 }

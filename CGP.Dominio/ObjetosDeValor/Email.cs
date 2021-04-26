@@ -16,8 +16,8 @@ namespace Cgp.Dominio.ObjetosDeValor.Email
 
         public Email(string valor)
         {
-            if (!this.ValorValido(valor))
-                throw new ExcecaoDeNegocio("Formato de email inválido");
+        //    if (!this.ValorValido(valor))
+        //        throw new ExcecaoDeNegocio("Formato de email inválido");
 
             this.Endereco = valor;
         }
@@ -37,5 +37,7 @@ namespace Cgp.Dominio.ObjetosDeValor.Email
         {
             return this.Endereco;
         }
+
+        public static Email Vazio => new Email(String.Empty);
     }
 }

@@ -28,6 +28,7 @@ using Cgp.Aplicacao.GestaoDeCrimes;
 using Cgp.Aplicacao.GestaoDeCaraters;
 using Cgp.Criptografia;
 using Cgp.Aplicacao.Criptografia;
+using System.Configuration;
 
 namespace Cgp.App_Start
 {
@@ -66,6 +67,8 @@ namespace Cgp.App_Start
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(
               VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")), Lifestyle.Scoped);
+
+            container.Register<IServicoDeLoginAd>(() => new ServicoDeLoginAd(ConfigurationManager.ConnectionStrings["conexao_AD"].ConnectionString), Lifestyle.Scoped);
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

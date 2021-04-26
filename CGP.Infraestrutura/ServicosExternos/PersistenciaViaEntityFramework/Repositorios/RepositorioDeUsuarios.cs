@@ -27,6 +27,14 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             return usuario != null ? usuario : null;
         }
 
+        public Usuario PegarPorMatricula(string matricula)
+        {
+            var usuario = this._contexto.Set<Usuario>().FirstOrDefault(
+            au => au.Matricula.Contains(matricula) && au.Ativo == true);
+
+            return usuario != null ? usuario : null;
+        }
+
         public IList<Usuario> RetornarTodosUsuarios()
         {
             var query = this._contexto.Set<Usuario>()

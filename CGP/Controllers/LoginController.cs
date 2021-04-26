@@ -1,4 +1,5 @@
-﻿using Cgp.Aplicacao.GestaoDeBatalhoes;
+﻿using Cgp.Aplicacao;
+using Cgp.Aplicacao.GestaoDeBatalhoes;
 using Cgp.Aplicacao.GestaoDeUsuarios;
 using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
 using Cgp.Aplicacao.Login;
@@ -53,8 +54,8 @@ namespace Cgp.Controllers
             }
             catch (Exception ex)
             {
-                this.AdicionarMensagemDeErro(ex.Message);
-                ViewBag.Mensagem = "Erro ao logar: "+ ex.Message;
+                ViewBag.Mensagem = "Erro ao logar: " + ex.Message;
+                throw new ExcecaoDeAplicacao(ex.Message);
             }
 
             return RedirectToAction(nameof(Index), "Login");

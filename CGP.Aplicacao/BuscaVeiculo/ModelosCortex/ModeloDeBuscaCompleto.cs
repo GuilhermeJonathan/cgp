@@ -80,6 +80,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo.ModelosCortex
         public string tipoVeiculo { get; set; }
         public string ufEmplacamento { get; set; }
         public string ufFatura { get; set; }
+        public string chassiTratado => !String.IsNullOrEmpty(this.chassi) ? this.chassi.Substring(this.chassi.Length - 5, 5) : String.Empty;
 
     }
 }

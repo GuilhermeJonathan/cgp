@@ -3,6 +3,8 @@ using Cgp.Aplicacao.Criptografia;
 using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
 using Cgp.Aplicacao.Login.Modelos;
 using Cgp.Aplicacao.MontagemDeEmails;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
 using Cgp.Infraestrutura.InterfaceDeServicosExternos;
 using Cgp.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
 using Cgp.SendGrid;
@@ -22,11 +24,12 @@ namespace Cgp.Aplicacao.Login
         private readonly IServicoDeMontagemDeEmails _servicoDeMontagemDeEmails;
         private readonly IServicoDeEnvioDeEmails _servicoDeEnvioDeEmails;
         private readonly IServicoDeCriptografia _servicoDeCriptografia;
+        private readonly IServicoDeLoginAd _servicoDeLoginAd;
 
 
         public ServicoDeLogin(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoExternoDeAutenticacao servicoDeAutenticacao,
             IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha, IServicoDeEnvioDeEmails servicoDeEnvioDeEmails, IServicoDeMontagemDeEmails servicoDeMontagemDeEmails,
-            IServicoDeCriptografia servicoDeCriptografia)
+            IServicoDeCriptografia servicoDeCriptografia, IServicoDeLoginAd servicoDeLoginAd)
         {
             _servicoExternoDePersistencia = servicoExternoDePersistencia;
             _servicoDeAutenticacao = servicoDeAutenticacao;
@@ -34,11 +37,39 @@ namespace Cgp.Aplicacao.Login
             this._servicoDeEnvioDeEmails = servicoDeEnvioDeEmails;
             this._servicoDeMontagemDeEmails = servicoDeMontagemDeEmails;
             this._servicoDeCriptografia = servicoDeCriptografia;
+            this._servicoDeLoginAd = servicoDeLoginAd;
         }
 
         public void Entrar(ModeloDeLogin modelo)
         {
-            var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarPorLoginESenha(modelo.Login, modelo.SenhaCriptograda(this._servicoDeGeracaoDeHashSha.GerarHash));
+            var loginAd = this._servicoDeLoginAd.Autenticar(modelo.Login.ToUpper(), modelo.Senha);
+
+            var usuario = new Usuario();
+
+            if(loginAd == null)
+                usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarPorLoginESenha(modelo.Login, modelo.SenhaCriptograda(this._servicoDeGeracaoDeHashSha.GerarHash));
+
+            //LoginAD Succes
+            if (loginAd != null)
+            {
+                usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarPorMatricula(ValidaMatricula(loginAd.Matricula));
+
+                if (usuario == null)
+                {
+                    var nome = loginAd.Nome.Valor.Split(',')[0].Split(' ').ToList();
+                    nome.RemoveAt(0);
+                    var nomeCompleto = nome.Aggregate((partialPhrase, word) => $"{partialPhrase} {word}");
+
+                    var senha = new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash);
+                    var novoUsuario = new Usuario(new Nome(nomeCompleto), senha, loginAd.Matricula);
+
+                    this._servicoExternoDePersistencia.RepositorioDeUsuarios.Inserir(novoUsuario);
+                    this._servicoExternoDePersistencia.Persistir();
+                    usuario = novoUsuario;
+                }
+            }
+            else
+                usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.PegarPorLoginESenha(modelo.Login, modelo.SenhaCriptograda(this._servicoDeGeracaoDeHashSha.GerarHash));
 
             if(usuario == null)
                 throw new ExcecaoDeAplicacao("Usuário e/ou senha inválidos");
@@ -50,6 +81,7 @@ namespace Cgp.Aplicacao.Login
                 {
                     { "id", usuario.Id },
                     { "nome", usuario.Nome.Valor },
+                    { "matricula", usuario.Matricula },
                     { "login", usuario.Login.Valor },
                     { "perfil", usuario.PerfilDeUsuario },
                     { "dataDoCadastro", usuario.DataDoCadastro }
@@ -103,6 +135,22 @@ namespace Cgp.Aplicacao.Login
         public void Sair()
         {
             this._servicoDeAutenticacao.Sair();
+        }
+
+        public string ValidaMatricula(string usuario)
+        {
+            if (usuario.Length == 4)
+                usuario = $"0000{usuario}";
+            else if (usuario.Length == 5)
+                usuario = $"000{usuario}";
+            else if (usuario.Length == 6)
+                usuario = $"00{usuario}";
+            else if (usuario.Length == 7)
+                usuario = $"0{usuario}";
+            else if (usuario.Length == 8)
+                usuario = usuario.Substring(1, usuario.Length - 1);
+
+            return usuario.Replace(".", "").Replace("-", "").Replace("/", "");
         }
     }
 }
