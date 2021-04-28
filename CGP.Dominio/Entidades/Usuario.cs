@@ -26,6 +26,7 @@ namespace Cgp.Dominio.Entidades
         public Batalhao Batalhao { get; set; }
         public string Matricula { get; set; }
         public bool EhEstrangeiro { get; set; }
+        public bool ValidadoGenesis { get; set; }
         public string TokenSenha { get; set; }
 
         internal void AlterarLogin(string login)
@@ -72,11 +73,12 @@ namespace Cgp.Dominio.Entidades
 
             this.Nome = nome;
             this.Senha = senha;
-            this.Ativo = true;
             this.Telefone = Telefone.Vazio;
             this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
             this.Matricula = matricula;
             this.Login = LoginUsuario.Vazio;
+            this.Ativo = true;
+            this.ValidadoGenesis = true;
         }
 
         public void AlterarDados(string nome, string email, bool ativo, PerfilDeUsuario perfilDeUsuario, Batalhao batalhao, string matricula)

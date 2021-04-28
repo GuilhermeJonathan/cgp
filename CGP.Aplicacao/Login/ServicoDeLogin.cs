@@ -6,6 +6,7 @@ using Cgp.Aplicacao.MontagemDeEmails;
 using Cgp.Dominio.Entidades;
 using Cgp.Dominio.ObjetosDeValor;
 using Cgp.Infraestrutura.InterfaceDeServicosExternos;
+using Cgp.Infraestrutura.ServicosExternos.BuscaViaDapper;
 using Cgp.Infraestrutura.ServicosExternos.InterfacesDeServicosExternos;
 using Cgp.SendGrid;
 using System;
@@ -25,7 +26,6 @@ namespace Cgp.Aplicacao.Login
         private readonly IServicoDeEnvioDeEmails _servicoDeEnvioDeEmails;
         private readonly IServicoDeCriptografia _servicoDeCriptografia;
         private readonly IServicoDeLoginAd _servicoDeLoginAd;
-
 
         public ServicoDeLogin(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoExternoDeAutenticacao servicoDeAutenticacao,
             IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha, IServicoDeEnvioDeEmails servicoDeEnvioDeEmails, IServicoDeMontagemDeEmails servicoDeMontagemDeEmails,

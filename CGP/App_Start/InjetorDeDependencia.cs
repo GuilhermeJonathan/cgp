@@ -29,6 +29,7 @@ using Cgp.Aplicacao.GestaoDeCaraters;
 using Cgp.Criptografia;
 using Cgp.Aplicacao.Criptografia;
 using System.Configuration;
+using Cgp.Infraestrutura.ServicosExternos.BuscaViaDapper;
 
 namespace Cgp.App_Start
 {
@@ -69,6 +70,9 @@ namespace Cgp.App_Start
               VariaveisDeAmbiente.Pegar<string>("azure:contaDeArmazenamentoAzure"), VariaveisDeAmbiente.Pegar<string>("azure:chaveDaContaDeArmazenamentoAzure")), Lifestyle.Scoped);
 
             container.Register<IServicoDeLoginAd>(() => new ServicoDeLoginAd(ConfigurationManager.ConnectionStrings["conexao_AD"].ConnectionString), Lifestyle.Scoped);
+
+            container.Register<IServicoDeBuscaViaDapper>(() => new ServicoDeBuscaViaDapper(
+               VariaveisDeAmbiente.ConnectionString("conexaoDoBanco")), Lifestyle.Singleton);
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
