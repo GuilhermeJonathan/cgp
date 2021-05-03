@@ -111,24 +111,24 @@
 
         $(".placaVeiculo").blur(function () {
             var placa = $(this).val();
-            $.ajax({
-                type: 'GET',
-                url: '../Carater/BuscarPlacaDoVeiculo',
-                data: 'placa=' + placa,
-                beforeSend: function (resultado) {
-                    $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
-                },
-                success: function (resultado) {
-                    $.unblockUI();
-                    if (resultado.veiculo != undefined) {
-                        $("#MarcaVeiculo").val(resultado.veiculo.model);
-                        $("#ModeloVeiculo").val(resultado.veiculo.name);
-                        $("#AnoVeiculo").val(resultado.veiculo.year);
-                    } else {
-                        campeonatoGeral.AdicionarMensagemDeErro("Veículo não encontrado.");
-                    }
-                }
-            });
+            //$.ajax({
+            //    type: 'GET',
+            //    url: '../Carater/BuscarPlacaDoVeiculo',
+            //    data: 'placa=' + placa,
+            //    beforeSend: function (resultado) {
+            //        $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
+            //    },
+            //    success: function (resultado) {
+            //        $.unblockUI();
+            //        if (resultado.veiculo != undefined) {
+            //            $("#MarcaVeiculo").val(resultado.veiculo.model);
+            //            $("#ModeloVeiculo").val(resultado.veiculo.name);
+            //            $("#AnoVeiculo").val(resultado.veiculo.year);
+            //        } else {
+            //            campeonatoGeral.AdicionarMensagemDeErro("Veículo não encontrado.");
+            //        }
+            //    }
+            //});
 
             $.ajax({
                 type: 'GET',
@@ -157,11 +157,15 @@
                         $("#CorVeiculo").val(resultado.veiculo.cor);
                         $("#ChassiVeiculo").val(resultado.veiculo.chassiTratado);
                         $("#AnoVeiculo").val(resultado.veiculo.anoFabricacao);
-                        $("#MarcaVeiculo").val(resultado.veiculo.marcaModelo);
-                        $("#ModeloVeiculo").val(resultado.veiculo.name);
+                        $("#MarcaVeiculo").val(resultado.veiculo.marca);
+                        $("#ModeloVeiculo").val(resultado.veiculo.modelo);
                     } else {
+                        $("#UfVeiculo").val()
                         $("#CorVeiculo").val();
                         $("#ChassiVeiculo").val();
+                        $("#AnoVeiculo").val();
+                        $("#MarcaVeiculo").val();
+                        $("#ModeloVeiculo").val();
                         campeonatoGeral.AdicionarMensagemDeErro("Busca de chassi indisponível.");
                     }
                 }

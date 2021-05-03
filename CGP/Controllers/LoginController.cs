@@ -44,11 +44,11 @@ namespace Cgp.Controllers
         [TratarErros]
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Entrar(string login, string senha)
+        public async Task<ActionResult> Entrar(string login, string senha)
         {
             try
             {
-                this._servicoDeLogin.Entrar(new ModeloDeLogin(login, senha, Request.UserHostAddress));
+                await this._servicoDeLogin.EntrarAsync(new ModeloDeLogin(login, senha, Request.UserHostAddress));
                 this.AdicionarMensagemDeSucesso("Login Efetuado com sucesso.");
                 return RedirectToAction(nameof(Index), "Home");
             }

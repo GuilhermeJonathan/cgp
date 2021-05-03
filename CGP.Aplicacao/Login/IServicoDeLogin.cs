@@ -10,7 +10,7 @@ namespace Cgp.Aplicacao.Login
 {
     public interface IServicoDeLogin
     {
-        void Entrar(ModeloDeLogin modelo);
+        Task EntrarAsync(ModeloDeLogin modelo);
         Task<string> EnviarEmailEsqueciMinhaSenha(string login);
         ModeloDeEdicaoDeUsuario ValidarTokenRetornarUsuario(string token);
         void Sair();

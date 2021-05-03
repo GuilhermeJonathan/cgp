@@ -25,6 +25,11 @@ namespace Cgp.Web.CustomExtensions
             return Claim(principal, ClaimTypes.Email);
         }
 
+        public static string Cpf(this IPrincipal principal)
+        {
+            return Claim(principal, "cpf");
+        }
+
         public static PerfilDeUsuario Perfil(this IPrincipal principal)
         {
             var perfil = Claim(principal, "perfil");
@@ -61,7 +66,7 @@ namespace Cgp.Web.CustomExtensions
 
         public static UsuarioLogado Logado(this IPrincipal principal)
         {
-            return new UsuarioLogado(principal.Id(), principal.Nome(), principal.Email(), principal.Perfil());
+            return new UsuarioLogado(principal.Id(), principal.Nome(), principal.Email(), principal.Perfil(), principal.Cpf());
         }
 
         private static string Claim(IPrincipal usuario, string chave)

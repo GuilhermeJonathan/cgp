@@ -163,7 +163,7 @@ namespace Cgp.Controllers
         [HttpGet]
         public async Task<JsonResult> BuscarPlacaDoVeiculoCompleta(string placa)
         {
-            var veiculo = await this._servicoDeGestaoDeVeiculos.BuscarPlacaComleta(placa);
+            var veiculo = await this._servicoDeGestaoDeVeiculos.BuscarPlacaComleta(placa, User.Logado());
             return Json(new { veiculo }, JsonRequestBehavior.AllowGet);
         }
 

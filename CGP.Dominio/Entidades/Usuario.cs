@@ -28,6 +28,11 @@ namespace Cgp.Dominio.Entidades
         public bool EhEstrangeiro { get; set; }
         public bool ValidadoGenesis { get; set; }
         public string TokenSenha { get; set; }
+        public string Cpf { get; set; }
+        public string Posto { get; set; }
+        public string Lotacao { get; set; }
+        public int CodigoLotacao { get; set; }
+        public string NomeGuerra { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -89,6 +94,23 @@ namespace Cgp.Dominio.Entidades
             this.PerfilDeUsuario = perfilDeUsuario;
             this.Batalhao = batalhao;
             this.Matricula = matricula;
+        }
+
+        public void AlterarDadosDoSgpol(Nome nome, Senha senha, string matricula, string cpf, string nomeGuerra, string posto, string lotacao, int lotacaoCodigo, string telefone) 
+        {
+            this.Nome = nome;
+            this.Senha = senha;
+            this.Matricula = matricula;
+            this.Cpf = cpf;
+            this.NomeGuerra = nomeGuerra;
+            this.Posto = posto;
+            this.Lotacao = lotacao;
+            this.CodigoLotacao = lotacaoCodigo;
+            this.ValidadoGenesis = true;
+            this.Telefone = new Telefone(telefone);
+            this.Login = LoginUsuario.Vazio;
+            this.Ativo = true;
+            this.UsuarioNovo = false;
         }
 
         public void AlterarMeusDados(string nome, string email, string ddd, string telefone, Batalhao batalhao, string matricula)

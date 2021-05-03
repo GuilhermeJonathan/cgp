@@ -9,6 +9,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
     internal class ModeloDeRespostaDaAutorizacao
     {
         public string Token { get; set; }
+        public string access_token { get; set; }
         public string DataExpiration { get; set; }
     }
 }

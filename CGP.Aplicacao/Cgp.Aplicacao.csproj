@@ -111,6 +111,11 @@
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeHistoricoDeCaraterDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeListaDeCaraters.cs" />
     <Compile Include="GestaoDeCaraters\ServicoDeGestaoDeCaraters.cs" />
+    <Compile Include="GestaoDeUsuariosSGPOL\IServicoDeGestaoDeUsuariosSGPOL.cs" />
+    <Compile Include="GestaoDeUsuariosSGPOL\Modelos\ModeloDeAutorizacaoSGPOL.cs" />
+    <Compile Include="GestaoDeUsuariosSGPOL\Modelos\ModeloDeUsuarioSGPOL.cs" />
+    <Compile Include="GestaoDeUsuariosSGPOL\Modelos\Cnh.cs" />
+    <Compile Include="GestaoDeUsuariosSGPOL\ServicoDeGestaoDeUsuariosSGPOL.cs" />
     <Compile Include="GestaoDeVeiculos\IServicoDeGestaoDeVeiculos.cs" />
     <Compile Include="GestaoDeVeiculos\ServicoDeGestaoDeVeiculos.cs" />
     <Compile Include="GestaoDeCidades\IServicoDeGestaoDeCidades.cs" />

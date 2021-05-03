@@ -59,7 +59,19 @@ namespace Cgp.ComunicacaoViaHttp
 
         public async Task<TRetorno> PostJson<T, TRetorno>(Uri url, T dados, KeyValuePair<string, string> tokenDeAutorizacao = new KeyValuePair<string, string>(), IDictionary<string, string> cabecalho = null)
         {
-            var resposta = await this.PostSemToken<dynamic>(url, dados, tokenDeAutorizacao, cabecalho, this.MontarConteudoJson);
+            var resposta = await this.Post<dynamic>(url, dados, tokenDeAutorizacao, cabecalho, this.MontarConteudoJson);
+            return JsonConvert.DeserializeObject<TRetorno>(resposta);
+        }
+
+        public async Task<TRetorno> PostJsonGeral<T, TRetorno>(Uri url, T dados, KeyValuePair<string, string> tokenDeAutorizacao, IDictionary<string, string> cabecalho = null)
+        {
+            var resposta = await this.PostGeral<dynamic>(url, dados, tokenDeAutorizacao, cabecalho);
+            return JsonConvert.DeserializeObject<TRetorno>(resposta);
+        }
+
+        public async Task<TRetorno> PostJsonSemToken<T, TRetorno>(Uri url, T dados, IDictionary<string, string> cabecalho = null)
+        {
+            var resposta = await this.PostSemToken<dynamic>(url, dados, cabecalho, this.MontarConteudoJson);
             return JsonConvert.DeserializeObject<TRetorno>(resposta);
         }
 
@@ -125,7 +137,7 @@ namespace Cgp.ComunicacaoViaHttp
             }
         }
 
-        private async Task<string> PostSemToken<T>(Uri url, T dados, KeyValuePair<string, string> tokenDeAutorizacao, IDictionary<string, string> cabecalho,
+        private async Task<string> PostSemToken<T>(Uri url, T dados, IDictionary<string, string> cabecalho,
             Func<object, HttpContent> montarConteudo)
         {
             this.MontarCabecalho(cabecalho);
@@ -159,6 +171,32 @@ namespace Cgp.ComunicacaoViaHttp
                     throw new InvalidOperationException("Servidor indisponível");
                 }
             }
+        }
+
+        private async Task<string> PostGeral<T>(Uri url, T dados, KeyValuePair<string, string> tokenDeAutorizacao, IDictionary<string, string> cabecalho)
+        {
+            try
+            {
+                this._clienteHttp.BaseAddress = url;
+                this._clienteHttp.DefaultRequestHeaders.Accept.Clear();
+                this._clienteHttp.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenDeAutorizacao.Key, tokenDeAutorizacao.Value);
+
+                var LisKey = cabecalho.ToList<KeyValuePair<string, string>>();
+                var content = new FormUrlEncodedContent(LisKey);
+                
+                using (var resposta = await this._clienteHttp.PostAsync(url, content))
+                {
+                    if (!resposta.IsSuccessStatusCode)
+                        throw new HttpException((int)resposta.StatusCode, resposta.ReasonPhrase, new HttpRequestException(resposta.ReasonPhrase));
+                    
+                    return await resposta.Content.ReadAsStringAsync();
+                }
+            }
+            catch (HttpRequestException)
+            {
+                throw new InvalidOperationException("Servidor indisponível");
+            }
+            
         }
 
         public void Dispose()

@@ -1,6 +1,7 @@
 ﻿using Cgp.Aplicacao.BuscaVeiculo.Modelos;
 using Cgp.Aplicacao.BuscaVeiculo.ModelosCortex;
 using Cgp.Aplicacao.ComunicacaoViaHttp;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,15 +36,14 @@ namespace Cgp.Aplicacao.BuscaVeiculo
             }
         }
 
-        public async Task<ModeloDeBuscaCompleto> BuscarPlacaComleta(string placa)
+        public async Task<ModeloDeBuscaCompleto> BuscarPlacaComleta(string placa, UsuarioLogado usuario)
         {
             try
             {
                 var token = await this.Autorizar();
-                //var retorno = await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApiCompleta}/{placa}/json"));
-                Dictionary<string, string> usuario = new Dictionary<string, string>();
-                usuario.Add("usuario", "02025032161");
-                return await this._servicoHttp.Get<ModeloDeBuscaCompleto>(new Uri($"{this._urlDaApiCompleta}{placa}"), null, new KeyValuePair<string, string>("Bearer", token.Token.Replace("Bearer ", "")), usuario);
+                Dictionary<string, string> usuarioParametro = new Dictionary<string, string>();
+                usuarioParametro.Add("usuario", usuario.Cpf);
+                return await this._servicoHttp.Get<ModeloDeBuscaCompleto>(new Uri($"{this._urlDaApiCompleta}{placa}"), null, new KeyValuePair<string, string>("Bearer", token.Token.Replace("Bearer ", "")), usuarioParametro);
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo
 
         private async Task<ModeloDeRespostaDaAutorizacao> Autorizar()
         {
-            return await this._servicoHttp.PostJson<ModeloDeAutorizacao, ModeloDeRespostaDaAutorizacao>(
+            return await this._servicoHttp.PostJsonSemToken<ModeloDeAutorizacao, ModeloDeRespostaDaAutorizacao>(
                     new Uri($"{this._urlToken}"), new ModeloDeAutorizacao());
         }
 

@@ -11,5 +11,8 @@ namespace Cgp.Aplicacao.Comum
     {
         string GerarHash(string valor);
         string GerarParaStream(Stream s);
+
+        string EncodeToBase64(string texto);
+        string DecodeFrom64(string dados);
     }
 }
