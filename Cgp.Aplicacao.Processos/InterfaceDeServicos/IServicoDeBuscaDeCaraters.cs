@@ -9,6 +9,6 @@ namespace Cgp.Aplicacao.Processos.InterfaceDeServicos
 {
     public interface IServicoDeBuscaDeCaraters
     {
-        Task<List<Carater>> Executar();
+        Task Executar();
     }
 }

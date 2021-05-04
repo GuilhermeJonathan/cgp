@@ -24,7 +24,7 @@ namespace Cgp.Processos.Servicos
         {
             try
             {
-                var retorno = await this._servicoDeBuscaDeCaraters.Executar();
+                await this._servicoDeBuscaDeCaraters.Executar();
             }
             catch (Exception ex)
             {

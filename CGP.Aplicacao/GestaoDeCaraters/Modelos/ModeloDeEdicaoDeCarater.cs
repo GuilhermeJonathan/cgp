@@ -27,6 +27,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             if (carater == null)
                 return;
 
+            var situacoesBaixas = new Dominio.ObjetosDeValor.SituacaoDoCarater[] { Dominio.ObjetosDeValor.SituacaoDoCarater.Localizado, Dominio.ObjetosDeValor.SituacaoDoCarater.BaixaAutomatica };
+
             this.HistoricosDeCaraters = new List<ModeloDeHistoricoDeCaraterDaLista>();
             this.Fotos = new List<ModeloDeFotosDaLista>();
 
@@ -63,18 +65,17 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 this.ChassiVeiculo = carater.Veiculo.Chassi;
             }
 
-            if(carater.SituacaoDoCarater == Dominio.ObjetosDeValor.SituacaoDoCarater.Localizado)
+            if(situacoesBaixas.Contains(carater.SituacaoDoCarater))
             {
                 this.RealizouBaixa = true;
                 this.DescricaoLocalizacao = carater.DescricaoLocalizado;
                 var dataHora = carater.DataHoraLocalizacao.HasValue ? carater.DataHoraLocalizacao.Value : DateTime.MinValue;
-                this.CidadeLocalizacao = carater.CidadeLocalizado != null ? carater.CidadeLocalizado.Descricao : String.Empty;
+                this.CidadeLocalizacao = carater.CidadeLocalizado != null ? $" - Cidade: {carater.CidadeLocalizado.Descricao}" : String.Empty;
                 this.UsuarioLocalizacao = $"Baixa por {usuario} no dia {dataHora.ToString("dd/MM")} às {dataHora.ToString("HH:mm")}";
             }
 
             carater.HistoricosDeCaraters.OrderByDescending(a => a.DataDoCadastro).ToList().ForEach(a => this.HistoricosDeCaraters.Add(new ModeloDeHistoricoDeCaraterDaLista(a, carater.Fotos.ToList())));
             carater.Fotos.Where(a => a.Ativo).ToList().ForEach(a => this.Fotos.Add(new ModeloDeFotosDaLista(a)));
-
         }
 
         public int Id { get; set; }

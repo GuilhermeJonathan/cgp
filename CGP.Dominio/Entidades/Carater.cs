@@ -77,6 +77,15 @@ namespace Cgp.Dominio.Entidades
             this.Atualizar(usuario);
         }
 
+        public void RealizarBaixaAutomatica(string descricao, Usuario usuario)
+        {
+            this.DescricaoLocalizado = descricao;
+            this.SituacaoDoCarater = SituacaoDoCarater.BaixaAutomatica;
+            this.DataHoraLocalizacao = DateTime.Now;
+            this.UsuarioQueAlterou = usuario;
+            this.Atualizar(usuario);
+        }
+
         public void AdicionarHistorico(HistoricoDeCarater historico)
         {
             if (this.HistoricosDeCaraters == null)

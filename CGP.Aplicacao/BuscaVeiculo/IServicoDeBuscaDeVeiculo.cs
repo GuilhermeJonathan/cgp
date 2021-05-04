@@ -12,6 +12,6 @@ namespace Cgp.Aplicacao.BuscaVeiculo
     public interface IServicoDeBuscaDeVeiculo
     {
         Task<ModeloDeBuscaDeVeiculo> BuscarPlacaSimples(string placa);
-        Task<ModeloDeBuscaCompleto> BuscarPlacaComleta(string placa, UsuarioLogado usuario);
+        Task<ModeloDeBuscaCompleto> BuscarPlacaCompleta(string placa, UsuarioLogado usuario);
     }
 }

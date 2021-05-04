@@ -14,13 +14,12 @@ namespace Cgp.Aplicacao.BuscaVeiculo
     {
         private readonly IServicoDeComunicacaoViaHttp _servicoHttp;
         private readonly string _urlToken;
-        private readonly string _urlDaApi;
         private readonly string _urlDaApiCompleta;
-        public ServicoDeBuscaDeVeiculo(IServicoDeComunicacaoViaHttp servicoHttp, string urlToken, string url, string urlCompleta)
+
+        public ServicoDeBuscaDeVeiculo(IServicoDeComunicacaoViaHttp servicoHttp, string urlToken, string urlCompleta)
         {
             this._urlToken = urlToken;
             this._servicoHttp = servicoHttp;
-            this._urlDaApi = url;
             this._urlDaApiCompleta = urlCompleta;
         }
 
@@ -28,7 +27,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo
         {
             try
             {
-                return await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApi}/{placa}"));
+                return await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApiCompleta}/{placa}"));
             }
             catch (Exception ex)
             {
@@ -36,7 +35,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo
             }
         }
 
-        public async Task<ModeloDeBuscaCompleto> BuscarPlacaComleta(string placa, UsuarioLogado usuario)
+        public async Task<ModeloDeBuscaCompleto> BuscarPlacaCompleta(string placa, UsuarioLogado usuario)
         {
             try
             {

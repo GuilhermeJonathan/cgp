@@ -11,6 +11,8 @@ namespace Cgp.Dominio.ObjetosDeValor
     {
         [Description("Cadastrado")]
         Cadastrado = 1,
-        Localizado =2
+        Localizado = 2,
+        [Description("Baixa Automática")]
+        BaixaAutomatica = 3
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
+namespace Cgp.Aplicacao.Processos.Modelos
 {
     public class ModeloDeAutorizacao
     {
@@ -18,4 +18,5 @@ namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
         public string email { get; set; }
         public string senha { get; set; }
     }
+  
 }
