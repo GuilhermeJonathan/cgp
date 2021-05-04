@@ -28,12 +28,14 @@ namespace Cgp.SendGrid
             var from = new EmailAddress(_emailEmpresa, _nomeEmpresa);
             
             var subject = titulo;
-            var to = new EmailAddress(usuario.Login.Valor, usuario.Nome.Valor);
-
-            var plainTextContent = titulo;
-            var htmlContent = mensagem;
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var response = await client.SendEmailAsync(msg);
+            if (usuario.Login != null)
+            {
+                var to = new EmailAddress(usuario.Login.Valor, usuario.Nome.Valor);
+                var plainTextContent = titulo;
+                var htmlContent = mensagem;
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                var response = await client.SendEmailAsync(msg);
+            }
         }
     }
 }

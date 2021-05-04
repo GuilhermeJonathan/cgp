@@ -101,5 +101,18 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Carater)
                 .FirstOrDefault(a => a.Id == id);
         }
+
+        public IList<Carater> RetornarTodosCaraters()
+        {
+            var query = this._contexto.Set<Carater>()
+                .Include(a => a.Veiculo)
+                .Include(a => a.Cidade)
+                .Include(a => a.Crime)
+                .AsQueryable();
+
+            query = query.Where(c => c.SituacaoDoCarater == SituacaoDoCarater.Cadastrado);
+
+            return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
+        }
     }
 }
