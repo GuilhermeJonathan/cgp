@@ -98,6 +98,14 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
+        public IRepositorioDeHistoricoDePassagens RepositorioDeHistoricoDePassagens
+        {
+            get
+            {
+                return new RepositorioDeHistoricoDePassagens(this._contexto);
+            }
+        }
+
         public void Persistir()
         {
             this._contexto.SaveChanges();

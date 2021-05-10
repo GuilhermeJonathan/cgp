@@ -13,11 +13,12 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
     {
         Task<string> CadastrarNovoUsuario(ModeloDeCadastroDeUsuario modelo);
         string AlterarDadosDoUsuario(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
+        string AlterarPerfilDoUsuario(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         string EditarMeusDados(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         Tuple<string, bool> AlterarSenha(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario);
         string AlterarSenhaRenovacao(ModeloDeEdicaoDeUsuario modelo);
         IList<ModeloDeUsuarioDaLista> RetonarTodosOsUsuariosAtivos();
-        ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, int pagina, int registrosPorPagina = 30);
+        ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, UsuarioLogado usuario,  int pagina, int registrosPorPagina = 30);
         Task<string> AtivarUsuario(int id, UsuarioLogado usuario);
         int BuscarUsuariosNovos();
         Usuario BuscarSomenteUsuarioPorId(int id);

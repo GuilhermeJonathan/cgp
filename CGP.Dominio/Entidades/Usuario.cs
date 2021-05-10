@@ -33,6 +33,8 @@ namespace Cgp.Dominio.Entidades
         public string Lotacao { get; set; }
         public int CodigoLotacao { get; set; }
         public string NomeGuerra { get; set; }
+        public int IdUsuarioAlterou { get; set; }
+        public DateTime DataAlteracao { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -94,6 +96,13 @@ namespace Cgp.Dominio.Entidades
             this.PerfilDeUsuario = perfilDeUsuario;
             this.Batalhao = batalhao;
             this.Matricula = matricula;
+        }
+
+        public void AlterarPerfil(PerfilDeUsuario perfilDeUsuario, int idUsuarioAlterou)
+        {
+            this.IdUsuarioAlterou = idUsuarioAlterou;
+            this.PerfilDeUsuario = perfilDeUsuario;
+            this.DataAlteracao = DateTime.Now;
         }
 
         public void AlterarDadosDoSgpol(Nome nome, Senha senha, string matricula, string cpf, string nomeGuerra, string posto, string lotacao, int lotacaoCodigo, string telefone) 

@@ -406,6 +406,7 @@
     <Content Include="Views\Carater\_VisualizarFoto.cshtml" />
     <Content Include="Views\EsqueciMinhaSenha\Index.cshtml" />
     <Content Include="Views\EsqueciMinhaSenha\RenovacaoDeSenha.cshtml" />
+    <Content Include="Views\Usuario\EditarPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

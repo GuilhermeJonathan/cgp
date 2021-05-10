@@ -35,6 +35,8 @@ namespace Cgp.Aplicacao.Processos.Servicos
 
         public async Task Executar()
         {
+            Console.WriteLine($"*********** PROCESSO INICIADO");
+
             var usuarioBanco = this._servicoDePersistencia.RepositorioDeUsuarios.BuscarPorId(1);
             var caraters = this._servicoDePersistencia.RepositorioDeCaraters.RetornarTodosCaraters();
             var setentaEDuasHoras = DateTime.Now.AddDays(-3);
@@ -45,6 +47,8 @@ namespace Cgp.Aplicacao.Processos.Servicos
             Console.WriteLine($"Lista de Caráters:{caraters.Count}");
 
             var token = await this.Autorizar();
+            Console.WriteLine($"*********** TOKEN API: {token.Token}");
+
             Dictionary<string, string> usuarioParametro = new Dictionary<string, string>();
             usuarioParametro.Add("usuario", "02025032161");
 
@@ -61,10 +65,12 @@ namespace Cgp.Aplicacao.Processos.Servicos
                     {
                         Console.WriteLine($"*********** VEÍCULO BAIXADO: {carater.Veiculo.Placa}");
                         carater.RealizarBaixaAutomatica(descricaoBaixa, usuarioBanco);
+                        carater.AdicionarHistorico(new HistoricoDeCarater("Realizou baixa do Caráter", descricaoBaixa, TipoDeHistoricoDeCarater.Baixa, usuarioBanco, carater.Id));
                     }
                 }
             }
-            
+
+            Console.WriteLine($"*********** PROCESSO FINALIZADO");
             this._servicoDePersistencia.Persistir();
         }
 

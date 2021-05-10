@@ -9,7 +9,7 @@ namespace Cgp.Dominio.Repositorios
         Usuario PegarPorLoginESenha(string login, string senha);
         Usuario PegarPorMatricula(string matricula);
         IList<Usuario> RetornarTodosUsuarios();
-        IList<Usuario> RetornarUsuariosPorFiltro(string nome, string email, int batalhao, bool ativo, int pagina, int registrosPorPagina, out int quantidadeEncontrada);
+        IList<Usuario> RetornarUsuariosPorFiltro(string nome, string email, int batalhao, bool ativo, bool ehAtenas, int pagina, int registrosPorPagina, out int quantidadeEncontrada);
         int BuscarQtdUsuariosNovos();
         Usuario BuscarUsuarioCompletoPorId(int id);
     }

@@ -65,12 +65,15 @@
                                     @Html.CheckBoxFor(m => m.Ativo, new { @class = "checkbox" })
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <br />
-                                    <a href="@Url.Action("AlterarSenha", "Usuario", new {id = Model.Id})" class="btn btn-info float-left"> Alterar Senha</a>
+                            @if (User.EhInterno() && User.EhUsuario())
+                            {
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <br />
+                                        <a href="@Url.Action("AlterarSenha", "Usuario", new { id = Model.Id })" class="btn btn-info float-left"> Alterar Senha</a>
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         </div>
                         
                         <div class="card-footer">

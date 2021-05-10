@@ -10,6 +10,7 @@ namespace Cgp.Dominio.ObjetosDeValor
     {
         Administrador = 1,
         Interno = 2,
-        Usuario = 3
+        Usuario = 3,
+        Atenas = 4
     }
 }

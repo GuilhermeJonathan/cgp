@@ -69,6 +69,24 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             }
         }
 
+        public string AlterarPerfilDoUsuario(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                var usuarioParaAlterar = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(modelo.Id);
+                usuarioParaAlterar.AlterarPerfil(modelo.PerfilDeUsuario, usuarioBanco.Id);
+
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Usuário alterado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
         public string EditarMeusDados(ModeloDeEdicaoDeUsuario modelo, UsuarioLogado usuario)
         {
             try
@@ -130,10 +148,11 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             return modelo;
         }
 
-        public ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, int pagina, int registrosPorPagina = 30)
+        public ModeloDeListaDeUsuarios RetonarUsuariosPorFiltro(ModeloDeFiltroDeUsuario filtro, UsuarioLogado usuario, int pagina, int registrosPorPagina = 30)
         {
+            var ehAtenas = usuario.PerfilDeUsuario == PerfilDeUsuario.Atenas;
             var quantidadeEncontrada = 0;
-            var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarUsuariosPorFiltro(filtro.Nome, filtro.Email, filtro.Batalhao, filtro.Ativo, 
+            var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarUsuariosPorFiltro(filtro.Nome, filtro.Email, filtro.Batalhao, filtro.Ativo, ehAtenas,
                 pagina, registrosPorPagina, out quantidadeEncontrada);
 
             return new ModeloDeListaDeUsuarios(usuarios, quantidadeEncontrada, filtro);

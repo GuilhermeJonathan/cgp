@@ -10,7 +10,7 @@ namespace Cgp.Dominio.ObjetosDeValor
     public class Senha
     {
         public const int TamanhoMinimo = 6;
-        public const int TamanhoMaximo = 12;
+        public const int TamanhoMaximo = 30;
 
         public Senha()
         {

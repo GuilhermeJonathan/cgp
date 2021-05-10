@@ -34,13 +34,13 @@ namespace Cgp.Controllers
         [HttpGet]
         public ActionResult Index(ModeloDeListaDeUsuarios modelo, bool? Ativo)
         {
-            if (!User.EhAdministrador())
+            if (User.EhInterno() && User.EhUsuario())
                 return UsuarioSemPermissao();
 
             if (Ativo.HasValue)
                 modelo.Filtro.Ativo = Ativo.Value;
 
-            modelo = this._servicoDeGestaoDeUsuarios.RetonarUsuariosPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
+            modelo = this._servicoDeGestaoDeUsuarios.RetonarUsuariosPorFiltro(modelo.Filtro, User.Logado(),  this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
 
             modelo.Filtro.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
                   () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
@@ -53,7 +53,7 @@ namespace Cgp.Controllers
         [HttpGet]
         public ActionResult Editar(int? id)
         {
-            if (!User.EhAdministrador())
+            if (User.EhInterno() && User.EhUsuario())
                 return UsuarioSemPermissao();
 
             if (!id.HasValue)
@@ -63,6 +63,9 @@ namespace Cgp.Controllers
 
             modelo.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
                   () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
+
+            if(User.EhAtenas())
+                return View(nameof(EditarPerfil), modelo);
 
             return View(modelo);
         }
@@ -93,6 +96,9 @@ namespace Cgp.Controllers
         [HttpGet]
         public ActionResult AlterarSenha(int? id)
         {
+            if (User.EhInterno() && User.EhUsuario())
+                return UsuarioSemPermissao();
+
             var idUsuario = User.Logado().Id;
 
             if (id.HasValue)
@@ -107,6 +113,9 @@ namespace Cgp.Controllers
         [HttpPost]
         public ActionResult AlterarSenha(ModeloDeEdicaoDeUsuario modelo)
         {
+            if (User.EhInterno() && User.EhUsuario())
+                return UsuarioSemPermissao();
+
             var retorno = this._servicoDeGestaoDeUsuarios.AlterarSenha(modelo, User.Logado());
             this.AdicionarMensagemDeSucesso(retorno.Item1);
             if (retorno.Item2)
@@ -119,7 +128,7 @@ namespace Cgp.Controllers
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeUsuario modelo)
         {
-            if (!User.EhAdministrador())
+            if (User.EhInterno() && User.EhUsuario())
                 return UsuarioSemPermissao();
 
             var retorno = this._servicoDeGestaoDeUsuarios.AlterarDadosDoUsuario(modelo, User.Logado());
@@ -130,7 +139,23 @@ namespace Cgp.Controllers
             this.AdicionarMensagemDeSucesso(retorno);
             return RedirectToAction(nameof(Index));
         }
-        
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditarPerfil(ModeloDeEdicaoDeUsuario modelo)
+        {
+            if (User.EhInterno() && User.EhUsuario())
+                return UsuarioSemPermissao();
+
+            var retorno = this._servicoDeGestaoDeUsuarios.AlterarPerfilDoUsuario(modelo, User.Logado());
+
+            modelo.Batalhoes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Batalhao>(nameof(Batalhao.Sigla), nameof(Batalhao.Id),
+                  () => this._servicoDeGestaoDeBatalhoes.RetonarTodosOsBatalhoesAtivos());
+
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
         public JsonResult BuscarUsuario(int idUsuario)
         {

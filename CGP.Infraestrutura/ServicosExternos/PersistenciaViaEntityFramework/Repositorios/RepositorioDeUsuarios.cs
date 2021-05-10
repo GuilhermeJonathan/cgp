@@ -45,7 +45,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             return query.OrderBy(a => a.DataDoCadastro).ToList();
         }
         
-        public IList<Usuario> RetornarUsuariosPorFiltro(string nome, string email, int batalhao, bool ativo, int pagina, int registrosPorPagina, out int quantidadeEncontrada)
+        public IList<Usuario> RetornarUsuariosPorFiltro(string nome, string email, int batalhao, bool ativo, bool ehAtenas, int pagina, int registrosPorPagina, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Usuario>()
                 .Include(a => a.Batalhao)
@@ -59,6 +59,9 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             if (batalhao > 0)
                 query = query.Where(c => c.Batalhao.Id == batalhao);
+            
+            if(ehAtenas)
+                query = query.Where(c => c.PerfilDeUsuario != Dominio.ObjetosDeValor.PerfilDeUsuario.Administrador);
 
             query = query.Where(c => c.Ativo == ativo);
 

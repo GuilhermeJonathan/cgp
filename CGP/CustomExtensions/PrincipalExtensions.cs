@@ -64,6 +64,23 @@ namespace Cgp.Web.CustomExtensions
             else return false;
         }
 
+        public static bool EhUsuario(this IPrincipal principal)
+        {
+            var perfil = Claim(principal, "perfil");
+            if ((PerfilDeUsuario)Enum.Parse(typeof(PerfilDeUsuario), perfil) == PerfilDeUsuario.Usuario)
+                return true;
+            else return false;
+        }
+
+        public static bool EhAtenas(this IPrincipal principal)
+        {
+            var perfil = Claim(principal, "perfil");
+            if ((PerfilDeUsuario)Enum.Parse(typeof(PerfilDeUsuario), perfil) == PerfilDeUsuario.Atenas)
+                return true;
+            else return false;
+        }
+
+
         public static UsuarioLogado Logado(this IPrincipal principal)
         {
             return new UsuarioLogado(principal.Id(), principal.Nome(), principal.Email(), principal.Perfil(), principal.Cpf());
