@@ -29,7 +29,9 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.Descricao = !String.IsNullOrEmpty(historico.Descricao) ? historico.Descricao.Replace(Environment.NewLine, "<br />").Replace("\n", "<br />") : "";
             this.Titulo = historico.Titulo;
             this.IdUsuario = historico.Usuario != null ? historico.Usuario.Id : 0;
-            this.Usuario = historico.Usuario != null ? historico.Usuario.Nome.Valor : "";
+            
+            this.Usuario = historico.Usuario != null ? historico.Usuario.PerfilDeUsuario == PerfilDeUsuario.Atenas 
+                ? historico.Usuario.PerfilDeUsuario.ToString() : historico.Usuario.Nome.Valor : "";
             this.IdCarater = historico.Carater != null ? historico.Carater.Id : 0;
             this.IdEntidade = historico.IdEntidade;
             this.TipoDeHistoricoDeCarater = historico.TipoDeHistoricoDeCarater;

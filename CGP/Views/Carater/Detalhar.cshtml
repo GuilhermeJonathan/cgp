@@ -4,6 +4,9 @@
     ViewBag.Title = "Detalhar Caráter";
 }
 
+@{ 
+    var cssMobile = this.Request.Browser.IsMobileDevice ? "btn-block" : "";
+} 
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -102,17 +105,24 @@
                             }
                         </div>
                         <div class="card-footer">
-                            @Html.BackButton() &nbsp;
-                            @if (!Model.RealizouBaixa)
-                            {
-                                <a href="#" class="btn btn-default btnAbrirBaixa" data-id="@Model.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </a>
-                                <a href="#" class="btn btn-default btnAbrirCadastroHistorico" data-id="@Model.Id"> <i class="fas fa-history"></i> Adicionar Histórico </a>
-                                <a href="#" class="btn btn-default btnAbrirCadastroHistoricoPassagem" data-id="@Model.Id"> <i class="fas fa-car-side"></i> Adicionar Passagem </a>
-                                <a href="@Url.Action("Editar", "Carater", new { id = Model.Id })" class="btn btn-info float-right"> <i class="fas fa-car-alt"></i> Editar Caráter </a>
-                            }
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    @Html.BackButton() &nbsp;
+                                </div>
+                                @if (!Model.RealizouBaixa)
+                                {
+                                    <div class="col-lg-10  col-sm-12">
+                                        <a href="#" class="btn btn-default @cssMobile btnAbrirBaixa" data-id="@Model.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </a>
+                                        <a href="#" class="btn btn-default @cssMobile btnAbrirCadastroHistorico" data-id="@Model.Id"> <i class="fas fa-history"></i> Adicionar Histórico </a>
+                                        <a href="#" class="btn btn-default @cssMobile btnAbrirCadastroHistoricoPassagem" data-id="@Model.Id"> <i class="fas fa-car-side"></i> Adicionar Passagem </a>
+                                        <a href="@Url.Action("Editar", "Carater", new { id = Model.Id })" class="btn btn-info @cssMobile float-right"> <i class="fas fa-car-alt"></i> Editar Caráter </a>
+                                    </div>
+                                }
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="container-fluid">
+    
+                        <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card">
@@ -127,8 +137,8 @@
                                     <div class="card-body table-responsive p-0">
                                         @Html.Grid(Model.HistoricosDePassagens).Columns(colunas =>
                                         {
-                                            colunas.Add().Encoded(false).Sanitized(false).Css("text-center").SetWidth(30).RenderValueAs(
-                                            m => @<div class="btn-group btn-group-sm"><a href="#" data-toggle="modal" data-target="#modalVisualizarHistoricoDaPassagem" class="btn btn-info no-load buscaHistoricoDePassagem" data-id="@m.Id" title="Visualizar Histórico do Imóvel"> <i class="fas fa-search"></i></a></div>);
+                                    colunas.Add().Encoded(false).Sanitized(false).Css("text-center").SetWidth(30).RenderValueAs(
+                                    m => @<div class="btn-group btn-group-sm"><a href="#" data-toggle="modal" data-target="#modalVisualizarHistoricoDaPassagem" class="btn btn-info no-load buscaHistoricoDePassagem" data-id="@m.Id" title="Visualizar Histórico do Imóvel"> <i class="fas fa-search"></i></a></div>);
 
                                             colunas.Add(m => m.DataPassagem).Titled("Data Passagem");
                                             colunas.Add(m => m.Local).Titled("Local");

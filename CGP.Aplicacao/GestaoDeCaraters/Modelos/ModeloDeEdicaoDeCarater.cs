@@ -54,7 +54,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.Data = carater.DataHoraDoFato.HasValue ? carater.DataHoraDoFato.Value.ToShortDateString() : String.Empty;
             this.Hora = carater.DataHoraDoFato.HasValue ? carater.DataHoraDoFato.Value.ToShortTimeString() : String.Empty;
             this.UrlImagem = $"{caminhoBlob}/{carater.UrlImagem}";
-            var usuario = carater.UsuarioQueAlterou != null ? carater.UsuarioQueAlterou.Nome.Valor : String.Empty;
+            var usuario = carater.UsuarioQueAlterou != null ? carater.UsuarioQueAlterou.PerfilDeUsuario == PerfilDeUsuario.Atenas ?
+                carater.UsuarioQueAlterou.PerfilDeUsuario.ToString() : carater.UsuarioQueAlterou.Nome.Valor : String.Empty;
             this.UsuarioCadastro = $"Cadastro por {usuario} no dia {carater.DataDoCadastro.ToString("dd/MM")} às {carater.DataDoCadastro.ToString("HH:mm")}";
             this.SituacaoDoCarater = (int)carater.SituacaoDoCarater;
             this.CssTipoCrime = RetornaCssCrime(NomeCrime);
