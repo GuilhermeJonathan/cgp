@@ -70,6 +70,7 @@
     <Compile Include="ObjetosDeValor\Telefone.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeUsuario.cs" />
     <Compile Include="ObjetosDeValor\TipoDeHistoricoDeCarater.cs" />
+    <Compile Include="ObjetosDeValor\TipoDeHistoricoDePassagem.cs" />
     <Compile Include="ObjetosDeValor\UsuarioLogado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\IRepositorio.cs" />

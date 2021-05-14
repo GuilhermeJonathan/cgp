@@ -34,7 +34,7 @@ namespace Cgp.Dominio.Entidades
         public int CodigoLotacao { get; set; }
         public string NomeGuerra { get; set; }
         public int IdUsuarioAlterou { get; set; }
-        public DateTime DataAlteracao { get; set; }
+        public DateTime? DataAlteracao { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -120,6 +120,10 @@ namespace Cgp.Dominio.Entidades
             this.Login = LoginUsuario.Vazio;
             this.Ativo = true;
             this.UsuarioNovo = false;
+            this.IdUsuarioAlterou = 0;
+            this.EhEstrangeiro = false;
+            this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
+            this.DataAlteracao = DateTime.Now;
         }
 
         public void AlterarMeusDados(string nome, string email, string ddd, string telefone, Batalhao batalhao, string matricula)

@@ -68,6 +68,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Fotos)
                 .Include(a => a.HistoricosDeCaraters)
                 .Include(a => a.HistoricosDeCaraters.Select(b => b.Usuario))
+                .Include(a => a.HistoricosDePassagens)
                 .FirstOrDefault(a => a.Id == id);
         }
 
@@ -113,6 +114,14 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
             query = query.Where(c => c.SituacaoDoCarater == SituacaoDoCarater.Cadastrado);
 
             return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
+        }
+
+        public HistoricoDePassagem PegarHistoricoDePassagem(int id)
+        {
+            var historico = this._contexto.Set<HistoricoDePassagem>()
+                .Include(a => a.Carater)
+                .FirstOrDefault(a => a.Id == id);
+            return historico;
         }
     }
 }

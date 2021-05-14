@@ -152,8 +152,8 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         {
             var ehAtenas = usuario.PerfilDeUsuario == PerfilDeUsuario.Atenas;
             var quantidadeEncontrada = 0;
-            var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarUsuariosPorFiltro(filtro.Nome, filtro.Email, filtro.Batalhao, filtro.Ativo, ehAtenas,
-                pagina, registrosPorPagina, out quantidadeEncontrada);
+            var usuarios = this._servicoExternoDePersistencia.RepositorioDeUsuarios.RetornarUsuariosPorFiltro(filtro.Nome, filtro.Email, filtro.Batalhao, 
+                filtro.Ativo, ehAtenas, filtro.PerfilDeUsuario, pagina, registrosPorPagina, out quantidadeEncontrada);
 
             return new ModeloDeListaDeUsuarios(usuarios, quantidadeEncontrada, filtro);
         }

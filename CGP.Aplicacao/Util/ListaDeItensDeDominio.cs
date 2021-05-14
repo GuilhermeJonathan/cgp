@@ -9,7 +9,7 @@ namespace Cgp.Aplicacao.Util
 {
     public static class ListaDeItensDeDominio
     {
-        public static IEnumerable<SelectListItem> DoEnumComOpcaoPadrao<T>(string defaultText = "Selecione") where T : struct
+        public static IEnumerable<SelectListItem> DoEnumComOpcaoPadrao<T>(string defaultText = "Selecione", string[] ignorarEnum = null) where T : struct
         {
             if (!typeof(T).IsEnum)
                 throw new InvalidOperationException("Não é possível criar uma lista de SelectListItens de um tipo que não é Enum");
@@ -21,9 +21,11 @@ namespace Cgp.Aplicacao.Util
 
             foreach (var item in Enum.GetValues(typeof(T)))
             {
-
                 lista.Add(new SelectListItem { Text = preecherAtributosDoEnum((Enum)Enum.Parse(typeof(T), item.ToString())), Value = ((int)item).ToString() });
             }
+
+            if (ignorarEnum != null)
+                lista = lista.Where(a => !ignorarEnum.Contains(a.Text)).ToList();
 
             return lista;
         }

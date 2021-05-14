@@ -86,6 +86,9 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 case TipoDeHistoricoDeCarater.Baixa:
                     retorno = "fas fa-arrow-alt-circle-down bg-yellow";
                     break;
+                case TipoDeHistoricoDeCarater.HistoricoPassagem:
+                    retorno = "fas fa-car-side bg-blue";
+                    break;
                 default:
                     break;
             }

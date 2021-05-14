@@ -110,7 +110,7 @@ namespace Cgp.Controllers
             if (!id.HasValue)
                 return CaraterNaoEncontrado();
 
-            var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value);
+            var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value, User.Logado());
 
             modelo.Crimes = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Crime>(nameof(Crime.Nome), nameof(Crime.Id),
              () => this._servicoDeGestaoDeCrimes.RetonarTodosOsCrimesAtivos());
@@ -133,13 +133,22 @@ namespace Cgp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public ActionResult SalvarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo)
+        {
+            var retorno = this._servicoDeGestaoDeCaraters.AdicionarHistoricoPassagem(modelo, User.Logado());
+
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(Detalhar), new { id = modelo.Id });
+        }
+
         [HttpGet]
         public ActionResult Detalhar(int? id)
         {
             if (!id.HasValue)
                 return CaraterNaoEncontrado();
             
-            var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value);
+            var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value, User.Logado());
 
             modelo.CidadesLocalizacao = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
               () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
@@ -209,6 +218,14 @@ namespace Cgp.Controllers
             var retorno = this._servicoDeGestaoDeCaraters.ExcluirFoto(id, User.Logado());
             var result = new { Status = retorno, Message = "Error Message" };
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public JsonResult HistoricoDePassagem(int id)
+        {
+            var historico = this._servicoDeGestaoDeCaraters.BuscarHistoricoDePassagem(id);
+            return Json(new { historico }, JsonRequestBehavior.AllowGet);
         }
     }
 }

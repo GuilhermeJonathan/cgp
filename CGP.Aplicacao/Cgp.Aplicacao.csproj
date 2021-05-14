@@ -109,6 +109,7 @@
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeFiltroDeCarater.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeFotosDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeHistoricoDeCaraterDaLista.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeHistoricoDePassagensDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeListaDeCaraters.cs" />
     <Compile Include="GestaoDeCaraters\ServicoDeGestaoDeCaraters.cs" />
     <Compile Include="GestaoDeUsuariosSGPOL\IServicoDeGestaoDeUsuariosSGPOL.cs" />

@@ -88,12 +88,13 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
-        public ModeloDeEdicaoDeCarater BuscarCaraterPorId(int id)
+        public ModeloDeEdicaoDeCarater BuscarCaraterPorId(int id, UsuarioLogado usuario)
         {
             try
             {
                 var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(id);
-                return new ModeloDeEdicaoDeCarater(carater);
+                var modelo = new ModeloDeEdicaoDeCarater(carater);
+                return modelo;
             }
             catch (Exception ex)
             {
@@ -363,6 +364,85 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
 
                 this._servicoExternoDePersistencia.Persistir();
                 return "Foto excluída com sucesso.";
+            }
+
+            catch (ExcecaoDeAplicacao ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
+        public string AdicionarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                DateTime dataHoraFato = new DateTime();
+                var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(modelo.Id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                                
+                if (!string.IsNullOrEmpty(modelo.DataHistorico) && !string.IsNullOrEmpty(modelo.HoraHistorico))
+                {
+                    var data = Convert.ToDateTime(modelo.Data);
+                    var hora = Convert.ToDateTime(modelo.Hora);
+                    dataHoraFato = new DateTime(data.Year, data.Month, data.Day, hora.Hour, hora.Minute, 0);
+                }
+
+                var historicoPassagem = new HistoricoDePassagem(dataHoraFato, modelo.DescricaoHistorico, carater.Veiculo != null ? carater.Veiculo.Placa : String.Empty, String.Empty);
+
+                carater.AdicionarHistoricoPassagem(historicoPassagem, usuarioBanco);
+
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Histórico cadastrado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível cadastrar o histórico: " + ex.InnerException);
+            }
+        }
+
+        public ModeloDeHistoricoDePassagensDaLista BuscarHistoricoDePassagem(int id)
+        {
+            try
+            {
+                var historico = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarHistoricoDePassagem(id);
+                var modelo = new ModeloDeHistoricoDePassagensDaLista(historico);
+                //await AdicionarImagemPassagem(historico, modelo.Imagem);
+                modelo.Imagem = null;
+                return modelo;
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar Histórico de Passagem");
+            }
+        }
+
+        public async Task<string> AdicionarImagemPassagem(HistoricoDePassagem historico, Stream arquivo)
+        {
+            try
+            {
+                if (historico != null)
+                {
+                    var caminho = historico.Arquivo;
+                        var caminhoBlob = $"fotos";
+                
+                        this._servicoExternoDePersistencia.Persistir();
+
+
+                        //arquivo.Position = 0;
+                        await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(arquivo, caminhoBlob, caminho);
+                        this._servicoExternoDePersistencia.Persistir();
+                    }
+
+                    this._servicoExternoDePersistencia.Persistir();
+                
+
+                return "Fotos adicionadas com sucesso";
             }
 
             catch (ExcecaoDeAplicacao ex)

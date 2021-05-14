@@ -73,6 +73,13 @@ namespace Cgp.Aplicacao.Login
                         novoUsuario.AlterarDadosDoSgpol(new Nome(usuarioSGPOL.nome), senha, usuarioSGPOL.matricula, cpf, usuarioSGPOL.nomeGuerra, usuarioSGPOL.posto, usuarioSGPOL.lotacao, usuarioSGPOL.lotacaoCodigo, usuarioSGPOL.celular);
                     
                     this._servicoExternoDePersistencia.RepositorioDeUsuarios.Inserir(novoUsuario);
+                    try
+                    {
+                        this._servicoExternoDePersistencia.Persistir();
+                    } catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.InnerException.Message);
+                    }
                     usuario = novoUsuario;
                 }
 

@@ -1,0 +1,48 @@
+﻿@model Cgp.Aplicacao.GestaoDeCaraters.Modelos.ModeloDeEdicaoDeCarater
+
+<form role="form" id="formEditarCarater" action="@Url.Action("SalvarHistoricoPassagem", "Carater")" method="post">
+    <div class="modal fade" id="modalCadastrarHistoricoPassagem" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Cadastrar Histórico de Passagem <span class="spnTitulo"></span></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    @Html.HiddenFor(c => c.Id, new { @class = "Id" })
+                </div>
+                <div class="modal-body">
+                    <div class="card divDados">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Informe os dados do histórico
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Data </label>
+                                    <input type="text" class="form-control mascaraData" id="data" name="Data" value="@Model.DataHistorico">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="control-label"> Hora </label>
+                                    <input type="time" class="form-control mascaraHora" id="Hora" name="Hora" value="@Model.HoraHistorico">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="control-label"> Histórico: </label>
+                                    @Html.TextAreaFor(m => m.DescricaoHistorico, new { @class = "form-control", @rows = 6, @placeholder = "Descreva aqui um breve histórico da passagem", @maxlength = 2000 })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-success float-right">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

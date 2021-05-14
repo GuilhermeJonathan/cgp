@@ -19,5 +19,7 @@ namespace Cgp.Dominio.ObjetosDeValor
         Foto = 4,
         [Description("Baixa")]
         Baixa = 5,
+        [Description("Histórico de Passagem")]
+        HistoricoPassagem = 6
     }
 }

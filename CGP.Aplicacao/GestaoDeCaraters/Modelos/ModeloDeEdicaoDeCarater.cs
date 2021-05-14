@@ -20,16 +20,22 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
             this.HistoricosDeCaraters = new List<ModeloDeHistoricoDeCaraterDaLista>();
             this.Fotos = new List<ModeloDeFotosDaLista>();
+            this.DataHistorico = DateTime.Now.ToShortDateString();
+            this.HoraHistorico = DateTime.Now.ToShortTimeString();
         }
 
         public ModeloDeEdicaoDeCarater(Carater carater)
         {
             if (carater == null)
                 return;
+            
+            this.DataHistorico = DateTime.Now.ToShortDateString();
+            this.HoraHistorico = DateTime.Now.ToShortTimeString();
 
             var situacoesBaixas = new Dominio.ObjetosDeValor.SituacaoDoCarater[] { Dominio.ObjetosDeValor.SituacaoDoCarater.Localizado, Dominio.ObjetosDeValor.SituacaoDoCarater.BaixaAutomatica };
 
             this.HistoricosDeCaraters = new List<ModeloDeHistoricoDeCaraterDaLista>();
+            this.HistoricosDePassagens = new List<ModeloDeHistoricoDePassagensDaLista>();
             this.Fotos = new List<ModeloDeFotosDaLista>();
 
             this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
@@ -76,6 +82,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
 
             carater.HistoricosDeCaraters.OrderByDescending(a => a.DataDoCadastro).ToList().ForEach(a => this.HistoricosDeCaraters.Add(new ModeloDeHistoricoDeCaraterDaLista(a, carater.Fotos.ToList())));
             carater.Fotos.Where(a => a.Ativo).ToList().ForEach(a => this.Fotos.Add(new ModeloDeFotosDaLista(a)));
+            carater.HistoricosDePassagens.OrderByDescending(a => a.DataDoCadastro).ToList().ForEach(a => this.HistoricosDePassagens.Add(new ModeloDeHistoricoDePassagensDaLista(a)));
+
         }
 
         public int Id { get; set; }
@@ -102,6 +110,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }
         public string UsuarioCadastro { get; set; }
+        public string CpfUsuario { get; set; }
         public bool RealizouBaixa { get; set; }
         public string DescricaoLocalizacao { get; set; }
         public string CidadeLocalizacao { get; set; }
@@ -110,9 +119,13 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string CssTipoCrime { get; set; }
         public string NomeCrime { get; set; }
         public string NomeCidade { get; set; }
+        public string DescricaoHistorico { get; set; }
+        public string DataHistorico { get; set; }
+        public string HoraHistorico { get; set; }
 
         public IList<ModeloDeHistoricoDeCaraterDaLista> HistoricosDeCaraters{ get; set; }
         public IList<ModeloDeFotosDaLista> Fotos { get; set; }
+        public IList<ModeloDeHistoricoDePassagensDaLista> HistoricosDePassagens { get; set; }
 
         private string RetornaCssCrime(string crime)
         {

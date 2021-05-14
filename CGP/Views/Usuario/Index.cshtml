@@ -44,7 +44,11 @@
                                     <label class="control-label"> Batalhão </label>
                                     @Html.DropDownListFor(m => m.Filtro.Batalhao, Model.Filtro.Batalhoes, new { @class = "form-control autoComplete" })
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Perfil de Usuário </label>
+                                    @Html.DropDownListFor(m => m.Filtro.PerfilDeUsuario, Model.Filtro.PerfisDeUsuario, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-2">
                                     <label class="control-label"> Ativo </label>
                                     @Html.CheckBoxFor(m => m.Filtro.Ativo, new { @class = "checkbox" })
                                 </div>

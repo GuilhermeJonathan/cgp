@@ -12,7 +12,7 @@ namespace Cgp.Dominio.Entidades
         public Carater()
         {
             this.HistoricosDeCaraters = new List<HistoricoDeCarater>();
-            this.HistoricoDePassagem = new List<HistoricoDePassagem>();
+            this.HistoricosDePassagens = new List<HistoricoDePassagem>();
             this.Fotos = new List<Foto>();
         }
 
@@ -44,7 +44,7 @@ namespace Cgp.Dominio.Entidades
         public DateTime? DataHoraLocalizacao { get; set; }
         public ICollection<Foto> Fotos { get; set; }
         public ICollection<HistoricoDeCarater> HistoricosDeCaraters { get; set; }
-        public ICollection<HistoricoDePassagem> HistoricoDePassagem { get; set; }
+        public ICollection<HistoricoDePassagem> HistoricosDePassagens { get; set; }
         public bool VerificarSeJaTemEssaFoto(string descricao) => this.Fotos.Any(a => a.Caminho == descricao && a.Ativo);
 
         public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, string urlImagem, Usuario usuario)
@@ -95,6 +95,18 @@ namespace Cgp.Dominio.Entidades
 
             this.DataUltimaAtualizacao = DateTime.Now;
             this.HistoricosDeCaraters.Add(historico);
+        }
+
+        public void AdicionarHistoricoPassagem(HistoricoDePassagem historico, Usuario usuario)
+        {
+            if (this.HistoricosDePassagens == null)
+                this.HistoricosDePassagens = new List<HistoricoDePassagem>();
+            
+            this.DataUltimaAtualizacao = DateTime.Now;
+            this.HistoricosDePassagens.Add(historico);
+            this.Atualizar(usuario);
+
+            this.AdicionarHistorico(new HistoricoDeCarater("Incluiu histórico de passagem", "", TipoDeHistoricoDeCarater.HistoricoPassagem, usuario, this.Id));
         }
     }
 }

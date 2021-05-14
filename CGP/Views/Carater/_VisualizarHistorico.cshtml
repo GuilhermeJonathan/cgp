@@ -1,23 +1,32 @@
-﻿<div class="modal fade" id="modalVisualizarFoto" role="dialog">
+﻿@model Cgp.Aplicacao.GestaoDeCaraters.Modelos.ModeloDeEdicaoDeCarater
+
+<div class="modal fade" id="modalVisualizarHistoricoPassagem" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Visualização de Imagem <span class="spnTitulo"></span></h4>
+                <h4 class="modal-title">Histórico de Passagem</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <input type="hidden" class="idFoto" />
+                @Html.HiddenFor(a => a.Id)
             </div>
             <div class="modal-body">
                 <div class="card divDados">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <label class="control-label lblDescricao"></label>
+                            <span class="spnLocal"></span>
                         </h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12">
+                                <label class="control-label"> Data/Hora: &nbsp;</label><span class="username spnDataHora"></span>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                
                                 <figure class="containerImagem">
                                     <img class="imgFoto fotoModal" />
                                     <figcaption><span class="spnCPF"> @User.Cpf()</span></figcaption>
@@ -29,7 +38,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn btn-danger pull-right btnExcluirFoto"><i class='fa fa-save'> </i> Excluir</button>
             </div>
         </div>
     </div>

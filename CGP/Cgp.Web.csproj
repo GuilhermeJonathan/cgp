@@ -407,9 +407,12 @@
     <Content Include="Views\EsqueciMinhaSenha\Index.cshtml" />
     <Content Include="Views\EsqueciMinhaSenha\RenovacaoDeSenha.cshtml" />
     <Content Include="Views\Usuario\EditarPerfil.cshtml" />
+    <Content Include="Views\Carater\_VisualizarHistorico.cshtml" />
+    <Content Include="Views\Carater\_AdicionarHistorico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FotosPlacas\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
