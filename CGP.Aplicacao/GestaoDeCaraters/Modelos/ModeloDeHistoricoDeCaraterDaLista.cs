@@ -124,7 +124,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             }
             else if (timeSpan <= TimeSpan.FromDays(365))
             {
-                result = timeSpan.Days > 30 ?
+                result = timeSpan.Days > 60 ?
                     String.Format("há {0} meses", timeSpan.Days / 30) :
                     "há um mês";
             }

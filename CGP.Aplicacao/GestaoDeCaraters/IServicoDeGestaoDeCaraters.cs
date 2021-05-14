@@ -23,6 +23,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         Task<string> AdicionarFotos(int id, HttpFileCollectionBase files, UsuarioLogado usuario);
         string ExcluirFoto(int id, UsuarioLogado usuario);
         string AdicionarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
+        string AdicionarHistoricoCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
         ModeloDeHistoricoDePassagensDaLista BuscarHistoricoDePassagem(int id);
     }
 }

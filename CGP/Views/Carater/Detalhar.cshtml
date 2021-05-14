@@ -106,7 +106,8 @@
                             @if (!Model.RealizouBaixa)
                             {
                                 <a href="#" class="btn btn-default btnAbrirBaixa" data-id="@Model.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </a>
-                                <a href="#" class="btn btn-default btnAbrirCadastroHistorico" data-id="@Model.Id"> <i class="fas fa-car-side"></i> Adicionar Passagem </a>
+                                <a href="#" class="btn btn-default btnAbrirCadastroHistorico" data-id="@Model.Id"> <i class="fas fa-history"></i> Adicionar Histórico </a>
+                                <a href="#" class="btn btn-default btnAbrirCadastroHistoricoPassagem" data-id="@Model.Id"> <i class="fas fa-car-side"></i> Adicionar Passagem </a>
                                 <a href="@Url.Action("Editar", "Carater", new { id = Model.Id })" class="btn btn-info float-right"> <i class="fas fa-car-alt"></i> Editar Caráter </a>
                             }
                         </div>
@@ -232,6 +233,7 @@
 @Html.Partial("_RealizarBaixa")
 @Html.Partial("_VisualizarFoto")
 @Html.Partial("_VisualizarHistorico")
+@Html.Partial("_AdicionarHistoricoPassagem")
 @Html.Partial("_AdicionarHistorico")
 
 <script>
@@ -248,10 +250,18 @@
             form.modal('show');
         });
 
-        $(".btnAbrirCadastroHistorico").button().click(function () {
+        $(".btnAbrirCadastroHistoricoPassagem").button().click(function () {
             var idCarater = $(this).attr("data-id");
             $(".Id").val(idCarater);
             var form = $("#modalCadastrarHistoricoPassagem");
+            form.modal('show');
+        });
+
+
+        $(".btnAbrirCadastroHistorico").button().click(function () {
+            var idCarater = $(this).attr("data-id");
+            $(".Id").val(idCarater);
+            var form = $("#modalCadastrarHistorico");
             form.modal('show');
         });
 
@@ -317,23 +327,21 @@
                     $(".divCarrega").show();
                     $(".divDados").hide();
                 },
-
                 success: function (resultado) {
                     $(".divDados").show();
                     $(".divCarrega").hide();
-                    debugger;
+                    
                     var form = $("#modalVisualizarHistoricoPassagem");
                     form.modal('show');
 
                     if (resultado.historico.Arquivo != null) {
                         $(".containerImagem").show();
+                        $(".spnCPF").show();
                         $(".imgFoto").attr('src', resultado.historico.Arquivo);
                     } else {
-                        debugger;
                         $(".containerImagem").hide();
                         $(".spnCPF").hide();
                     }
-
                     $(".spnDataHora").html(resultado.historico.DataPassagem);
                     $(".spnLocal").html(resultado.historico.Local);
                 }

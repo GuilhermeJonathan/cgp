@@ -140,6 +140,15 @@ namespace Cgp.Controllers
 
             this.AdicionarMensagemDeSucesso(retorno);
             return RedirectToAction(nameof(Detalhar), new { id = modelo.Id });
+        } 
+        
+        [HttpPost]
+        public ActionResult AdicionarHistorico(ModeloDeEdicaoDeCarater modelo)
+        {
+            var retorno = this._servicoDeGestaoDeCaraters.AdicionarHistoricoCarater(modelo, User.Logado());
+
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(Detalhar), new { id = modelo.Id });
         }
 
         [HttpGet]

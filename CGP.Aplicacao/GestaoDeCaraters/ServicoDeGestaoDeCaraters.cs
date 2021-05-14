@@ -406,13 +406,31 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
+        public string AdicionarHistoricoCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(modelo.Id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                carater.AdicionarHistorico(new HistoricoDeCarater("Incluiu histórico no caráter", modelo.DescricaoHistorico, TipoDeHistoricoDeCarater.Historico, usuarioBanco, carater.Id));
+
+                this._servicoExternoDePersistencia.Persistir();
+
+                return "Histórico cadastrado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível cadastrar o histórico: " + ex.InnerException);
+            }
+        }
+
         public ModeloDeHistoricoDePassagensDaLista BuscarHistoricoDePassagem(int id)
         {
             try
             {
                 var historico = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarHistoricoDePassagem(id);
                 var modelo = new ModeloDeHistoricoDePassagensDaLista(historico);
-                //await AdicionarImagemPassagem(historico, modelo.Imagem);
                 modelo.Imagem = null;
                 return modelo;
             }
@@ -432,9 +450,6 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                         var caminhoBlob = $"fotos";
                 
                         this._servicoExternoDePersistencia.Persistir();
-
-
-                        //arquivo.Position = 0;
                         await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(arquivo, caminhoBlob, caminho);
                         this._servicoExternoDePersistencia.Persistir();
                     }

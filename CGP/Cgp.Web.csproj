@@ -408,6 +408,7 @@
     <Content Include="Views\EsqueciMinhaSenha\RenovacaoDeSenha.cshtml" />
     <Content Include="Views\Usuario\EditarPerfil.cshtml" />
     <Content Include="Views\Carater\_VisualizarHistorico.cshtml" />
+    <Content Include="Views\Carater\_AdicionarHistoricoPassagem.cshtml" />
     <Content Include="Views\Carater\_AdicionarHistorico.cshtml" />
   </ItemGroup>
   <ItemGroup>
