@@ -21,7 +21,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 return;
 
             this.Id = alerta.Id;
-            var arquivoTratado = alerta.HistoricoDePassagem.Arquivo.Replac2-e(@"I:\", "").Replace(@"\", "/");
+            var arquivoTratado = alerta.HistoricoDePassagem.Arquivo.Replace(@"I:\", "").Replace(@"\", "/");
             var caminho = VariaveisDeAmbiente.Pegar<string>("LOCAL:servidorDePassagens") + arquivoTratado;
             this.DataPassagem = alerta.HistoricoDePassagem.Data.ToString("dd/MM/yyyy HH:mm");
             this.Local = alerta.HistoricoDePassagem.Local;

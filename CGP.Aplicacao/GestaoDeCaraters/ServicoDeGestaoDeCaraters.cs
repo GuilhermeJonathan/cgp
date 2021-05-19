@@ -95,16 +95,18 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(id);
                 if(carater != null)
                 {
-                    var alerta = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarAlertaPorId(carater.Id);
-                    if (alerta != null)
+                    var alertas = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarTodosAlertaPorCarater(carater.Id);
+                    if (alertas != null)
                     {
                         var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
-                        var alertasUsuarios = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarAlertasUsuarios(usuario.Id, alerta.Id);
-                        if (alertasUsuarios.Count == 0)
+                        foreach (var alerta in alertas)
                         {
-                            usuarioBanco.InserirAlertaUsuario(alerta);
-                            this._servicoExternoDePersistencia.Persistir();
+                            var alertasUsuarios = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarAlertasUsuarios(usuario.Id, alerta.Id);
+                            if (alertasUsuarios.Count == 0)
+                               usuarioBanco.InserirAlertaUsuario(alerta);
                         }
+
+                        this._servicoExternoDePersistencia.Persistir();
                     }
                 }
 
@@ -211,8 +213,15 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(id);
                 var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
                 var cidadeBanco = this._servicoExternoDePersistencia.RepositorioDeCidades.PegarPorId(cidade);
-                
+                var alertas = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarTodosAlertaPorCarater(carater.Id);
+
                 carater.RealizarBaixaVeiculo(descricao, cidadeBanco, usuarioBanco);
+                if(alertas != null)
+                {
+                    foreach (var alerta in alertas)
+                        alerta.SituacaoDoAlerta = SituacaoDoAlerta.Finalizado;
+                }
+                
                 var descricaHistorico = $"{descricao} <br>Cidade: {cidadeBanco.Descricao}.";
 
                 carater.AdicionarHistorico(new HistoricoDeCarater("Realizou baixa do Caráter", descricaHistorico, TipoDeHistoricoDeCarater.Baixa, usuarioBanco, carater.Id));

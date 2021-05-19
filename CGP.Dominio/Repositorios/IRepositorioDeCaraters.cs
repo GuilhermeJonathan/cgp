@@ -20,5 +20,6 @@ namespace Cgp.Dominio.Repositorios
         List<Alerta> PegarNovosAlertas();
         List<AlertaUsuario> PegarAlertasUsuarios(int idUsuario, int idAlerta);
         Alerta PegarAlertaPorId(int idCarater);
+        List<Alerta> PegarTodosAlertaPorCarater(int idCarater);
     }
 }

@@ -157,5 +157,14 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .FirstOrDefault(a => a.HistoricoDePassagem.Carater.Id == idCarater);
             return alerta;
         }
+
+        public List<Alerta> PegarTodosAlertaPorCarater(int idCarater)
+        {
+            var alertas = this._contexto.Set<Alerta>()
+                .Include(a => a.HistoricoDePassagem)
+                .Include(a => a.HistoricoDePassagem.Carater)
+                .Where(a => a.HistoricoDePassagem.Carater.Id == idCarater);
+            return alertas.ToList();
+        }
     }
 }
