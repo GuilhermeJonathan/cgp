@@ -88,12 +88,28 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
-        public ModeloDeEdicaoDeCarater BuscarCaraterPorId(int id, UsuarioLogado usuario)
+        public ModeloDeEdicaoDeCarater BuscarCaraterPorId(int id, UsuarioLogado usuario, bool EhCelular = false)
         {
             try
             {
                 var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(id);
-                var modelo = new ModeloDeEdicaoDeCarater(carater);
+                if(carater != null)
+                {
+                    var alerta = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarAlertaPorId(carater.Id);
+                    if (alerta != null)
+                    {
+                        var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                        var alertasUsuarios = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarAlertasUsuarios(usuario.Id, alerta.Id);
+                        if (alertasUsuarios.Count == 0)
+                        {
+                            usuarioBanco.InserirAlertaUsuario(alerta);
+                            this._servicoExternoDePersistencia.Persistir();
+                        }
+                    }
+                }
+
+                var modelo = new ModeloDeEdicaoDeCarater(carater, EhCelular);
+                
                 return modelo;
             }
             catch (Exception ex)
@@ -425,12 +441,12 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
-        public ModeloDeHistoricoDePassagensDaLista BuscarHistoricoDePassagem(int id)
+        public ModeloDeHistoricoDePassagensDaLista BuscarHistoricoDePassagem(int id, bool EhCelular = false)
         {
             try
             {
                 var historico = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarHistoricoDePassagem(id);
-                var modelo = new ModeloDeHistoricoDePassagensDaLista(historico);
+                var modelo = new ModeloDeHistoricoDePassagensDaLista(historico, EhCelular);
                 modelo.Imagem = null;
                 return modelo;
             }
@@ -468,6 +484,56 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             catch (Exception ex)
             {
                 throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
+        public List<ModeloDeAlertaDaLista> BuscarAlertas(UsuarioLogado usuario)
+        {
+            try
+            {
+                var modelo = new List<ModeloDeAlertaDaLista>();
+                var alertas = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarNovosAlertas();
+                if(alertas != null)
+                {
+                    foreach (var alerta in alertas)
+                    {
+                        var alertasUsuario = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarAlertasUsuarios(usuario.Id, alerta.Id);
+                        var alertaUsuario = alertasUsuario.FirstOrDefault(a => a.Alerta.Id == alerta.Id);
+                        
+                        if(alertaUsuario == null)
+                            modelo.Add(new ModeloDeAlertaDaLista(alerta));
+                    }
+                }
+
+                return modelo;
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível buscar os alertas: " + ex.InnerException);
+            }
+        }
+
+        public string RealizarBaixaAlertaUsuario(UsuarioLogado usuario)
+        {
+            try
+            {                
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                var alertas = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarNovosAlertas();
+
+                if (alertas != null)
+                {
+                    foreach (var alerta in alertas)
+                        usuarioBanco.InserirAlertaUsuario(alerta);
+                    
+                    this._servicoExternoDePersistencia.Persistir();
+                } else
+                    return "Não foi possível realizar baixa de alerta.";
+
+                return "Alerta baixado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível realizar baixa: " + ex.InnerException);
             }
         }
     }

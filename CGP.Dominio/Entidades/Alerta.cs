@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cgp.Dominio.ObjetosDeValor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,6 @@ namespace Cgp.Dominio.Entidades
 
         public HistoricoDePassagem HistoricoDePassagem { get; set; }
         public Usuario Usuario { get; set; }
-        public bool Visualizado { get; set; } = false;
+        public SituacaoDoAlerta SituacaoDoAlerta { get; set; } = SituacaoDoAlerta.Cadastrado;
     }
 }

@@ -103,6 +103,7 @@
     <Compile Include="Criptografia\IServicoDeCriptografia.cs" />
     <Compile Include="ExcecaoDeAplicacao.cs" />
     <Compile Include="GestaoDeCaraters\IServicoDeGestaoDeCaraters.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeAlertaDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeCadastroDeCarater.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeCaratersDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeEdicaoDeCarater.cs" />

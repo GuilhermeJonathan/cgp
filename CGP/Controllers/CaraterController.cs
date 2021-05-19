@@ -157,7 +157,7 @@ namespace Cgp.Controllers
             if (!id.HasValue)
                 return CaraterNaoEncontrado();
             
-            var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value, User.Logado());
+            var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value, User.Logado(), Request.Browser.IsMobileDevice);
 
             modelo.CidadesLocalizacao = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
               () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
@@ -229,12 +229,25 @@ namespace Cgp.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
         [HttpGet]
         public JsonResult HistoricoDePassagem(int id)
         {
             var historico = this._servicoDeGestaoDeCaraters.BuscarHistoricoDePassagem(id);
             return Json(new { historico }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult VerificarAlerta()
+        {
+            var resultado = this._servicoDeGestaoDeCaraters.BuscarAlertas(User.Logado());
+            return Json(new { resultado }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BaixarAlertaUsuario()
+        {
+            var retorno = this._servicoDeGestaoDeCaraters.RealizarBaixaAlertaUsuario(User.Logado());
+            var result = new { Status = retorno, Message = "Error Message" };
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

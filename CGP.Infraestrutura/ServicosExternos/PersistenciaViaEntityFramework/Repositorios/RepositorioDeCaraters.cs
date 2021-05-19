@@ -123,5 +123,39 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .FirstOrDefault(a => a.Id == id);
             return historico;
         }
+
+        public List<Alerta> PegarNovosAlertas()
+        {
+            var query = this._contexto.Set<Alerta>()
+                .Include(a => a.HistoricoDePassagem)
+                .Include(a => a.HistoricoDePassagem.Carater)
+                .Include(a => a.HistoricoDePassagem.Carater.Veiculo)
+                .AsQueryable();
+
+            query = query.Where(c => c.SituacaoDoAlerta == SituacaoDoAlerta.Cadastrado);
+
+            return query.OrderBy(a => a.DataDoCadastro).ToList();
+        }
+
+        public List<AlertaUsuario> PegarAlertasUsuarios(int idUsuario, int idAlerta)
+        {
+            var query = this._contexto.Set<AlertaUsuario>()
+                .Include(a => a.Alerta)
+                .Include(a => a.Usuario)
+                .AsQueryable();
+
+            query = query.Where(c => c.Usuario.Id == idUsuario && c.Alerta.Id == idAlerta);
+
+            return query.OrderByDescending(a => a.DataDoCadastro).ToList();
+        }
+
+        public Alerta PegarAlertaPorId(int idCarater)
+        {
+            var alerta = this._contexto.Set<Alerta>()
+                .Include(a => a.HistoricoDePassagem)
+                .Include(a => a.HistoricoDePassagem.Carater)
+                .FirstOrDefault(a => a.HistoricoDePassagem.Carater.Id == idCarater);
+            return alerta;
+        }
     }
 }

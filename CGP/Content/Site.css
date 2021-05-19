@@ -209,7 +209,30 @@
         font-size: 40px;
         color: red;
         text-shadow: 0px 0px 10px red;
+     
     }
+
+#divAlerta {
+    width: 25%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    z-index: 1000;
+}
+
+.imagemAlerta {
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    max-width: 150px;
+}
+
+#divDadosAlerta {
+    max-height: 600px !important;
+    overflow: hidden;
+}
 
 @media screen and (max-width: 900px) {
     .btnRodadaFechada {
@@ -241,5 +264,13 @@
         color: red;
         text-shadow: 0px 0px 10px red;
     }
-    
+
+    #divAlerta {
+        width: 55%;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin: 0;
+        z-index: 1000;
+    }
 }

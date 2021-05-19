@@ -35,6 +35,7 @@ namespace Cgp.Dominio.Entidades
         public string NomeGuerra { get; set; }
         public int IdUsuarioAlterou { get; set; }
         public DateTime? DataAlteracao { get; set; }
+        public ICollection<AlertaUsuario> AlertasUsuario { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -153,6 +154,14 @@ namespace Cgp.Dominio.Entidades
         public void IncluirToken(string token)
         {
             this.TokenSenha = token;
+        }
+
+        public void InserirAlertaUsuario(Alerta alerta)
+        {
+            if (this.AlertasUsuario == null)
+                this.AlertasUsuario = new List<AlertaUsuario>();
+
+            this.AlertasUsuario.Add(new AlertaUsuario(alerta, this));
         }
     }
 }

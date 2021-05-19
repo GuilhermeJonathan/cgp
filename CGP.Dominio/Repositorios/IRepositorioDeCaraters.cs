@@ -17,5 +17,8 @@ namespace Cgp.Dominio.Repositorios
         Foto PegarFotoPorId(int id);
         IList<Carater> RetornarTodosCaraters();
         HistoricoDePassagem PegarHistoricoDePassagem(int id);
+        List<Alerta> PegarNovosAlertas();
+        List<AlertaUsuario> PegarAlertasUsuarios(int idUsuario, int idAlerta);
+        Alerta PegarAlertaPorId(int idCarater);
     }
 }

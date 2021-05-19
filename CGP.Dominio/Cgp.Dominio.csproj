@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entidades\Alerta.cs" />
+    <Compile Include="Entidades\AlertaUsuario.cs" />
     <Compile Include="Entidades\Carater.cs" />
     <Compile Include="Entidades\Crime.cs" />
     <Compile Include="Entidades\Foto.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="ObjetosDeValor\Nome.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeFuncionario.cs" />
     <Compile Include="ObjetosDeValor\Senha.cs" />
+    <Compile Include="ObjetosDeValor\SituacaoDoAlerta.cs" />
     <Compile Include="ObjetosDeValor\SituacaoDoCarater.cs" />
     <Compile Include="ObjetosDeValor\Telefone.cs" />
     <Compile Include="ObjetosDeValor\PerfilDeUsuario.cs" />

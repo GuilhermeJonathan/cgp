@@ -2,10 +2,11 @@
 @{
     ViewBag.Title = "Caráters Gerais";
 }
+@{ var cssMobile = this.Request.Browser.IsMobileDevice ? "btn-block" : ""; }
+
 <form action="@Url.Action("Dashboard", "Home")" id="formBuscarCarater" method="post" enctype="multipart/form-data">
 
     <div class="content-wrapper">
-
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -21,12 +22,12 @@
                         </div>
                     }
                     else
-                    { 
+                    {
                         <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
                             <a href="#" class="btn btn-primary btnBuscarCidades btnBotaoTopo" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Buscar por Cidades</a>
                         </div>
                         <div class="col-lg-2 col-sm-12 col-xs-12 text-center">
-                            <a href="@Url.Action("Cadastrar", "Carater" )" class="btn btn-default btnBotaoTopo" > <i class="fas fa-car-alt"></i> Novo Caráter </a>
+                            <a href="@Url.Action("Cadastrar", "Carater" )" class="btn btn-default btnBotaoTopo"> <i class="fas fa-car-alt"></i> Novo Caráter </a>
                         </div>
                     }
 
@@ -65,16 +66,37 @@
                                 </div>
                             </div>
                         }
-                    } else
+                    }
+                    else
                     {
                         <div class="col-12">
                             <div class="small-box bg-default">
                                 <div class="inner">Nenhum caráter nas últimas 72 horas.</div>
                             </div>
-                        </div>   
+                        </div>
                     }
                 </div>
                 <div class="row" id="divDadosNovos" style="margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <div class="modal-dialog-new hide" id="divAlerta" tabindex="-1" role="dialog" aria-labelledby="trackModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Alerta de Passagem<span class="spnTitulo"></span></h4>
+                        <button type="button" class="close btnFecharModal" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="divDadosAlerta"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default @cssMobile pull-left btnFecharModal" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-default @cssMobile pull-left btnBaixarAlerta" data-dismiss="modal">Marcar como visto</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -126,8 +148,8 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <input type="hidden" class="IdCaraterSelecionado"/>
-                    
+                    <input type="hidden" class="IdCaraterSelecionado" />
+
                 </div>
                 <div class="modal-body">
                     <div class="card divDados">
@@ -163,6 +185,62 @@
 <script type="text/javascript" language="javascript">
 
     $(function () {
+
+        $(document).ready(function () {
+            $("#divAlerta").hide();
+            verificaAlerta();
+        });
+
+        var interval = setInterval(function () {
+            verificaAlerta();
+        }, 15000/* 15s */);
+
+        function verificaAlerta() {
+            var tabela = "";
+            $.ajax({
+                type: 'GET',
+                url: '/Carater/VerificarAlerta',
+                success: function (resultado) {
+                    $("#divAlerta").show("fast");
+                    if (resultado.resultado.length > 0) {
+                        tabela += "<div class='row'>";
+                        $(resultado.resultado).each(function () {
+                            var item = $(this);
+                            tabela += "<div class='col-sm-12 col-lg-12'>";
+                            tabela += "<div class='small-box bg-default'> ";
+                            tabela += "<div class='row'> <div <div class='col-lg-4'><img class='imagemAlerta' src='" + item[0].Arquivo + "' style='' alt='Imagem veículo' /> </div>";
+                            tabela += "<div class='col-lg-8'><h3>" + item[0].Placa + "</h3>";
+                            tabela += "<sup style='font-size: 16pt'>" + item[0].Local + " </sup><br>";
+                            tabela += "<sup style='font-size: 12pt'>" + item[0].DataPassagem + " </sup>";
+                            tabela += "</div></div>" + "<a href='../Carater/Detalhar/" + item[0].IdCarater + "' target='_blank' class='small-box-footer'> Visualizar <i class='fas fa-search'></i></a>";
+                            tabela += "</div></div></div>";
+                        });
+                        tabela += "</div></div>";
+                        $("#divDadosAlerta").html(tabela).show();
+
+                    } else {
+                        $("#divDadosAlerta").html("").hide();
+                        $("#divAlerta").hide();
+                    }
+                }
+            });
+        }
+
+        $(".btnFecharModal").button().click(function () {
+            $("#divAlerta").hide();
+        });
+
+        $(".btnBaixarAlerta").button().click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '../Carater/BaixarAlertaUsuario',
+                success: function (resultado) {
+                    campeonatoGeral.AdicionarMensagemDeSucesso(resultado.retorno);
+                    verificaAlerta();
+                }
+            });
+        });
+
         $(".btnBuscarCidades").button().click(function () {
             var form = $("#modalBuscarPorCidades");
             form.modal('show');
@@ -180,14 +258,12 @@
         });
 
         function abrirBaixa(idCarater) {
-            debugger;
             $(".IdCaraterSelecionado").val(idCarater);
             var form = $("#modalRealizarBaixa");
             form.modal('show');
         }
 
         $(".txtBuscar").keyup(function () {
-            
             var placa = $(this).val();
             var divDados = $("#divDados");
             var tabela = "";
@@ -206,7 +282,7 @@
                             if (resultado.Lista.length > 0) {
                                 $(resultado.Lista).each(function () {
                                     divDados.hide();
-                                    
+
                                     var item = $(this);
                                     tabela += "<div class='col-sm-12 col-lg-4'>";
                                     tabela += "<div class='small-box bg-default'> <div class='inner'>";
@@ -247,7 +323,7 @@
             var form = $("#modalRealizarBaixa");
             form.modal('show');
         });
-        
+
         $(".btnRealizarBaixa").button().click(function () {
             var idCarater = $(".IdCaraterSelecionado").val();
             var descricao = $(".txtDescricao").val();
