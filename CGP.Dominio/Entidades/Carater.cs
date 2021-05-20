@@ -88,6 +88,15 @@ namespace Cgp.Dominio.Entidades
             this.Atualizar(usuario);
         }
 
+        public void RealizarBaixaAlertas()
+        {
+            if(this.HistoricosDePassagens != null)
+            {
+                foreach (var historico in HistoricosDePassagens)
+                    historico.RealizarBaixaAlertas();
+            }
+        }
+
         public void AdicionarHistorico(HistoricoDeCarater historico)
         {
             if (this.HistoricosDeCaraters == null)

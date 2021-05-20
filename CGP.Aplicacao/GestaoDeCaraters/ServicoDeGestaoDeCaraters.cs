@@ -213,15 +213,10 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(id);
                 var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
                 var cidadeBanco = this._servicoExternoDePersistencia.RepositorioDeCidades.PegarPorId(cidade);
-                var alertas = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarTodosAlertaPorCarater(carater.Id);
-
-                carater.RealizarBaixaVeiculo(descricao, cidadeBanco, usuarioBanco);
-                if(alertas != null)
-                {
-                    foreach (var alerta in alertas)
-                        alerta.SituacaoDoAlerta = SituacaoDoAlerta.Finalizado;
-                }
                 
+                carater.RealizarBaixaVeiculo(descricao, cidadeBanco, usuarioBanco);
+                carater.RealizarBaixaAlertas();
+                     
                 var descricaHistorico = $"{descricao} <br>Cidade: {cidadeBanco.Descricao}.";
 
                 carater.AdicionarHistorico(new HistoricoDeCarater("Realizou baixa do Caráter", descricaHistorico, TipoDeHistoricoDeCarater.Baixa, usuarioBanco, carater.Id));

@@ -65,6 +65,7 @@ namespace Cgp.Aplicacao.Processos.Servicos
                     {
                         Console.WriteLine($"*********** VEÍCULO BAIXADO: {carater.Veiculo.Placa}");
                         carater.RealizarBaixaAutomatica(descricaoBaixa, usuarioBanco);
+                        carater.RealizarBaixaAlertas();
                         carater.AdicionarHistorico(new HistoricoDeCarater("Realizou baixa do Caráter", descricaoBaixa, TipoDeHistoricoDeCarater.Baixa, usuarioBanco, carater.Id));
                     }
                 }

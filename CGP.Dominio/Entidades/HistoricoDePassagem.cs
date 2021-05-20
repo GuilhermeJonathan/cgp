@@ -32,5 +32,15 @@ namespace Cgp.Dominio.Entidades
         public string Longitude { get; set; }
         public Carater Carater { get; set; }
         public TipoDeHistoricoDePassagem TipoDeHistoricoDePassagem { get; set; }
+        public ICollection<Alerta> Alertas { get; set; }
+
+        public void RealizarBaixaAlertas()
+        {
+            if(this.Alertas != null)
+            {
+                foreach (var alerta in Alertas)
+                    alerta.SituacaoDoAlerta = SituacaoDoAlerta.Finalizado;
+            }
+        }
     }
 }

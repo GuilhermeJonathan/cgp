@@ -69,6 +69,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.HistoricosDeCaraters)
                 .Include(a => a.HistoricosDeCaraters.Select(b => b.Usuario))
                 .Include(a => a.HistoricosDePassagens)
+                .Include(a => a.HistoricosDePassagens.Select(c => c.Alertas))
                 .FirstOrDefault(a => a.Id == id);
         }
 
@@ -109,6 +110,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Veiculo)
                 .Include(a => a.Cidade)
                 .Include(a => a.Crime)
+                .Include(a => a.HistoricosDePassagens)
+                .Include(a => a.HistoricosDePassagens.Select(b => b.Alertas))
                 .AsQueryable();
 
             query = query.Where(c => c.SituacaoDoCarater == SituacaoDoCarater.Cadastrado);

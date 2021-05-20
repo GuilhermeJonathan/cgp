@@ -21,7 +21,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.HistoricosDeCaraters = new List<ModeloDeHistoricoDeCaraterDaLista>();
             this.Fotos = new List<ModeloDeFotosDaLista>();
             this.DataHistorico = DateTime.Now.ToShortDateString();
-            this.HoraHistorico = DateTime.Now.ToShortTimeString();
+            //this.HoraHistorico = DateTime.Now.ToShortTimeString();
         }
 
         public ModeloDeEdicaoDeCarater(Carater carater, bool ehCelular)
@@ -30,7 +30,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 return;
             
             this.DataHistorico = DateTime.Now.ToShortDateString();
-            this.HoraHistorico = DateTime.Now.ToShortTimeString();
+            //this.HoraHistorico = DateTime.Now.ToShortTimeString();
 
             var situacoesBaixas = new Dominio.ObjetosDeValor.SituacaoDoCarater[] { Dominio.ObjetosDeValor.SituacaoDoCarater.Localizado, Dominio.ObjetosDeValor.SituacaoDoCarater.BaixaAutomatica };
 
