@@ -29,5 +29,11 @@ namespace Cgp.Dominio.Entidades
         public Carater Carater { get; set; }
         public TipoDeHistoricoDeCarater TipoDeHistoricoDeCarater { get; set; }
         public int IdEntidade { get; set; }
+        public bool Excluido { get; set; } = false;
+
+        public void Excluir()
+        {
+            this.Excluido = true;
+        }
     }
 }

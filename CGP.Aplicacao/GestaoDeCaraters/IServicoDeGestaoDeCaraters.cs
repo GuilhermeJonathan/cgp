@@ -27,5 +27,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         ModeloDeHistoricoDePassagensDaLista BuscarHistoricoDePassagem(int id, bool EhCelular = false);
         List<ModeloDeAlertaDaLista> BuscarAlertas(UsuarioLogado usuario);
         string RealizarBaixaAlertaUsuario(UsuarioLogado usuario);
+        string ExcluirCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
+        string ExcluirHistorico(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
+        string ExcluirHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
     }
 }

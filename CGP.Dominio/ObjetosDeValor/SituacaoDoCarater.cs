@@ -13,6 +13,8 @@ namespace Cgp.Dominio.ObjetosDeValor
         Cadastrado = 1,
         Localizado = 2,
         [Description("Baixa Automática")]
-        BaixaAutomatica = 3
+        BaixaAutomatica = 3,
+        [Description("Excluído")]
+        Excluido = 4
     }
 }

@@ -18,7 +18,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
 
         public ModeloDeHistoricoDeCaraterDaLista(HistoricoDeCarater historico, List<Foto> fotos)
         {
-            var exibeBotao = new List<TipoDeHistoricoDeCarater> { TipoDeHistoricoDeCarater.Historico };
+            var exibeBotao = new List<TipoDeHistoricoDeCarater> { TipoDeHistoricoDeCarater.HistoricoCarater };
             var exibeDescricao = new List<TipoDeHistoricoDeCarater> { TipoDeHistoricoDeCarater.Historico, TipoDeHistoricoDeCarater.Baixa };
 
             if (historico == null)
@@ -39,8 +39,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.IconeDoTipo = RetornaIconeDoTipo(historico.TipoDeHistoricoDeCarater);
             this.TempoDecorrido = TimeAgo(historico.DataDoCadastro);
 
-            //this.ExibeBotao = exibeBotao.Contains(historico.TipoDeHistoricoDeCarater);
-            this.ExibeBotao = false;
+            this.ExibeBotao = exibeBotao.Contains(historico.TipoDeHistoricoDeCarater);
+            
             this.ExibeDescricao = exibeDescricao.Contains(historico.TipoDeHistoricoDeCarater);
 
             if (fotos != null && fotos.Count > 0)
@@ -90,6 +90,12 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                     break;
                 case TipoDeHistoricoDeCarater.HistoricoPassagem:
                     retorno = "fas fa-car-side bg-blue";
+                    break;
+                case TipoDeHistoricoDeCarater.HistoricoCarater:
+                    retorno = "fas fa-comments bg-green";
+                    break;
+                case TipoDeHistoricoDeCarater.Exclusao:
+                    retorno = "fas fa-times bg-red";
                     break;
                 default:
                     break;

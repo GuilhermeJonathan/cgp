@@ -33,6 +33,7 @@ namespace Cgp.Dominio.Entidades
         public Carater Carater { get; set; }
         public TipoDeHistoricoDePassagem TipoDeHistoricoDePassagem { get; set; }
         public ICollection<Alerta> Alertas { get; set; }
+        public bool Excluido { get; set; } = false;
 
         public void RealizarBaixaAlertas()
         {
@@ -41,6 +42,12 @@ namespace Cgp.Dominio.Entidades
                 foreach (var alerta in Alertas)
                     alerta.SituacaoDoAlerta = SituacaoDoAlerta.Finalizado;
             }
+        }
+
+        public void Excluir()
+        {
+            this.Excluido = true;
+            this.RealizarBaixaAlertas();
         }
     }
 }

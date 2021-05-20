@@ -17,7 +17,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.Crimes = new List<SelectListItem>();
             this.Cidades = new List<SelectListItem>();
             this.Cidades = new List<SelectListItem>();
-            this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>();
+            this.SituacoesDoCarater = ListaDeItensDeDominio.DoEnumComOpcaoPadrao<SituacaoDoCarater>(ignorarEnum: new string[] { "Excluído"});
         }
 
         public string Placa { get; set; }

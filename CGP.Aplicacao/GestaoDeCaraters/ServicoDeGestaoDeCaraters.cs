@@ -436,7 +436,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(modelo.Id);
                 var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
 
-                carater.AdicionarHistorico(new HistoricoDeCarater("Incluiu histórico no caráter", modelo.DescricaoHistorico, TipoDeHistoricoDeCarater.Historico, usuarioBanco, carater.Id));
+                carater.AdicionarHistorico(new HistoricoDeCarater("Incluiu histórico no caráter", modelo.DescricaoHistorico, TipoDeHistoricoDeCarater.HistoricoCarater, usuarioBanco, carater.Id));
 
                 this._servicoExternoDePersistencia.Persistir();
 
@@ -541,6 +541,69 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             catch (Exception ex)
             {
                 throw new ExcecaoDeAplicacao("Não foi possível realizar baixa: " + ex.InnerException);
+            }
+        }
+
+        public string ExcluirCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(modelo.Id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                if (carater != null)
+                    carater.Excluir();
+
+                carater.AdicionarHistorico(new HistoricoDeCarater("Excluiu o caráter", modelo.DescricaoHistorico, TipoDeHistoricoDeCarater.Exclusao, usuarioBanco, carater.Id));
+
+                this._servicoExternoDePersistencia.Persistir();
+                return "Caráter excluído com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível excluir o caráter: " + ex.InnerException);
+            }
+        }
+
+        public string ExcluirHistorico(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(modelo.Id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                if (carater.HistoricosDeCaraters != null)
+                    carater.ExcluirHistoricoCarater(modelo.IdHistorico);
+
+                carater.AdicionarHistorico(new HistoricoDeCarater("Excluiu histórico do caráter", modelo.DescricaoHistorico, TipoDeHistoricoDeCarater.Exclusao, usuarioBanco, carater.Id));
+
+                this._servicoExternoDePersistencia.Persistir();
+                return "Histórico excluído com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível excluir o histórico: " + ex.InnerException);
+            }
+        }
+
+        public string ExcluirHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario)
+        {
+            try
+            {
+                var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(modelo.Id);
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+
+                if(carater.HistoricosDePassagens != null)
+                    carater.ExcluirHistoricoPassagem(modelo.IdHistorico);
+                 
+                carater.AdicionarHistorico(new HistoricoDeCarater("Excluiu histórico do caráter", modelo.DescricaoHistorico, TipoDeHistoricoDeCarater.Exclusao, usuarioBanco, carater.Id));
+
+                this._servicoExternoDePersistencia.Persistir();
+                return "Histórico excluído com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Não foi possível excluir o histórico: " + ex.InnerException);
             }
         }
     }

@@ -1,0 +1,29 @@
+﻿@model Cgp.Aplicacao.GestaoDeCaraters.Modelos.ModeloDeEdicaoDeCarater
+
+<form role="form" id="formExcluirHistorico" action="@Url.Action("ExcluirHistorico", "Carater")" method="post">
+    <div class="modal fade" id="modalExcluirHistorico" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmação</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    @Html.HiddenFor(c => c.Id, new { @class = "Id" })
+                    @Html.HiddenFor(c => c.IdHistorico, new { @class = "IdHistorico" })
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span class="spnTextoConfirmacao">Tem certeza que deseja excluir o histórico?</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger float-left" data-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-success float-right">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

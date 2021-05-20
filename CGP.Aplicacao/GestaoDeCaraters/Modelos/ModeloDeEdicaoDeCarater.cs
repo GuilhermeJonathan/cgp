@@ -30,8 +30,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 return;
             
             this.DataHistorico = DateTime.Now.ToShortDateString();
-            //this.HoraHistorico = DateTime.Now.ToShortTimeString();
-
+            
             var situacoesBaixas = new Dominio.ObjetosDeValor.SituacaoDoCarater[] { Dominio.ObjetosDeValor.SituacaoDoCarater.Localizado, Dominio.ObjetosDeValor.SituacaoDoCarater.BaixaAutomatica };
 
             this.HistoricosDeCaraters = new List<ModeloDeHistoricoDeCaraterDaLista>();
@@ -81,12 +80,12 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 this.UsuarioLocalizacao = $"Baixa por {usuario} no dia {dataHora.ToString("dd/MM")} às {dataHora.ToString("HH:mm")}";
             }
 
-            carater.HistoricosDeCaraters.OrderByDescending(a => a.DataDoCadastro).ToList().ForEach(a => this.HistoricosDeCaraters.Add(new ModeloDeHistoricoDeCaraterDaLista(a, carater.Fotos.ToList())));
+            carater.HistoricosDeCaraters.Where(a => !a.Excluido).OrderByDescending(a => a.DataDoCadastro).ToList().ForEach(a => this.HistoricosDeCaraters.Add(new ModeloDeHistoricoDeCaraterDaLista(a, carater.Fotos.ToList())));
+            carater.HistoricosDePassagens.Where(a => !a.Excluido).OrderByDescending(a => a.DataDoCadastro).ToList().ForEach(a => this.HistoricosDePassagens.Add(new ModeloDeHistoricoDePassagensDaLista(a, ehCelular)));
             carater.Fotos.Where(a => a.Ativo).ToList().ForEach(a => this.Fotos.Add(new ModeloDeFotosDaLista(a)));
             
-            carater.HistoricosDePassagens.OrderByDescending(a => a.DataDoCadastro).ToList().ForEach(a => this.HistoricosDePassagens.Add(new ModeloDeHistoricoDePassagensDaLista(a, ehCelular)));
             this.SeloAtenas = carater.SeloAtenas;
-
+            this.Excluido = carater.Excluido;
         }
 
         public int Id { get; set; }
@@ -126,6 +125,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string DataHistorico { get; set; }
         public string HoraHistorico { get; set; }
         public bool SeloAtenas { get; set; }
+        public int IdHistorico { get; set; }
+        public bool Excluido { get; set; }
 
         public IList<ModeloDeHistoricoDeCaraterDaLista> HistoricosDeCaraters{ get; set; }
         public IList<ModeloDeFotosDaLista> Fotos { get; set; }

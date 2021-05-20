@@ -35,7 +35,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-2">
-                                    @Html.InputTextFor(a => a.Filtro.Placa, "Placa", required: false)
+                                    @Html.InputTextFor(a => a.Filtro.Placa, "Fragmento", required: false, placeholder:"Ex. placa, marca, modelo...")
                                 </div>
                                 <div class="col-lg-2">
                                     <label class="control-label"> Data Início </label>
@@ -59,8 +59,9 @@
                         </div>
                         <div class="card-footer">
                             <a href="@Url.Action("Cadastrar", "Carater" )" class="btn btn-info"> <i class="fas fa-car-alt"></i> Novo Caráter </a> &nbsp;
-                            <button type='submit' class='btn btn-warning no-load' name="exportar" value="imprimir"> <i class='fa fa-file-pdf'> </i> &nbsp; Imprimir </button>
                             <button type="submit" class="btn btn-primary float-right">Buscar</button>
+                            <button type='submit' class='btn btn-warning no-load' name="exportar" value="imprimir"> <i class='fa fa-file-pdf'> </i> &nbsp; Imprimir </button>
+                            
                         </div>
                     </div>
 

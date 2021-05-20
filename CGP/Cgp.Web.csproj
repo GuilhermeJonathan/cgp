@@ -411,6 +411,7 @@
     <Content Include="Views\Carater\_VisualizarHistorico.cshtml" />
     <Content Include="Views\Carater\_AdicionarHistoricoPassagem.cshtml" />
     <Content Include="Views\Carater\_AdicionarHistorico.cshtml" />
+    <Content Include="Views\Carater\_Confirmacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

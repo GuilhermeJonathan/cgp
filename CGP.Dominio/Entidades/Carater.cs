@@ -46,6 +46,7 @@ namespace Cgp.Dominio.Entidades
         public ICollection<HistoricoDeCarater> HistoricosDeCaraters { get; set; }
         public ICollection<HistoricoDePassagem> HistoricosDePassagens { get; set; }
         public bool SeloAtenas { get; set; }
+        public bool Excluido { get; set; }
         public bool VerificarSeJaTemEssaFoto(string descricao) => this.Fotos.Any(a => a.Caminho == descricao && a.Ativo);
 
         public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, 
@@ -119,6 +120,36 @@ namespace Cgp.Dominio.Entidades
             this.Atualizar(usuario);
 
             this.AdicionarHistorico(new HistoricoDeCarater("Incluiu histórico de passagem", "", TipoDeHistoricoDeCarater.HistoricoPassagem, usuario, this.Id));
+        }
+
+        public void Excluir()
+        {
+            this.Excluido = true;
+            this.SituacaoDoCarater = SituacaoDoCarater.Excluido;
+        }
+
+        public void ExcluirHistoricoCarater(int idHistorico)
+        {
+            if (this.HistoricosDeCaraters != null)
+            {
+                var historico = this.HistoricosDeCaraters.FirstOrDefault(a => a.Id == idHistorico);
+                if (historico != null)
+                    historico.Excluir();
+            }
+            else
+                return;
+        }
+
+        public void ExcluirHistoricoPassagem(int idHistorico)
+        {
+            if (this.HistoricosDePassagens != null)
+            {
+                var historico = this.HistoricosDePassagens.FirstOrDefault(a => a.Id == idHistorico);
+                if (historico != null)
+                    historico.Excluir();
+            }
+            else 
+                return;
         }
     }
 }

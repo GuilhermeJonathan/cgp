@@ -33,17 +33,31 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            @if (Model.Excluido) {
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <h4 class="alert-heading">ATENÇÃO!</h4>
+                                            <i class="fas fa-exclamation-triangle"></i> Este caráter foi excluído.
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                            }
                             <div class="row">
 
                                 <div class="col-sm-12 col-lg-12">
                                     <div class="small-box bg-default">
                                         <div class="inner">
                                             <p2>
-                                                <span style="font-size: 26pt; font-weight: bold;">@Model.Placa @Model.UfVeiculo 
-                                                    </span> <span style="font-size: 18pt"> 
-                                                    @Model.MarcaVeiculo @Model.ModeloVeiculo @Model.CorVeiculo 
-                                                    @if (!String.IsNullOrEmpty(Model.ChassiVeiculo)) {<span>(@Model.ChassiVeiculo)</span>}
-                                                    @if (Model.SeloAtenas) { <img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 50px;" /> }
+                                                <span style="font-size: 26pt; font-weight: bold;">
+                                                    @Model.Placa @Model.UfVeiculo
+                                                </span> <span style="font-size: 18pt">
+                                                    @Model.MarcaVeiculo @Model.ModeloVeiculo @Model.CorVeiculo @Model.AnoVeiculo
+                                                    @if (!String.IsNullOrEmpty(Model.ChassiVeiculo))
+                                                    {<span>(@Model.ChassiVeiculo)</span>}
+                                                    @if (Model.SeloAtenas)
+                                                    {<img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 50px;" />}
                                                 </span>
                                             </p2>
 
@@ -75,19 +89,22 @@
                                     </div>
                                 </div>
                             </div>
-                            @if (Model.Fotos.Count > 0)
+                            @if (Model.Fotos != null)
                             {
-                                <div class="row">
-                                    <div class="col-12 product-image-thumbs">
-                                        @foreach (var item in Model.Fotos)
-                                        {
-                                            <div class="product-image-thumb">
-                                                <img src="@item.Caminho" alt="@item.Descricao" data-id="@item.Id" class="fotoCarater">
-                                            </div>
-                                        }
+                                if (Model.Fotos.Count > 0)
+                                {
+                                    <div class="row">
+                                        <div class="col-12 product-image-thumbs">
+                                            @foreach (var item in Model.Fotos)
+                                            {
+                                                <div class="product-image-thumb">
+                                                    <img src="@item.Caminho" alt="@item.Descricao" data-id="@item.Id" class="fotoCarater">
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                                <hr />
+                                    <hr />
+                                }
                             }
                             @if (Model.RealizouBaixa)
                             {
@@ -108,42 +125,49 @@
                                 <div class="col-lg-2">
                                     @Html.BackButton() &nbsp;
                                 </div>
-                                @if (!Model.RealizouBaixa)
+                                @if (!Model.RealizouBaixa && !Model.Excluido)
                                 {
                                     <div class="col-lg-10  col-sm-12">
                                         <a href="#" class="btn btn-default @cssMobile btnAbrirBaixa" data-id="@Model.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </a>
                                         <a href="#" class="btn btn-default @cssMobile btnAbrirCadastroHistorico" data-id="@Model.Id"> <i class="fas fa-history"></i> Adicionar Histórico </a>
                                         <a href="#" class="btn btn-default @cssMobile btnAbrirCadastroHistoricoPassagem" data-id="@Model.Id"> <i class="fas fa-car-side"></i> Adicionar Passagem </a>
+                                        @if (User.EhAtenas() || User.EhAdministrador())
+                                        {<a href="#" class="btn btn-danger @cssMobile btnExcluirCarater" data-id="@Model.Id"> <i class="fas fa-times"></i> Excluir Carater </a>}
                                         <a href="@Url.Action("Editar", "Carater", new { id = Model.Id })" class="btn btn-info @cssMobile float-right"> <i class="fas fa-car-alt"></i> Editar Caráter </a>
                                     </div>
                                 }
-                                </div>
                             </div>
                         </div>
-    
-                        <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Histórico de Passagens</h3>
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Histórico de Passagens</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
                                     </div>
-                                    <div class="card-body table-responsive p-0">
-                                        @Html.Grid(Model.HistoricosDePassagens).Columns(colunas =>
+                                </div>
+                                <div class="card-body table-responsive p-0">
+                                    @Html.Grid(Model.HistoricosDePassagens).Columns(colunas =>
+                                    {
+                                        colunas.Add().Encoded(false).Sanitized(false).Css("text-center").SetWidth(30).RenderValueAs(
+                                        m => @<div class="btn-group btn-group-sm"><a href="#" data-toggle="modal" data-target="#modalVisualizarHistoricoDaPassagem" class="btn btn-info no-load buscaHistoricoDePassagem" data-id="@m.Id" title="Visualizar Histórico"> <i class="fas fa-search"></i></a></div>);
+
+                                        if (User.EhAtenas() || User.EhAdministrador())
                                         {
-                                    colunas.Add().Encoded(false).Sanitized(false).Css("text-center").SetWidth(30).RenderValueAs(
-                                    m => @<div class="btn-group btn-group-sm"><a href="#" data-toggle="modal" data-target="#modalVisualizarHistoricoDaPassagem" class="btn btn-info no-load buscaHistoricoDePassagem" data-id="@m.Id" title="Visualizar Histórico do Imóvel"> <i class="fas fa-search"></i></a></div>);
+                                            colunas.Add().Encoded(false).Sanitized(false).Css("text-center").SetWidth(30).RenderValueAs(
+                                            m => @<div class="btn-group btn-group-sm"><a href="#" data-toggle="modal" class="btn btn-info no-load btnExcluirHistoricoPassagem" 
+                                            data-id="@Model.Id" data-idHistorico="@m.Id" title="Excluir Histórico"> <i class="fas fa-times"></i> </a></div>);
+                                        }
 
-                                            colunas.Add(m => m.DataPassagem).Titled("Data Passagem");
-                                            colunas.Add(m => m.Local).Titled("Local");
+                                        colunas.Add(m => m.DataPassagem).Titled("Data Passagem");
+                                        colunas.Add(m => m.Local).Titled("Local");
 
-                                        }).WithPaging(30).Sortable(true).EmptyText("Nenhuma passagem cadastrada")
-                                    </div>
+                                    }).WithPaging(30).Sortable(true).EmptyText("Nenhuma passagem cadastrada")
                                 </div>
                             </div>
                         </div>
@@ -212,15 +236,14 @@
                                                         }
                                                     </div>
 
-                                                    @if (historico.ExibeBotao)
+                                                    @if (historico.ExibeBotao && (User.EhAtenas() || User.EhAdministrador()))
                                                     {
-                                                        <div class="timeline-footer">
-                                                            <a class="btn btn-default btn-xs buscaHistorico no-load" data-id="@historico.Id">Visualizar</a>
+                                                        <div class="timeline-footer">  
+                                                            <button type='button' class='btn btn-xs btn-danger btnExcluirHistorico' title="Excluir Histórico?" data-id="@historico.IdEntidade"  data-idHistorico="@historico.Id" value="@historico.IdEntidade"> <i class='fa fa-check'> </i> &nbsp; Excluir </button>
                                                         </div>
                                                     }
                                                 </div>
                                             </li>
-
                                             contador++;
                                         }
 
@@ -244,6 +267,7 @@
 @Html.Partial("_VisualizarHistorico")
 @Html.Partial("_AdicionarHistoricoPassagem")
 @Html.Partial("_AdicionarHistorico")
+@Html.Partial("_Confirmacao")
 
 <script>
     $(function () {
@@ -265,7 +289,6 @@
             var form = $("#modalCadastrarHistoricoPassagem");
             form.modal('show');
         });
-
 
         $(".btnAbrirCadastroHistorico").button().click(function () {
             var idCarater = $(this).attr("data-id");
@@ -355,6 +378,45 @@
                     $(".spnLocal").html(resultado.historico.Local);
                 }
             });
+        });
+
+        $(".btnExcluirCarater").button().click(function () {
+            var idCarater = $(this).attr("data-id");
+            $(".Id").val(idCarater);
+            
+            $("#formExcluirHistorico").attr("action", "../ExcluirCarater");
+            $(".spnTextoConfirmacao").html("Tem certeza que deseja excluir o caráter?");
+
+            var form = $("#modalExcluirHistorico");
+            form.modal('show');
+        });
+
+        $(".btnExcluirHistoricoPassagem").button().click(function () {
+            var idCarater = $(this).attr("data-id");
+            var idHistorico = $(this).attr("data-idHistorico");
+
+            $(".Id").val(idCarater);
+            $(".IdHistorico").val(idHistorico);
+
+            $("#formExcluirHistorico").attr("action", "../ExcluirHistoricoPassagem");
+            $(".spnTextoConfirmacao").html("Tem certeza que deseja excluir o histórico de passagem?");
+
+            var form = $("#modalExcluirHistorico");
+            form.modal('show');
+        });
+
+        $(".btnExcluirHistorico").button().click(function () {
+            var idCarater = $(this).attr("data-id");
+            var idHistorico = $(this).attr("data-idHistorico");
+
+            $(".Id").val(idCarater);
+            $(".IdHistorico").val(idHistorico);
+
+            $("#formExcluirHistorico").attr("action", "../ExcluirHistorico");
+            $(".spnTextoConfirmacao").html("Tem certeza que deseja excluir o histórico?");
+
+            var form = $("#modalExcluirHistorico");
+            form.modal('show');
         });
     })
 </script>

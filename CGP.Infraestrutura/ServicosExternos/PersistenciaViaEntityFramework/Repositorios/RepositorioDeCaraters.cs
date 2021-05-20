@@ -20,8 +20,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Crime)
                 .AsQueryable();
             
-            if(!String.IsNullOrEmpty(placa))
-                query = query.Where(c => c.Veiculo.Placa.Contains(placa));
+            if (!String.IsNullOrEmpty(placa))
+                query = query.Where(c => c.Veiculo.Placa.Contains(placa) || c.Veiculo.Marca.Contains(placa) || c.Veiculo.Modelo.Contains(placa) || c.Veiculo.Cor.Contains(placa));
 
             if (cidades != null)
                 query = query.Where(c => cidades.Contains(c.Cidade.Id));
@@ -34,6 +34,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             if (dataInicial.HasValue && dataFinal.HasValue)
                 query = query.Where(a => a.DataHoraDoFato >= dataInicial.Value && a.DataHoraDoFato <= dataFinal.Value);
+
+            query = query.Where(c => !c.Excluido);
 
             quantidadeEncontrada = query.Count();
 
@@ -83,7 +85,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             if (!String.IsNullOrEmpty(fragmento))
                 query = query.Where(c => c.Veiculo.Placa.Contains(fragmento) || c.Veiculo.Marca.Contains(fragmento) || c.Veiculo.Modelo.Contains(fragmento) || c.Veiculo.Cor.Contains(fragmento));
-            
+
+            query = query.Where(c => !c.Excluido);
 
             return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
         }

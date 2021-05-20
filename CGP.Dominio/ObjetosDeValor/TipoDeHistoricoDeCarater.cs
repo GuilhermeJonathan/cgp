@@ -20,6 +20,10 @@ namespace Cgp.Dominio.ObjetosDeValor
         [Description("Baixa")]
         Baixa = 5,
         [Description("Histórico de Passagem")]
-        HistoricoPassagem = 6
+        HistoricoPassagem = 6,
+        [Description("Histórico do Carater")]
+        HistoricoCarater = 7,
+        [Description("Exclusão")]
+        Exclusao = 8
     }
 }

@@ -249,5 +249,29 @@ namespace Cgp.Controllers
             var result = new { Status = retorno, Message = "Error Message" };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult ExcluirCarater(ModeloDeEdicaoDeCarater modelo)
+        {
+            var retorno = this._servicoDeGestaoDeCaraters.ExcluirCarater(modelo, User.Logado());
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public ActionResult ExcluirHistorico(ModeloDeEdicaoDeCarater modelo)
+        {
+            var retorno = this._servicoDeGestaoDeCaraters.ExcluirHistorico(modelo, User.Logado());
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(Detalhar), new { id = modelo.Id });
+        }
+
+        [HttpPost]
+        public ActionResult ExcluirHistoricoPassagem(ModeloDeEdicaoDeCarater modelo)
+        {
+            var retorno = this._servicoDeGestaoDeCaraters.ExcluirHistoricoPassagem(modelo, User.Logado());
+            this.AdicionarMensagemDeSucesso(retorno);
+            return RedirectToAction(nameof(Detalhar), new { id = modelo.Id });
+        }
     }
 }
