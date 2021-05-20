@@ -32,6 +32,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             this.SituacaoDoCarater = carater.SituacaoDoCarater.ToString();
             this.VeiculoLocalizado = carater.SituacaoDoCarater == Dominio.ObjetosDeValor.SituacaoDoCarater.Localizado ? true : false;
             this.CssTipoCrime = RetornaCssCrime(NomeCrime);
+            this.SeloAtenas = carater.SeloAtenas;
 
             if (carater.Veiculo != null)
             {
@@ -66,6 +67,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string SituacaoDoCarater { get; set; }
         public string CssTipoCrime { get; set; }
         public bool VeiculoLocalizado { get; set; }
+        public bool SeloAtenas { get; set; }
 
         private string RetornaCssCrime(string crime)
         {

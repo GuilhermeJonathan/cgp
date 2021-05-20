@@ -79,7 +79,7 @@
                                     <label class="control-label"> Cidade </label>
                                     @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete" })
                                 </div>
-                                
+
                                 <div class="col-lg-3">
                                     @Html.InputTextFor(a => a.ComplementoEndereco, "Complemento do Endereço", required: false)
                                 </div>
@@ -91,35 +91,49 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <label class="control-label"> Situação do Caráter </label>
                                     @Html.DropDownListFor(m => m.SituacaoDoCarater, Model.SituacoesDoCarater, new { @class = "form-control autoComplete", @readonly = true })
                                 </div>
-                                <div class="col-lg-6">
-                                    <label> @Model.UsuarioCadastro </label>
+                                @if (User.EhAtenas()) {
+                                <div class="col-lg-4">
+                                    <div style="float:left;">
+                                        <img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Selo Atenas" style="width: 50px;" />
+                                    </div>
+                                    <div class="custom-control custom-switch" style="float:left; margin-top: 15px;">
+                                        <input type="checkbox" class="custom-control-input" value="true" name="SeloAtenas" id="SeloAtenas" @(Model.SeloAtenas ? "checked" : "")>
+                                        <label class="custom-control-label" for="SeloAtenas"> SELO ATENAS</label>
+                                    </div>
                                 </div>
+                                }
                             </div>
-
                             <div class="row">
-                                <div class="col-12 col-lg-4 col-sm-12">
+                                <div class="col-12 col-lg-12 col-sm-12">
                                     <div class="form-group">
                                         <br />
                                         <div id="inserirFoto">Clique para upload de imagens</div>
                                     </div>
                                 </div>
                             </div>
-                            @if (Model.Fotos.Count > 0) {
                             <hr />
                             <div class="row">
-                                <div class="col-12 product-image-thumbs">
-                                    @foreach (var item in Model.Fotos)
-                                    {
-                                        <div class="product-image-thumb">
-                                            <img src="@item.Caminho" alt="@item.Descricao" data-id="@item.Id" class="fotoCarater">
-                                        </div>
-                                    }
+                                <div class="col-lg-6">
+                                    <label> @Model.UsuarioCadastro </label>
                                 </div>
                             </div>
+                            @if (Model.Fotos.Count > 0)
+                            {
+                                <hr />
+                                <div class="row">
+                                    <div class="col-12 product-image-thumbs">
+                                        @foreach (var item in Model.Fotos)
+                                        {
+                                            <div class="product-image-thumb">
+                                                <img src="@item.Caminho" alt="@item.Descricao" data-id="@item.Id" class="fotoCarater">
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
                             }
                         </div>
                         <hr />

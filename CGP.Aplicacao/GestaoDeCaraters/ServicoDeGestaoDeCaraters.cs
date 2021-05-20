@@ -194,7 +194,10 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                     dataHoraFato = new DateTime(data.Year, data.Month, data.Day, hora.Hour, hora.Minute, 0);
                 }
 
-                carater.AlterarDados(modelo.Descricao, modelo.ComplementoEndereco, dataHoraFato, cidade, crime, veiculo,  modelo.UrlImagem, usuarioBanco);
+                if (!carater.SeloAtenas && modelo.SeloAtenas)
+                    carater.AdicionarHistorico(new HistoricoDeCarater("Incluiu o selo Atenas ao Caráter", String.Empty, TipoDeHistoricoDeCarater.Historico, usuarioBanco, carater.Id));
+
+                carater.AlterarDados(modelo.Descricao, modelo.ComplementoEndereco, dataHoraFato, cidade, crime, veiculo,  modelo.UrlImagem, usuarioBanco, modelo.SeloAtenas);
 
                 this._servicoExternoDePersistencia.Persistir();
 
@@ -407,8 +410,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                                 
                 if (!string.IsNullOrEmpty(modelo.DataHistorico) && !string.IsNullOrEmpty(modelo.HoraHistorico))
                 {
-                    var data = Convert.ToDateTime(modelo.Data);
-                    var hora = Convert.ToDateTime(modelo.Hora);
+                    var data = Convert.ToDateTime(modelo.DataHistorico);
+                    var hora = Convert.ToDateTime(modelo.HoraHistorico);
                     dataHoraFato = new DateTime(data.Year, data.Month, data.Day, hora.Hour, hora.Minute, 0);
                 }
 

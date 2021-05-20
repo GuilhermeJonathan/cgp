@@ -39,10 +39,11 @@
                                     <div class="small-box bg-default">
                                         <div class="inner">
                                             <p2>
-                                                <span style="font-size: 26pt; font-weight: bold;">@Model.Placa @Model.UfVeiculo</span> <span style="font-size: 18pt">
-                                                    @Model.MarcaVeiculo @Model.ModeloVeiculo @Model.CorVeiculo
-                                                    @if (!String.IsNullOrEmpty(Model.ChassiVeiculo))
-                                                    {<span>(@Model.ChassiVeiculo)</span>}
+                                                <span style="font-size: 26pt; font-weight: bold;">@Model.Placa @Model.UfVeiculo 
+                                                    </span> <span style="font-size: 18pt"> 
+                                                    @Model.MarcaVeiculo @Model.ModeloVeiculo @Model.CorVeiculo 
+                                                    @if (!String.IsNullOrEmpty(Model.ChassiVeiculo)) {<span>(@Model.ChassiVeiculo)</span>}
+                                                    @if (Model.SeloAtenas) { <img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 50px;" /> }
                                                 </span>
                                             </p2>
 

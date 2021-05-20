@@ -85,6 +85,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             carater.Fotos.Where(a => a.Ativo).ToList().ForEach(a => this.Fotos.Add(new ModeloDeFotosDaLista(a)));
             
             carater.HistoricosDePassagens.OrderByDescending(a => a.DataDoCadastro).ToList().ForEach(a => this.HistoricosDePassagens.Add(new ModeloDeHistoricoDePassagensDaLista(a, ehCelular)));
+            this.SeloAtenas = carater.SeloAtenas;
 
         }
 
@@ -124,6 +125,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string DescricaoHistorico { get; set; }
         public string DataHistorico { get; set; }
         public string HoraHistorico { get; set; }
+        public bool SeloAtenas { get; set; }
 
         public IList<ModeloDeHistoricoDeCaraterDaLista> HistoricosDeCaraters{ get; set; }
         public IList<ModeloDeFotosDaLista> Fotos { get; set; }

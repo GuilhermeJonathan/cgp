@@ -57,7 +57,7 @@
                                 <div class="small-box bg-default">
                                     <div class="inner">
                                         <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
-                                        <sup style="font-size: 16pt"> @item.NomeVeiculo @item.CorVeiculo</sup>
+                                        <sup style="font-size: 16pt"> @item.NomeVeiculo @item.CorVeiculo @item.AnoVeiculo @if (item.SeloAtenas) {<img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 30px;" />}</sup>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;"> <span class="@item.CssTipoCrime">@item.NomeCrime </span> no dia  @item.DataDoFato</p>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.NomeCidade @item.ComplementoEnderecoTradado</p>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.Descricao</p>
@@ -290,7 +290,9 @@
                                     tabela += "<h3>" + item[0].PlacaVeiculo;
                                     if (!item[0].VeiculoLocalizado) tabela += "<a type='button' class='btn btn-xs btn-default' href='../Carater/Detalhar/" + item[0].Id + "'> <i class='fas fa-arrow-alt-circle-down'></i> Realizar Baixa </a>";
                                     tabela += "</h3>";
-                                    tabela += "<sup style='font-size: 16pt'>" + item[0].NomeVeiculo + item[0].CorVeiculo + " </sup>";
+                                    tabela += "<sup style='font-size: 16pt'>" + item[0].NomeVeiculo + item[0].CorVeiculo;
+                                    if (item[0].SeloAtenas) tabela += "<img src='../Content/images/seloAtenas.png' alt='selo atenas' title='Este Caráter foi validado pelo Atenas.' style='width: 30px;' />"
+                                    tabela += " </sup>";
                                     if (item[0].VeiculoLocalizado) tabela += "<sup style='font-size: 16pt' class='badge bg-warning'>Veículo localizado.</sup>";
                                     tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'> <span class='" + item[0].CssTipoCrime + "'>" + item[0].NomeCrime + "</span> no dia " + item[0].DataDoFato + "</p>";
                                     tabela += "<p style='font-size: 14pt; margin-bottom: 0px !important;'>" + item[0].NomeCidade + " - " + item[0].ComplementoEndereco + "</p>";

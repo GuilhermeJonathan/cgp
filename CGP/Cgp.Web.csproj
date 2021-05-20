@@ -230,6 +230,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\images\avatar-anonimo.png" />
+    <Content Include="Content\images\seloAtenas.png" />
     <Content Include="Content\logo_pmdf.png" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\images\user2-160x160.jpg" />

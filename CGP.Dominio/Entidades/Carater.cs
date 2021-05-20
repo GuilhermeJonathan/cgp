@@ -45,9 +45,11 @@ namespace Cgp.Dominio.Entidades
         public ICollection<Foto> Fotos { get; set; }
         public ICollection<HistoricoDeCarater> HistoricosDeCaraters { get; set; }
         public ICollection<HistoricoDePassagem> HistoricosDePassagens { get; set; }
+        public bool SeloAtenas { get; set; }
         public bool VerificarSeJaTemEssaFoto(string descricao) => this.Fotos.Any(a => a.Caminho == descricao && a.Ativo);
 
-        public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, string urlImagem, Usuario usuario)
+        public void AlterarDados(string descricao, string complementoEndereco, DateTime dataHora, Cidade cidade, Crime crime, Veiculo veiculo, 
+            string urlImagem, Usuario usuario, bool seloAtenas)
         {
             var descricaoHistorico = String.Empty;
 
@@ -58,6 +60,7 @@ namespace Cgp.Dominio.Entidades
             this.Crime = crime;
             this.Veiculo = veiculo;
             this.UrlImagem = urlImagem;
+            this.SeloAtenas = seloAtenas;
             this.Atualizar(usuario);
 
             this.AdicionarHistorico(new HistoricoDeCarater("Alterou os dados do Caráter", descricaoHistorico, TipoDeHistoricoDeCarater.Historico, usuario, this.Id));
