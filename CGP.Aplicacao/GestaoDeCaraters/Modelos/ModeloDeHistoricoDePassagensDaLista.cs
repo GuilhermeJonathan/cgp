@@ -28,6 +28,13 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             if(historico.TipoDeHistoricoDePassagem == TipoDeHistoricoDePassagem.Automatico)
             {
                 this.Arquivo = caminho;
+            } else if(historico.TipoDeHistoricoDePassagem == TipoDeHistoricoDePassagem.Manual)
+            {
+                if (!String.IsNullOrEmpty(historico.Arquivo))
+                {
+                    var caminhoBlob = $"{VariaveisDeAmbiente.Pegar<string>("azure:caminhoDoBlob")}fotos/{historico.Arquivo}";
+                    this.Arquivo = caminhoBlob;
+                }
             }
             else if (!String.IsNullOrEmpty(historico.Arquivo))
             {

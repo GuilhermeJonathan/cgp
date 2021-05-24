@@ -400,33 +400,53 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
-        public string AdicionarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario)
+        public async Task<string> AdicionarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario, HttpPostedFileBase imagem)
         {
-            try
-            {
-                DateTime dataHoraFato = new DateTime();
-                var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(modelo.Id);
-                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+            DateTime dataHoraFato = new DateTime();
+            var carater = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarPorId(modelo.Id);
+            var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
                                 
-                if (!string.IsNullOrEmpty(modelo.DataHistorico) && !string.IsNullOrEmpty(modelo.HoraHistorico))
-                {
-                    var data = Convert.ToDateTime(modelo.DataHistorico);
-                    var hora = Convert.ToDateTime(modelo.HoraHistorico);
-                    dataHoraFato = new DateTime(data.Year, data.Month, data.Day, hora.Hour, hora.Minute, 0);
-                }
+            if (!string.IsNullOrEmpty(modelo.DataHistorico) && !string.IsNullOrEmpty(modelo.HoraHistorico))
+            {
+                var data = Convert.ToDateTime(modelo.DataHistorico);
+                var hora = Convert.ToDateTime(modelo.HoraHistorico);
+                dataHoraFato = new DateTime(data.Year, data.Month, data.Day, hora.Hour, hora.Minute, 0);
+            }
 
-                var historicoPassagem = new HistoricoDePassagem(dataHoraFato, modelo.DescricaoHistorico, carater.Veiculo != null ? carater.Veiculo.Placa : String.Empty, String.Empty);
+            var historicoPassagem = new HistoricoDePassagem(dataHoraFato, modelo.DescricaoHistorico, carater.Veiculo != null ? carater.Veiculo.Placa : String.Empty, String.Empty);
+            carater.AdicionarHistoricoPassagem(historicoPassagem, usuarioBanco);
 
-                carater.AdicionarHistoricoPassagem(historicoPassagem, usuarioBanco);
+            if(imagem != null)
+            {
+                int MaxContentLength = 1024 * 1024 * 3; //3 MB
+                string[] AllowedFileExtensions = new string[] { ".jpg", ".png" };
+                var extensao = imagem.FileName.Substring(imagem.FileName.LastIndexOf('.'));
 
+                if (!AllowedFileExtensions.Contains(imagem.FileName.Substring(imagem.FileName.LastIndexOf('.'))))
+                    throw new ExcecaoDeAplicacao("Extensão não permitida. Favor enviar somente: '.jpg', '.png'.");
+
+                if (imagem.ContentLength > MaxContentLength)
+                    throw new ExcecaoDeAplicacao("Permitido enviar no máximo 3mb.");
+
+                var caminho = _servicoDeGeracaoDeHashSha.GerarParaStream(imagem.InputStream) + extensao;
+                var caminhoBlob = $"fotos";
+
+                historicoPassagem.Arquivo = caminho;
                 this._servicoExternoDePersistencia.Persistir();
 
-                return "Histórico cadastrado com sucesso.";
+                try
+                {
+                    imagem.InputStream.Position = 0;
+                    await this._servicoExternoDeArmazenamentoEmNuvem.EnviarArquivoAsync(imagem.InputStream, caminhoBlob, caminho);
+                } catch(Exception ex)
+                {
+                    throw new ExcecaoDeAplicacao("Não foi possível salvar o arquivo:" + ex.InnerException);
+                }
             }
-            catch (Exception ex)
-            {
-                throw new ExcecaoDeAplicacao("Não foi possível cadastrar o histórico: " + ex.InnerException);
-            }
+
+            this._servicoExternoDePersistencia.Persistir();
+
+            return "Histórico cadastrado com sucesso.";
         }
 
         public string AdicionarHistoricoCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario)
@@ -454,7 +474,6 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             {
                 var historico = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarHistoricoDePassagem(id);
                 var modelo = new ModeloDeHistoricoDePassagensDaLista(historico, EhCelular);
-                modelo.Imagem = null;
                 return modelo;
             }
             catch (Exception ex)

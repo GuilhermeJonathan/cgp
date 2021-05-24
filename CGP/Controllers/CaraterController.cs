@@ -134,10 +134,9 @@ namespace Cgp.Controllers
         }
 
         [HttpPost]
-        public ActionResult SalvarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo)
+        public async Task<ActionResult> SalvarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, HttpPostedFileBase file)
         {
-            var retorno = this._servicoDeGestaoDeCaraters.AdicionarHistoricoPassagem(modelo, User.Logado());
-
+            var retorno = await this._servicoDeGestaoDeCaraters.AdicionarHistoricoPassagem(modelo, User.Logado(), file);
             this.AdicionarMensagemDeSucesso(retorno);
             return RedirectToAction(nameof(Detalhar), new { id = modelo.Id });
         } 

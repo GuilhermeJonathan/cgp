@@ -22,7 +22,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         bool VerificaCadastroDeCarater(string placa);
         Task<string> AdicionarFotos(int id, HttpFileCollectionBase files, UsuarioLogado usuario);
         string ExcluirFoto(int id, UsuarioLogado usuario);
-        string AdicionarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
+        Task<string> AdicionarHistoricoPassagem(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario, HttpPostedFileBase imagem);
         string AdicionarHistoricoCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
         ModeloDeHistoricoDePassagensDaLista BuscarHistoricoDePassagem(int id, bool EhCelular = false);
         List<ModeloDeAlertaDaLista> BuscarAlertas(UsuarioLogado usuario);
