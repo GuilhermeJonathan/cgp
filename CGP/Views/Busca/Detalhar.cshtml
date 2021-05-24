@@ -1,0 +1,229 @@
+﻿@model Cgp.Aplicacao.BuscaVeiculo.Modelos.ModeloDeBuscaDaLista
+
+@{
+    ViewBag.Title = "Detalhar Veículo";
+}
+
+@{ var cssMobile = this.Request.Browser.IsMobileDevice ? "btn-block" : "";}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Busca" )">Busca Veicular</a></li>
+                        <li class="breadcrumb-item active">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="@Url.Action("Index", "Busca")" method="post">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Dados do Veículo</h3>
+                        </div>
+                        <div class="card-body">
+                            @if (Model.TemRestricao)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <h4 class="alert-heading">ATENÇÃO!</h4>
+                                            <i class="fas fa-exclamation-triangle"></i> VEÍCULO COM RESTRIÇÃO DE ROUBO/FURTO.
+                                            <button type='button' class='btn btn-default btnExibirRestricao' title="Visualizar Ocorrência"> <i class='fa fa-search'> </i> &nbsp; Visualizar Restrição </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                            }
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Placa:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.Placa, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Marca/Modelo:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.MarcaModelo, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Ano/Modelo:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.AnoModelo, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Cor:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.Cor, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Município:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.Municipio, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Renavam:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.Renavam, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Chassi:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.Chassi, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">N. Motor:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.Motor, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Último CRV:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.UltimoCRV, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Atualiação:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.Atualizacao, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Situação:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.Situacao, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">PROPRIETÁRIO</label>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Nome:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.NomeProprietario, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Documento:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.DocumentoProprietario, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Endereço:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.EnderecoProprietario, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">POSSUIDOR</label>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Nome:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.NomePossuidor, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Documento:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.DocumentoPossuidor, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label for="Placa" class="col-sm-2 col-form-label">Endereço:</label>
+                                <div class="col-sm-10">
+                                    @Html.InputTextFor(a => a.EnderecoPossuidor, @readonly: true, exibeTitulo: false)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            @Html.BackButton()
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalRestricao" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Visualizar Ocorrência <span class="spnTitulo"></span></h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card divDados">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                Dados da ocorrência
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    @Html.InputTextFor(a => a.Restricao.Data, "Data", @readonly: true)
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @Html.InputTextFor(a => a.Restricao.NumeroBO, "Número BO", @readonly: true)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    @Html.InputTextFor(a => a.Restricao.Natureza, "Natureza", @readonly: true)
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @Html.InputTextFor(a => a.Restricao.Municipio, "Município", @readonly: true)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    @Html.InputTextFor(a => a.Restricao.NomeDeclarante, "Nome Declarante", @readonly: true)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label class="control-label"> Histórico: </label>
+                                                    @Html.TextAreaFor(m => m.Restricao.Historico, new { @class = "form-control", @rows = 3, @maxlength = 2000 })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".btnExibirRestricao").button().click(function () {
+            var form = $("#modalRestricao");
+            form.modal('show');
+        });
+    })
+</script>
+
+

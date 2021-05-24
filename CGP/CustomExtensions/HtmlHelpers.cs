@@ -13,13 +13,13 @@ namespace Cgp.CustomExtensions
     {
         public static MvcHtmlString InputTextFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression,
             string label = "", int maxLength = short.MaxValue, int minLength = 0, bool required = true, string id = "", string placeholder = "",
-            bool disabled = false, bool @readonly = false, string @class = "")
+            bool disabled = false, bool @readonly = false, string @class = "", bool @exibeTitulo = true)
         {
             var name = ExpressionHelper.GetExpressionText(expression);
             var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
-
+            
             return new MvcHtmlString(Input(helper, "text", name, metadata.Model as string, label, @class, id, required, disabled, @readonly, placeholder,
-                minLength, maxLength));
+                minLength, maxLength, exibeTitulo));
         }
 
         public static MvcHtmlString InputTextFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression,
@@ -27,7 +27,6 @@ namespace Cgp.CustomExtensions
         {
             var name = ExpressionHelper.GetExpressionText(expression);
             var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
-
             return new MvcHtmlString(Input("text", name, metadata.Model as string, properties));
         }
 
@@ -257,7 +256,7 @@ namespace Cgp.CustomExtensions
         }
 
         private static string Input(HtmlHelper helper, string type, string name, string value, string label, string @class, string id, bool required, bool disabled,
-            bool @readonly, string placeholder, int minLength, int maxlength, bool @decimal = false)
+            bool @readonly, string placeholder, int minLength, int maxlength, bool @exibeTitulo = false)
         {
             id = string.IsNullOrEmpty(id) ? name : id;
             label = string.IsNullOrEmpty(label) ? name : label;
@@ -268,7 +267,7 @@ namespace Cgp.CustomExtensions
             value = string.IsNullOrEmpty(value) ? valorRecuperado : value;
 
             var html = new StringBuilder(@"<div class='form-group'>");
-            html.Append($@"<label for='{name}' class='control-label'> {label} </label>");
+            if(exibeTitulo) html.Append($@"<label for='{name}' class='control-label'> {label} </label>");
             html.Append($@"<input type='{type}' id='{id}' name='{name}' value=""{value}"" class='form-control {@class}' { requiredText } placeholder='{placeholder}' ");
 
             if (minLength >= 0)
@@ -283,9 +282,6 @@ namespace Cgp.CustomExtensions
             if (@readonly)
                 html.Append(" readonly='readonly' ");
 
-            if (@decimal)
-                html.Append(" step='any' ");
-
             html.Append(" />");
             html.Append("</div>");
 
@@ -294,6 +290,7 @@ namespace Cgp.CustomExtensions
 
         private static string Input(string type, string name, string value, dynamic properties)
         {
+            
             properties.id = string.IsNullOrEmpty(properties.id) ? name : properties.id;
             properties.label = string.IsNullOrEmpty(properties.label) ? name : properties.label;
 
@@ -301,6 +298,20 @@ namespace Cgp.CustomExtensions
 
             var html = new StringBuilder("<div class='form-group'>");
             html.Append($"<label for='{name}' class='control-label'> {properties.label} </label>");
+            html.Append($"<input type='{type}' id='{properties.id}' name='{name}' value='{value}' class='form-control {properties.@class}' { properties.requiredText } placeholder='{properties.placeholder}' />");
+            html.Append("</div>");
+
+            return html.ToString();
+        }
+
+
+        private static string InputSemLabel(string type, string name, string value, dynamic properties)
+        {
+            properties.id = string.IsNullOrEmpty(properties.id) ? name : properties.id;
+            properties.label = string.IsNullOrEmpty(properties.label) ? name : properties.label;
+
+            var html = new StringBuilder("<div class='form-group'>");
+            
             html.Append($"<input type='{type}' id='{properties.id}' name='{name}' value='{value}' class='form-control {properties.@class}' { properties.requiredText } placeholder='{properties.placeholder}' />");
             html.Append("</div>");
 

@@ -13,5 +13,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo
     {
         Task<ModeloDeBuscaDeVeiculo> BuscarPlacaSimples(string placa);
         Task<ModeloDeBuscaCompleto> BuscarPlacaCompleta(string placa, UsuarioLogado usuario);
+        Task<ModeloDeListaDeBuscas> BuscarPlacasPorFiltro(ModeloDeFiltroDeBusca filtro, UsuarioLogado usuario);
+        Task<ModeloDeBuscaDaLista> DetalharVeiculo(ModeloDeFiltroDeBusca filtro, UsuarioLogado usuario);
     }
 }

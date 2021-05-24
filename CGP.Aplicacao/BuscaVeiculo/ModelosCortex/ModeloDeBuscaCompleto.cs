@@ -16,7 +16,6 @@ namespace Cgp.Aplicacao.BuscaVeiculo.ModelosCortex
         public string alarme { get; set; }
         public string anoFabricacao { get; set; }
         public string anoModelo { get; set; }
-        public Arrendatario arrendatario { get; set; }
         public string capacidadeMaximaCarga { get; set; }
         public string capacidadeMaximaTracao { get; set; }
         public string carroceria { get; set; }

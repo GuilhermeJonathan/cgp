@@ -93,8 +93,12 @@
     <Compile Include="BuscaVeiculo\ModelosCortex\Restricao.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeAutorizacao.cs" />
     <Compile Include="BuscaVeiculo\ModelosCortex\ModeloDeBuscaCompleto.cs" />
+    <Compile Include="BuscaVeiculo\Modelos\ModeloDeBuscaDaLista.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeBuscaDeVeiculo.cs" />
+    <Compile Include="BuscaVeiculo\Modelos\ModeloDeFiltroDeBusca.cs" />
+    <Compile Include="BuscaVeiculo\Modelos\ModeloDeListaDeBuscas.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeRespostaDaAutorizacao.cs" />
+    <Compile Include="BuscaVeiculo\Modelos\ModeloDeRestricaoDaLista.cs" />
     <Compile Include="BuscaVeiculo\ServicoDeBuscaDeVeiculo.cs" />
     <Compile Include="Comum\ExcecaoDeAplicacao.cs" />
     <Compile Include="Comum\IServicoDeGeracaoDeHashSha.cs" />
