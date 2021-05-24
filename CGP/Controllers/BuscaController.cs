@@ -1,6 +1,7 @@
 ﻿using Cgp.Aplicacao.BuscaVeiculo;
 using Cgp.Aplicacao.BuscaVeiculo.Modelos;
 using Cgp.Aplicacao.GestaoDeCaraters;
+using Cgp.Aplicacao.GestaoDeVeiculos;
 using Cgp.CustomExtensions;
 using Cgp.Filter;
 using Cgp.Web.CustomExtensions;
@@ -18,20 +19,28 @@ namespace Cgp.Controllers
     public class BuscaController : Controller
     {
         private readonly IServicoDeGestaoDeCaraters _servicoDeGestaoDeCaraters;
-        private readonly IServicoDeBuscaDeVeiculo _servicoDeGestaoDeVeiculos;
+        private readonly IServicoDeBuscaDeVeiculo _servicoDeBuscaDeVeiculos;
+        private readonly IServicoDeGestaoDeVeiculos _servicoDeGestaoDeVeiculos;
 
-        public BuscaController(IServicoDeGestaoDeCaraters servicoDeGestaoDeCaraters, IServicoDeBuscaDeVeiculo servicoDeGestaoDeVeiculos)
+        public BuscaController(IServicoDeGestaoDeCaraters servicoDeGestaoDeCaraters, IServicoDeBuscaDeVeiculo servicoDeBuscaDeVeiculos,
+            IServicoDeGestaoDeVeiculos servicoDeGestaoDeVeiculos)
         {
-         
-            this._servicoDeGestaoDeVeiculos = servicoDeGestaoDeVeiculos;
+            this._servicoDeBuscaDeVeiculos = servicoDeBuscaDeVeiculos;
             this._servicoDeGestaoDeCaraters = servicoDeGestaoDeCaraters;
+            this._servicoDeGestaoDeVeiculos = servicoDeGestaoDeVeiculos;
         }
 
         public async Task<ActionResult> Index(ModeloDeListaDeBuscas modelo)
         {
             if (!String.IsNullOrEmpty(modelo.Filtro.Placa) || !String.IsNullOrEmpty(modelo.Filtro.Cpf))
-                modelo = await this._servicoDeGestaoDeVeiculos.BuscarPlacasPorFiltro(modelo.Filtro, User.Logado());
-
+            {
+                modelo = await this._servicoDeBuscaDeVeiculos.BuscarPlacasPorFiltro(modelo.Filtro, User.Logado());
+                if(modelo.Lista.Count > 0)
+                {
+                    foreach (var veiculo in modelo.Lista)
+                        this._servicoDeGestaoDeVeiculos.CadastrarProprietarioPossuidor(veiculo, User.Logado());
+                }
+            }
             return View(modelo);
         }
 
@@ -43,7 +52,7 @@ namespace Cgp.Controllers
                 VeiculoNaoEncontrado();
 
             modelo.Filtro.Placa = busca;
-            var retorno = await this._servicoDeGestaoDeVeiculos.DetalharVeiculo(modelo.Filtro, User.Logado());
+            var retorno = await this._servicoDeBuscaDeVeiculos.DetalharVeiculo(modelo.Filtro, User.Logado());
             return View(retorno);
         }
 

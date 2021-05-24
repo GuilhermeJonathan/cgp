@@ -1,10 +1,7 @@
 ﻿using Cgp.Dominio.Entidades;
 using Cgp.Dominio.Repositorios;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Repositorios
 {
@@ -21,6 +18,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
         public Veiculo PegarPorPlaca(string placa)
         {
             return this._contexto.Set<Veiculo>()
+                .Include(a => a.Proprietario)
+                .Include(a => a.Possuidor)
                 .FirstOrDefault(a => a.Placa.Contains(placa));
         }
     }

@@ -106,6 +106,22 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
+        public IRepositorioDeProprietarios RepositorioDeProprietarios
+        {
+            get
+            {
+                return new RepositorioDeProprietarios(this._contexto);
+            }
+        }
+
+        public IRepositorioDePossuidores RepositorioDePossuidores
+        {
+            get
+            {
+                return new RepositorioDePossuidores(this._contexto);
+            }
+        }
+
         public void Persistir()
         {
             this._contexto.SaveChanges();

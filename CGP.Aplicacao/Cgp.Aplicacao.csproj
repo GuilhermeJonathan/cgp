@@ -97,6 +97,8 @@
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeBuscaDeVeiculo.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeFiltroDeBusca.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeListaDeBuscas.cs" />
+    <Compile Include="BuscaVeiculo\Modelos\ModeloDePossuidorDaLista.cs" />
+    <Compile Include="BuscaVeiculo\Modelos\ModeloDeProprietarioDaLista.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeRespostaDaAutorizacao.cs" />
     <Compile Include="BuscaVeiculo\Modelos\ModeloDeRestricaoDaLista.cs" />
     <Compile Include="BuscaVeiculo\ServicoDeBuscaDeVeiculo.cs" />

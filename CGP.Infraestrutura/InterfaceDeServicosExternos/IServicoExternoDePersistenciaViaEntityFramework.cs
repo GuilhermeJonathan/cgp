@@ -20,6 +20,8 @@ namespace Cgp.Infraestrutura.InterfaceDeServicosExternos
         IRepositorioDeCaraters RepositorioDeCaraters { get; }
         IRepositorioDeVeiculos RepositorioDeVeiculos { get; }
         IRepositorioDeHistoricoDePassagens RepositorioDeHistoricoDePassagens { get; }
+        IRepositorioDeProprietarios RepositorioDeProprietarios { get; }
+        IRepositorioDePossuidores RepositorioDePossuidores { get; }
         void Persistir();
         void Dispose();
     }

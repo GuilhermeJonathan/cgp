@@ -16,6 +16,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
             this.AnoModelo = $"{modelo.anoFabricacao}/{modelo.anoModelo}";
             this.Cor = modelo.cor;
             this.Municipio = modelo.municipioPlaca;
+            this.Uf = modelo.ufEmplacamento;
             this.Renavam = modelo.renavam;
             this.Chassi = modelo.chassi;
             this.Motor = modelo.numeroMotor;
@@ -24,18 +25,10 @@ namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
             this.Situacao = modelo.situacaoVeiculo;
             
             if(modelo.proprietario != null)
-            {
-                this.NomeProprietario = modelo.proprietario.nomeProprietario;
-                this.EnderecoProprietario = modelo.proprietario.enderecoProprietario;
-                this.DocumentoProprietario = modelo.proprietario.numeroDocumentoProprietario;
-            }
-            
-            if(modelo.possuidor != null)
-            {
-                this.NomePossuidor = modelo.possuidor.nomePossuidor;
-                this.EnderecoPossuidor = modelo.possuidor.enderecoPossuidor;
-                this.DocumentoPossuidor = modelo.possuidor.numeroDocumentoPossuidor;
-            }
+                this.Proprietario = new ModeloDeProprietarioDaLista(modelo.proprietario);
+
+            if (modelo.possuidor != null)
+                this.Possuidor = new ModeloDePossuidorDaLista(modelo.possuidor);
 
             if(modelo.restricao != null && modelo.restricao.Count > 0)
             {
@@ -49,19 +42,17 @@ namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
         public string AnoModelo { get; set; }
         public string Cor { get; set; }
         public string Municipio { get; set; }
+        public string Uf { get; set; }
         public string Renavam { get; set; }
         public string Chassi { get; set; }
         public string Motor { get; set; }
         public string UltimoCRV { get; set; }
         public string Atualizacao { get; set; }
         public string Situacao { get; set; }
-        public string NomeProprietario { get; set; }
-        public string EnderecoProprietario { get; set; }
-        public string DocumentoProprietario { get; set; }
-        public string NomePossuidor { get; set; }
-        public string EnderecoPossuidor { get; set; }
-        public string DocumentoPossuidor { get; set; }
         public bool TemRestricao { get; set; } = false;
+
+        public ModeloDeProprietarioDaLista Proprietario { get; set; }
+        public ModeloDePossuidorDaLista Possuidor { get; set; }
         public ModeloDeRestricaoDaLista Restricao { get; set; }
 
     }

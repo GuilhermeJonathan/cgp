@@ -118,6 +118,8 @@
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeFoto.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeHistoricoDeCarater.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeHistoricoDePassagens.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDePossuidor.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeProprietario.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeVeiculo.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCidade.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeComandoRegional.cs" />
@@ -129,6 +131,8 @@
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\Repositorio.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeCaraters.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeHistoricoDePassagens.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDePossuidores.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeProprietarios.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeVeiculos.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeCidades.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Repositorios\RepositorioDeComandosRegionais.cs" />

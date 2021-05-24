@@ -33,6 +33,8 @@ namespace Cgp.Dominio.Entidades
         public string Municipio { get; set; }
         public string Uf { get; set; }
         public string Situacao { get; set; }
+        public Proprietario Proprietario { get; set; }
+        public Possuidor Possuidor { get; set; }
 
         public void AlterarDadosVeiculo(string marca, string modelo, string ano, string cor, string chassi, string uf)
         {
@@ -51,6 +53,22 @@ namespace Cgp.Dominio.Entidades
                 retorno = parametro.ToUpper();
 
             return retorno;
+        }
+
+        public void CadastrarProprietario(Proprietario proprietario)
+        {
+            if (proprietario == null)
+                return;
+
+            this.Proprietario = proprietario;
+        }
+
+        public void CadastrarPossuidor(Possuidor possuidor)
+        {
+            if (possuidor == null)
+                return;
+
+            this.Possuidor = possuidor;
         }
     }
 }

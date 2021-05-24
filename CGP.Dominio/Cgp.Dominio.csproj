@@ -48,6 +48,8 @@
     <Compile Include="Entidades\Foto.cs" />
     <Compile Include="Entidades\HistoricoDeCarater.cs" />
     <Compile Include="Entidades\HistoricoDePassagem.cs" />
+    <Compile Include="Entidades\Possuidor.cs" />
+    <Compile Include="Entidades\Proprietario.cs" />
     <Compile Include="Entidades\Veiculo.cs" />
     <Compile Include="Entidades\Cidade.cs" />
     <Compile Include="Entidades\ComandoRegional.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="Repositorios\IRepositorioDeCaraters.cs" />
     <Compile Include="Repositorios\IRepositorioDeCrimes.cs" />
     <Compile Include="Repositorios\IRepositorioDeHistoricoDePassagens.cs" />
+    <Compile Include="Repositorios\IRepositorioDePossuidores.cs" />
+    <Compile Include="Repositorios\IRepositorioDeProprietarios.cs" />
     <Compile Include="Repositorios\IRepositorioDeVeiculos.cs" />
     <Compile Include="Repositorios\IRepositorioDeCidades.cs" />
     <Compile Include="Repositorios\IRepositorioDeComandoRegional.cs" />
