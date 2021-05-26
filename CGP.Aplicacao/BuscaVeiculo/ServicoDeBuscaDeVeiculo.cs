@@ -85,7 +85,6 @@ namespace Cgp.Aplicacao.BuscaVeiculo
 
                     foreach (var veiculo in veiculos)
                         lista.Add(veiculo);
-
                 }
 
                 var modelo = new ModeloDeListaDeBuscas(lista, lista.Count, filtro);

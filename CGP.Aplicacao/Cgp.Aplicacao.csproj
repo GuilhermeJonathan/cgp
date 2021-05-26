@@ -118,6 +118,8 @@
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeHistoricoDeCaraterDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeHistoricoDePassagensDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeListaDeCaraters.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDePossuidor.cs" />
+    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeProprietario.cs" />
     <Compile Include="GestaoDeCaraters\ServicoDeGestaoDeCaraters.cs" />
     <Compile Include="GestaoDeUsuariosSGPOL\IServicoDeGestaoDeUsuariosSGPOL.cs" />
     <Compile Include="GestaoDeUsuariosSGPOL\Modelos\ModeloDeAutorizacaoSGPOL.cs" />

@@ -1,4 +1,5 @@
 ﻿using Cgp.Aplicacao.BuscaVeiculo.Modelos;
+using Cgp.Dominio.Entidades;
 using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace Cgp.Aplicacao.GestaoDeVeiculos
 {
     public interface IServicoDeGestaoDeVeiculos
     {
-        string CadastrarProprietarioPossuidor(ModeloDeBuscaDaLista modelo, UsuarioLogado usuario);
+        Veiculo CadastrarProprietarioPossuidor(ModeloDeBuscaDaLista modelo, UsuarioLogado usuario);
     }
 }

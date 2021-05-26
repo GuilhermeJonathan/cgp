@@ -14,7 +14,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         ModeloDeListaDeCaraters RetonarCaratersPorFiltro(ModeloDeFiltroDeCarater filtro, int pagina, int registrosPorPagina = 30);
         ModeloDeListaDeCaraters RetonarCaratersPorCidades(ModeloDeFiltroDeCarater filtro);
         ModeloDeEdicaoDeCarater BuscarCaraterPorId(int id, UsuarioLogado usuario, bool EhCelular = false);
-        Tuple<string, int> CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario);
+        Task<Tuple<string, int>> CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario);
         string AlterarDadosDoCarater(ModeloDeEdicaoDeCarater modelo, UsuarioLogado usuario);
         string RealizarBaixaVeiculo(int id, string descricao, int cidade, UsuarioLogado usuario);
         ModeloDeListaDeCaraters BuscarCaraterPorPlaca(string placa);

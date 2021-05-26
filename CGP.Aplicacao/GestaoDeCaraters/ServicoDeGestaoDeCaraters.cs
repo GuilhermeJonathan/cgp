@@ -1,5 +1,8 @@
-﻿using Cgp.Aplicacao.Comum;
+﻿using Cgp.Aplicacao.BuscaVeiculo;
+using Cgp.Aplicacao.BuscaVeiculo.Modelos;
+using Cgp.Aplicacao.Comum;
 using Cgp.Aplicacao.GestaoDeCaraters.Modelos;
+using Cgp.Aplicacao.GestaoDeVeiculos;
 using Cgp.Aplicacao.Util;
 using Cgp.Dominio.Entidades;
 using Cgp.Dominio.ObjetosDeValor;
@@ -19,12 +22,17 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         private readonly IServicoExternoDePersistenciaViaEntityFramework _servicoExternoDePersistencia;
         private readonly IServicoDeGeracaoDeHashSha _servicoDeGeracaoDeHashSha;
         private readonly IServicoExternoDeArmazenamentoEmNuvem _servicoExternoDeArmazenamentoEmNuvem;
+        private readonly IServicoDeGestaoDeVeiculos _servicoDeGestaoDeVeiculos;
+        private readonly IServicoDeBuscaDeVeiculo _servicoDeBuscaDeVeiculos;
 
-        public ServicoDeGestaoDeCaraters(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha, IServicoExternoDeArmazenamentoEmNuvem servicoExternoDeArmazenamentoEmNuvem)
+        public ServicoDeGestaoDeCaraters(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha, IServicoExternoDeArmazenamentoEmNuvem servicoExternoDeArmazenamentoEmNuvem,
+            IServicoDeGestaoDeVeiculos servicoDeGestaoDeVeiculos, IServicoDeBuscaDeVeiculo servicoDeBuscaDeVeiculos)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
             this._servicoDeGeracaoDeHashSha = servicoDeGeracaoDeHashSha;
             this._servicoExternoDeArmazenamentoEmNuvem = servicoExternoDeArmazenamentoEmNuvem;
+            this._servicoDeGestaoDeVeiculos = servicoDeGestaoDeVeiculos;
+            this._servicoDeBuscaDeVeiculos = servicoDeBuscaDeVeiculos;
         }
 
         public ModeloDeListaDeCaraters RetonarCaratersPorFiltro(ModeloDeFiltroDeCarater filtro, int pagina, int registrosPorPagina = 30)
@@ -120,7 +128,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             }
         }
 
-        public Tuple<string, int> CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario)
+        public async Task<Tuple<string, int>> CadastrarCarater(ModeloDeCadastroDeCarater modelo, UsuarioLogado usuario)
         {
             var mensagemErro = String.Empty;
             try
@@ -140,7 +148,14 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
 
                 if (veiculo == null)
                 {
-                    veiculo = new Veiculo(modelo.Placa, modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo, modelo.UfVeiculo);
+                    var dadosVeiculo = await this._servicoDeBuscaDeVeiculos.BuscarPlacaCompleta(modelo.Placa, usuario);
+                    var modeloParaCadastro = new ModeloDeBuscaDaLista(dadosVeiculo);
+                    
+                    if (dadosVeiculo != null)
+                        veiculo = this._servicoDeGestaoDeVeiculos.CadastrarProprietarioPossuidor(modeloParaCadastro, usuario);
+                    else 
+                        veiculo = new Veiculo(modelo.Placa, modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo, modelo.UfVeiculo);
+
                     this._servicoExternoDePersistencia.Persistir();
                 }
 

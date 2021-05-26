@@ -97,9 +97,9 @@ namespace Cgp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(ModeloDeCadastroDeCarater modelo)
+        public async Task<ActionResult> Cadastrar(ModeloDeCadastroDeCarater modelo)
         {
-            var retorno = this._servicoDeGestaoDeCaraters.CadastrarCarater(modelo, User.Logado());
+            var retorno = await this._servicoDeGestaoDeCaraters.CadastrarCarater(modelo, User.Logado());
             this.AdicionarMensagemDeSucesso(retorno.Item1);
             return RedirectToAction(nameof(Editar), new { id = retorno.Item2 });
         }

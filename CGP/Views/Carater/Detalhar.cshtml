@@ -45,32 +45,179 @@
                                 <hr />
                             }
                             <div class="row">
+                                <div class="col-12">
+                                    <ul class="nav nav-tabs" id="tabDados" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#divDadosCarater" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Caráter</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#divDadosVeiculo" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Veículo</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#divDadosProprietario" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Proprietário</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="tabDadosContent">
+                                        <div class="tab-pane fade show active" id="divDadosCarater" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-lg-12">
+                                                    <div class="small-box bg-default">
+                                                        <div class="inner">
+                                                            <p2>
+                                                                <span style="font-size: 26pt; font-weight: bold;">
+                                                                    @Model.Placa @Model.UfVeiculo
+                                                                </span> <span style="font-size: 18pt">
+                                                                    @Model.MarcaVeiculo @Model.ModeloVeiculo @Model.CorVeiculo @Model.AnoVeiculo
+                                                                    @if (!String.IsNullOrEmpty(Model.ChassiVeiculoTratado))
+                                                                    {<span>(@Model.ChassiVeiculoTratado)</span>}
+                                                                    @if (Model.SeloAtenas)
+                                                                    {<img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 50px;" />}
+                                                                </span>
+                                                            </p2>
 
-                                <div class="col-sm-12 col-lg-12">
-                                    <div class="small-box bg-default">
-                                        <div class="inner">
-                                            <p2>
-                                                <span style="font-size: 26pt; font-weight: bold;">
-                                                    @Model.Placa @Model.UfVeiculo
-                                                </span> <span style="font-size: 18pt">
-                                                    @Model.MarcaVeiculo @Model.ModeloVeiculo @Model.CorVeiculo @Model.AnoVeiculo
-                                                    @if (!String.IsNullOrEmpty(Model.ChassiVeiculo))
-                                                    {<span>(@Model.ChassiVeiculo)</span>}
-                                                    @if (Model.SeloAtenas)
-                                                    {<img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 50px;" />}
-                                                </span>
-                                            </p2>
+                                                            @if (Model.RealizouBaixa)
+                                                            {<span style='font-size: 16pt' class='badge bg-warning'>Veículo localizado.</span>}
 
-                                            @if (Model.RealizouBaixa)
-                                            {<span style='font-size: 16pt' class='badge bg-warning'>Veículo localizado.</span>}
-
-                                            <p style="font-size: 16pt; margin-bottom: 0px !important;"> <span class="@Model.CssTipoCrime">@Model.NomeCrime </span> no dia  @Model.Data</p>
-                                            <p style="font-size: 16pt; margin-bottom: 0px !important;">@Model.NomeCidade @Model.ComplementoEnderecoTradado</p>
-                                            <p style="font-size: 16pt; margin-bottom: 0px !important;">@Model.Descricao</p>
+                                                            <p style="font-size: 16pt; margin-bottom: 0px !important;"> <span class="@Model.CssTipoCrime">@Model.NomeCrime </span> no dia  @Model.Data</p>
+                                                            <p style="font-size: 16pt; margin-bottom: 0px !important;">@Model.NomeCidade @Model.ComplementoEnderecoTradado</p>
+                                                            <p style="font-size: 16pt; margin-bottom: 0px !important;">@Model.Descricao</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="divDadosVeiculo" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-lg-12">
+                                                    <div class="small-box bg-default">
+                                                        <div class="inner">
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Placa:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Placa, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Marca/Modelo:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.MarcaVeiculo, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Ano/Modelo:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.AnoVeiculo, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Cor:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.CorVeiculo, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Município:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.MunicipioVeiculo, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Renavam:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Renavam, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Chassi:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.ChassiVeiculo, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">N. Motor:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Motor, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Último CRV:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.UltimoCRV, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Atualiação:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.AtualizacaoVeiculo, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Situação:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Situacao, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="divDadosProprietario" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-lg-12">
+                                                    <div class="small-box bg-default">
+                                                        <div class="inner">
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">PROPRIETÁRIO</label>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Nome:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Proprietario.Nome, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Documento:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Proprietario.Documento, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Endereço:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Proprietario.Endereco, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">POSSUIDOR</label>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Nome:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Possuidor.Nome, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Documento:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Possuidor.Documento, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="Placa" class="col-sm-2 col-form-label">Endereço:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.Possuidor.Endereco, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                            
                             <hr />
                             <div class="row">
                                 <div class="col-lg-6">

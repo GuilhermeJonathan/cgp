@@ -22,6 +22,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
             this.Motor = modelo.numeroMotor;
             this.UltimoCRV = !String.IsNullOrEmpty(modelo.dataEmissaoUltimoCRV) ? Convert.ToDateTime(modelo.dataEmissaoUltimoCRV).ToShortDateString() : String.Empty;
             this.Atualizacao = modelo.dataHoraAtualizacaoVeiculo.ToString();
+            this.AtualizacaoData = modelo.dataHoraAtualizacaoVeiculo;
             this.Situacao = modelo.situacaoVeiculo;
             
             if(modelo.proprietario != null)
@@ -48,6 +49,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo.Modelos
         public string Motor { get; set; }
         public string UltimoCRV { get; set; }
         public string Atualizacao { get; set; }
+        public DateTime AtualizacaoData { get; set; }
         public string Situacao { get; set; }
         public bool TemRestricao { get; set; } = false;
 

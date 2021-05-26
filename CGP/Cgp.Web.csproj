@@ -213,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\adminlte.css" />
+    <Content Include="Content\adminlte.min.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\alt\adminlte.components.css" />
     <Content Include="Content\alt\adminlte.components.min.css" />
@@ -296,10 +297,7 @@
     <Content Include="plugins\select2\select2.full.min.js" />
     <Content Include="plugins\select2\select2.min.js" />
     <Content Include="Scripts\adminlte.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\adminlte.min.js" />
     <Content Include="libman.json" />
     <Content Include="plugins\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="plugins\bootstrap\js\bootstrap.bundle.min.js.map" />

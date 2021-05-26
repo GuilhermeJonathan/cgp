@@ -18,31 +18,38 @@ namespace Cgp.Aplicacao.GestaoDeVeiculos
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
         }
 
-        public string CadastrarProprietarioPossuidor(ModeloDeBuscaDaLista modelo, UsuarioLogado usuario)
+        public Veiculo CadastrarProprietarioPossuidor(ModeloDeBuscaDaLista modelo, UsuarioLogado usuario)
         {
             try
             {
                 var proprietario = modelo.Proprietario;
                 var possuidor = modelo.Possuidor;
                 var veiculo = this._servicoExternoDePersistencia.RepositorioDeVeiculos.PegarPorPlaca(modelo.Placa);
-                
+                var marca = modelo.MarcaModelo.Split('/')[0];
+                var modeloCaro = modelo.MarcaModelo.Split('/')[1];
+
                 if (veiculo == null)
                 {
-                    var marca = modelo.MarcaModelo.Split('/')[0];
-                    var modeloCaro = modelo.MarcaModelo.Split('/')[1];
-                    veiculo = new Veiculo(modelo.Placa, marca, modeloCaro, modelo.AnoModelo, modelo.Cor, modelo.Chassi, modelo.Uf);
+                    veiculo = new Veiculo(modelo.Placa, marca, modeloCaro, modelo.AnoModelo, modelo.Cor, modelo.Municipio, modelo.Uf, 
+                        modelo.Renavam, modelo.Chassi, modelo.Motor, modelo.UltimoCRV, modelo.AtualizacaoData, modelo.Situacao);
                     this._servicoExternoDePersistencia.RepositorioDeVeiculos.Inserir(veiculo);
-                    this._servicoExternoDePersistencia.Persistir();
-                } 
+                    
+                } else
+                {
+                    veiculo.AlterarDadosVeiculo(marca, modeloCaro, modelo.AnoModelo, modelo.Cor, modelo.Municipio, modelo.Uf,
+                        modelo.Renavam, modelo.Chassi, modelo.Motor, modelo.UltimoCRV, modelo.AtualizacaoData, modelo.Situacao);
+                }
 
-                if(veiculo.Proprietario == null)
+                this._servicoExternoDePersistencia.Persistir();
+
+                if (veiculo.Proprietario == null)
                     CadastrarProprietario(veiculo, proprietario);
 
                 if (veiculo.Possuidor == null)
                     CadastrarPossuidor(veiculo, possuidor);
 
                 this._servicoExternoDePersistencia.Persistir();
-                return "Proprietário cadastrado com sucesso.";
+                return veiculo;
             }
             catch (Exception ex)
             {

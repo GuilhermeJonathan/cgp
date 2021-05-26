@@ -54,13 +54,12 @@
         </nav>
 
         @Html.Partial("_Menu")
-
         <script src="~/Scripts/jquery-3.3.1.js"></script>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+        <script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.map"></script>
+        <script src="~/Scripts/adminlte.min.js"></script>
 
-        <script src="~/Scripts/adminlte.js"></script>
         <script src="~/Scripts/toastr.min.js"></script>
         <script src="~/plugins/datepicker/moment-with-locales.js"></script>
         <script src="~/plugins/datepicker/bootstrap-datepicker.min.js"></script>
@@ -71,10 +70,12 @@
         <script src="~/plugins/JqueryUploadFile/jquery.uploadfile.min.js"></script>
         <script src="~/Scripts/campeonatoGeral.js"></script>
 
+        @RenderSection("scripts", required: false)
+
         @RenderBody()
 
         <footer class="main-footer">
-            <b>CaráterGeral</b>Policial - PMDF(Ditel) - All rights reserved.
+            <b>Caráter Geral</b> Policial - PMDF(Ditel) - All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Desenvolvedor: </b> Sd Jonathan
             </div>

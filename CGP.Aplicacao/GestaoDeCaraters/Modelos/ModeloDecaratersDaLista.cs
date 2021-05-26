@@ -36,7 +36,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
 
             if (carater.Veiculo != null)
             {
-                var chassi = !String.IsNullOrEmpty(carater.Veiculo.Chassi) ? $"({carater.Veiculo.Chassi})" : String.Empty;
+                var chassi = !String.IsNullOrEmpty(carater.Veiculo.Chassi) ? carater.Veiculo.Chassi.Length > 4 ? $"({carater.Veiculo.Chassi.Substring(carater.Veiculo.Chassi.Length - 5)})" : carater.Veiculo.Chassi : String.Empty;
                 this.NomeVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Marca} {carater.Veiculo.Modelo} {chassi}" : String.Empty;
                 this.PlacaVeiculo = carater.Veiculo != null ? $"{carater.Veiculo.Placa} {carater.Veiculo.Uf}" : String.Empty;
                 this.PlacaInicial = carater.Veiculo != null ? $"{carater.Veiculo.Placa.Substring(3,4)}" : String.Empty;
@@ -61,6 +61,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string PlacaFinal { get; set; }
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }
+        public string ChassiTratado => !String.IsNullOrEmpty(this.ChassiVeiculo) && this.ChassiVeiculo.Length > 4 ? this.ChassiVeiculo.Substring(this.ChassiVeiculo.Length - 5) : String.Empty;
         public string AnoVeiculo { get; set; }
         public string UfVeiculo { get; set; }
         public string DataDoFato { get; set; }

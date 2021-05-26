@@ -63,12 +63,25 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
             {
                 this.Placa = carater.Veiculo.Placa;
                 this.UfVeiculo = carater.Veiculo.Uf;
+                this.MunicipioVeiculo = carater.Veiculo.Municipio;
                 this.IdVeiculo = carater.Veiculo.Id;
                 this.ModeloVeiculo = carater.Veiculo.Modelo;
                 this.MarcaVeiculo = carater.Veiculo.Marca;
                 this.AnoVeiculo = carater.Veiculo.Ano;
                 this.CorVeiculo = carater.Veiculo.Cor;
                 this.ChassiVeiculo = carater.Veiculo.Chassi;
+                this.ChassiVeiculoTratado = !String.IsNullOrEmpty(carater.Veiculo.Chassi) ? carater.Veiculo.Chassi.Length > 4 ? carater.Veiculo.Chassi.Substring(carater.Veiculo.Chassi.Length - 5) : carater.Veiculo.Chassi : String.Empty;
+                this.Renavam = carater.Veiculo.Renavam;
+                this.Motor = carater.Veiculo.Motor;
+                this.UltimoCRV = !String.IsNullOrEmpty(carater.Veiculo.UltimoCRV) ? Convert.ToDateTime(carater.Veiculo.UltimoCRV).ToShortDateString() : String.Empty;
+                this.AtualizacaoVeiculo = carater.Veiculo.Atualizacao.ToString();
+                this.Situacao = carater.Veiculo.Situacao;
+                
+                if (carater.Veiculo.Proprietario != null)
+                    this.Proprietario = new ModeloDeProprietario(carater.Veiculo.Proprietario);
+
+                if (carater.Veiculo.Possuidor != null)
+                    this.Possuidor = new ModeloDePossuidor(carater.Veiculo.Possuidor);
             }
 
             if(situacoesBaixas.Contains(carater.SituacaoDoCarater))
@@ -108,9 +121,18 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public string ModeloVeiculo { get; set; }
         public string MarcaVeiculo { get; set; }
         public string UfVeiculo { get; set; }
+        public string MunicipioVeiculo { get; set; }
         public string AnoVeiculo { get; set; }
         public string CorVeiculo { get; set; }
         public string ChassiVeiculo { get; set; }
+        public string ChassiVeiculoTratado { get; set; }
+        public string Renavam { get; set; }
+        public string Motor { get; set; }
+        public string UltimoCRV { get; set; }
+        public string AtualizacaoVeiculo { get; set; }
+        public string Situacao { get; set; }
+
+
         public string UsuarioCadastro { get; set; }
         public string CpfUsuario { get; set; }
         public bool RealizouBaixa { get; set; }
@@ -127,6 +149,8 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public bool SeloAtenas { get; set; }
         public int IdHistorico { get; set; }
         public bool Excluido { get; set; }
+        public ModeloDeProprietario Proprietario { get; set; }
+        public ModeloDePossuidor Possuidor { get; set; }
 
         public IList<ModeloDeHistoricoDeCaraterDaLista> HistoricosDeCaraters{ get; set; }
         public IList<ModeloDeFotosDaLista> Fotos { get; set; }

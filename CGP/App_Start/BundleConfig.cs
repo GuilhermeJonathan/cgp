@@ -21,14 +21,13 @@ namespace Cgp
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                        "~/Scripts/bootstrap.js",
-                         "~/Scripts/bootstrap.bundle.min.js",
-                       "~/Scripts/core.js",
-                       "~/Scripts/demo.js",
-                      "~/Scripts/bootstrap.bundle.js"));
+                        "~/plugins/bootstrap/js/bootstrap.min.js",
+                        "~/plugins/bootstrap/js/bootstrap.bundle.min.js",
+                        "~/plugins/bootstrap/js/bootstrap.bundle.min.js.map",
+                         "~/Scripts/adminlte.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                       "~/Content/adminlte.css",
+                        "~/Content/adminlte.min.css",
                          "~/Content/Site.css",
                         "~/plugins/fontawesome-free/css/all.min.css"));
         }

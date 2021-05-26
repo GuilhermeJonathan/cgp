@@ -219,7 +219,13 @@
     right: 0;
     margin: 0;
     z-index: 1000;
+    overflow-y: initial !important
 }
+
+    #divAlerta .modal-body {
+        max-height: 400px;
+        overflow-y: auto;
+    }
 
 .imagemAlerta {
     height: 100%;
@@ -230,7 +236,7 @@
 }
 
 #divDadosAlerta {
-    max-height: 600px !important;
+    height: 100% !important;
     overflow: hidden;
 }
 

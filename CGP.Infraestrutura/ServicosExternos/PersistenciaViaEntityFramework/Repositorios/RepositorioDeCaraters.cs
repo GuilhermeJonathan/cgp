@@ -63,6 +63,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
         {
             return this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
+                .Include(a => a.Veiculo.Proprietario)
+                .Include(a => a.Veiculo.Possuidor)
                 .Include(a => a.Cidade)
                 .Include(a => a.CidadeLocalizado)
                 .Include(a => a.Crime)
@@ -132,6 +134,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
         public List<Alerta> PegarNovosAlertas()
         {
+            var dataFiltro = DateTime.Now.AddDays(-2);
+
             var query = this._contexto.Set<Alerta>()
                 .Include(a => a.HistoricoDePassagem)
                 .Include(a => a.HistoricoDePassagem.Carater)
@@ -139,6 +143,8 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .AsQueryable();
 
             query = query.Where(c => c.SituacaoDoAlerta == SituacaoDoAlerta.Cadastrado);
+
+            //query = query.Where(c => c.DataDoCadastro >= dataFiltro);
 
             return query.OrderBy(a => a.DataDoCadastro).ToList();
         }
