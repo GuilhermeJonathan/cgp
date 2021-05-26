@@ -215,5 +215,33 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             var usuario = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarUsuarioCompletoPorId(idUsuario);
             return new ModeloDeEdicaoDeUsuario(usuario);
         }
+
+        public string DarCienciaEmTermo(UsuarioLogado usuario)
+        {
+            try
+            {
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                usuarioBanco.DarCienciaTermo();
+                this._servicoExternoDePersistencia.Persistir();
+                return "Termo aceito com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
+
+        public bool VerificarCiencia(UsuarioLogado usuario)
+        {
+            try
+            {
+                var usuarioBanco = this._servicoExternoDePersistencia.RepositorioDeUsuarios.BuscarPorId(usuario.Id);
+                return usuarioBanco.CienciaTermo;
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao(ex.Message);
+            }
+        }
     }
 }

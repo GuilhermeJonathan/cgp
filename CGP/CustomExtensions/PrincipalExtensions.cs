@@ -20,6 +20,16 @@ namespace Cgp.Web.CustomExtensions
             return Claim(principal, ClaimTypes.Name);
         }
 
+        public static string NomeCompleto(this IPrincipal principal)
+        {
+            return Claim(principal, "nomeCompleto");
+        }
+
+        public static string Lotacao(this IPrincipal principal)
+        {
+            return Claim(principal, "lotacao");
+        }
+
         public static string Email(this IPrincipal principal)
         {
             return Claim(principal, ClaimTypes.Email);
@@ -28,6 +38,11 @@ namespace Cgp.Web.CustomExtensions
         public static string Cpf(this IPrincipal principal)
         {
             return Claim(principal, "cpf");
+        }
+
+        public static string Matricula(this IPrincipal principal)
+        {
+            return Claim(principal, "matricula");
         }
 
         public static PerfilDeUsuario Perfil(this IPrincipal principal)
@@ -83,7 +98,8 @@ namespace Cgp.Web.CustomExtensions
 
         public static UsuarioLogado Logado(this IPrincipal principal)
         {
-            return new UsuarioLogado(principal.Id(), principal.Nome(), principal.Email(), principal.Perfil(), principal.Cpf());
+            return new UsuarioLogado(principal.Id(), principal.Nome(), principal.NomeCompleto(), principal.Email(), 
+                principal.Perfil(), principal.Cpf(), principal.Matricula(), principal.Lotacao());
         }
 
         private static string Claim(IPrincipal usuario, string chave)
@@ -91,7 +107,7 @@ namespace Cgp.Web.CustomExtensions
             var claims = ((ClaimsIdentity)usuario.Identity).Claims;
             var claim = claims.FirstOrDefault(c => c.Type == chave.ToLower());
 
-            return claim != null ? claim.Value.Contains(' ') ? claim.Value.Split(' ')[0] : claim.Value : string.Empty;
+            return claim != null ? claim.Value : string.Empty;
         }
     }
 }

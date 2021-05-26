@@ -25,5 +25,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
         ModeloDeEdicaoDeUsuario BuscarUsuarioPorId(int id);
         ModeloDeEdicaoDeUsuario BuscarMeusDados(UsuarioLogado usuarioLogado);
         ModeloDeEdicaoDeUsuario BuscarMeusDadosParaAlterarSenha(int idUsuario);
+        string DarCienciaEmTermo(UsuarioLogado usuario);
+        bool VerificarCiencia(UsuarioLogado usuario);
     }
 }

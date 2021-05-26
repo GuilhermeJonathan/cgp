@@ -106,10 +106,13 @@ namespace Cgp.Aplicacao.Login
             var dadosDaSessao = new Dictionary<string, object>
                 {
                     { "id", usuario.Id },
-                    { "nome", usuario.Nome.Valor },
+                    { "nome", usuario.Nome.Valor.Contains(' ') ? usuario.Nome.Valor.Split(' ')[0] : usuario.Nome.Valor},
+                    { "nomeCompleto", usuario.Nome.Valor },
                     { "cpf", !String.IsNullOrEmpty(usuario.Cpf) ? usuario.Cpf : string.Empty},
+                    { "matricula", !String.IsNullOrEmpty(usuario.Matricula) ? usuario.Matricula : string.Empty},
                     { "login", usuario.Login.Valor },
                     { "perfil", usuario.PerfilDeUsuario },
+                    { "lotacao", usuario.Lotacao },
                     { "dataDoCadastro", usuario.DataDoCadastro }
                 };
 

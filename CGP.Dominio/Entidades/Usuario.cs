@@ -36,6 +36,8 @@ namespace Cgp.Dominio.Entidades
         public int IdUsuarioAlterou { get; set; }
         public DateTime? DataAlteracao { get; set; }
         public ICollection<AlertaUsuario> AlertasUsuario { get; set; }
+        public bool CienciaTermo { get; set; } = false;
+        public DateTime? DataCiencia { get; set; }
 
         internal void AlterarLogin(string login)
         {
@@ -138,6 +140,12 @@ namespace Cgp.Dominio.Entidades
                 this.Telefone = new Telefone(ddd, telefone);
             else
                 this.Telefone = Telefone.Vazio;
+        }
+
+        public void DarCienciaTermo()
+        {
+            this.CienciaTermo = true;
+            this.DataCiencia = DateTime.Now;
         }
 
         public void AtivarUsuario()

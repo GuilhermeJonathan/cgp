@@ -56,8 +56,6 @@ namespace Cgp.Infraestrutura.ServicosExternos.Autenticacao.AutenticacaoViaCookie
                     claims.Add(new Claim(ClaimTypes.Name, valor));
                 else if (chave == "email" || chave == "login")
                     claims.Add(new Claim(ClaimTypes.Email, valor));
-                else if (chave == "matricula")
-                    claims.Add(new Claim(ClaimTypes.NameIdentifier, valor));
                 else
                     claims.Add(new Claim(chave, valor ?? ""));
             }

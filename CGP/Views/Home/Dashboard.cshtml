@@ -57,7 +57,10 @@
                                 <div class="small-box bg-default">
                                     <div class="inner">
                                         <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
-                                        <sup style="font-size: 16pt"> @item.NomeVeiculo @item.CorVeiculo @item.AnoVeiculo @if (item.SeloAtenas) {<img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 30px;" />}</sup>
+                                        <sup style="font-size: 16pt">
+                                            @item.NomeVeiculo @item.CorVeiculo @item.AnoVeiculo @if (item.SeloAtenas)
+                                            {<img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 30px;" />}
+                                        </sup>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;"> <span class="@item.CssTipoCrime">@item.NomeCrime </span> no dia  @item.DataDoFato</p>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.NomeCidade @item.ComplementoEnderecoTradado</p>
                                         <p style="font-size: 14pt; margin-bottom: 0px !important;">@item.Descricao</p>
@@ -180,7 +183,74 @@
             </div>
         </div>
     </div>
+
 </form>
+
+<div class="modal fade" id="modalTermoCiencia" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <form role="form" id="formEditarCarater" action="@Url.Action("DarCiencia", "Home")" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Termo de Compromisso <span class="spnTitulo"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="card divDados">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-align:center; font-weight: bold;">
+                                Termo de Compromisso de Manutenção de Sigilo
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12" style="text-align: justify;">
+                                    Eu, <span style="font-weight: bold;">@User.Logado().NomeCompleto</span> , matrícula @User.Matricula(), lotado no @User.Lotacao(), perante o Centro de
+                                    Inteligência da Polícia Militar do Distrito Federal –CI/PMDF, declaro haver solicitado inclusão em
+                                    grupo de aplicativo de mensagens instantâneas administrado pela Equipe da Operação Atena,
+                                    comprometendo-me a: <br>
+                                    <br>a) Utilizar o grupo virtual somente por necessidade de serviço, realizando as tarefas e operações, em
+                                    estrita observância aos procedimentos, normas e disposições contidas no Plano de Operação;
+                                    <br>b) Não revelar fora do âmbito profissional fato ou informação de qualquer natureza de que tenha
+                                    conhecimento por força de minha inclusão, salvo em decorrência de decisão competente na esfera
+                                    legal ou judicial, bem como de autoridade superior;
+                                    <br>c) Manter a necessária cautela quanto ao acesso aos aparelhos utilizados para acesso ao grupo,
+                                    quando da exibição de dados em tela e no armazenamento de dados em meios eletrônicos, a fim de
+                                    evitar que deles venham a tomar ciência pessoas não autorizadas;
+                                    <br>d) Não possibilitar acesso de terceiros às mensagens e informações transmitidas no grupo,
+                                    garantindo assim a impossibilidade de acesso indevido;
+                                    <br>e) Não revelar a ninguém minha senha de acesso do meu aparelho celular ou computador utilizado
+                                    para acessar o grupo e tomar o máximo de cuidado para que ela permaneça somente de meu
+                                    conhecimento;
+                                    <br>f) Responder, em todas as instâncias, pelas consequências das ações ou omissões de minha parte
+                                    que possam pôr em risco ou comprometer a exclusividade de conhecimento ao grupo ou das
+                                    informações a que tenha acesso por meio deste;
+                                    <br>g) Preservar a integridade, confidencialidade e disponibilidade dos dados e informações contidas no
+                                    grupo, devendo comunicar por escrito à Coordenação da Operação, quaisquer indícios ou
+                                    possibilidades de irregularidades, de vazamentos ou falhas identificadas no grupo;
+                                    <br>h) Não divulgar dados obtidos nos grupos aos quais tenho acesso para outros servidores não
+                                    envolvidos nos trabalhos executados;
+                                    <br><br>Declaro também que estou ciente da aplicação da Legislação Especial e Comum, sem prejuízo de
+                                    outras sanções de natureza disciplinar que possam advir do não cumprimento do presente termo.
+                                    Declaro ainda, ter ciência inequívoca da legislação sobre o tratamento de informação classificada
+                                    cuja divulgação possa causar risco ou dano à segurança da sociedade ou do Estado, e me
+                                    comprometo a guardar o sigilo necessário, nos termos das Leis: Lei nº 12.527, de 18 de novembro de
+                                    2011; LEI DISTRITAL Nº 4.990, de 12 de dezembro de 2012; DECRETO DISTRITAL Nº 35.382, de 29 de
+                                    abril de 201; Decreto-Lei nº 2.484/40; Portaria PMDF nº 986 de 17 de novembro de 2015
+                                    (Recomendações gerais aos Policias Militares do Distrito Federal para o uso da internet e redes
+                                    sociais).
+                                    <br><br>
+                                    Declaro estar de acordo com o presente Termo.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn btn-primary pull-right">Ciente</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script type="text/javascript" language="javascript">
 
@@ -188,7 +258,9 @@
 
         $(document).ready(function () {
             $("#divAlerta").hide();
+            
             verificaAlerta();
+            verificaCiencia();
         });
 
         var interval = setInterval(function () {
@@ -221,6 +293,21 @@
                     } else {
                         $("#divDadosAlerta").html("").hide();
                         $("#divAlerta").hide();
+                    }
+                }
+            });
+        }
+
+        function verificaCiencia() {
+            $.ajax({
+                type: 'GET',
+                url: '/Home/VerificarCiencia',
+                success: function (resultado) {
+                    debugger;
+                    if (resultado.resultado == true) {
+                        $("#modalTermoCiencia").hide();
+                    } else {
+                        $("#modalTermoCiencia").modal().show("fast");
                     }
                 }
             });
