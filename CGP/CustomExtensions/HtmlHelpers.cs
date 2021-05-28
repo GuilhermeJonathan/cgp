@@ -40,13 +40,13 @@ namespace Cgp.CustomExtensions
 
         public static MvcHtmlString InputNumberFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression,
             string label = "", int maxLength = short.MaxValue, int minLength = 0, bool required = true, string id = "", string placeholder = "",
-            bool disabled = false, bool @readonly = false, string @class = "")
+            bool disabled = false, bool @readonly = false, string @class = "", bool @exibeTitulo = true)
         {
             var name = ExpressionHelper.GetExpressionText(expression);
             var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
 
             return new MvcHtmlString(Input(helper, "number", name, metadata.Model as string, label, @class, id, required, disabled, @readonly, placeholder,
-                minLength, maxLength));
+                minLength, maxLength, exibeTitulo));
         }
 
         public static MvcHtmlString InputEmailFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression,

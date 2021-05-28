@@ -1,0 +1,110 @@
+﻿@model Cgp.Aplicacao.GestaoDeCameras.Modelos.ModeloDeListaDeCameras
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Lista de Câmeras";
+}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home" )">Home</a></li>
+                        <li class="breadcrumb-item active">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="formBuscar" action="@Url.Action("Index", "Camera")" method="post" enctype="multipart/form-data">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Buscar Câmeras</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.InputTextFor(a => a.Filtro.Nome, "Nome", required: false, placeholder: "Ex. Endereço, VIA, BR...")
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Cidade</label>
+                                    @Html.DropDownListFor(m => m.Filtro.Cidade, Model.Filtro.Cidades, new { @class = "form-control autoComplete" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label"> Ativo </label>
+                                    @Html.CheckBoxFor(m => m.Filtro.Ativo, new { @class = "checkbox" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="@Url.Action("Cadastrar", "Camera" )" class="btn btn-info"> <i class="fas fa-camera"></i> Nova Câmera </a> &nbsp;
+                            <button type="submit" class="btn btn-primary float-right">Buscar</button>
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@ViewBag.Title</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        @Html.Grid(Model.Lista).Columns(colunas =>
+                        {
+                            colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
+                            m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Editar", "Camera", new { id = m.Id })" title="Visualizar Caráter" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
+                            colunas.Add(m => m.Ponto).Titled("Ponto");
+                            colunas.Add(m => m.Nome).Titled("Endereço");
+
+                            colunas.Add(m => m.Cidade).Titled("Cidade");
+                            colunas.Add(m => m.Latitude).Titled("Latitude");
+                            colunas.Add(m => m.Longintude).Titled("Longitude");
+
+                            colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
+                            m => @<div class="custom-control custom-switch left">
+                            <input type="checkbox" class="custom-control-input btnAtivarCamera" id="@m.Id" data-id="@m.Id" @(m.Ativo ? "checked" : "")>
+                            <label class="custom-control-label" for="@m.Id"> ATIVO</label>
+                            </div>);
+
+                        }).WithPaging(30).Sortable(true).EmptyText("Nenhuma câmera encontrada.")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $(".btnAtivarCamera").click(function () {
+            var idCamera = $(this).attr("data-id");
+            $.ajax({
+                type: 'GET',
+                url: '../Camera/AtivarCamera',
+                data: 'id=' + idCamera,
+                success: function (resultado) {
+                    campeonatoGeral.AdicionarMensagemDeSucesso(resultado);
+                }
+            });
+        });
+    })
+</script>

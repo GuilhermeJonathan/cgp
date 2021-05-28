@@ -109,7 +109,11 @@
     <Compile Include="Criptografia\IServicoDeCriptografia.cs" />
     <Compile Include="ExcecaoDeAplicacao.cs" />
     <Compile Include="GestaoDeCameras\IServicoDeGestaDeCameras.cs" />
-    <Compile Include="GestaoDeCameras\Mdelos\ModeloDeCameraDaLista.cs" />
+    <Compile Include="GestaoDeCameras\Modelos\ModeloDeCadastroDeCamera.cs" />
+    <Compile Include="GestaoDeCameras\Modelos\ModeloDeCameraDaLista.cs" />
+    <Compile Include="GestaoDeCameras\Modelos\ModeloDeEdicaoDeCamera.cs" />
+    <Compile Include="GestaoDeCameras\Modelos\ModeloDeFiltroDeCamera.cs" />
+    <Compile Include="GestaoDeCameras\Modelos\ModeloDeListaDeCameras.cs" />
     <Compile Include="GestaoDeCameras\ServicoDeGestaoDeCameras.cs" />
     <Compile Include="GestaoDeCaraters\IServicoDeGestaoDeCaraters.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeAlertaDaLista.cs" />

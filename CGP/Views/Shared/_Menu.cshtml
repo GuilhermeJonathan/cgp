@@ -42,6 +42,12 @@
                 @if (User.EhAdministrador() || User.EhInterno())
                 {
                     <li class="nav-item">
+                        <a href="@Url.Action("Index", "Camera")" class="nav-link @Html.Raw(controller == "Camera" ? "active" : "")">
+                            <i class="nav-icon fas fa-camera"></i>
+                            <p> Câmeras </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="@Url.Action("Index", "ComandoRegional")" class="nav-link @Html.Raw(controller == "ComandoRegional" ? "active" : "")">
                             <i class="nav-icon fas fa-user-shield"></i>
                             <p> Comandos Regionais </p>

@@ -1,6 +1,7 @@
 ﻿using Cgp.Aplicacao.BuscaVeiculo;
 using Cgp.Aplicacao.BuscaVeiculo.Modelos;
 using Cgp.Aplicacao.Comum;
+using Cgp.Aplicacao.GestaoDeCameras;
 using Cgp.Aplicacao.GestaoDeCaraters.Modelos;
 using Cgp.Aplicacao.GestaoDeVeiculos;
 using Cgp.Aplicacao.Util;
@@ -24,15 +25,17 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
         private readonly IServicoExternoDeArmazenamentoEmNuvem _servicoExternoDeArmazenamentoEmNuvem;
         private readonly IServicoDeGestaoDeVeiculos _servicoDeGestaoDeVeiculos;
         private readonly IServicoDeBuscaDeVeiculo _servicoDeBuscaDeVeiculos;
+        private readonly IServicoDeGestaDeCameras _servicoDeGestaoDeCameras;
 
         public ServicoDeGestaoDeCaraters(IServicoExternoDePersistenciaViaEntityFramework servicoExternoDePersistencia, IServicoDeGeracaoDeHashSha servicoDeGeracaoDeHashSha, IServicoExternoDeArmazenamentoEmNuvem servicoExternoDeArmazenamentoEmNuvem,
-            IServicoDeGestaoDeVeiculos servicoDeGestaoDeVeiculos, IServicoDeBuscaDeVeiculo servicoDeBuscaDeVeiculos)
+            IServicoDeGestaoDeVeiculos servicoDeGestaoDeVeiculos, IServicoDeBuscaDeVeiculo servicoDeBuscaDeVeiculos, IServicoDeGestaDeCameras servicoDeGestaoDeCameras)
         {
             this._servicoExternoDePersistencia = servicoExternoDePersistencia;
             this._servicoDeGeracaoDeHashSha = servicoDeGeracaoDeHashSha;
             this._servicoExternoDeArmazenamentoEmNuvem = servicoExternoDeArmazenamentoEmNuvem;
             this._servicoDeGestaoDeVeiculos = servicoDeGestaoDeVeiculos;
             this._servicoDeBuscaDeVeiculos = servicoDeBuscaDeVeiculos;
+            this._servicoDeGestaoDeCameras = servicoDeGestaoDeCameras;
         }
 
         public ModeloDeListaDeCaraters RetonarCaratersPorFiltro(ModeloDeFiltroDeCarater filtro, int pagina, int registrosPorPagina = 30)
@@ -488,7 +491,9 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
             try
             {
                 var historico = this._servicoExternoDePersistencia.RepositorioDeCaraters.PegarHistoricoDePassagem(id);
-                var modelo = new ModeloDeHistoricoDePassagensDaLista(historico, EhCelular);
+                var camera = _servicoDeGestaoDeCameras.BuscarCameraPorEndereco(historico.Local);
+
+                var modelo = new ModeloDeHistoricoDePassagensDaLista(historico, EhCelular, camera);
                 return modelo;
             }
             catch (Exception ex)

@@ -12,7 +12,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
 {
     public class ModeloDeHistoricoDePassagensDaLista
     {
-        public ModeloDeHistoricoDePassagensDaLista(HistoricoDePassagem historico, bool ehCelular)
+        public ModeloDeHistoricoDePassagensDaLista(HistoricoDePassagem historico, bool ehCelular, Camera camera = null)
         {
             if (historico == null)
                 return;
@@ -41,21 +41,35 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
                 this.Arquivo = caminho;
             }
 
-            this.Latitude = historico.Latitude;
-            this.Longitude = historico.Longitude;
+            if(camera != null)
+            {
+                this.TemLatLong = true;
+                this.Cidade = camera.Cidade.Descricao;
+                this.Latitude = camera.Latitude;
+                this.Longitude = camera.Longitude;
+                this.LocalParaMapa = $"<b>{camera.Cidade.Descricao}</b><br/>{historico.Local}";
+            } else
+            {
+                this.TemLatLong = !String.IsNullOrEmpty(historico.Latitude) && !String.IsNullOrEmpty(historico.Longitude) ? true : false;
+                this.Latitude = historico.Latitude;
+                this.Longitude = historico.Longitude;
+            }
+            
             this.IdCarater = historico.Carater != null ? historico.Carater.Id : 0;
         }
 
         public int Id { get; set; }
         public string DataPassagem { get; set; }
         public string Local { get; set; }
+        public string LocalParaMapa { get; set; }
         public string Arquivo { get; set; }
+        public string Cidade { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public int IdCarater { get; set; }
         public Stream Imagem { get; set; }
         public bool ExisteArquivo { get; set; }
-
+        public bool TemLatLong { get; set; }
         //string path = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + @"\FotosPlacas";
         // this.ExisteArquivo = File.Exists(VariaveisDeAmbiente.Pegar<string>("LOCAL:servidorDePassagens") + arquivoTratado);
 

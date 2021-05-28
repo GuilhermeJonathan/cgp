@@ -1,4 +1,6 @@
-﻿using Cgp.Aplicacao.GestaoDeCameras.Mdelos;
+﻿using Cgp.Aplicacao.GestaoDeCameras.Modelos;
+using Cgp.Dominio.Entidades;
+using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,11 @@ namespace Cgp.Aplicacao.GestaoDeCameras
 {
     public interface IServicoDeGestaDeCameras
     {
-        ModeloDeCameraDaLista BuscarHistoricoDePassagem(string endereco);
+        ModeloDeListaDeCameras RetonarCamerasPorFiltro(ModeloDeFiltroDeCamera filtro, int pagina, int registrosPorPagina = 30);
+        Camera BuscarCameraPorEndereco(string endereco);
+        string CadastrarCamera(ModeloDeCadastroDeCamera modelo, UsuarioLogado usuario);
+        ModeloDeEdicaoDeCamera BuscarCaraterPorId(int id, UsuarioLogado usuario);
+        string AlterarDadosDaCamera(ModeloDeEdicaoDeCamera modelo, UsuarioLogado usuario);
+        string AtivarCamera(int id, UsuarioLogado usuario);
     }
 }

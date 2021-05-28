@@ -98,61 +98,67 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Marca/Modelo:</label>
+                                                                <label for="MarcaVeiculo" class="col-sm-2 col-form-label">Marca:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.MarcaVeiculo, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Ano/Modelo:</label>
+                                                                <label for="ModeloVeiculo" class="col-sm-2 col-form-label">Modelo:</label>
+                                                                <div class="col-sm-10">
+                                                                    @Html.InputTextFor(a => a.ModeloVeiculo, @readonly: true, exibeTitulo: false)
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-1">
+                                                                <label for="AnoVeiculo" class="col-sm-2 col-form-label">Ano/Modelo:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.AnoVeiculo, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Cor:</label>
+                                                                <label for="CorVeiculo" class="col-sm-2 col-form-label">Cor:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.CorVeiculo, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Município:</label>
+                                                                <label for="MunicipioVeiculo" class="col-sm-2 col-form-label">Município:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.MunicipioVeiculo, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Renavam:</label>
+                                                                <label for="Renavam" class="col-sm-2 col-form-label">Renavam:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Renavam, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Chassi:</label>
+                                                                <label for="ChassiVeiculo" class="col-sm-2 col-form-label">Chassi:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.ChassiVeiculo, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">N. Motor:</label>
+                                                                <label for="Motor" class="col-sm-2 col-form-label">N. Motor:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Motor, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Último CRV:</label>
+                                                                <label for="UltimoCRV" class="col-sm-2 col-form-label">Último CRV:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.UltimoCRV, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Atualiação:</label>
+                                                                <label for="AtualizacaoVeiculo" class="col-sm-2 col-form-label">Atualiação:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.AtualizacaoVeiculo, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Situação:</label>
+                                                                <label for="Situacao" class="col-sm-2 col-form-label">Situação:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Situacao, @readonly: true, exibeTitulo: false)
                                                                 </div>
@@ -171,19 +177,19 @@
                                                                 <label for="Placa" class="col-sm-2 col-form-label">PROPRIETÁRIO</label>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Nome:</label>
+                                                                <label for="Proprietario.Nome" class="col-sm-2 col-form-label">Nome:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Proprietario.Nome, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Documento:</label>
+                                                                <label for="Proprietario.Documento" class="col-sm-2 col-form-label">Documento:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Proprietario.Documento, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Endereço:</label>
+                                                                <label for="Proprietario.Endereco" class="col-sm-2 col-form-label">Endereço:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Proprietario.Endereco, @readonly: true, exibeTitulo: false)
                                                                 </div>
@@ -193,19 +199,19 @@
                                                                 <label for="Placa" class="col-sm-2 col-form-label">POSSUIDOR</label>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Nome:</label>
+                                                                <label for="Possuidor.Nome" class="col-sm-2 col-form-label">Nome:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Possuidor.Nome, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Documento:</label>
+                                                                <label for="Possuidor.Documento" class="col-sm-2 col-form-label">Documento:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Possuidor.Documento, @readonly: true, exibeTitulo: false)
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mb-1">
-                                                                <label for="Placa" class="col-sm-2 col-form-label">Endereço:</label>
+                                                                <label for="Possuidor.Endereco" class="col-sm-2 col-form-label">Endereço:</label>
                                                                 <div class="col-sm-10">
                                                                     @Html.InputTextFor(a => a.Possuidor.Endereco, @readonly: true, exibeTitulo: false)
                                                                 </div>
@@ -418,27 +424,32 @@
 
 <script>
     $(function () {
+        var latitude;
+        var longitude;
+        var descricao;
 
         $(function () {
-            // Esse trecho de codigo sera executado quando a construção do DOM for terminada. Possibilitando a localização dos elementos nos seletores.
+            
             $("#modalVisualizarHistoricoPassagem").on('shown.bs.modal', function () {
-                var lat = -15.817878;
-                var lon = -48.057395;
-                // inicializa o mapa
-                map = L.map('mapDiv').setView([lat, lon], 13);
-
-                // define os recursos para exibição
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                }).addTo(map);
-
-                // adiciona um marcador no mapa
-                marker = L.marker([lat, lon]).addTo(map);
-
-                // adiciona um popup no marcador
-                marker.bindPopup("<b>TAGUA</b><br />").openPopup();
+                CarregarMapa();
             });
         });
+
+        function CarregarMapa() {
+            
+            map = L.map('mapDiv').setView([latitude, longitude], 13);
+
+            // define os recursos para exibição
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+            }).addTo(map);
+
+            // adiciona um marcador no mapa
+            marker = L.marker([latitude, longitude]).addTo(map);
+
+            // adiciona um popup no marcador
+            marker.bindPopup(descricao).openPopup();
+        }
 
         $('#data').datepicker({
             language: "pt-BR", autoclose: true,
@@ -546,8 +557,14 @@
                     $(".spnDataHora").html(resultado.historico.DataPassagem);
                     $(".spnLocal").html(resultado.historico.Local);
 
-                    
-                   
+                    if (resultado.historico.TemLatLong)
+                        $(".divMapa").show();
+                    else
+                        $(".divMapa").hide();
+
+                    latitude = resultado.historico.Latitude;
+                    longitude = resultado.historico.Longitude;
+                    descricao = resultado.historico.LocalParaMapa;                   
                 }
             });
         });
