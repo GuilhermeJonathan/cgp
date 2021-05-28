@@ -122,6 +122,14 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework
             }
         }
 
+        public IRepositorioDeCameras RepositorioDeCameras
+        {
+            get
+            {
+                return new RepositorioDeCameras(this._contexto);
+            }
+        }
+
         public void Persistir()
         {
             this._contexto.SaveChanges();

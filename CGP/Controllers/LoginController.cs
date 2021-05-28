@@ -57,8 +57,6 @@ namespace Cgp.Controllers
                 ViewBag.Mensagem = "Erro ao logar: " + ex.Message;
                 throw new ExcecaoDeAplicacao(ex.Message);
             }
-
-            return RedirectToAction(nameof(Index), "Login");
         }
 
         [HttpGet]
@@ -103,6 +101,7 @@ namespace Cgp.Controllers
         public ActionResult Sair()
         {
             this._servicoDeLogin.Sair();
+            Session.Clear();
             return RedirectToAction(nameof(Index), "Login");
         }
     }

@@ -30,6 +30,7 @@ using Cgp.Criptografia;
 using Cgp.Aplicacao.Criptografia;
 using System.Configuration;
 using Cgp.Infraestrutura.ServicosExternos.BuscaViaDapper;
+using Cgp.Aplicacao.GestaoDeCameras;
 
 namespace Cgp.App_Start
 {
@@ -57,6 +58,7 @@ namespace Cgp.App_Start
             container.Register<IServicoDeGestaoDeVeiculos, ServicoDeGestaoDeVeiculos>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCrimes, ServicoDeGestaoDeCrimes>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCaraters, ServicoDeGestaoDeCaraters>(Lifestyle.Scoped);
+            container.Register<IServicoDeGestaDeCameras, ServicoDeGestaoDeCameras>(Lifestyle.Scoped);
             
             container.Register<IServicoDeEnvioDeEmails>(() => new ServicoDeEnvioDeEmails(
              VariaveisDeAmbiente.Pegar<string>("chaveSendGrid"), VariaveisDeAmbiente.Pegar<string>("EmailDaEmpresa"), VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")), Lifestyle.Scoped);
@@ -65,7 +67,7 @@ namespace Cgp.App_Start
             container.Register<IServicoDeCriptografia, ServicoDeCriptografia>(Lifestyle.Scoped);
        
             container.Register<IServicoDeBuscaDeVeiculo>(() => new ServicoDeBuscaDeVeiculo(container.GetInstance<IServicoDeComunicacaoViaHttp>(), VariaveisDeAmbiente.Pegar<string>("Cortex:urlToken"), VariaveisDeAmbiente.Pegar<string>("Cortex:urlBuscaVeiculo")), Lifestyle.Scoped);
-            
+                       
             container.Register<IServicoDeGestaoDeUsuariosSGPOL>(() => new ServicoDeGestaoDeUsuariosSGPOL(container.GetInstance<IServicoDeComunicacaoViaHttp>(), container.GetInstance<IServicoDeGeracaoDeHashSha>(), VariaveisDeAmbiente.Pegar<string>("SGPOL:urlToken"), VariaveisDeAmbiente.Pegar<string>("SGPOL:urlBusca")), Lifestyle.Scoped);
 
             container.Register<IServicoExternoDeArmazenamentoEmNuvem>(() => new ServicoExternoDeArmazenamentoEmNuvem(

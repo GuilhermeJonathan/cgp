@@ -418,6 +418,28 @@
 
 <script>
     $(function () {
+
+        $(function () {
+            // Esse trecho de codigo sera executado quando a construção do DOM for terminada. Possibilitando a localização dos elementos nos seletores.
+            $("#modalVisualizarHistoricoPassagem").on('shown.bs.modal', function () {
+                var lat = -15.817878;
+                var lon = -48.057395;
+                // inicializa o mapa
+                map = L.map('mapDiv').setView([lat, lon], 13);
+
+                // define os recursos para exibição
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                }).addTo(map);
+
+                // adiciona um marcador no mapa
+                marker = L.marker([lat, lon]).addTo(map);
+
+                // adiciona um popup no marcador
+                marker.bindPopup("<b>TAGUA</b><br />").openPopup();
+            });
+        });
+
         $('#data').datepicker({
             language: "pt-BR", autoclose: true,
             zIndexOffset: 99999999
@@ -523,6 +545,9 @@
                     }
                     $(".spnDataHora").html(resultado.historico.DataPassagem);
                     $(".spnLocal").html(resultado.historico.Local);
+
+                    
+                   
                 }
             });
         });

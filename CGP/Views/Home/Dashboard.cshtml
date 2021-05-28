@@ -203,7 +203,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12" style="text-align: justify;">
-                                    Eu, <span style="font-weight: bold;">@User.Logado().NomeCompleto</span> , matrícula @User.Matricula(), lotado no @User.Lotacao(), perante o Centro de
+                                    Eu, <span style="font-weight: bold;">@User.Logado().NomeCompleto</span>, matrícula <span style="font-weight: bold;">@User.Matricula()</span> lotado no @User.Lotacao(), perante o Centro de
                                     Inteligência da Polícia Militar do Distrito Federal –CI/PMDF, declaro haver solicitado inclusão em
                                     grupo de aplicativo de mensagens instantâneas administrado pela Equipe da Operação Atena,
                                     comprometendo-me a: <br>
@@ -265,7 +265,7 @@
 
         var interval = setInterval(function () {
             verificaAlerta();
-        }, 15000/* 15s */);
+        }, 10000/* 15s */);
 
         function verificaAlerta() {
             var tabela = "";
@@ -273,7 +273,7 @@
                 type: 'GET',
                 url: '/Carater/VerificarAlerta',
                 success: function (resultado) {
-                    $("#divAlerta").show("fast");
+                    $("#divAlerta").show();
                     if (resultado.resultado.length > 0) {
                         tabela += "<div class='row'>";
                         $(resultado.resultado).each(function () {
