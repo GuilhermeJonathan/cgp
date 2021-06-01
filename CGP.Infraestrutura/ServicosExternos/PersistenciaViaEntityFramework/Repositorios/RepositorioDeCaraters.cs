@@ -144,7 +144,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             query = query.Where(c => c.SituacaoDoAlerta == SituacaoDoAlerta.Cadastrado);
 
-            //query = query.Where(c => c.DataDoCadastro >= dataFiltro);
+            query = query.Where(c => c.DataDoCadastro >= dataFiltro);
 
             return query.OrderBy(a => a.DataDoCadastro).ToList();
         }

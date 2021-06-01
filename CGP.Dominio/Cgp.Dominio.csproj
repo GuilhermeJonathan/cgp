@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\AcessoUsuario.cs" />
     <Compile Include="Entidades\Alerta.cs" />
     <Compile Include="Entidades\AlertaUsuario.cs" />
     <Compile Include="Entidades\Camera.cs" />

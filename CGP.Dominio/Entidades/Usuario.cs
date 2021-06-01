@@ -36,6 +36,7 @@ namespace Cgp.Dominio.Entidades
         public int IdUsuarioAlterou { get; set; }
         public DateTime? DataAlteracao { get; set; }
         public ICollection<AlertaUsuario> AlertasUsuario { get; set; }
+        public ICollection<AcessoUsuario> AcessosUsuario { get; set; }
         public bool CienciaTermo { get; set; } = false;
         public DateTime? DataCiencia { get; set; }
 
@@ -170,6 +171,15 @@ namespace Cgp.Dominio.Entidades
                 this.AlertasUsuario = new List<AlertaUsuario>();
 
             this.AlertasUsuario.Add(new AlertaUsuario(alerta, this));
+        }
+
+        public void InserirAcessoUsuario()
+        {
+            if (this.AcessosUsuario == null)
+                this.AcessosUsuario = new List<AcessoUsuario>();
+
+            this.AcessosUsuario.Add(new AcessoUsuario(this));
+
         }
     }
 }

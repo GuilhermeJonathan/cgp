@@ -14,7 +14,7 @@ namespace Cgp
     {
         public void Configuration(IAppBuilder app)
         {
-            var configuracaoDoTempoDeSessao = "15768000";
+            var configuracaoDoTempoDeSessao = "60";
             var sessaoEmMinutos = !string.IsNullOrEmpty(configuracaoDoTempoDeSessao) ? double.Parse(configuracaoDoTempoDeSessao) : 90;
 
             var configuracaoDaPaginaDeLogin = "/Login";

@@ -103,6 +103,12 @@ namespace Cgp.Aplicacao.Login
             if (!usuario.Ativo)
                 throw new ExcecaoDeAplicacao("Usuário inativo. Ainda não validado pelo Administrador.");
 
+            if (usuario != null)
+            {
+                usuario.InserirAcessoUsuario();
+                this._servicoExternoDePersistencia.Persistir();
+            }
+
             var dadosDaSessao = new Dictionary<string, object>
                 {
                     { "id", usuario.Id },
