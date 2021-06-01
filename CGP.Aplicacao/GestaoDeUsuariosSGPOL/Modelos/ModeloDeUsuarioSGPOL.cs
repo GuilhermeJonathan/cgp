@@ -36,6 +36,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuariosSGPOL.Modelos
         public string previsaoFerias { get; set; }
         public string siape { get; set; }
         public int restricaoMedica { get; set; }
+        public string email { get; set; }
         public Cnh cnh { get; set; }
     }
 }

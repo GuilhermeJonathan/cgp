@@ -111,6 +111,7 @@
     <Compile Include="ServicosExternos\InterfacesDeServicosExternos\IServicoExternoDeAutenticacao.cs" />
     <Compile Include="ServicosExternos\NotificacaoViaSmtp\ContatoDaNotificacao.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Contexto.cs" />
+    <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeAcessosDeUsuario.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeAlertas.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeAlertasUsuario.cs" />
     <Compile Include="ServicosExternos\PersistenciaViaEntityFramework\Mapeamentos\MapeamentoDeCameras.cs" />

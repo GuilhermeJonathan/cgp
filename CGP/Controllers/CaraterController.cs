@@ -158,6 +158,9 @@ namespace Cgp.Controllers
             
             var modelo = this._servicoDeGestaoDeCaraters.BuscarCaraterPorId(id.Value, User.Logado(), Request.Browser.IsMobileDevice);
 
+            modelo.Cidades = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
+              () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
+
             modelo.CidadesLocalizacao = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
               () => this._servicoDeGestaoDeCidades.RetonarCidadesPorUf(7));
 

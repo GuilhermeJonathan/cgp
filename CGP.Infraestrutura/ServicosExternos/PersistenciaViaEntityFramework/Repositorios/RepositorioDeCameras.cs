@@ -42,5 +42,12 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Include(a => a.Cidade)
                 .FirstOrDefault(a => a.Id == id);
         }
+
+        public List<Camera> BuscarTodasAtivas()
+        {
+            return this._contexto.Set<Camera>()
+                .Include(a => a.Cidade)
+                .Where(a => a.Ativo).ToList();
+        }
     }
 }

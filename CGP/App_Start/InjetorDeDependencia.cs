@@ -31,6 +31,7 @@ using Cgp.Aplicacao.Criptografia;
 using System.Configuration;
 using Cgp.Infraestrutura.ServicosExternos.BuscaViaDapper;
 using Cgp.Aplicacao.GestaoDeCameras;
+using Cgp.Aplicacao.GestaoDeHistoricoDePassagens;
 
 namespace Cgp.App_Start
 {
@@ -59,6 +60,7 @@ namespace Cgp.App_Start
             container.Register<IServicoDeGestaoDeCrimes, ServicoDeGestaoDeCrimes>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaoDeCaraters, ServicoDeGestaoDeCaraters>(Lifestyle.Scoped);
             container.Register<IServicoDeGestaDeCameras, ServicoDeGestaoDeCameras>(Lifestyle.Scoped);
+            container.Register<IServicoDeHistoricoDePassagens, ServicoDeGestaoDeHistoricoDePassagens>(Lifestyle.Scoped);
             
             container.Register<IServicoDeEnvioDeEmails>(() => new ServicoDeEnvioDeEmails(
              VariaveisDeAmbiente.Pegar<string>("chaveSendGrid"), VariaveisDeAmbiente.Pegar<string>("EmailDaEmpresa"), VariaveisDeAmbiente.Pegar<string>("NomeDaEmpresa")), Lifestyle.Scoped);

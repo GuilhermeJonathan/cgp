@@ -21,5 +21,6 @@ namespace Cgp.Dominio.Repositorios
         List<AlertaUsuario> PegarAlertasUsuarios(int idUsuario, int idAlerta);
         Alerta PegarAlertaPorId(int idCarater);
         List<Alerta> PegarTodosAlertaPorCarater(int idCarater);
+        IList<HistoricoDePassagem> RetornarHistoricosPassagensPorFiltro(string placa, int[] cidades, int[] crimes, int situacao, out int quantidadeEncontrada);
     }
 }

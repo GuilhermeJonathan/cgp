@@ -84,6 +84,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="@Url.Action("Index", "HistoricoPassagem")" class="nav-link @Html.Raw(controller == "HistoricoPassagem" ? "active" : "")">
+                        <i class="nav-icon fas fa-car-side"></i>
+                        <p> Histórico de Passagens</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="@Url.Action("Contato", "Home")" class="nav-link @Html.Raw(controller == "Contato" ? "active" : "")">
                         <i class="nav-icon fas fa-phone"></i>
                         <p> Contatos </p>

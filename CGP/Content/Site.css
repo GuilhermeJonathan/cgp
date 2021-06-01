@@ -26,8 +26,8 @@
     text-align:center;
 }
 
-.autoComplete{
-    height: 200px;
+.autoComplete span{
+    height: 100%;
 }
 
 .btnRodadaFechada {

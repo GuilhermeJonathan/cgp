@@ -1,8 +1,8 @@
-﻿@model Cgp.Aplicacao.GestaoDeCaraters.Modelos.ModeloDeListaDeCaraters
+﻿@model Cgp.Aplicacao.GestaoDeHistoricoDePassagens.Modelos.ModeloDeListaDeHistoricoDePassagens
 @using GridMvc.Html
 
 @{
-    ViewBag.Title = "Lista de Caráter Geral";
+    ViewBag.Title = "Lista de Passagens";
 }
 
 <div class="content-wrapper">
@@ -22,10 +22,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form id="formBuscar" action="@Url.Action("Index", "Carater")" method="post" enctype="multipart/form-data">
+                <form id="formBuscar" action="@Url.Action("Index", "HistoricoPassagem")" method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Buscar Caráter</h3>
+                            <h3 class="card-title">Buscar Histórico de Passagem</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                                     <i class="fas fa-minus"></i>
@@ -34,34 +34,23 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-2">
-                                    @Html.InputTextFor(a => a.Filtro.Placa, "Fragmento", required: false, placeholder:"Ex. placa, marca, modelo...")
+                                <div class="col-lg-3">
+                                    @Html.InputTextFor(a => a.Filtro.Placa, "Fragmento", required: false, placeholder: "Ex. placa, marca, modelo...")
                                 </div>
-                                <div class="col-lg-2">
-                                    <label class="control-label"> Data Início </label>
-                                    <input type="text" class="form-control mascaraData" id="dataInicio" name="Filtro.DataInicio" value="@Model.Filtro.DataInicio">
-                                </div>
-                                <div class="col-lg-2">
-                                    <label class="control-label"> Data Fim </label>
-                                    <input type="text" class="form-control mascaraData" id="dataFim" name="Filtro.DataFim" value="@Model.Filtro.DataFim">
-                                </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <label class="control-label"> Situação do Caráter </label>
                                     @Html.DropDownListFor(m => m.Filtro.SituacaoDoCarater, Model.Filtro.SituacoesDoCarater, new { @class = "form-control autoComplete" })
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <a href="#" class="btn btn-block btn-default btnBuscarCidades btnNoFormulario" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Selecionar Cidades</a>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <a href="#" class="btn btn-block btn-default btnBuscarCrimes btnNoFormulario" data-toggle="modal" data-target="#modalBuscarPorCrimes"> <i class="fas fa-gavel"></i> Selecionar Crimes</a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="@Url.Action("Cadastrar", "Carater" )" class="btn btn-info"> <i class="fas fa-car-alt"></i> Novo Caráter </a> &nbsp;
                             <button type="submit" class="btn btn-primary float-right">Buscar</button>
-                            <button type='submit' class='btn btn-warning no-load' name="exportar" value="imprimir"> <i class='fa fa-file-pdf'> </i> &nbsp; Imprimir </button>
-                            
                         </div>
                     </div>
 
@@ -147,6 +136,29 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
+                        <h3 class="card-title">Mapa das Passagens</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <div class="row divMapa">
+                            <div class="col-lg-12">
+                                <div id="mapDiv" style="width: 100%; height: 500px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
                         <h3 class="card-title">@ViewBag.Title</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -157,21 +169,15 @@
                     <div class="card-body table-responsive p-0">
                         @Html.Grid(Model.Lista).Columns(colunas =>
                         {
-                           colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
-                           m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Detalhar", "Carater", new { id = m.Id })" title="Visualizar Caráter" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
-                            colunas.Add(m => m.PlacaVeiculo).Titled("Placa");
-                            colunas.Add(m => m.NomeVeiculo).Titled("Veículo");
-                            colunas.Add(m => m.CorVeiculo).Titled("Cor");
-                            colunas.Add(m => m.AnoVeiculo).Titled("Ano");
-                            colunas.Add(m => m.NomeCrime).Titled("Crime");
-                            colunas.Add(m => m.NomeCidade).Titled("Cidade");
-                            colunas.Add(m => m.DataDoFato).Titled("Data do Fato");
-                            colunas.Add(m => m.SituacaoDoCarater).Titled("Situação");
-
                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
-                            m => m.SeloAtenas ? "<img style='max-width: 30px;' src='../Content/images/seloAtenas.png' title='Este Caráter foi validado pelo Atenas.'/>" : "");  
+                                      m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Detalhar", "Carater", new { id = m.IdCarater })" title="Visualizar Caráter" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
+                            colunas.Add(m => m.DataPassagem).Titled("Data");
+                             colunas.Add(m => m.Placa).Titled("Placa");
+                             colunas.Add(m => m.Local).Titled("Local").SetWidth(200);
+                             colunas.Add(m => m.TipoHistorico).Titled("Tipo");
 
-                            }).WithPaging(30).Sortable(true).EmptyText("Nenhum caráter encontrado")
+                             colunas.Add(m => m.Cidade).Titled("Cidade");
+                        }).WithPaging(30).Sortable(true).EmptyText("Nenhuma passagem encontrada")
                     </div>
                 </div>
             </div>
@@ -179,18 +185,45 @@
     </div>
 </div>
 
+
 <script>
     $(function () {
+        var map = null;
+        
+        CarregarMapa("-15.7801", "-47.9292", "Brasília");
+        @foreach (var item in Model.Lista) {
+            
+        }
 
-        $('#dataInicio').datepicker({
-            language: "pt-BR", autoclose: true,
-            zIndexOffset: 99999999
-        });
+        var teste = JSON.parse("@Model.Lista");
+        
+        function CarregarMapa(lat, long, descricao) {
+            if (map != undefined || map != null)
+                map.remove();
 
-        $('#dataFim').datepicker({
-            language: "pt-BR", autoclose: true,
-            zIndexOffset: 99999999
-        });
+            map = L.map('mapDiv').setView([lat, long], 13);
+
+            // define os recursos para exibição
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+            }).addTo(map);
+
+            // adiciona um marcador no mapa
+            marker = L.marker([lat, long]).addTo(map);
+
+            // adiciona um popup no marcador
+            marker.bindPopup(descricao).openPopup();
+        }
+
+        function AdicionarMarcador(lat, long, descricao) {
+            if (map != undefined || map != null) {
+                marker = L.marker([lat, long]).addTo(map);
+
+                // adiciona um popup no marcador
+                marker.bindPopup(descricao).openPopup();
+            }
+        }
+
 
         $(".btnBuscarCidades").button().click(function () {
             var form = $("#modalBuscarPorCidades");

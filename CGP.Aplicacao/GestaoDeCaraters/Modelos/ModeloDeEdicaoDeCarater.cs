@@ -1,4 +1,5 @@
-﻿using Cgp.Aplicacao.Util;
+﻿using Cgp.Aplicacao.GestaoDeHistoricoDePassagens.Modelos;
+using Cgp.Aplicacao.Util;
 using Cgp.Dominio.Entidades;
 using Cgp.Dominio.ObjetosDeValor;
 using System;
@@ -155,6 +156,9 @@ namespace Cgp.Aplicacao.GestaoDeCaraters.Modelos
         public IList<ModeloDeHistoricoDeCaraterDaLista> HistoricosDeCaraters{ get; set; }
         public IList<ModeloDeFotosDaLista> Fotos { get; set; }
         public IList<ModeloDeHistoricoDePassagensDaLista> HistoricosDePassagens { get; set; }
+
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
 
         private string RetornaCssCrime(string crime)
         {

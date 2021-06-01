@@ -17,5 +17,6 @@ namespace Cgp.Aplicacao.GestaoDeCameras
         ModeloDeEdicaoDeCamera BuscarCaraterPorId(int id, UsuarioLogado usuario);
         string AlterarDadosDaCamera(ModeloDeEdicaoDeCamera modelo, UsuarioLogado usuario);
         string AtivarCamera(int id, UsuarioLogado usuario);
+        List<Camera> BuscarCamerasAtivas();
     }
 }

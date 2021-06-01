@@ -14,12 +14,14 @@ namespace Cgp.Dominio.Entidades
 
         }
 
-        public HistoricoDePassagem(DateTime dataHora, string local, string placa, string arquivo)
+        public HistoricoDePassagem(DateTime dataHora, string local, string placa, string arquivo, string latitude, string longitude)
         {
             this.Data = dataHora;
             this.Local = local;
             this.Placa = placa;
             this.Arquivo = arquivo;
+            this.Latitude = latitude;
+            this.Longitude = longitude;
             this.TipoDeHistoricoDePassagem = TipoDeHistoricoDePassagem.Manual;
         }
 

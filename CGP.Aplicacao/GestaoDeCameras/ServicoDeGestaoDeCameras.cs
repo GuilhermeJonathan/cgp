@@ -127,5 +127,21 @@ namespace Cgp.Aplicacao.GestaoDeCameras
                 throw new ExcecaoDeAplicacao("Não foi possível alterar a Câmera: " + ex.InnerException);
             }
         }
+
+        public List<Camera> BuscarCamerasAtivas()
+        {
+            try
+            {
+                var cameras = this._servicoExternoDePersistencia.RepositorioDeCameras.BuscarTodasAtivas();
+                if (cameras == null)
+                    new ExcecaoDeAplicacao("Câmera não encontrada.");
+
+                return cameras;
+            }
+            catch (Exception ex)
+            {
+                throw new ExcecaoDeAplicacao("Erro ao consultar camêra");
+            }
+        }
     }
 }

@@ -196,6 +196,7 @@
     <Compile Include="Controllers\ComandoRegionalController.cs" />
     <Compile Include="Controllers\CrimeController.cs" />
     <Compile Include="Controllers\EsqueciMinhaSenhaController.cs" />
+    <Compile Include="Controllers\HistoricoPassagemController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\BatalhaoController.cs" />
@@ -417,6 +418,7 @@
     <Content Include="Views\Camera\Index.cshtml" />
     <Content Include="Views\Camera\Editar.cshtml" />
     <Content Include="Views\Camera\Cadastrar.cshtml" />
+    <Content Include="Views\HistoricoPassagem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

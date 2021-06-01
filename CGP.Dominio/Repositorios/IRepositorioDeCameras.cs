@@ -12,5 +12,6 @@ namespace Cgp.Dominio.Repositorios
         IList<Camera> RetornarCamerasPorFiltro(string nome, int cidade, bool ativo, out int quantidadeEncontrada);
         Camera PegarPorEndereco(string endereco);
         Camera PegarPorId(int id);
+        List<Camera> BuscarTodasAtivas();
     }
 }

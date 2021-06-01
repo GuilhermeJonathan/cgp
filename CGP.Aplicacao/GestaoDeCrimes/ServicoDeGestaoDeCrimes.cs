@@ -32,7 +32,6 @@ namespace Cgp.Aplicacao.GestaoDeCrimes
                 throw new ExcecaoDeAplicacao("Erro ao consultar os crimes");
             }
         }
-
         public ModeloDeEdicaoDeCrime BuscarCrimePorId(int id)
         {
             try

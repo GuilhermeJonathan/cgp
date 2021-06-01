@@ -70,7 +70,7 @@ namespace Cgp.Aplicacao.Login
                     var novoUsuario = new Usuario(new Nome(nomeCompleto), senha, loginAd.Matricula);
                     
                     if(usuarioSGPOL != null)
-                        novoUsuario.AlterarDadosDoSgpol(new Nome(usuarioSGPOL.nome), senha, usuarioSGPOL.matricula, cpf, usuarioSGPOL.nomeGuerra, usuarioSGPOL.posto, usuarioSGPOL.lotacao, usuarioSGPOL.lotacaoCodigo, usuarioSGPOL.celular);
+                        novoUsuario.AlterarDadosDoSgpol(new Nome(usuarioSGPOL.nome), senha, usuarioSGPOL.matricula, cpf, usuarioSGPOL.nomeGuerra, usuarioSGPOL.posto, usuarioSGPOL.lotacao, usuarioSGPOL.lotacaoCodigo, usuarioSGPOL.celular, usuarioSGPOL.email);
                     
                     this._servicoExternoDePersistencia.RepositorioDeUsuarios.Inserir(novoUsuario);
                     try
@@ -89,7 +89,7 @@ namespace Cgp.Aplicacao.Login
                     var cpf = Regex.Replace(usuarioSGPOL.cpf, "[^0-9a-zA-Z]+", "");
                     var senha = new Senha(modelo.Senha, _servicoDeGeracaoDeHashSha.GerarHash);
 
-                    usuario.AlterarDadosDoSgpol(new Nome(usuarioSGPOL.nome), senha, usuarioSGPOL.matricula, cpf, usuarioSGPOL.nomeGuerra, usuarioSGPOL.posto, usuarioSGPOL.lotacao, usuarioSGPOL.lotacaoCodigo, usuarioSGPOL.celular);
+                    usuario.AlterarDadosDoSgpol(new Nome(usuarioSGPOL.nome), senha, usuarioSGPOL.matricula, cpf, usuarioSGPOL.nomeGuerra, usuarioSGPOL.posto, usuarioSGPOL.lotacao, usuarioSGPOL.lotacaoCodigo, usuarioSGPOL.celular, usuarioSGPOL.email);
                 }
 
                 this._servicoExternoDePersistencia.Persistir();

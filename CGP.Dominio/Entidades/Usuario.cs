@@ -109,7 +109,8 @@ namespace Cgp.Dominio.Entidades
             this.DataAlteracao = DateTime.Now;
         }
 
-        public void AlterarDadosDoSgpol(Nome nome, Senha senha, string matricula, string cpf, string nomeGuerra, string posto, string lotacao, int lotacaoCodigo, string telefone) 
+        public void AlterarDadosDoSgpol(Nome nome, Senha senha, string matricula, string cpf, string nomeGuerra, string posto, 
+            string lotacao, int lotacaoCodigo, string telefone, string email) 
         {
             this.Nome = nome;
             this.Senha = senha;
@@ -128,6 +129,7 @@ namespace Cgp.Dominio.Entidades
             this.EhEstrangeiro = false;
             this.PerfilDeUsuario = PerfilDeUsuario.Usuario;
             this.DataAlteracao = DateTime.Now;
+            this.Email = email;
         }
 
         public void AlterarMeusDados(string nome, string email, string ddd, string telefone, Batalhao batalhao, string matricula)

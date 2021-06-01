@@ -3,6 +3,7 @@ using Cgp.Aplicacao.BuscaVeiculo.Modelos;
 using Cgp.Aplicacao.Comum;
 using Cgp.Aplicacao.GestaoDeCameras;
 using Cgp.Aplicacao.GestaoDeCaraters.Modelos;
+using Cgp.Aplicacao.GestaoDeHistoricoDePassagens.Modelos;
 using Cgp.Aplicacao.GestaoDeVeiculos;
 using Cgp.Aplicacao.Util;
 using Cgp.Dominio.Entidades;
@@ -431,7 +432,7 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
                 dataHoraFato = new DateTime(data.Year, data.Month, data.Day, hora.Hour, hora.Minute, 0);
             }
 
-            var historicoPassagem = new HistoricoDePassagem(dataHoraFato, modelo.DescricaoHistorico, carater.Veiculo != null ? carater.Veiculo.Placa : String.Empty, String.Empty);
+            var historicoPassagem = new HistoricoDePassagem(dataHoraFato, modelo.DescricaoHistorico, carater.Veiculo != null ? carater.Veiculo.Placa : String.Empty, String.Empty, modelo.Latitude, modelo.Longitude);
             carater.AdicionarHistoricoPassagem(historicoPassagem, usuarioBanco);
 
             if(imagem != null)

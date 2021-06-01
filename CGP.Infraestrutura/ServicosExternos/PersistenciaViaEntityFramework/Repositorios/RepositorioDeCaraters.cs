@@ -178,5 +178,33 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
                 .Where(a => a.HistoricoDePassagem.Carater.Id == idCarater);
             return alertas.ToList();
         }
+
+        public IList<HistoricoDePassagem> RetornarHistoricosPassagensPorFiltro(string placa, int[] cidades, int[] crimes, int situacao, out int quantidadeEncontrada)
+        {
+            var query = this._contexto.Set<HistoricoDePassagem>()
+                .Include(a => a.Carater)
+                .Include(a => a.Carater)
+                .Include(a => a.Carater.Crime)
+                .Include(a => a.Carater.Veiculo)
+                .AsQueryable();
+
+            if (!String.IsNullOrEmpty(placa))
+                query = query.Where(c => c.Carater.Veiculo.Placa.Contains(placa) || c.Carater.Veiculo.Marca.Contains(placa) || c.Carater.Veiculo.Modelo.Contains(placa) || c.Carater.Veiculo.Cor.Contains(placa));
+
+            if (cidades != null)
+                query = query.Where(c => cidades.Contains(c.Carater.Cidade.Id));
+
+            if (crimes != null)
+                query = query.Where(c => crimes.Contains(c.Carater.Crime.Id));
+
+            if (situacao > 0)
+                query = query.Where(c => (int)c.Carater.SituacaoDoCarater == situacao);
+
+            query = query.Where(c => !c.Excluido);
+
+            quantidadeEncontrada = query.Count();
+
+            return query.OrderByDescending(a => a.DataDoCadastro).ToList();
+        }
     }
 }

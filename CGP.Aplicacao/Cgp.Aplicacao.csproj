@@ -123,11 +123,15 @@
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeFiltroDeCarater.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeFotosDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeHistoricoDeCaraterDaLista.cs" />
-    <Compile Include="GestaoDeCaraters\Modelos\ModeloDeHistoricoDePassagensDaLista.cs" />
+    <Compile Include="GestaoDeHistoricoDePassagens\IServicoDeHistoricoDePassagens.cs" />
+    <Compile Include="GestaoDeHistoricoDePassagens\Modelos\ModeloDeFiltroDeHistoricoDePassagem.cs" />
+    <Compile Include="GestaoDeHistoricoDePassagens\Modelos\ModeloDeHistoricoDePassagensDaLista.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeListaDeCaraters.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDePossuidor.cs" />
     <Compile Include="GestaoDeCaraters\Modelos\ModeloDeProprietario.cs" />
     <Compile Include="GestaoDeCaraters\ServicoDeGestaoDeCaraters.cs" />
+    <Compile Include="GestaoDeHistoricoDePassagens\Modelos\ModeloDeListaDeHistoricoDePassagens.cs" />
+    <Compile Include="GestaoDeHistoricoDePassagens\ServicoDeGestaoDeHistoricoDePassagens.cs" />
     <Compile Include="GestaoDeUsuariosSGPOL\IServicoDeGestaoDeUsuariosSGPOL.cs" />
     <Compile Include="GestaoDeUsuariosSGPOL\Modelos\ModeloDeAutorizacaoSGPOL.cs" />
     <Compile Include="GestaoDeUsuariosSGPOL\Modelos\ModeloDeUsuarioSGPOL.cs" />

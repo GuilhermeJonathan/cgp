@@ -418,12 +418,18 @@
 @Html.Partial("_RealizarBaixa")
 @Html.Partial("_VisualizarFoto")
 @Html.Partial("_VisualizarHistorico")
-@Html.Partial("_AdicionarHistoricoPassagem")
+@Html.Partial("_AdicionarHistoricoPassagem", Model)
 @Html.Partial("_AdicionarHistorico")
 @Html.Partial("_Confirmacao")
 
 <script>
     $(function () {
+
+        $(document).ready(function () {
+            $(".autoComplete").select2({ width: '100%' });   
+        });
+
+        var map = null;
         var latitude;
         var longitude;
         var descricao;
@@ -431,11 +437,14 @@
         $(function () {
             
             $("#modalVisualizarHistoricoPassagem").on('shown.bs.modal', function () {
-                CarregarMapa();
+                if (latitude != null)
+                    CarregarMapa();
             });
         });
 
         function CarregarMapa() {
+            if (map != undefined || map != null)
+                map.remove();
             
             map = L.map('mapDiv').setView([latitude, longitude], 13);
 

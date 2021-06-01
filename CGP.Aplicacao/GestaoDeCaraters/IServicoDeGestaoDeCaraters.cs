@@ -1,4 +1,5 @@
 ﻿using Cgp.Aplicacao.GestaoDeCaraters.Modelos;
+using Cgp.Aplicacao.GestaoDeHistoricoDePassagens.Modelos;
 using Cgp.Dominio.ObjetosDeValor;
 using System;
 using System.Collections.Generic;

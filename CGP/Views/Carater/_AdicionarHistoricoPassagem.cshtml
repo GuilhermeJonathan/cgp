@@ -30,6 +30,22 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.Latitude, "Latitude", required: false)
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.InputTextFor(a => a.Longitude, "Longitude", required: false)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="control-label"> Cidade </label>
+                                        @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-12">
                                     <label class="control-label"> Histórico: </label>
                                     @Html.TextAreaFor(m => m.DescricaoHistorico, new { @class = "form-control", @rows = 6, @placeholder = "Descreva aqui um breve histórico da passagem", @maxlength = 2000 })
