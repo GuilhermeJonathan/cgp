@@ -31,6 +31,9 @@ namespace Cgp.Controllers
 
         public ActionResult Index(ModeloDeListaDeCameras modelo)
         {
+            if (!User.EhAdministrador() && !User.EhInterno())
+                return UsuarioSemPermissao();
+
             modelo = this._servicoDeGestaoDeCameras.RetonarCamerasPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
 
             modelo.Filtro.Cidades = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),

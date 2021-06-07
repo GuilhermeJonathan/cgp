@@ -50,8 +50,31 @@
                             <a href="@Url.Action("Cadastrar", "Camera" )" class="btn btn-info"> <i class="fas fa-camera"></i> Nova Câmera </a> &nbsp;
                             <button type="submit" class="btn btn-primary float-right">Buscar</button>
                         </div>
-                    </div>                    
+                    </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Mapa das Câmeras</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <div class="row divMapa">
+                            <div class="col-lg-12">
+                                <div id="mapDiv" style="width: 100%; height: 500px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -72,20 +95,20 @@
                         {
                             colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
                             m => @<div class="btn-group btn-group-sm"><a href="@Url.Action("Editar", "Camera", new { id = m.Id })" title="Visualizar Caráter" class="btn btn-info"><i class="fas fa-search"></i></a></div>);
-                            colunas.Add(m => m.Ponto).Titled("Ponto");
-                            colunas.Add(m => m.Nome).Titled("Endereço");
+                        colunas.Add(m => m.Ponto).Titled("Ponto");
+                        colunas.Add(m => m.Nome).Titled("Endereço");
 
-                            colunas.Add(m => m.Cidade).Titled("Cidade");
-                            colunas.Add(m => m.Latitude).Titled("Latitude");
-                            colunas.Add(m => m.Longintude).Titled("Longitude");
+                        colunas.Add(m => m.Cidade).Titled("Cidade");
+                        colunas.Add(m => m.Latitude).Titled("Latitude");
+                        colunas.Add(m => m.Longitude).Titled("Longitude");
 
-                            colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
-                            m => @<div class="custom-control custom-switch left">
-                            <input type="checkbox" class="custom-control-input btnAtivarCamera" id="@m.Id" data-id="@m.Id" @(m.Ativo ? "checked" : "")>
-                            <label class="custom-control-label" for="@m.Id"> ATIVO</label>
-                            </div>);
+                        colunas.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(
+                        m => @<div class="custom-control custom-switch left">
+    <input type="checkbox" class="custom-control-input btnAtivarCamera" id="@m.Id" data-id="@m.Id" @(m.Ativo ? "checked" : "")>
+    <label class="custom-control-label" for="@m.Id"> ATIVO</label>
+</div>);
 
-                        }).WithPaging(30).Sortable(true).EmptyText("Nenhuma câmera encontrada.")
+}).WithPaging(30).Sortable(true).EmptyText("Nenhuma câmera encontrada.")
                     </div>
                 </div>
             </div>
@@ -95,6 +118,40 @@
 
 <script>
     $(function () {
+        var map = null;
+        CarregarMapa("-15.7801", "-47.9292", "Brasília");
+        DataParse();
+
+        function DataParse() {
+            var model = '@Html.Raw(Json.Encode(Model.Lista))';
+            var data = JSON.parse(model);
+            for (i = 0; i < data.length; i++) {
+                AdicionarMarcador(data[i].Latitude, data[i].Longitude, data[i].Nome, data[i].Id)
+            }
+        }
+
+        function CarregarMapa(lat, long, descricao) {
+            if (map != undefined || map != null)
+                map.remove();
+
+            map = L.map('mapDiv').setView([lat, long], 13);
+
+            // define os recursos para exibição
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+            }).addTo(map);
+
+            marker = L.marker([lat, long]).addTo(map);
+            marker.bindPopup(descricao).openPopup();
+        }
+
+        function AdicionarMarcador(lat, long, descricao, id) {
+            var link = "<a href='Camera/Editar/" + id + "'>" + descricao + "</a>";
+            if (map != undefined || map != null) {
+                marker = L.marker([lat, long]).addTo(map);
+                marker.bindPopup(link).openPopup();
+            }
+        }
         $(".btnAtivarCamera").click(function () {
             var idCamera = $(this).attr("data-id");
             $.ajax({

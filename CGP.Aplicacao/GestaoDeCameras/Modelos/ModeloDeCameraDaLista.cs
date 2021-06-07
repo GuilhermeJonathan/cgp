@@ -24,7 +24,7 @@ namespace Cgp.Aplicacao.GestaoDeCameras.Modelos
             this.Nome = camera.Nome;
             this.Ponto = camera.Ponto;
             this.Latitude = camera.Latitude;
-            this.Longintude = camera.Longitude;
+            this.Longitude = camera.Longitude;
             this.Ativo = camera.Ativo;
         }
 
@@ -33,7 +33,7 @@ namespace Cgp.Aplicacao.GestaoDeCameras.Modelos
         public string Nome { get; set; }
         public string Ponto { get; set; }
         public string Latitude { get; set; }
-        public string Longintude { get; set; }
+        public string Longitude { get; set; }
         public bool Ativo { get; set; }
     }
 }
