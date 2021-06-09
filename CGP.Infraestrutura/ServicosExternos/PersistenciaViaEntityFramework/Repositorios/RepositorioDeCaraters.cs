@@ -12,7 +12,7 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
     {
         public RepositorioDeCaraters(Contexto contexto) : base(contexto) { }
 
-        public IList<Carater> RetornarCaratersPorFiltro(string placa, int[] cidades, int[] crimes, int situacao, DateTime? dataInicial, DateTime? dataFinal, out int quantidadeEncontrada)
+        public IList<Carater> RetornarCaratersPorFiltro(string placa, int[] cidades, int[] crimes, int situacao, DateTime? dataInicial, DateTime? dataFinal, int pagina, int registrosPorPagina, bool ignorarPaginacao, out int quantidadeEncontrada)
         {
             var query = this._contexto.Set<Carater>()
                 .Include(a => a.Veiculo)
@@ -39,7 +39,10 @@ namespace Cgp.Infraestrutura.ServicosExternos.PersistenciaViaEntityFramework.Rep
 
             quantidadeEncontrada = query.Count();
 
-            return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
+            if(ignorarPaginacao)
+                return query.OrderByDescending(a => a.DataHoraDoFato).ToList();
+            else
+                return query.OrderByDescending(a => a.DataHoraDoFato).Skip((pagina - 1) * registrosPorPagina).Take(registrosPorPagina).ToList();
         }
 
         public IList<Carater> RetornarCaratersPorCidades(int[] cidades, DateTime dataParaBusca)

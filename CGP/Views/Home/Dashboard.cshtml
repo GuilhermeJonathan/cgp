@@ -17,14 +17,14 @@
                     @if (Request.Browser.IsMobileDevice)
                     {
                         <div class="col-lg-5 col-sm-12 col-xs-12 text-center">
-                            <a href="#" class="btn btn-block btn-primary btnBuscarCidades btnBotaoTopo" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Buscar por Cidades</a>
+                            <a href="#" class="btn btn-block btn-primary btnBuscarCidades btnBotaoTopo no-load" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Buscar por Cidades</a>
                             <a href="@Url.Action("Cadastrar", "Carater" )" class="btn btn-block btn-default btnBuscarCidades btnBotaoTopo"> <i class="fas fa-car-alt"></i> Novo Caráter </a>
                         </div>
                     }
                     else
                     {
                         <div class="col-lg-3 col-sm-12 col-xs-12 text-center">
-                            <a href="#" class="btn btn-primary btnBuscarCidades btnBotaoTopo" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Buscar por Cidades</a>
+                            <a href="#" class="btn btn-primary btnBuscarCidades btnBotaoTopo no-load" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Buscar por Cidades</a>
                         </div>
                         <div class="col-lg-2 col-sm-12 col-xs-12 text-center">
                             <a href="@Url.Action("Cadastrar", "Carater" )" class="btn btn-default btnBotaoTopo"> <i class="fas fa-car-alt"></i> Novo Caráter </a>
@@ -56,7 +56,7 @@
                             <div class="col-lg-4 col-sm-12 col-xs-12">
                                 <div class="small-box bg-default">
                                     <div class="inner">
-                                        <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
+                                        <h3> @item.PlacaVeiculo <button type='button' class='btn btn-xs btn-default btnAbrirBaixa right no-load' data-id="@item.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </button></h3>
                                         <sup style="font-size: 16pt">
                                             @item.NomeVeiculo @item.CorVeiculo @item.AnoVeiculo @if (item.SeloAtenas)
                                             {<img src="~/Content/images/seloAtenas.png" alt="selo atenas" title="Este Caráter foi validado pelo Atenas." style="width: 30px;" />}

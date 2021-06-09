@@ -84,13 +84,13 @@ namespace Cgp.CustomExtensions
 
         public static MvcHtmlString InputPasswordFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression,
             string label = "", int maxLength = 20, int minLength = 3, bool required = true, string id = "", string placeholder = "",
-            bool disabled = false, bool @readonly = false, string @class = "")
+            bool disabled = false, bool @readonly = false, string @class = "", bool exibeTitulo = true)
         {
             var name = ExpressionHelper.GetExpressionText(expression);
             var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
 
             return new MvcHtmlString(Input(helper, "password", name, metadata.Model as string, label, @class, id, required, disabled, @readonly, placeholder,
-                minLength, maxLength));
+                minLength, maxLength, exibeTitulo));
         }
 
         public static MvcHtmlString InputPhoneFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression,

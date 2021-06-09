@@ -2,6 +2,7 @@
 using Cgp.Aplicacao.Criptografia;
 using Cgp.Aplicacao.GestaoDeUsuarios;
 using Cgp.Aplicacao.GestaoDeUsuarios.Modelos;
+using Cgp.Aplicacao.GestaoDeUsuariosSGPOL.Modelos;
 using Cgp.Aplicacao.Login.Modelos;
 using Cgp.Aplicacao.MontagemDeEmails;
 using Cgp.Dominio.Entidades;
@@ -59,8 +60,13 @@ namespace Cgp.Aplicacao.Login
               
                 if (usuario == null)
                 {
-                    var usuarioSGPOL = await this._servicoDeGestaoDeUsuariosSGPOL.BuscarDadosUsuario(modelo.Login, modelo.SenhaCriptograda(this._servicoDeGeracaoDeHashSha.EncodeToBase64));
-                    var cpf = Regex.Replace(usuarioSGPOL.cpf, "[^0-9a-zA-Z]+", "");
+                    ModeloDeUsuarioSGPOL usuarioSGPOL = null;
+                    var cpf = String.Empty;
+                    try
+                    {
+                        usuarioSGPOL = await this._servicoDeGestaoDeUsuariosSGPOL.BuscarDadosUsuario(modelo.Login, modelo.SenhaCriptograda(this._servicoDeGeracaoDeHashSha.EncodeToBase64));
+                        cpf = Regex.Replace(usuarioSGPOL.cpf, "[^0-9a-zA-Z]+", "");
+                    } catch(Exception ex) {}
 
                     var nome = loginAd.Nome.Valor.Split(',')[0].Split(' ').ToList();
                     nome.RemoveAt(0);

@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form id="formBuscar" action="@Url.Action("Index", "Carater")" method="post" enctype="multipart/form-data">
+                <form id="formBuscar" action="@Url.Action("Index", "Carater")" method="post" enctype="multipart/form-data" data-bloquear-tela="nao">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Buscar Caráter</h3>
@@ -50,10 +50,10 @@
                                     @Html.DropDownListFor(m => m.Filtro.SituacaoDoCarater, Model.Filtro.SituacoesDoCarater, new { @class = "form-control autoComplete" })
                                 </div>
                                 <div class="col-lg-2">
-                                    <a href="#" class="btn btn-block btn-default btnBuscarCidades btnNoFormulario" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Selecionar Cidades</a>
+                                    <a href="#" class="btn btn-block btn-default btnBuscarCidades btnNoFormulario no-load" data-toggle="modal" data-target="#modalBuscarPorCidades"> <i class="fas fa-home"></i> Selecionar Cidades</a>
                                 </div>
                                 <div class="col-lg-2">
-                                    <a href="#" class="btn btn-block btn-default btnBuscarCrimes btnNoFormulario" data-toggle="modal" data-target="#modalBuscarPorCrimes"> <i class="fas fa-gavel"></i> Selecionar Crimes</a>
+                                    <a href="#" class="btn btn-block btn-default btnBuscarCrimes btnNoFormulario no-load" data-toggle="modal" data-target="#modalBuscarPorCrimes"> <i class="fas fa-gavel"></i> Selecionar Crimes</a>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                                    <button type="button" class="btn btn btn-primary pull-right btnBuscar">Selecionar</button>
+                                    <button type="button" class="btn btn btn-primary pull-right btnBuscar no-load">Selecionar</button>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                                    <button type="button" class="btn btn btn-primary pull-right btnBuscarPorCrimes">Selecionar</button>
+                                    <button type="button" class="btn btn btn-primary pull-right btnBuscarPorCrimes no-load">Selecionar</button>
                                 </div>
                             </div>
                         </div>
@@ -181,16 +181,6 @@
 
 <script>
     $(function () {
-
-        $('#dataInicio').datepicker({
-            language: "pt-BR", autoclose: true,
-            zIndexOffset: 99999999
-        });
-
-        $('#dataFim').datepicker({
-            language: "pt-BR", autoclose: true,
-            zIndexOffset: 99999999
-        });
 
         $(".btnBuscarCidades").button().click(function () {
             var form = $("#modalBuscarPorCidades");

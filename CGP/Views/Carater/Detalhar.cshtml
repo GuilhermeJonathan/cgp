@@ -48,13 +48,13 @@
                                 <div class="col-12">
                                     <ul class="nav nav-tabs" id="tabDados" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#divDadosCarater" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Caráter</a>
+                                            <a class="nav-link active no-load" id="custom-tabs-three-home-tab" data-toggle="pill" href="#divDadosCarater" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Caráter</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#divDadosVeiculo" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Veículo</a>
+                                            <a class="nav-link no-load" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#divDadosVeiculo" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Veículo</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#divDadosProprietario" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Proprietário</a>
+                                            <a class="nav-link no-load" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#divDadosProprietario" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Proprietário</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="tabDadosContent">
@@ -281,11 +281,11 @@
                                 @if (!Model.RealizouBaixa && !Model.Excluido)
                                 {
                                     <div class="col-lg-10  col-sm-12">
-                                        <a href="#" class="btn btn-default @cssMobile btnAbrirBaixa" data-id="@Model.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </a>
-                                        <a href="#" class="btn btn-default @cssMobile btnAbrirCadastroHistorico" data-id="@Model.Id"> <i class="fas fa-history"></i> Adicionar Histórico </a>
-                                        <a href="#" class="btn btn-default @cssMobile btnAbrirCadastroHistoricoPassagem" data-id="@Model.Id"> <i class="fas fa-car-side"></i> Adicionar Passagem </a>
+                                        <a href="#" class="btn btn-default @cssMobile btnAbrirBaixa no-load" data-id="@Model.Id"> <i class="fas fa-arrow-alt-circle-down"></i> Realizar Baixa </a>
+                                        <a href="#" class="btn btn-default @cssMobile btnAbrirCadastroHistorico no-load" data-id="@Model.Id"> <i class="fas fa-history"></i> Adicionar Histórico </a>
+                                        <a href="#" class="btn btn-default @cssMobile btnAbrirCadastroHistoricoPassagem no-load" data-id="@Model.Id"> <i class="fas fa-car-side"></i> Adicionar Passagem </a>
                                         @if (User.EhAtenas() || User.EhAdministrador())
-                                        {<a href="#" class="btn btn-danger @cssMobile btnExcluirCarater" data-id="@Model.Id"> <i class="fas fa-times"></i> Excluir Carater </a>}
+                                        {<a href="#" class="btn btn-danger @cssMobile btnExcluirCarater no-load" data-id="@Model.Id"> <i class="fas fa-times"></i> Excluir Carater </a>}
                                         <a href="@Url.Action("Editar", "Carater", new { id = Model.Id })" class="btn btn-info @cssMobile float-right"> <i class="fas fa-car-alt"></i> Editar Caráter </a>
                                     </div>
                                 }
