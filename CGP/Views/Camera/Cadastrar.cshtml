@@ -34,22 +34,22 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    @Html.InputTextFor(a => a.Nome, "Nome", required: false)
+                                    @Html.InputTextFor(a => a.Nome, "Nome", required: true)
                                 </div>
                                 <div class="col-lg-4">
-                                    @Html.InputTextFor(a => a.Ponto, "Ponto", required: false)
+                                    @Html.InputTextFor(a => a.Ponto, "Ponto", required: true)
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="control-label"> Cidade </label>
-                                    @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete" })
+                                    @Html.DropDownListFor(m => m.Cidade, Model.Cidades, new { @class = "form-control autoComplete", required = true })
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
-                                    @Html.InputTextFor(a => a.Latitude, "Latitude", required: false)
+                                    @Html.InputTextFor(a => a.Latitude, "Latitude", required: true)
                                 </div>
                                 <div class="col-lg-4">
-                                    @Html.InputTextFor(a => a.Longitude, "Longitude", required: false)
+                                    @Html.InputTextFor(a => a.Longitude, "Longitude", required: true)
                                 </div>
                             </div>
                         </div>

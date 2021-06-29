@@ -31,7 +31,7 @@ namespace Cgp.Controllers
 
         public ActionResult Index(ModeloDeListaDeCameras modelo)
         {
-            if (!User.EhAdministrador() && !User.EhInterno())
+            if (User.EhUsuario())
                 return UsuarioSemPermissao();
 
             modelo = this._servicoDeGestaoDeCameras.RetonarCamerasPorFiltro(modelo.Filtro, this.Pagina(), VariaveisDeAmbiente.Pegar<int>("registrosPorPagina"));
@@ -45,6 +45,9 @@ namespace Cgp.Controllers
         [HttpGet]
         public ActionResult Cadastrar()
         {
+            if (!User.EhAdministrador() && !User.EhInterno())
+                return UsuarioSemPermissao();
+
             var modelo = new ModeloDeCadastroDeCamera();
 
             modelo.Cidades = ListaDeItensDeDominio.DaClasseComOpcaoPadrao<Cidade>(nameof(Cidade.Descricao), nameof(Cidade.Id),
@@ -64,7 +67,7 @@ namespace Cgp.Controllers
         [HttpGet]
         public ActionResult Editar(int? id)
         {
-            if (!User.EhAdministrador() && !User.EhInterno())
+            if (User.EhUsuario())
                 return UsuarioSemPermissao();
 
             if (!id.HasValue)
@@ -81,6 +84,9 @@ namespace Cgp.Controllers
         [HttpPost]
         public ActionResult Editar(ModeloDeEdicaoDeCamera modelo)
         {
+            if (!User.EhAdministrador() && !User.EhInterno())
+                return UsuarioSemPermissao();
+
             var retorno = this._servicoDeGestaoDeCameras.AlterarDadosDaCamera(modelo, User.Logado());
             this.AdicionarMensagemDeSucesso(retorno);
             return RedirectToAction(nameof(Index));

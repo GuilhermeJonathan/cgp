@@ -20,7 +20,7 @@ namespace Cgp.Aplicacao.GestaoDeCameras.Modelos
                 return;
 
             this.Id = camera.Id;
-            this.Cidade = camera.Cidade.Descricao;
+            this.Cidade = camera.Cidade != null ? camera.Cidade.Descricao : String.Empty;
             this.Nome = camera.Nome;
             this.Ponto = camera.Ponto;
             this.Latitude = camera.Latitude;

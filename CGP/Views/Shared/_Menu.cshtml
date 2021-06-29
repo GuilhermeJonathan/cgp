@@ -35,11 +35,10 @@
                             <p> Usuários </p>
                             <span class="badge badge-info right numeroDeUsuariosNovos"><i class="fas fa-sync-alt fa-spin"></i></span>
                         </a>
-
                     </li>
                 }
 
-                @if (User.EhAdministrador() || User.EhInterno())
+                @if (User.EhAdministrador() || User.EhInterno() || User.EhAtenas())
                 {
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Camera")" class="nav-link @Html.Raw(controller == "Camera" ? "active" : "")">
@@ -47,6 +46,10 @@
                             <p> Câmeras </p>
                         </a>
                     </li>
+                }
+
+                @if (User.EhAdministrador() || User.EhInterno())
+                {
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "ComandoRegional")" class="nav-link @Html.Raw(controller == "ComandoRegional" ? "active" : "")">
                             <i class="nav-icon fas fa-user-shield"></i>

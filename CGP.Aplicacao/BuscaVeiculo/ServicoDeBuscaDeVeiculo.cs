@@ -15,6 +15,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo
     {
         private readonly IServicoDeComunicacaoViaHttp _servicoHttp;
         private readonly string _urlToken;
+        private readonly string _urlDaApiSimples;
         private readonly string _urlDaApiCompleta;
         private readonly string _urlDaApiProprietario;
 
@@ -24,13 +25,14 @@ namespace Cgp.Aplicacao.BuscaVeiculo
             this._servicoHttp = servicoHttp;
             this._urlDaApiCompleta = urlCompleta;
             this._urlDaApiProprietario = VariaveisDeAmbiente.Pegar<string>("Cortex:urlBuscaProprietario");
+            this._urlDaApiSimples = VariaveisDeAmbiente.Pegar<string>("urlBuscaSimples");
         }
 
         public async Task<ModeloDeBuscaDeVeiculo> BuscarPlacaSimples(string placa)
         {
             try
             {
-                return await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApiCompleta}/{placa}"));
+                return await this._servicoHttp.Get<ModeloDeBuscaDeVeiculo>(new Uri($"{this._urlDaApiSimples}/{placa}"));
             }
             catch (Exception ex)
             {
@@ -92,7 +94,7 @@ namespace Cgp.Aplicacao.BuscaVeiculo
             }
             catch (Exception ex)
             {
-                throw new ExcecaoDeAplicacao("Erro ao consultar os caráters");
+                throw new ExcecaoDeAplicacao("Erro ao consultar os veículo");
             }
         }
 

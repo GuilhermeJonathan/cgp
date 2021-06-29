@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form id="formBuscar" action="@Url.Action("Index", "Carater")" method="post" enctype="multipart/form-data" data-bloquear-tela="nao">
+                <form id="formBuscar" action="@Url.Action("Index", "Carater")" method="post" data-bloquear-tela="nao">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Buscar Caráter</h3>
@@ -188,6 +188,7 @@
         });
 
         $(".btnBuscar").button().click(function () {
+            //$("#modalBuscarPorCidades").hide();
             $(this).prop("disabled", true);
             $("#formBuscar").submit();
         });

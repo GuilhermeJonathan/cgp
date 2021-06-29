@@ -153,13 +153,18 @@ namespace Cgp.Aplicacao.GestaoDeCaraters
 
                 if (veiculo == null)
                 {
-                    var dadosVeiculo = await this._servicoDeBuscaDeVeiculos.BuscarPlacaCompleta(modelo.Placa, usuario);
-                    var modeloParaCadastro = new ModeloDeBuscaDaLista(dadosVeiculo);
-                    
-                    if (dadosVeiculo != null)
+                    var buscarCortex = VariaveisDeAmbiente.Pegar<bool>("buscarCortex");
+                    if (buscarCortex)
+                    {
+                        var dadosVeiculo = await this._servicoDeBuscaDeVeiculos.BuscarPlacaCompleta(modelo.Placa, usuario);
+                        var modeloParaCadastro = new ModeloDeBuscaDaLista(dadosVeiculo);
                         veiculo = this._servicoDeGestaoDeVeiculos.CadastrarProprietarioPossuidor(modeloParaCadastro, usuario);
-                    else 
+                    }
+                    else
+                    {
                         veiculo = new Veiculo(modelo.Placa, modelo.MarcaVeiculo, modelo.ModeloVeiculo, modelo.AnoVeiculo, modelo.CorVeiculo, modelo.ChassiVeiculo, modelo.UfVeiculo);
+                        this._servicoExternoDePersistencia.RepositorioDeVeiculos.Inserir(veiculo);
+                    }
 
                     this._servicoExternoDePersistencia.Persistir();
                 }

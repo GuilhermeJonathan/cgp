@@ -30,7 +30,7 @@ namespace Cgp.Aplicacao.GestaoDeCameras
             }
             catch (Exception ex)
             {
-                throw new ExcecaoDeAplicacao("Erro ao consultar os crimes");
+                throw new ExcecaoDeAplicacao("Erro ao consultar câmeras");
             }
         }
 

@@ -53,7 +53,7 @@ namespace Cgp.Dominio.Entidades
         public string Chassi { get; set; }
         public string Motor { get; set; }
         public string UltimoCRV { get; set; }
-        public DateTime Atualizacao { get; set; }
+        public DateTime? Atualizacao { get; set; }
         public string Situacao { get; set; }        
         public Proprietario Proprietario { get; set; }
         public Possuidor Possuidor { get; set; }

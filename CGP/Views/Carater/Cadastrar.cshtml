@@ -120,6 +120,7 @@
             //        $.blockUI({ message: "<div style='color: white'> <i class='fa fa-spinner fa-pulse fa-3x'></i> </div>", css: { border: '0px', backgroundColor: 'none' } });
             //    },
             //    success: function (resultado) {
+            //        debugger;
             //        $.unblockUI();
             //        if (resultado.veiculo != undefined) {
             //            $("#MarcaVeiculo").val(resultado.veiculo.model);
@@ -150,16 +151,17 @@
                 data: 'placa=' + placa,
                 beforeSend: function (resultado) { },
                 success: function (resultado) {
-                    debugger;
                     $(".divCarrega").hide();
                     if (resultado.veiculo != undefined) {
                         debugger;
+                        
                         $("#UfVeiculo").val(resultado.veiculo.ufEmplacamento);
                         $("#CorVeiculo").val(resultado.veiculo.cor);
                         $("#ChassiVeiculo").val(resultado.veiculo.chassiTratado);
                         $("#AnoVeiculo").val(resultado.veiculo.anoFabricacao);
                         $("#MarcaVeiculo").val(resultado.veiculo.marca);
                         $("#ModeloVeiculo").val(resultado.veiculo.modelo);
+                        
                     } else {
                         $("#UfVeiculo").val()
                         $("#CorVeiculo").val();
@@ -167,7 +169,7 @@
                         $("#AnoVeiculo").val();
                         $("#MarcaVeiculo").val();
                         $("#ModeloVeiculo").val();
-                        campeonatoGeral.AdicionarMensagemDeErro("Busca de chassi indisponível.");
+                        campeonatoGeral.AdicionarMensagemDeErro("Busca de veículo indisponível.");
                     }
                 }
             });
