@@ -41,6 +41,7 @@ namespace Cgp.Aplicacao.GestaoDeUsuarios
             }
             catch (Exception ex)
             {
+
                 throw;
             }
         }
